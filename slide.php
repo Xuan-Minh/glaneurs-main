@@ -11,7 +11,7 @@ $slides = array(
     ),
     array(
         "chapitre" => "Chapitre 1",
-        "srcvideobg" => "video/pluie.mp4",
+        "srcvideobg" => "video/ville.mp4",
         "srcaudio" => "audio/pluie.mp3",
         "srcdocupart" => "video/pluie.mp4",
         "info" => "Glaneurs de carton est un film documentaire...",
