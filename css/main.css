@@ -1,0 +1,191 @@
+@font-face {
+  font-family: "New Edge";
+  src:url("../font/NewEdgeSoftPower4-LightRounded.otf") format("opentype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+html{
+  overflow-x:hidden;
+}
+body{
+  width:100%;
+  height:100vh;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "New Edge";
+  overflow-x: hidden;
+}
+
+h1{
+  font-size:4em;
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.container{
+  width:100%;
+  height:100vh;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll; /* Permet le défilement vertical */
+  scrollbar-width: none; /* Cacher la barre de défilement dans Firefox */
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Cacher la barre de défilement dans Chrome, Edge et Safari */
+}
+
+.slides {
+  width: 100vw; /* La largeur de la fenêtre */
+  height: 100vh; /* La hauteur de la fenêtre */
+  position: relative; /* Nécessaire pour positionner les vidéos et autres éléments */
+  overflow: hidden; /* Empêche les débordements */
+  scroll-snap-align: start; /* Aligne chaque diapositive au début de la fenêtre lors du défilement */
+  margin: 0;
+  padding: 0;
+}
+
+.slides video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assure que la vidéo remplit le conteneur sans déborder */
+  position: absolute; /* Positionne la vidéo pour qu'elle couvre tout le conteneur */
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.slides > video.flou {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(0.3rem);
+  transform: scale(1.05); /* Agrandit légèrement la vidéo */
+  
+}
+h2{
+  font-size:5em;
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  transition: top 1.5s ease-in-out, 
+              left 1.5s ease-in-out,
+              font-size 1.5s ease-in-out,
+              opacity 1.5s ease-in-out;
+  cursor: pointer;
+}
+
+
+
+.slides h2.move {
+/*    top: 20%;*/
+    left:30%;
+    font-size:4em;
+}
+
+
+.sliderButton {
+  position: relative;
+  z-index: 10; /* Place les boutons au-dessus des autres éléments */
+}
+
+.info{
+  position: absolute;
+  color: white;
+  top: 30%;
+  left:60%;
+  right: 20%;
+  z-index: 10;
+  display:none;
+}
+
+.visionner{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    z-index: 9999;
+    display: none; /* Masque par défaut */
+}
+
+.visionner video{
+  width:auto;
+  height:80vh;
+  max-width: 100%; /* Empêche la vidéo de dépasser la largeur de l'écran */
+  max-height: 100%; /* Empêche la vidéo de dépasser la hauteur de l'écran */
+  align-self: center; /* Centre la vidéo dans Flexbox */
+  margin: auto; /* Ajoute une marge automatique pour garantir le centrage */
+}
+
+
+.close-visionner {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color:black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.point1, .point2{
+  width:15px;
+  height:15px;
+  border-radius:100%;
+  border:2px solid white ;
+  transition: background-color 0.3s ease-in-out
+}
+
+.full{
+  background-color:white;
+}
+
+.empty{
+  background-color:none;
+  cursor: pointer;
+}
+
+.slides >.sliderButton{
+  width:5%;
+  min-width:70px;
+  height:auto;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  display:flex;
+  justify-content:space-around;
+}
+
+
