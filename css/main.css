@@ -63,13 +63,14 @@ h1{
   padding: 0;
 }
 
-.slides video {
+.slides > video {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Assure que la vidéo remplit le conteneur sans déborder */
   position: absolute; /* Positionne la vidéo pour qu'elle couvre tout le conteneur */
   top: 0;
   left: 0;
+  z-index: -1; /* Place la vidéo derrière les autres éléments */
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
@@ -142,6 +143,9 @@ h2{
   max-height: 100%; /* Empêche la vidéo de dépasser la hauteur de l'écran */
   align-self: center; /* Centre la vidéo dans Flexbox */
   margin: auto; /* Ajoute une marge automatique pour garantir le centrage */
+    position: relative; /* Permet de centrer la vidéo */
+  top: auto;
+  left: auto;
 }
 
 
