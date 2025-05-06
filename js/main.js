@@ -173,3 +173,64 @@ gsap.to(".scroll-down-arrow span", {
 //   duration: 0.3 // Durée de l'animation
 // });
 
+$(document).ready(function() {
+    const loadingItems = $(".loading-item");
+    let currentItem = 0;
+    const totalItems = loadingItems.length;
+    const fadeDuration = 500; // Durée du fondu en millisecondes
+    const displayDuration = 3000; // Durée d'affichage de chaque item en millisecondes
+    let intervalId; // Variable pour stocker l'ID de l'intervalle
+    let isAnimating = false; // Variable pour éviter les clics multiples
+
+    // Affiche le premier item
+    loadingItems.eq(0).addClass("active");
+
+    // Fonction pour afficher l'item suivant
+    function showNextItem() {
+        if (isAnimating) return; // Empêche les clics multiples
+        isAnimating = true;
+
+        // Fait disparaître l'item actuel
+        loadingItems.eq(currentItem).removeClass("active");
+
+        // Incrémente l'index
+        currentItem++;
+
+        // Vérifie si on est arrivé à l'avant-dernier item
+        if (currentItem < totalItems - 1) {
+            // Affiche l'item suivant
+            setTimeout(function() {
+                loadingItems.eq(currentItem).addClass("active");
+                isAnimating = false;
+            }, fadeDuration); // Délai pour que le fondu sortant soit terminé
+        } else if (currentItem === totalItems - 1) {
+            // Affiche le dernier item sans le faire disparaître
+            setTimeout(function() {
+                loadingItems.eq(currentItem).addClass("active");
+                isAnimating = false;
+            }, fadeDuration);
+            clearInterval(intervalId); // Arrête l'intervalle
+        } else {
+            // On est arrivé au dernier item, on arrête l'intervalle
+            clearInterval(intervalId);
+            isAnimating = false;
+        }
+    }
+
+    // Défilement automatique des loading-item
+    intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
+
+    // Gestion du clic sur le bouton "Entrer"
+    $("#enter-button").click(function() {
+        clearInterval(intervalId); // Arrête l'animation
+        $(".loading-screen").fadeOut(1000, function() { // Fade out de l'écran de chargement
+            $(".container").fadeIn(1000); // Fade in du container
+        });
+    });
+
+    // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
+    $(".loading-screen").click(function() {
+        showNextItem();
+    });
+});
+

@@ -10,7 +10,7 @@ $slides = array(
         "urlsuite" => ""
     ),
     array(
-        "chapitre" => "Ville",
+        "chapitre" => "Chapitre 1",
         "srcvideobg" => "video/ville.mp4",
         "srcaudio" => "audio/pluie.mp3",
         "srcdocupart" => "video/pluie.mp4",

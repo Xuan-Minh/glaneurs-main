@@ -9,11 +9,11 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
-  <!-- <?php include 'includes/loading.php'; ?> -->
+  <?php include 'includes/loading.php'; ?>
     <?php
     include 'header.php';?>
 
-    <div class="container">
+    <div class="container hidden">
   
     
 
