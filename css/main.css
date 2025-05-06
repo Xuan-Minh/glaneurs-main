@@ -140,6 +140,7 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  cursor: pointer;
   z-index: 10;
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
@@ -301,7 +302,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 0; /* Supprime le padding */
+  padding: 3px; /* Supprime le padding */
 }
 
 .menu-burger span {
