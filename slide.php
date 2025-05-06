@@ -31,35 +31,40 @@ $slides = array(
     )
 );
 $index = 1;
+$isFirst = true; // Ajoute une variable pour vérifier si c'est le premier élément
 foreach ($slides as $slide) {
- 
-    echo '<div class="slides slide' . $index . '">
-            
-                <video autoplay muted loop>
-                    <source src="' . $slide["srcvideobg"] . '" type="video/mp4" />
-                </video>
-                  <div class="visionner">
-                  <div class="close-visionner">X</div>
-                  <video autoplay controls>
-                     <source src="' . $slide["srcdocupart"] . '" type="video/mp4" />
-                  </video>
-                    
-                    </div>   
-              
-         
-            <h2>' . $slide["chapitre"] . '</h2>
-            <h3>' . $slide["sous-titre"] . '</h3>
-            <div class="sliderButton">
-                <div class="point1 full"></div>
-                <div class="point2 empty"></div>
-            </div>
-            <div class="info" . >
-                <div>' . $slide["info"] . '</div>
-            </div>
-        </div>';
-        
-        $index += 1;
-        //test
-        
+    echo '<div class="slides slide' . $index . '">';
+    echo '<video autoplay muted loop>';
+    echo '<source src="' . $slide["srcvideobg"] . '" type="video/mp4" />';
+    echo '</video>';
+
+    // Condition pour le premier slide
+    if ($isFirst) {
+        // N'affiche pas le visionner, ni les sliderButtons, et le h2 n'est pas cliquable
+        echo '<h1>' . $slide["chapitre"] . '</h1>';
+        echo '<h3>' . $slide["sous-titre"] . '</h3>';
+    } else {
+        // Affiche le visionner, les sliderButtons, et le h2 est cliquable
+        echo '<div class="visionner">';
+        echo '<div class="close-visionner">X</div>';
+        echo '<video autoplay controls>';
+        echo '<source src="' . $slide["srcdocupart"] . '" type="video/mp4" />';
+        echo '</video>';
+        echo '</div>';
+        echo '<h2 class="visionner-trigger">' . $slide["chapitre"] . '</h2>';
+        echo '<h3>' . $slide["sous-titre"] . '</h3>';
+        echo '<div class="sliderButton">';
+        echo '<div class="point1 full"></div>';
+        echo '<div class="point2 empty"></div>';
+        echo '</div>';
+    }
+
+    echo '<div class="info">';
+    echo '<div>' . $slide["info"] . '</div>';
+    echo '</div>';
+    echo '</div>';
+
+    $index += 1;
+    $isFirst = false; // Met à jour la variable après le premier élément
 }
 ?>
