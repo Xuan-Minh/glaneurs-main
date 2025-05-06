@@ -181,7 +181,6 @@ $(document).ready(function() {
     const displayDuration = 3000; // Durée d'affichage de chaque item en millisecondes
     let intervalId; // Variable pour stocker l'ID de l'intervalle
     let isAnimating = false; // Variable pour éviter les clics multiples
-    let windowActive = true; // Variable pour suivre l'état de la fenêtre
 
     // Affiche le premier item
     loadingItems.eq(0).addClass("active");
@@ -225,7 +224,6 @@ $(document).ready(function() {
 
     // Gestion du clic sur le bouton "Entrer"
     $("#enter-button").click(function() {
-        if (!windowActive) return; // Empêche le clic si la fenêtre n'est pas active
         clearInterval(intervalId); // Arrête l'animation
         $(".loading-screen").fadeOut(1000, function() { // Fade out de l'écran de chargement
             $(".container").fadeIn(1000); // Fade in du container
@@ -235,16 +233,6 @@ $(document).ready(function() {
     // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
     $(".loading-screen").click(function() {
         showNextItem();
-    });
-
-    // Vérifie si la fenêtre est active
-    $(window).focus(function() {
-        windowActive = true;
-    });
-
-    // Vérifie si la fenêtre est inactive
-    $(window).blur(function() {
-        windowActive = false;
     });
 });
 

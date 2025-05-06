@@ -279,7 +279,7 @@ sliderButton {
 
 header {
   position: fixed;
-  top: 0;
+  top: 10%;
   width: 100%;
   display: flex;
   justify-content: flex-end; /* Aligne les éléments à droite */
@@ -290,8 +290,8 @@ header {
 
 .header-controls {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 5%;
+  right: 40px;
   display: flex;
   align-items: center;
   gap: 30px; /* Espacement entre le bouton et le menu burger */
@@ -315,7 +315,7 @@ header {
   bottom: -5px; /* Ajuste la position du soulignement */
   left: 0;
   width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
+  height: 3px; /* Épaisseur du soulignement */
   background-color: #ddd; /* Couleur du soulignement */
   transition: width 0.5s ease; /* Animation de largeur */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
@@ -330,8 +330,8 @@ header {
 }
 
 .menu-burger {
-  width: 30px;
-  height: 20px;
+  width: 40px;
+  height: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -447,20 +447,37 @@ header {
 }
 
 .loading-item {
-    position: absolute; /* Positionnement absolu pour le fondu */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column; /* Ajout pour organiser verticalement */
-    justify-content: center; /* Centre verticalement */
+    flex-direction: column;
     align-items: center;
     font-size: 1.5em;
     text-align: center;
-    opacity: 0; /* Initialement invisible */
-    transition: opacity 0.5s ease-in-out; /* Transition pour le fondu */
-    /* flex-wrap: wrap; /* Permet aux éléments de se répartir sur plusieurs lignes si nécessaire */ */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Style spécifique pour la première page */
+.loading-item#loading-item1 {
+    justify-content: flex-start; /* Aligne le contenu en haut */
+    align-items: flex-start; /* Aligne le contenu à gauche */
+}
+
+.loading-item#loading-item1 .loading-content {
+  margin-left: 20%; /* Ajoute un retrait à la première div */
+  margin-top: 10%; /* Ajoute un retrait en haut pour ne pas coller au bord */
+    text-align: left; /* Aligne le texte à gauche */
+    font-size: 1em; /* Ajuste la taille de la police */
+    margin-bottom: 10px; /* Réduit l'espace en bas du texte */
+}
+
+.loading-item #loading-item1 .loading-content:first-child {
+    margin-left: 200px; /* Ajoute un retrait à la première div */
+    margin-top: 500px; /* Ajoute un retrait en haut pour ne pas coller au bord */
 }
 
 .loading-item.active {
@@ -619,6 +636,11 @@ header {
     flex-direction: column;
     align-items: center;
 }
+.loading-item #loading-item1 .loading-text {
+ text-align: left;
+    font-size: 2em; /* Ajuste la taille de la police */
+    margin-bottom: 20px; /* Ajoute un espace en bas du texte */
+}
 
 .loading-item #loading-item3 .universites {
     display: flex;
@@ -631,5 +653,16 @@ header {
     height: 150px; /* Ajuste la hauteur des images */
     width: auto; /* Garde les proportions */
 
+}
+
+.loading-item#loading-item1{
+    text-align: left; /* Aligne le texte à gauche */
+    font-size: 1.5em; /* Ajuste la taille de la police */
+    margin-bottom: 10px; /* Réduit l'espace en bas du texte */
+}
+
+.loading-item#loading-item1 .loading-content:first-child {
+    margin-left: 20px; /* Ajoute un retrait à la première div */
+    margin-top: 20px; /* Ajoute un retrait en haut pour ne pas coller au bord */
 }
 
