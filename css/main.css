@@ -111,8 +111,8 @@ h2{
               opacity 1.5s ease-in-out;
   cursor: pointer;
 }
-h3{
-    font-size: 2em;
+h3 {
+  font-size: 2em;
   position: absolute;
   color: white;
   top: 60%;
@@ -123,6 +123,7 @@ h3{
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
   position:relative; /* Ajout de position relative */
+  display: inline-block; /* Important pour que la largeur s'adapte au contenu */
 }
 
 h3::after {
@@ -144,7 +145,6 @@ h3:hover {
 h3:hover::after {
   width: 100%; /* Soulignement complet au survol */
 }
-
 .slides h2.move {
 /*    top: 20%;*/
     left:30%;

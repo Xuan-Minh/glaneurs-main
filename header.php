@@ -1,3 +1,4 @@
+<header>
 <div class="header-controls">
   <button id="languageToggle">KR</button>
   <div class="menu-burger" id="menuBurger">
@@ -6,3 +7,4 @@
     <span></span>
   </div>
 </div>
+</header>
