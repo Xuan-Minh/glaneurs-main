@@ -21,7 +21,12 @@
   font-weight: bold;
   font-style: normal;
 }
-
+@Font-face {
+  font-family: "New Edge";
+  src:url("../font/NewEdgeSoftPower4-LightRounded.otf") format("truetype");
+  font-weight: Regular;
+  font-style: Regular;
+}
 * {
   box-sizing: border-box;
 }
@@ -182,7 +187,7 @@ h3:hover::after {
 }
 
 
-.sliderButton {
+sliderButton {
   position: relative;
   margin: 0;
   z-index: 10; /* Place les boutons au-dessus des autres éléments */
@@ -415,13 +420,10 @@ header {
     font-size: 2em;
     width: 100%;
     height: 100vh; /* Utiliser vh pour la hauteur */
-    background-image: url("../img/bgopening.jpeg"); /* Remplace la couleur par l'image */
-    background-size: cover; /* Assure que l'image couvre tout l'écran */
-    background-position: center; /* Centre l'image */
-    background-color: rgba(0, 0, 0, 0.5); /* Ajoute un fond noir semi-transparent pour assombrir */
+    background-color: rgba(0, 0, 0); /* Ajoute un fond noir semi-transparent pour assombrir */
     z-index: 9999;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     color: white; /* Pour que le texte soit visible */
     overflow: hidden; /* Important pour masquer le défilement horizontal */
@@ -435,10 +437,6 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../img/bgopening.jpeg");
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px); /* Applique le flou à la pseudo-élément */
     z-index: -1; /* Place le pseudo-élément derrière le contenu */
 }
 
@@ -455,12 +453,14 @@ header {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Ajout pour organiser verticalement */
+    justify-content: center; /* Centre verticalement */
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     opacity: 0; /* Initialement invisible */
     transition: opacity 0.5s ease-in-out; /* Transition pour le fondu */
+    /* flex-wrap: wrap; /* Permet aux éléments de se répartir sur plusieurs lignes si nécessaire */ */
 }
 
 .loading-item.active {
@@ -468,13 +468,36 @@ header {
 }
 
 #enter-button {
-    background-color: #4CAF50;
+    background-color: rgba(0,0,0,0);
+    font-family: "Figtree", sans-serif;
+    font-size: 1em;
     color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    font-size: 1.5em;
     border-radius: 5px;
+    position: relative; /* Ajout de position relative */
+    transition: color 0.3s ease; /* Transition pour la couleur */
+}
+
+#enter-button::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Ajuste la position du soulignement */
+    left: 0;
+    width: 0; /* Initialise la largeur à 0 */
+    height: 2px; /* Épaisseur du soulignement */
+    background-color: #ddd; /* Couleur du soulignement */
+    transition: width 0.5s ease; /* Animation de largeur */
+    z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+#enter-button:hover {
+    color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+#enter-button:hover::after {
+    width: 100%; /* Soulignement complet au survol */
 }
 
 .hidden {
@@ -495,7 +518,13 @@ header {
     align-items: center;
     color: white; /* Pour que le texte soit visible */
 }
-
+.loading-content {
+    font-size: 1em;
+    width: 70%;
+    height : 20%;
+    text-align: center;
+    margin-bottom: 20px; /* Ajoute une marge en bas du texte */
+}
 .loading-screen video {
     position: absolute;
     top: 0;
@@ -508,11 +537,22 @@ header {
 
 .loading-items {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100;
+    height: 100vh;
     z-index: 2; /* Place le contenu au-dessus de la vidéo */
 }
-
+.universites {
+    display: flex;
+    justify-content: space-around; /* Espace entre les images */
+    width: 100%;
+    margin-top: 10px; /* Ajoute un espace au-dessus des images */
+    
+}
+.universites img {
+    height: 150px; /* Ajuste la hauteur des images */
+    width: auto; /* Garde les proportions */
+    margin: 0 20px; /* Ajoute un espace entre les images */
+}
 .loading-item {
     position: absolute;
     top: 0;
@@ -520,28 +560,76 @@ header {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Ajout pour organiser verticalement */
+    justify-content: center; /* Centre verticalement */
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    /* flex-wrap: wrap; /* Permet aux éléments de se répartir sur plusieurs lignes si nécessaire */ */
 }
-
+.loading-button{
+  width: 100%;
+  font-size: 0.5em;
+  font-family: "Figtree", sans-serif;
+  text-align: center; /* Centre le bouton horizontalement */
+}
 .loading-item.active {
     opacity: 1;
 }
 
 #enter-button {
-    background-color: #4CAF50;
+    background-color: rgba(0,0,0,0);
     color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 1.5em;
     border-radius: 5px;
+    position: relative; /* Ajout de position relative */
+    transition: color 0.3s ease; /* Transition pour la couleur */
+}
+
+#enter-button::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Ajuste la position du soulignement */
+    left: 0;
+    width: 0; /* Initialise la largeur à 0 */
+    height: 2px; /* Épaisseur du soulignement */
+    background-color: #ddd; /* Couleur du soulignement */
+    transition: width 0.5s ease; /* Animation de largeur */
+    z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+#enter-button:hover {
+    color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+#enter-button:hover::after {
+    width: 100%; /* Soulignement complet au survol */
 }
 
 .hidden {
     display: none;
 }
+.loading-item #loading-item3 .loading-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-item #loading-item3 .universites {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Ajoute un espace au-dessus des images */
+}
+
+.loading-item #loading-item3 .universites img {
+    height: 150px; /* Ajuste la hauteur des images */
+    width: auto; /* Garde les proportions */
+
+}
+

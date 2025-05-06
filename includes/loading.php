@@ -5,17 +5,25 @@
     </video>
     <div class="loading-items">
         <div class="loading-item" id="loading-item1">
-            <p>Glaneurs</p>
+            <div class="loading-content">‘glaneur,-euse’, personne qui glane, c'est-à-dire qui ramasse des choses. Personne qui traîne à la fin des marchés pour récupérer les produits qui ont été jetés aux ordures.</div>
         </div>
         <div class="loading-item" id="loading-item2">
-            <p>Optimisation...</p>
+            <div class="loading-content">Optimisation...</div>
         </div>
         <div class="loading-item" id="loading-item3">
-            <p>Une production</p>
+            <div class="loading-content">Une production de 
+                <div class="universites">
+                    <img src="img/dongeui.svg" alt="Université 1">
+                    <img src="img/univeiffel.svg" alt="Université 2">
+                </div>
+            </div>
         </div>
         <div class="loading-item" id="loading-item4">
-            <p>Veuillez mettre un casque pour profiter d'une meilleure expérience</p>
-            <button id="enter-button">Entrer</button>
+            <div class="loading-content">
+                
+                Veuillez mettre un casque pour profiter d'une meilleure expérience
+            </div>
+            <div class="loading-button"><button id="enter-button">Entrer</button></div>
         </div>
     </div>
 </div>
