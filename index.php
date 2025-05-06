@@ -7,11 +7,9 @@
     <meta name="description" content="Glaneurs de carton" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <style>
-    
-    </style>
   </head>
   <body>
+  <!-- <?php include 'includes/loading.php'; ?> -->
     <?php
     include 'header.php';?>
 
