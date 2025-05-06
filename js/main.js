@@ -234,5 +234,12 @@ $(document).ready(function() {
     $(".loading-screen").click(function() {
         showNextItem();
     });
+
+    const menuBurger = $("#menuBurger");
+    const menuVolet = $("#menuVolet");
+
+    menuBurger.click(function() {
+        menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
+    });
 });
 

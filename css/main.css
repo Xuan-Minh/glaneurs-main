@@ -666,3 +666,61 @@ header {
     margin-top: 20px; /* Ajoute un retrait en haut pour ne pas coller au bord */
 }
 
+.menu-volet {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+    z-index: 999; /* Au-dessus du header */
+    transform: translateX(100%); /* Cache le volet initialement */
+    transition: transform 0.3s ease-in-out; /* Animation de transition */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centre le contenu verticalement */
+}
+
+.menu-volet.open {
+    transform: translateX(0); /* Affiche le volet lorsqu'il est ouvert */
+}
+
+.menu-volet-content {
+    width: 80%;
+    max-width: 1200px; /* Ajuste la largeur maximale */
+    text-align: center;
+    display: flex;
+    flex-direction: row; /* Aligne les éléments horizontalement */
+    justify-content: space-around; /* Distribue l'espace entre les éléments */
+    color: white;
+    align-items: center; /* Centre verticalement les éléments */
+}
+
+.menu-video-item {
+    width: 30%; /* Ajuste la largeur de chaque élément vidéo */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligne les éléments à gauche */
+}
+
+.menu-video {
+    width: 100%;
+    max-height: 150px; /* Ajuste la hauteur maximale des vidéos */
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.menu-video:hover {
+    transform: scale(1.1); /* Agrandit la vidéo au survol */
+}
+
+.menu-volet-content h4 {
+    font-size: 1em;
+    font-family: "Figtree", sans-serif;
+    margin-top: 5px;
+    text-align: left; /* Aligne le texte à gauche */
+}
+

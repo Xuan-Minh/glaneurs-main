@@ -5,7 +5,7 @@ $slides = array(
         "sous-titre" => "Voir le documentaire en entier",
         "srcvideobg" => "video/chariot.mov",
         "srcaudio" => "audio/intro.mp3",
-        "srcdocupart" => "video/intro.mp4",
+        "srcdocupart" => "video/docu.mov",
         "info" => "",
         "urlsuite" => ""
     ),
