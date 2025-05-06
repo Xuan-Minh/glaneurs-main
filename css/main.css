@@ -1,6 +1,25 @@
 @font-face {
-  font-family: "New Edge";
-  src:url("../font/NewEdgeSoftPower4-LightRounded.otf") format("opentype");
+  font-family: "Figtree";
+  src:url("../font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src:url("../font/Libre_Baskerville/LibreBaskerville-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Libre Baskerville";
+  src:url("../font/Libre_Baskerville/LibreBaskerville-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Libre Baskerville";
+  src:url("../font/Libre_Baskerville/LibreBaskerville-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 * {
@@ -22,11 +41,11 @@ body{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: "New Edge";
   overflow-x: hidden;
 }
 
 h1{
+  font-family: "Libre Baskerville", serif;
   font-size:4em;
   position: absolute;
   color: white;
@@ -112,13 +131,16 @@ h2{
   cursor: pointer;
 }
 h3 {
-  font-size: 2em;
+  font-family: "Figtree";
+  font-size: 1em;
+  font-weight: 400;
   position: absolute;
   color: white;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  cursor: pointer;
   z-index: 10;
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
@@ -133,7 +155,7 @@ h3::after {
   left: 0;
   width: 0; /* Initialise la largeur à 0 */
   height: 2px; /* Épaisseur du soulignement */
-  background-color: white; /* Couleur du soulignement */
+  background-color: #ddd; /* Couleur du soulignement */
   transition: width 0.5s ease; /* Animation de largeur */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
 }
@@ -280,7 +302,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 0; /* Supprime le padding */
+  padding: 3px; /* Supprime le padding */
 }
 
 .menu-burger span {
