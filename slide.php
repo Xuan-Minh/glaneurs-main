@@ -50,5 +50,6 @@ foreach ($slides as $slide) {
         </div>';
         
         $index += 1;
+        //test
 }
 ?>
