@@ -28,9 +28,9 @@ $slides = array(
     ),
     array(
         "chapitre" => "Chapitre 3",
-        "srcvideobg" => "video/soleil.mp4",
+        "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/slide3.mp3",
-        "srcdocupart" => "video/soleil.mp4",
+        "srcdocupart" => "video/lee.mov",
         "info" => "Sed do eiusmod tempor incididunt...",
         "urlsuite" => ""
     )

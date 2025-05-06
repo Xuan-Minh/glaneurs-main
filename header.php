@@ -22,7 +22,7 @@
                 "title" => "Chapitre 2"
             ),
             array(
-                "src" => "video/soleil.mp4",
+                "src" => "video/lee.mov",
                 "title" => "Chapitre 3"
             )
         );
@@ -33,5 +33,13 @@
             echo '</div>';
         }
         ?>
+    </div>
+    <div class="menu-links">
+        <ul>
+            <li><a href="#">Archives</a></li>
+            <li><a href="#">Souvenirs</a></li>
+            <li><a href="#">Portraits</a></li>
+            <li><a href="#">Derrière la caméra</a></li>
+        </ul>
     </div>
 </div>

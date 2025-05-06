@@ -677,9 +677,10 @@ header {
     transform: translateX(100%); /* Cache le volet initialement */
     transition: transform 0.3s ease-in-out; /* Animation de transition */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Change la direction pour empiler les éléments */
     align-items: center;
-    justify-content: center; /* Centre le contenu verticalement */
+    justify-content: flex-start; /* Aligne le contenu en haut */
+    padding-top: 20px; /* Ajoute un espace en haut */
 }
 
 .menu-volet.open {
@@ -687,6 +688,7 @@ header {
 }
 
 .menu-volet-content {
+  margin-top:10%;
     width: 80%;
     max-width: 1200px; /* Ajuste la largeur maximale */
     text-align: center;
@@ -714,7 +716,7 @@ header {
 }
 
 .menu-video:hover {
-    transform: scale(1.1); /* Agrandit la vidéo au survol */
+    transform: scale(1.05); /* Agrandit la vidéo au survol */
 }
 
 .menu-volet-content h4 {
@@ -722,5 +724,91 @@ header {
     font-family: "Figtree", sans-serif;
     margin-top: 5px;
     text-align: left; /* Aligne le texte à gauche */
+}
+
+.menu-links {
+    width: 80%;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.menu-links h4 {
+    font-size: 1.2em;
+    font-family: "Figtree", sans-serif;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.menu-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-links li {
+    margin-bottom: 10px; /* Ajoute un espace en bas de chaque élément de la liste */
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+    font-family: "Figtree", sans-serif;
+    font-size: 2em; /* Agrandit la taille de la police */
+    display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
+    padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
+    transition: color 0.3s ease;
+    position: relative; /* Ajoute une position relative */
+}
+
+.menu-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Ajuste la position du soulignement */
+    left: 0;
+    width: 0; /* Initialise la largeur à 0 */
+    height: 2px; /* Épaisseur du soulignement */
+    background-color: #ddd; /* Couleur du soulignement */
+    transition: width 0.5s ease; /* Animation de largeur */
+    z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+.menu-links a:hover {
+    color: #ddd;
+    text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+.menu-links a:hover::after {
+    width: 100%; /* Soulignement complet au survol */
+}
+
+.menu-video-item h4 {
+    font-size: 1em;
+    font-family: "Figtree", sans-serif;
+    margin-top: 5px;
+    text-align: left; /* Aligne le texte à gauche */
+    position: relative; /* Ajoute une position relative */
+    display: inline-block; /* Important pour que la largeur s'adapte au contenu */
+    color: white;
+    transition: color 0.3s ease; /* Transition pour la couleur */
+}
+
+.menu-video-item h4::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Ajuste la position du soulignement */
+    left: 0;
+    width: 0; /* Initialise la largeur à 0 */
+    height: 2px; /* Épaisseur du soulignement */
+    background-color: #ddd; /* Couleur du soulignement */
+    transition: width 0.5s ease; /* Animation de largeur */
+    z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+.menu-video-item:hover h4 {
+    color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+.menu-video-item:hover h4::after {
+    width: 100%; /* Soulignement complet au survol */
 }
 
