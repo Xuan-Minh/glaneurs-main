@@ -117,6 +117,7 @@ h1{
 }
 h2{
   font-size:5em;
+  font-family: "Libre Baskerville", serif;  
   position: absolute;
   color: white;
   top: 40%;
@@ -176,6 +177,7 @@ h3:hover::after {
 
 .sliderButton {
   position: relative;
+  margin: 0;
   z-index: 10; /* Place les boutons au-dessus des autres éléments */
 }
 
@@ -256,7 +258,8 @@ h3:hover::after {
   text-align: center;
   z-index: 10;
   display:flex;
-  justify-content:space-around;
+  justify-content:space-between;
+  
 }
 
 
@@ -319,26 +322,27 @@ header {
 }
 
 .scroll-down-arrow {
-    position: sticky; /* Modification ici */
+    position: sticky;
     top: 80vh; /* Ajuste la position verticale */
-    left: 50%;
-    margin-left: -20px;
+    left: 50.7%;
+    transform: translateX(-50%); /* Ajout pour centrer horizontalement */
+    margin-left: 0; /* Suppression de la marge */
     width: 40px;
     height: 70px;
     text-align: center;
     z-index: 10;
 }
 
-.scroll-down-arrow span {
+.scroll-down-arrow div {
     position: absolute;
-    top: 40%;
+    top: 50%; /* Modification ici */
     left: 50%;
     width: 24px;
     height: 24px;
     margin-left: -12px;
     border-left: 2px solid #fff;
     border-bottom: 2px solid #fff;
-    transform: translate(-50%, -75%) rotate(315deg); /* Modification ici */
+    transform: translate(-50%, -50%) rotate(-45deg); /* Modification ici */
     animation: scroll-down 2s infinite;
     opacity: 0;
 }
