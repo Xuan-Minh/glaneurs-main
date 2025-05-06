@@ -1,20 +1,3 @@
-/*$(".slide1 h2").click(function() { 
-    $(".visionner").fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    $(".info").fadeOut(0);
-});
-$(".slide2 h2").click(function() {
-    $(".visionner").fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    $(".info").fadeOut(0);
-
-});
-$(".slide3 h2").click(function() {
-    $(".visionner").fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    $(".info").fadeOut(0);
-});*/
-
 function slideIn(slide, info) {
     resetOtherSlides(slide); // Réinitialise les autres slides
     $("body").css("overflow", "auto");
@@ -52,6 +35,21 @@ $(".visionner-trigger").click(function(event) {
     event.stopPropagation();
     const slide = $(this).closest(".slides");
     const visionner = slide.find(".visionner");
+    visionner.fadeIn(400).css("display", "flex");
+    $("body").css("overflow", "hidden");
+    slide.find(".info").fadeOut(0);
+});
+
+$(".visionner-trigger-h3").click(function(event) {
+    event.stopPropagation();
+    const slide = $(this).closest(".slides");
+    const visionner = slide.find(".visionner");
+    const srcdocupart = slide.find("video source").attr("src"); // Récupère la source de la vidéo
+    console.log(srcdocupart); // Affiche la source dans la console
+    // Met à jour la source de la vidéo dans le visionneur
+    visionner.find("video source").attr("src", srcdocupart);
+    visionner.find("video")[0].load(); // Recharge la vidéo
+
     visionner.fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
     slide.find(".info").fadeOut(0);
@@ -117,31 +115,6 @@ function triggerFunction(slide) {
 }
 
 
-// function resetState() {
-//     $(".visionner").fadeOut(400);
-//     $(".info").fadeOut(0);
-//     $("body").css("overflow", "auto");
-//     $(".slide1 h2").removeClass("move");
-//     $(".slide1 video").removeClass("flou");
-//     $(".slide1 .sliderButton .point2").removeClass("full");
-//     $(".slide1 .sliderButton .point2").addClass("empty");
-//     $(".slide1 .sliderButton .point1").removeClass("empty");
-//     $(".slide1 .sliderButton .point1").addClass("full");
-//     $(".slide2 h2").removeClass("move");
-//     $(".slide2 video").removeClass("flou");
-//     $(".slide2 .sliderButton .point2").removeClass("full");
-//     $(".slide2 .sliderButton .point2").addClass("empty");
-//     $(".slide2 .sliderButton .point1").removeClass("empty");
-//     $(".slide2 .sliderButton .point1").addClass("full");
-//     $(".slide3 h2").removeClass("move");
-//     $(".slide3 video").removeClass("flou");
-//     $(".slide3 .sliderButton .point2").removeClass("full");
-//     $(".slide3 .sliderButton .point2").addClass("empty");
-//     $(".slide3 .sliderButton .point1").removeClass("empty");
-//     $(".slide3 .sliderButton .point1").addClass("full");
-    
-// }
-
 function resetOtherSlides(activeSlide) {
     $(".slides").not(activeSlide).each(function () {
         const slide = $(this);
@@ -174,18 +147,29 @@ $(".slides:not(:first-child) h2").click(function (event) {
     // Affiche uniquement l'info de la slide active
     info.fadeIn(2000);
 
-    // Supprime les animations spécifiques à la slide active
-    // slide.find("h2").addClass("move");
-    // slide.find("video").addClass("flou");
+ 
 });
 
-/* $("slide1 h2").click(function move() {
-    $("this h2").removeClass("move");
-    $("this video").removeClass("flou");
-    $("this .info").fadeIn(2000);
-}); */
-// function move() {   
-//     $(".slide1 h2").removeClass("move");
-//     $(".slide1 video").removeClass("flou");
-//     $(".slide1 .info").fadeIn(2000);
-// }
+gsap.to(".scroll-down-arrow span", {
+    y: 20,
+    opacity: 0,
+    repeat: -1,
+    yoyo: true,
+    duration: 1,
+    ease: "power2.inOut"
+});
+
+// gsap.to(".scroll-down-arrow", {
+//   scrollTrigger: {
+//     trigger: ".slides:nth-child(2)", // Déclenche lorsque la 2ème slide atteint le haut de l'écran
+//     start: "top top", // Déclenche au sommet de la 2ème slide
+//     end: "bottom top", // Fin du déclenchement
+//     scrub: false, // animation non liée au défilement
+//     onEnter: () => gsap.to(".scroll-down-arrow", { opacity: 0, duration: 0.3 }), // Masque la flèche
+//     onLeaveBack: () => gsap.to(".scroll-down-arrow", { opacity: 1, duration: 0.3 }), // Affiche la flèche
+//     markers: false // Retirer les marqueurs
+//   },
+//   opacity: 1, // Opacité initiale
+//   duration: 0.3 // Durée de l'animation
+// });
+

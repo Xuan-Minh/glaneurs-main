@@ -298,3 +298,49 @@ header {
 body {
   background-color: lightblue;
 }
+
+.scroll-down-arrow {
+    position: sticky; /* Modification ici */
+    top: 80vh; /* Ajuste la position verticale */
+    left: 50%;
+    margin-left: -20px;
+    width: 40px;
+    height: 70px;
+    text-align: center;
+    z-index: 10;
+}
+
+.scroll-down-arrow span {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translate(-50%, -75%) rotate(315deg); /* Modification ici */
+    animation: scroll-down 2s infinite;
+    opacity: 0;
+}
+
+.scroll-down-arrow span:nth-child(2) {
+    top: 40%;
+    animation-delay: .2s;
+}
+
+@keyframes scroll-down {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        top: 70%;
+        opacity: 0;
+    }
+}

@@ -6,28 +6,33 @@ $slides = array(
         "srcvideobg" => "video/pluie.mp4",
         "srcaudio" => "audio/intro.mp3",
         "srcdocupart" => "video/intro.mp4",
-        "info" => "Glaneurs de carton est un film documentaire..."
+        "info" => "",
+        "urlsuite" => ""
     ),
     array(
         "chapitre" => "Chapitre 1",
         "srcvideobg" => "video/pluie.mp4",
         "srcaudio" => "audio/pluie.mp3",
         "srcdocupart" => "video/pluie.mp4",
-        "info" => "Glaneurs de carton est un film documentaire..."
+        "info" => "Glaneurs de carton est un film documentaire...",
+        "urlsuite" => ""
+        
     ),
     array(
         "chapitre" => "Chapitre 2",
         "srcvideobg" => "video/pont.mp4",
         "srcaudio" => "audio/pont.mp3",
         "srcdocupart" => "video/pont.mp4",
-        "info" => "Consectetur adipiscing elit..."
+        "info" => "Consectetur adipiscing elit...",
+        "urlsuite" => ""
     ),
     array(
         "chapitre" => "Chapitre 3",
         "srcvideobg" => "video/soleil.mp4",
         "srcaudio" => "audio/slide3.mp3",
         "srcdocupart" => "video/soleil.mp4",
-        "info" => "Sed do eiusmod tempor incididunt..."
+        "info" => "Sed do eiusmod tempor incididunt...",
+        "urlsuite" => ""
     )
 );
 $index = 1;
@@ -40,9 +45,15 @@ foreach ($slides as $slide) {
 
     // Condition pour le premier slide
     if ($isFirst) {
-        // N'affiche pas le visionner, ni les sliderButtons, et le h2 n'est pas cliquable
+        // Affiche le visionner, mais pas les sliderButtons, et le h2 est cliquable
+        echo '<div class="visionner">';
+        echo '<div class="close-visionner">X</div>';
+        echo '<video autoplay controls>';
+        echo '<source src="' . $slide["srcdocupart"] . '" type="video/mp4" />';
+        echo '</video>';
+        echo '</div>';
         echo '<h1>' . $slide["chapitre"] . '</h1>';
-        echo '<h3>' . $slide["sous-titre"] . '</h3>';
+        echo '<h3 class="visionner-trigger-h3">' . $slide["sous-titre"] . '</h3>';
     } else {
         // Affiche le visionner, les sliderButtons, et le h2 est cliquable
         echo '<div class="visionner">';
@@ -52,7 +63,7 @@ foreach ($slides as $slide) {
         echo '</video>';
         echo '</div>';
         echo '<h2 class="visionner-trigger">' . $slide["chapitre"] . '</h2>';
-        echo '<h3>' . $slide["sous-titre"] . '</h3>';
+        echo '<h3 class="visionner-trigger-h3">' . $slide["sous-titre"] . '</h3>';
         echo '<div class="sliderButton">';
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
