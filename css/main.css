@@ -280,7 +280,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 0; /* Supprime le padding */
+  padding: 3px; /* Supprime le padding */
 }
 
 .menu-burger span {
