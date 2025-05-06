@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Glaneurs</title>
+    <title>Glaneurs de carton</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Glaneurs de carton" />
     <link rel="apple-touch-icon" href="img/favicon.png" type="image/png" />
