@@ -1,4 +1,4 @@
-$(".slide1 h2").click(function() { 
+/*$(".slide1 h2").click(function() { 
     $(".visionner").fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
     $(".info").fadeOut(0);
@@ -13,7 +13,7 @@ $(".slide3 h2").click(function() {
     $(".visionner").fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
     $(".info").fadeOut(0);
-});
+});*/
 
 function slideIn(slide, info) {
     resetOtherSlides(slide); // Réinitialise les autres slides
@@ -46,6 +46,15 @@ $(".sliderButton .point1").click(function (event) {
     const slide = $(this).closest(".slides"); // Récupère la slide parente
     const info = slide.find(".info"); // Récupère l'élément .info de la slide
     slideOut(slide, info); // Appelle slideOut pour cette slide
+});
+
+$(".visionner-trigger").click(function(event) {
+    event.stopPropagation();
+    const slide = $(this).closest(".slides");
+    const visionner = slide.find(".visionner");
+    visionner.fadeIn(400).css("display", "flex");
+    $("body").css("overflow", "hidden");
+    slide.find(".info").fadeOut(0);
 });
 
 $(".close-visionner").click(function (event) {
@@ -155,13 +164,28 @@ $(".slides h2").click(function (event) {
     slide.find("video").addClass("flou");
 });
 
+$(".slides:not(:first-child) h2").click(function (event) {
+    event.stopPropagation(); // Empêche la propagation de l'événement
+    const slide = $(this).closest(".slides"); // Récupère la slide parente
+    const info = slide.find(".info"); // Récupère l'élément .info de la slide
+
+    resetOtherSlides(slide); // Réinitialise les autres slides
+
+    // Affiche uniquement l'info de la slide active
+    info.fadeIn(2000);
+
+    // Supprime les animations spécifiques à la slide active
+    // slide.find("h2").addClass("move");
+    // slide.find("video").addClass("flou");
+});
+
 /* $("slide1 h2").click(function move() {
     $("this h2").removeClass("move");
     $("this video").removeClass("flou");
     $("this .info").fadeIn(2000);
 }); */
-function move() {   
-    $(".slide1 h2").removeClass("move");
-    $(".slide1 video").removeClass("flou");
-    $(".slide1 .info").fadeIn(2000);
-}
+// function move() {   
+//     $(".slide1 h2").removeClass("move");
+//     $(".slide1 video").removeClass("flou");
+//     $(".slide1 .info").fadeIn(2000);
+// }

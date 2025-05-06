@@ -82,6 +82,20 @@ h1{
   transform: scale(1.05); /* Agrandit légèrement la vidéo */
   
 }
+h1{
+  font-size: 5em;
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  transition: top 1.5s ease-in-out, 
+              left 1.5s ease-in-out,
+              font-size 1.5s ease-in-out,
+              opacity 1.5s ease-in-out;
+}
 h2{
   font-size:5em;
   position: absolute;
