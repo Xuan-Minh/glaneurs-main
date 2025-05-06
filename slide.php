@@ -1,6 +1,14 @@
 <?php
 $slides = array(
     array(
+        "chapitre" => "Les glaneurs de carton", 
+        "sous-titre" => "Voir le documentaire en entier",
+        "srcvideobg" => "video/pluie.mp4",
+        "srcaudio" => "audio/intro.mp3",
+        "srcdocupart" => "video/intro.mp4",
+        "info" => "Glaneurs de carton est un film documentaire..."
+    ),
+    array(
         "chapitre" => "Chapitre 1",
         "srcvideobg" => "video/pluie.mp4",
         "srcaudio" => "audio/pluie.mp3",
@@ -40,6 +48,7 @@ foreach ($slides as $slide) {
               
          
             <h2>' . $slide["chapitre"] . '</h2>
+            <h3>' . $slide["sous-titre"] . '</h3>
             <div class="sliderButton">
                 <div class="point1 full"></div>
                 <div class="point2 empty"></div>
@@ -51,5 +60,6 @@ foreach ($slides as $slide) {
         
         $index += 1;
         //test
+        
 }
 ?>

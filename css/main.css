@@ -63,13 +63,14 @@ h1{
   padding: 0;
 }
 
-.slides video {
+.slides > video {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Assure que la vidéo remplit le conteneur sans déborder */
   position: absolute; /* Positionne la vidéo pour qu'elle couvre tout le conteneur */
   top: 0;
   left: 0;
+  z-index: -1; /* Place la vidéo derrière les autres éléments */
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
@@ -96,8 +97,39 @@ h2{
               opacity 1.5s ease-in-out;
   cursor: pointer;
 }
+h3{
+    font-size: 2em;
+  position: absolute;
+  color: white;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  transition: color 0.3s ease; /* Transition pour la couleur */
+  text-decoration: none; /* Pas de soulignement par défaut */
+  position:relative; /* Ajout de position relative */
+}
 
+h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Ajuste la position du soulignement */
+  left: 0;
+  width: 0; /* Initialise la largeur à 0 */
+  height: 2px; /* Épaisseur du soulignement */
+  background-color: white; /* Couleur du soulignement */
+  transition: width 0.5s ease; /* Animation de largeur */
+  z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
 
+h3:hover {
+  color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+h3:hover::after {
+  width: 100%; /* Soulignement complet au survol */
+}
 
 .slides h2.move {
 /*    top: 20%;*/
@@ -142,6 +174,9 @@ h2{
   max-height: 100%; /* Empêche la vidéo de dépasser la hauteur de l'écran */
   align-self: center; /* Centre la vidéo dans Flexbox */
   margin: auto; /* Ajoute une marge automatique pour garantir le centrage */
+    position: relative; /* Permet de centrer la vidéo */
+  top: auto;
+  left: auto;
 }
 
 
