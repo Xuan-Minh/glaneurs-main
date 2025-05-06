@@ -119,7 +119,6 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  cursor: pointer;
   z-index: 10;
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
@@ -256,32 +255,46 @@ header {
   right: 20px;
   display: flex;
   align-items: center;
-  gap: 30px; /* Espacement entre le bouton et le menu burger */
+  gap: 20px; /* Espacement entre le bouton et le menu burger */
   z-index: 1000;
 }
 
+/* Bouton "FR" avec soulignement au survol */
 #languageToggle {
   color: #fff; /* Texte blanc par défaut */
   border: none; /* Supprime les contours */
   background: none; /* Supprime le fond */
   padding: 5px 10px; /* Taille du bouton */
-  font-size: 20px; /* Augmente légèrement la taille du texte */
+  font-size: 18px; /* Taille du texte */
   cursor: pointer;
-  transition: color 0.3s ease; /* Transition uniquement sur la couleur */
+  position: relative; /* Nécessaire pour le soulignement */
+  text-decoration: none; /* Pas de soulignement par défaut */
 }
 
-#languageToggle:hover {
-  color: #000; /* Texte noir au survol */
+#languageToggle::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Position du soulignement */
+  left: 0;
+  width: 0; /* Initialement pas de soulignement */
+  height: 2px; /* Épaisseur du soulignement */
+  background-color: #fff; /* Couleur du soulignement */
+  transition: width 0.3s ease; /* Transition fluide pour le soulignement */
 }
 
+#languageToggle:hover::after {
+  width: 100%; /* Soulignement complet au survol */
+}
+
+/* Menu burger */
 .menu-burger {
-  width: 30px; /* Augmente la largeur */
-  height: 20px; /* Augmente la hauteur */
+  width: 30px; /* Largeur totale du menu burger */
+  height: 20px; /* Hauteur totale du menu burger */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Espacement uniforme entre les barres */
   cursor: pointer;
-  padding: 3px; /* Supprime le padding */
+  padding: 3px;
 }
 
 .menu-burger span {
@@ -290,55 +303,18 @@ header {
   height: 3px; /* Épaisseur des barres */
   background-color: #fff; /* Couleur des barres blanches par défaut */
   border-radius: 2px; /* Arrondit légèrement les barres */
-  transition: background-color 0.3s ease; /* Transition sur la couleur */
+  transition: width 0.3s ease; /* Transition fluide pour la largeur */
+  transform-origin: left; /* Définit l'origine du rétrécissement à gauche */
 }
 
-.menu-burger:hover span {
-  background-color: #000; /* Couleur des barres noires au survol */
+.menu-burger:hover span:nth-child(1) {
+  width: 80%; /* Rétrécit la première barre à 80% */
 }
 
-.scroll-down-arrow {
-    position: sticky; /* Modification ici */
-    top: 80vh; /* Ajuste la position verticale */
-    left: 50%;
-    margin-left: -20px;
-    width: 40px;
-    height: 70px;
-    text-align: center;
-    z-index: 10;
+.menu-burger:hover span:nth-child(2) {
+  width: 60%; /* Rétrécit la deuxième barre à 60% */
 }
 
-.scroll-down-arrow span {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: -12px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    transform: translate(-50%, -75%) rotate(315deg); /* Modification ici */
-    animation: scroll-down 2s infinite;
-    opacity: 0;
-}
-
-.scroll-down-arrow span:nth-child(2) {
-    top: 40%;
-    animation-delay: .2s;
-}
-
-@keyframes scroll-down {
-    0% {
-        opacity: 0;
-    }
-    30% {
-        opacity: 1;
-    }
-    60% {
-        opacity: 1;
-    }
-    100% {
-        top: 70%;
-        opacity: 0;
-    }
+.menu-burger:hover span:nth-child(3) {
+  width: 40%; /* Rétrécit la troisième barre à 40% */
 }
