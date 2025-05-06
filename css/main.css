@@ -131,9 +131,15 @@ h2{
               opacity 1.5s ease-in-out;
   cursor: pointer;
 }
+h2:hover {
+  
+  color: #ddd; /* Légère modification de la couleur au survol */
+ transition: color 0.3s ease; /* Transition pour la couleur */
+  text-decoration: none; /* Pas de soulignement par défaut */
+}
 h3 {
   font-family: "Figtree";
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: 400;
   position: absolute;
   color: white;
@@ -189,6 +195,8 @@ h3:hover::after {
   right: 20%;
   z-index: 10;
   display:none;
+  font-family : "figtree";
+  font-size: 1.2em;
 }
 
 .visionner{
@@ -291,34 +299,64 @@ header {
   padding: 5px 10px; /* Taille du bouton */
   font-size: 20px; /* Augmente légèrement la taille du texte */
   cursor: pointer;
+  position: relative; /* Ajout de position relative */
   transition: color 0.3s ease; /* Transition uniquement sur la couleur */
 }
 
+#languageToggle::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Ajuste la position du soulignement */
+  left: 0;
+  width: 0; /* Initialise la largeur à 0 */
+  height: 2px; /* Épaisseur du soulignement */
+  background-color: #ddd; /* Couleur du soulignement */
+  transition: width 0.5s ease; /* Animation de largeur */
+  z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
 #languageToggle:hover {
-  color: #000; /* Texte noir au survol */
+  color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+#languageToggle:hover::after {
+  width: 100%; /* Soulignement complet au survol */
 }
 
 .menu-burger {
-  width: 30px; /* Augmente la largeur */
-  height: 20px; /* Augmente la hauteur */
+  width: 30px;
+  height: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 3px; /* Supprime le padding */
+  padding: 3px;
+  transition: transform 0.3s ease; /* Ajoute une transition pour l'ensemble du conteneur */
 }
 
 .menu-burger span {
   display: block;
-  width: 100%; /* La largeur des barres correspond à celle du menu burger */
-  height: 3px; /* Épaisseur des barres */
-  background-color: #fff; /* Couleur des barres blanches par défaut */
-  border-radius: 2px; /* Arrondit légèrement les barres */
-  transition: background-color 0.3s ease; /* Transition sur la couleur */
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: width 0.3s ease, background-color 0.3s ease; /* Transitions individuelles */
+  transform-origin: right; /* Important pour l'animation depuis la gauche */
 }
 
 .menu-burger:hover span {
-  background-color: #000; /* Couleur des barres noires au survol */
+  transform: color (#ddd);}
+
+.menu-burger:hover span:nth-child(1) {
+  width: 100%; /* Première barre à sa taille originale */
+}
+
+.menu-burger:hover span:nth-child(2) {
+  width: 90%; /* Deuxième barre un peu plus petite */
+}
+
+.menu-burger:hover span:nth-child(3) {
+  width: 80%; /* Troisième barre encore plus petite */
 }
 
 .scroll-down-arrow {
