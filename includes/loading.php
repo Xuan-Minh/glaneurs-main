@@ -1,6 +1,6 @@
 <div class="loading-screen">
     <video autoplay muted loop>
-        <source src="video/eau.mp4" type="video/mp4">
+        <source src="video/eaulow.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
     <div class="loading-items">

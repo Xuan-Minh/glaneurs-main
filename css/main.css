@@ -469,15 +469,8 @@ header {
 
 .loading-item#loading-item1 .loading-content {
   margin-left: 20%; /* Ajoute un retrait à la première div */
-  margin-top: 10%; /* Ajoute un retrait en haut pour ne pas coller au bord */
     text-align: left; /* Aligne le texte à gauche */
     font-size: 1em; /* Ajuste la taille de la police */
-    margin-bottom: 10px; /* Réduit l'espace en bas du texte */
-}
-
-.loading-item #loading-item1 .loading-content:first-child {
-    margin-left: 200px; /* Ajoute un retrait à la première div */
-    margin-top: 500px; /* Ajoute un retrait en haut pour ne pas coller au bord */
 }
 
 .loading-item.active {
@@ -662,8 +655,9 @@ header {
 }
 
 .loading-item#loading-item1 .loading-content:first-child {
-    margin-left: 20px; /* Ajoute un retrait à la première div */
-    margin-top: 20px; /* Ajoute un retrait en haut pour ne pas coller au bord */
+    margin-left: 20%; /* Ajoute un retrait à la première div */
+    margin-top: 10%; /* Ajoute un retrait en haut pour ne pas coller au bord */
+    margin-bottom: 0; /* Ajoute un espace en bas du texte */
 }
 
 .menu-volet {
