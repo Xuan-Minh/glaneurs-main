@@ -468,7 +468,7 @@ header {
 }
 
 .loading-item#loading-item1 .loading-content {
-  margin-left: 20%; /* Ajoute un retrait à la première div */
+  margin-left: 15%; /* Ajoute un retrait à la première div */
     text-align: left; /* Aligne le texte à gauche */
     font-size: 1em; /* Ajuste la taille de la police */
 }
@@ -664,11 +664,12 @@ header {
     text-align: left; /* Aligne le texte à gauche */
     font-size: 1.5em; /* Ajuste la taille de la police */
     margin-bottom: 10px; /* Réduit l'espace en bas du texte */
+  justify-content: center; /* Aligne le contenu en haut */
+    align-items: center; /* Aligne le contenu à gauche */ 
+
 }
 
 .loading-item#loading-item1 .loading-content:first-child {
-    margin-left: 25%; /* Ajoute un retrait à la première div */
-    margin-top: 15%; /* Ajoute un retrait en haut pour ne pas coller au bord */
     margin-bottom: 0; /* Ajoute un espace en bas du texte */
 }
 

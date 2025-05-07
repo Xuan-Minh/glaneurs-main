@@ -20,6 +20,10 @@
             </div>
         </div>
         <div class="loading-item" id="loading-item4">
+           
+                <div class="">
+                    <img src="img/headphones-4-64.png" alt="Casque">
+                </div>
             <div class="loading-content">
                 
                 Veuillez mettre un casque pour profiter d'une meilleure expérience
