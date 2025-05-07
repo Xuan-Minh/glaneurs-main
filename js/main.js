@@ -137,6 +137,15 @@ $(".slides h2").click(function (event) {
     slide.find("video").addClass("flou");
 });
 
+$(".slides h2").click(function (event) {
+    event.stopPropagation();
+    const slide = $(this).closest(".slides");
+    const visionner = slide.find(".visionner");
+    visionner.fadeIn(400).css("display", "flex");
+    $("body").css("overflow", "hidden");
+    slide.find(".info").fadeOut(0);
+});
+
 $(".slides:not(:first-child) h2").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
@@ -148,6 +157,29 @@ $(".slides:not(:first-child) h2").click(function (event) {
     info.fadeIn(2000);
 
  
+});
+
+$(".slides h2").click(function (event) {
+    event.stopPropagation();
+    const slide = $(this).closest(".slides");
+    const visionner = slide.find(".visionner");
+    const info = slide.find(".info");
+
+    resetOtherSlides(slide); // Réinitialise les autres slides
+
+    visionner.fadeIn(400).css("display", "flex");
+    $("body").css("overflow", "hidden");
+    info.fadeOut(0);
+});
+
+$(".visionner-trigger-h3").click(function(event) {
+    event.stopPropagation();
+    const slide = $(this).closest(".slides");
+    const visionner = slide.find(".visionner");
+    console.log("visionner-trigger-h3 clicked");
+    visionner.fadeIn(400).css("display", "flex");
+    $("body").css("overflow", "hidden");
+    slide.find(".info").fadeOut(0);
 });
 
 gsap.to(".scroll-down-arrow span", {
