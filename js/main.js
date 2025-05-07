@@ -318,3 +318,28 @@ $(document).ready(function() {
     });
 });
 
+$("#languageToggle").click(function () {
+    const button = $(this);
+    const isKR = button.text() === "KR"; // Vérifie si le bouton est en mode KR
+
+    if (isKR) {
+        // Passe en coréen
+        $("h1").each(function () {
+            const krVersion = $(this).data("krversion"); // Récupère la version coréenne
+            if (krVersion) {
+                $(this).text(krVersion); // Change le texte du h1
+            }
+        });
+        button.text("FR"); // Change le texte du bouton en FR
+    } else {
+        // Passe en français
+        $("h1").each(function () {
+            const frVersion = $(this).data("frversion") || $(this).data("chapitre"); // Récupère la version française
+            if (frVersion) {
+                $(this).text(frVersion); // Change le texte du h1
+            }
+        });
+        button.text("KR"); // Change le texte du bouton en KR
+    }
+});
+
