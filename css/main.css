@@ -464,7 +464,7 @@ header {
   
 }
 .loading-titre{
-  font-family : "Libre Baskerville", serif;
+  font-family : "Libre Baskerville", serif !important;
   font-size: 2em !Important;
   font-weight: 400;
 }
