@@ -482,6 +482,7 @@ header {
     font-family: "Figtree", sans-serif;
     font-size: 1em;
     color: white;
+    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -531,7 +532,7 @@ header {
 .loading-content {
     font-size: 1em;
     width: 70%;
-    height : 20%;
+    height : 10%;
     text-align: center;
     margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
@@ -553,9 +554,10 @@ header {
 }
 .universites {
     display: flex;
-    justify-content: space-around; /* Espace entre les images */
+    justify-content: space-evenly; /* Espace entre les images */
     width: 100%;
     margin-top: 10px; /* Ajoute un espace au-dessus des images */
+    align-items: center;
     
 }
 .universites img {
@@ -638,14 +640,24 @@ header {
 .loading-item #loading-item3 .universites {
     display: flex;
     justify-content: center;
+    
     align-items: center;
     margin-top: 10px; /* Ajoute un espace au-dessus des images */
 }
 
-.loading-item #loading-item3 .universites img {
+.loading-item #loading-item3 .universites img:nth-child(1) {
     height: 150px; /* Ajuste la hauteur des images */
-    width: auto; /* Garde les proportions */
+    margin: 0 20px; /* Ajoute un espace entre les images */
+}
 
+.loading-item #loading-item3 .universites img:nth-child(2) {
+    height: 50px; /* Réduit la hauteur du second logo */
+    width: auto; /* Garde les proportions */
+}
+.universites>img:nth-child(2) {
+    height: 100px; /* Réduit la hauteur du second logo */
+    width: auto; /* Garde les proportions */
+   margin : 0;
 }
 
 .loading-item#loading-item1{
@@ -655,8 +667,8 @@ header {
 }
 
 .loading-item#loading-item1 .loading-content:first-child {
-    margin-left: 20%; /* Ajoute un retrait à la première div */
-    margin-top: 10%; /* Ajoute un retrait en haut pour ne pas coller au bord */
+    margin-left: 25%; /* Ajoute un retrait à la première div */
+    margin-top: 15%; /* Ajoute un retrait en haut pour ne pas coller au bord */
     margin-bottom: 0; /* Ajoute un espace en bas du texte */
 }
 
