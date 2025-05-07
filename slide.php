@@ -4,7 +4,7 @@ $slides = array(
         "chapitre" => "Les glaneurs de carton", 
         "sous-titre" => "Voir le documentaire en entier",
         "srcvideobg" => "video/chariot.mov",
-        "srcaudio" => "audio/intro.mp3",
+        "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "video/docu.mov",
         "info" => "",
         "urlsuite" => ""
@@ -12,7 +12,7 @@ $slides = array(
     array(
         "chapitre" => "Chapitre 1",
         "srcvideobg" => "video/ville.mov",
-        "srcaudio" => "audio/pluie.mp3",
+        "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "video/ville.mov",
         "info" => "Glaneurs de carton est un film documentaire...",
         "urlsuite" => ""
@@ -21,7 +21,7 @@ $slides = array(
     array(
         "chapitre" => "Chapitre 2",
         "srcvideobg" => "video/bache.mov",
-        "srcaudio" => "audio/pont.mp3",
+        "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "video/bache.mov",
         "info" => "Consectetur adipiscing elit...",
         "urlsuite" => ""
@@ -29,7 +29,7 @@ $slides = array(
     array(
         "chapitre" => "Chapitre 3",
         "srcvideobg" => "video/lee.mov",
-        "srcaudio" => "audio/slide3.mp3",
+        "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "video/lee.mov",
         "info" => "Sed do eiusmod tempor incididunt...",
         "urlsuite" => ""

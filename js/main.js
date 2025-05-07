@@ -226,7 +226,15 @@ $(document).ready(function() {
     $("#enter-button").click(function() {
         clearInterval(intervalId); // Arrête l'animation
         $(".loading-screen").fadeOut(1000, function() { // Fade out de l'écran de chargement
-            $(".container").fadeIn(1000); // Fade in du container
+            $(".container").fadeIn(1000, function() {
+                // Démarrer le son du premier chapitre
+                const firstAudio = document.getElementById('audio-slide-1');
+                if (firstAudio) {
+                    firstAudio.volume = 0; // Volume initial à 0
+                    firstAudio.play();
+                    $(firstAudio).animate({volume: 0.5}, 2000); // Fade in jusqu'à 50%
+                }
+            }); // Fade in du container
         });
     });
 
@@ -240,6 +248,41 @@ $(document).ready(function() {
 
     menuBurger.click(function() {
         menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
+    });
+
+    // Fonction pour gérer le changement de slide et les sons
+    function handleSlideChange(slide) {
+        // Récupérer l'index de la slide actuelle
+        const slideIndex = $(slide).index() + 1;
+
+        // Faire un fadeOut de tous les sons
+        $("audio").animate({volume: 0}, 1000, function() {
+            this.pause();
+        });
+
+        // Faire un fadeIn du son de la nouvelle slide
+        const newAudio = document.getElementById(`audio-slide-${slideIndex}`);
+        if (newAudio) {
+            newAudio.volume = 0;
+            newAudio.play();
+            $(newAudio).animate({volume: 0.5}, 2000);
+        }
+    }
+
+    // Observer les changements de slide
+    const slides = document.querySelectorAll('.slides');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                handleSlideChange(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5 // Déclencher quand la slide est visible à 50%
+    });
+
+    slides.forEach(slide => {
+        observer.observe(slide);
     });
 });
 
