@@ -6,10 +6,10 @@
     <div class="loading-items">
         <div class="loading-item" id="loading-item1">
             <div class="loading-content def">‘glaneur,-euse’, nom,</div>
-            <div class="loading-content"><i>Personne qui glane, c'est-à-dire qui ramasse des choses. Personne qui traîne à la fin des marchés pour récupérer les produits qui ont été jetés aux ordures.</i></div>
+            <div class="loading-content blabla">Personne qui glane, c'est-à-dire qui ramasse des choses. Personne qui traîne à la fin des marchés pour récupérer les produits qui ont été jetés aux ordures.</div>
         </div>
         <div class="loading-item" id="loading-item2">
-            <div class="loading-content">Les glaneurs de carton</div>
+            <div class="loading-content loading-titre">Les glaneurs de carton</div>
         </div>
         <div class="loading-item" id="loading-item3">
             <div class="loading-content">Une production de 

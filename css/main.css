@@ -455,10 +455,24 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+}
+.loading-content.def{
+  
+}
+.loading-titre{
+  font-family : "Libre Baskerville", serif;
+  font-size: 2em !Important;
+  font-weight: 400;
+}
+.blabla{
+
+  font-size:0.7em !important; 
+  font-style: italic;
+  font-family: "Figtree", sans-serif;
 }
 
 /* Style spécifique pour la première page */
@@ -468,7 +482,7 @@ header {
 }
 
 .loading-item#loading-item1 .loading-content {
-  margin-left: 15%; /* Ajoute un retrait à la première div */
+  margin-left: 10%; /* Ajoute un retrait à la première div */
     text-align: left; /* Aligne le texte à gauche */
     font-size: 1em; /* Ajuste la taille de la police */
 }
@@ -671,6 +685,7 @@ header {
 
 .loading-item#loading-item1 .loading-content:first-child {
     margin-bottom: 0; /* Ajoute un espace en bas du texte */
+    margin-left: 15%; /* Ajoute un retrait à la première div */
 }
 
 .menu-volet {
