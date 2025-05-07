@@ -16,7 +16,6 @@ $slides = array(
         "srcdocupart" => "https://vimeo.com/76979871", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "Glaneurs de carton est un film documentaire...",
         "urlsuite" => ""
-        
     ),
     array(
         "chapitre" => "Chapitre 2",
@@ -47,7 +46,7 @@ foreach ($slides as $slide) {
         // Affiche le visionner, mais pas les sliderButtons
         echo '<div class="visionner">';
         echo '<div class="close-visionner">X</div>';
-        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=en" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
         echo '<h1>' . $slide["chapitre"] . '</h1>';
         echo '<h3 class="visionner-trigger visionner-trigger-h3">Voir le documentaire en entier</h3>';
@@ -55,7 +54,7 @@ foreach ($slides as $slide) {
         // Affiche le visionner et les sliderButtons
         echo '<div class="visionner">';
         echo '<div class="close-visionner">X</div>';
-        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=en" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
         echo '<h2 class="visionner-trigger">' . $slide["chapitre"] . '</h2>';
         echo '<div class="sliderButton">';
