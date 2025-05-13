@@ -14,7 +14,7 @@ $slides = array(
         "chapitre" => "Chapitre 1",
         "srcvideobg" => "video/ville.mov",
         "srcaudio" => "audio/chap1.mp3",
-        "srcdocupart" => "https://vimeo.com/76979871", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "Glaneurs de carton est un film documentaire...",
         "urlsuite" => ""
     ),
@@ -22,7 +22,7 @@ $slides = array(
         "chapitre" => "Chapitre 2",
         "srcvideobg" => "video/bache.mov",
         "srcaudio" => "audio/chap2.mp3",
-        "srcdocupart" => "https://vimeo.com/76979871", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "Consectetur adipiscing elit...",
         "urlsuite" => ""
     ),
@@ -30,7 +30,7 @@ $slides = array(
         "chapitre" => "Chapitre 3",
         "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/chap3.mp3",
-        "srcdocupart" => "https://vimeo.com/76979871", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "Sed do eiusmod tempor incididunt...",
         "urlsuite" => ""
     )

@@ -124,51 +124,22 @@ function resetOtherSlides(activeSlide) {
     });
 }
 
-$(".slides h2").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
-    resetOtherSlides(slide); // Réinitialise les autres slides
-    // Affiche uniquement l'info de la slide active
-    info.fadeIn(2000);
+// Supprime tous les autres handlers sur .slides h2 AVANT ce bloc
 
-    // Ajoute des animations spécifiques à la slide active
-    slide.find("h2").addClass("move");
-    slide.find("video").addClass("flou");
-});
-
-$(".slides h2").click(function (event) {
-    event.stopPropagation();
-    const slide = $(this).closest(".slides");
-    const visionner = slide.find(".visionner");
-    visionner.fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    slide.find(".info").fadeOut(0);
-});
-
-$(".slides:not(:first-child) h2").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
-
-    resetOtherSlides(slide); // Réinitialise les autres slides
-
-    // Affiche uniquement l'info de la slide active
-    info.fadeIn(2000);
-
- 
-});
-
-$(".slides h2").click(function (event) {
+$(".slides h2").off("click").on("click", function (event) {
     event.stopPropagation();
     const slide = $(this).closest(".slides");
     const visionner = slide.find(".visionner");
     const info = slide.find(".info");
 
-    resetOtherSlides(slide); // Réinitialise les autres slides
+    // Réinitialise les autres slides
+    resetOtherSlides(slide);
 
+    // Ouvre le visionneur
     visionner.fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
+
+    // Masque l'info (si tu veux l'afficher, remplace fadeOut(0) par fadeIn(2000))
     info.fadeOut(0);
 });
 
@@ -336,4 +307,22 @@ document.addEventListener("DOMContentLoaded", function() {
         color: "#FFFFFF", // Couleur dorée, change selon ton design
         removeDefaultCursor: true, // Cache le curseur natif
     });
+});
+
+$(document).on("click", ".menu-video-item", function() {
+    var index = $(this).index(); // 0 = Chapitre 1, 1 = Chapitre 2, etc.
+    var $slide = $('.slides').eq(index + 1); // +1 car la première slide est le documentaire
+
+    if ($slide.length === 0) return;
+
+    // Scroll smooth natif
+    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Ouvre le visionneur après un court délai (pour laisser le scroll finir)
+    setTimeout(function() {
+        $slide.find('h2').trigger('click');
+    }, 600);
+
+    // Ferme le menu-volet si besoin
+    $("#menuVolet").removeClass("open");
 });

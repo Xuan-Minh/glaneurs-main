@@ -16,8 +16,6 @@
 
     <div class="container hidden">
   
-    
-
       <?php 
       include 'scrolldown.php';
       include 'slide.php';?>
