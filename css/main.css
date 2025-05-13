@@ -1,3 +1,4 @@
+/* ------------------------ LES FONTS ------------------------------------------- */
 @font-face {
   font-family: "Figtree";
   src:url("../font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
@@ -28,6 +29,7 @@
   font-style: Regular;
 }
 
+/* ------------------------ GENERAL ------------------------------------------- */
 html, body {
   font-family: "Figtree", sans-serif;
   margin: 0;
@@ -45,9 +47,9 @@ body{
   height:100vh;
 }
 
-h1{
+h1, h2{
   font-family: "Libre Baskerville", serif;
-  font-size:4em;
+  font-size:5em;
   position: absolute;
   color: white;
   top: 40%;
@@ -55,8 +57,19 @@ h1{
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 10;
+  transition: top 1.5s ease-in-out, 
+              left 1.5s ease-in-out,
+              font-size 1.5s ease-in-out,
+              opacity 1.5s ease-in-out;
 }
-
+h2{
+  cursor: pointer;
+}
+h2:hover {
+  color: #ddd; /* Légère modification de la couleur au survol */
+ transition: color 0.3s ease; /* Transition pour la couleur */
+  text-decoration: none; /* Pas de soulignement par défaut */
+}
 .container{
   width:100%;
   height:100vh;
@@ -102,42 +115,7 @@ h1{
   transform: scale(1.05); /* Agrandit légèrement la vidéo */
   
 }
-h1{
-  font-size: 5em;
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  transition: top 1.5s ease-in-out, 
-              left 1.5s ease-in-out,
-              font-size 1.5s ease-in-out,
-              opacity 1.5s ease-in-out;
-}
-h2{
-  font-size:5em;
-  font-family: "Libre Baskerville", serif;  
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  transition: top 1.5s ease-in-out, 
-              left 1.5s ease-in-out,
-              font-size 1.5s ease-in-out,
-              opacity 1.5s ease-in-out;
-  cursor: pointer;
-}
-h2:hover {
-  
-  color: #ddd; /* Légère modification de la couleur au survol */
- transition: color 0.3s ease; /* Transition pour la couleur */
-  text-decoration: none; /* Pas de soulignement par défaut */
-}
+
 h3 {
   font-family: "Figtree";
   font-size: 1.5em;
