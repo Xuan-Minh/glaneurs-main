@@ -106,6 +106,9 @@ h3:hover::after {
 .container::-webkit-scrollbar {
   display: none; /* Cacher la barre de défilement dans Chrome, Edge et Safari */
 }
+.hidden {
+    display: none;
+}
 /* ---------------------- MAIN PAGE ------------------------------------ */
 .slides {
   position: relative;
@@ -256,7 +259,6 @@ header {
   padding: 5px 10px; /* Taille du bouton */
   font-size: 20px; /* Augmente légèrement la taille du texte */
   cursor: pointer;
-
   position: relative; /* Ajout de position relative */
   transition: color 0.3s ease; /* Transition uniquement sur la couleur */
 }
@@ -276,7 +278,6 @@ header {
 #languageToggle:hover {
   color: #ddd; /* Légère modification de la couleur au survol */
 }
-
 #languageToggle:hover::after {
   width: 100%; /* Soulignement complet au survol */
 }
@@ -317,53 +318,7 @@ header {
   width: 60%; /* Troisième barre encore plus petite */
 }
 
-.scroll-down-arrow {
-    position: sticky;
-    top: 85vh; /* Ajuste la position verticale */
-    left: 50vw;
-    transform: translateX(-50%); /* Ajout pour centrer horizontalement */
-    margin-left: 0; /* Suppression de la marge */
-    width: 40px;
-    text-align: center;
-    z-index: 10;
-}
-
-.scroll-down-arrow div {
-    position: absolute;
-    top: 50%; /* Modification ici */
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: -12px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    transform: translate(-50%, -50%) rotate(45deg); /* Modification ici */
-    animation: scroll-down 2s infinite;
-    opacity: 0;
-}
-
-.scroll-down-arrow span:nth-child(2) {
-    top: 40%;
-    animation-delay: .2s;
-}
-
-@keyframes scroll-down {
-    0% {
-        opacity: 0;
-    }
-    30% {
-        opacity: 1;
-    }
-    60% {
-        opacity: 1;
-    }
-    100% {
-        top: 70%;
-        opacity: 0;
-    }
-}
-/* LOADING  */
-/* Style pour l'écran de chargement */
+/* ---------------------------------- LOADING ----------------------------------------------*/
 .loading-screen {
     position: fixed;
     top: 0;
@@ -374,13 +329,12 @@ header {
     background-color: rgba(0, 0, 0); /* Ajoute un fond noir semi-transparent pour assombrir */
     z-index: 9999;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     color: white; /* Pour que le texte soit visible */
     overflow: hidden; /* Important pour masquer le défilement horizontal */
     /* filter: blur(5px); /* Retire l'effet de flou de l'écran de chargement */
 }
-
 .loading-screen::before {
     content: "";
     position: absolute;
@@ -390,7 +344,6 @@ header {
     height: 100%;
     z-index: -1; /* Place le pseudo-élément derrière le contenu */
 }
-
 .loading-screen .loading-items {
     position: relative; /* Ajout de position relative */
     width: 100%;
@@ -404,9 +357,10 @@ header {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Ajout pour organiser verticalement */
+    justify-content: center; /* Centre verticalement */
     align-items: center;
-    font-size: 1em;
+    font-size: 1.5em;
     text-align: center;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -417,7 +371,6 @@ header {
   font-weight: 400;
 }
 .blabla{
-
   font-size:0.7em !important; 
   font-style: italic;
   font-family: "Figtree", sans-serif;
@@ -439,57 +392,8 @@ header {
     opacity: 1; /* Visible lorsqu'il est actif */
 }
 
-#enter-button {
-    background-color: rgba(0,0,0,0);
-    font-family: "Figtree", sans-serif;
-    font-size: 1.5em;
-    color: white;
-    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    position: relative; /* Ajout de position relative */
-    transition: color 0.3s ease; /* Transition pour la couleur */
-}
-
-#enter-button::after {
-    content: "";
-    position: absolute;
-    bottom: -5px; /* Ajuste la position du soulignement */
-    left: 0;
-    width: 0; /* Initialise la largeur à 0 */
-    height: 2px; /* Épaisseur du soulignement */
-    background-color: #ddd; /* Couleur du soulignement */
-    transition: width 0.5s ease; /* Animation de largeur */
-    z-index: -1; /* Pour que le soulignement passe sous le texte */
-}
-
-#enter-button:hover {
-    color: #ddd; /* Légère modification de la couleur au survol */
-}
-
-#enter-button:hover::after {
-    width: 100%; /* Soulignement complet au survol */
-}
-.hidden {
-    display: none;
-}
 
 /* Style pour l'écran de chargement */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden; /* Empêche le défilement horizontal */
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; /* Pour que le texte soit visible */
-}
 .loading-content {
     font-size: 1em;
     width: 70%;
@@ -526,32 +430,14 @@ header {
     width: auto; /* Garde les proportions */
     margin: 0 20px; /* Ajoute un espace entre les images */
 }
-.loading-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column; /* Ajout pour organiser verticalement */
-    justify-content: center; /* Centre verticalement */
-    align-items: center;
-    font-size: 1.5em;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
+
 .loading-button{
   width: 100%;
   font-size: 0.5em;
-  font-family: "Figtree", sans-serif;
-  text-align: center; /* Centre le bouton horizontalement */
 }
 .loading-item.active {
     opacity: 1;
 }
-
-
 
 .loading-item #loading-item3 .loading-text {
     display: flex;
@@ -600,7 +486,43 @@ header {
     margin-bottom: 0; /* Ajoute un espace en bas du texte */
     margin-left: 15%; /* Ajoute un retrait à la première div */
 }
+/* -------------------- ENTER ---------------------------------------- */
+#enter-button {
+    background-color: rgba(0,0,0,0);
+    font-family: "Figtree", sans-serif;
+    font-size: 1.5em;
+    color: white;
+    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative; /* Ajout de position relative */
+    transition: color 0.3s ease; /* Transition pour la couleur */
+}
 
+#enter-button::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Ajuste la position du soulignement */
+    left: 0;
+    width: 0; /* Initialise la largeur à 0 */
+    height: 2px; /* Épaisseur du soulignement */
+    background-color: #ddd; /* Couleur du soulignement */
+    transition: width 0.5s ease; /* Animation de largeur */
+    z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+#enter-button:hover {
+    color: #ddd; /* Légère modification de la couleur au survol */
+}
+
+#enter-button:hover::after {
+    width: 100%; /* Soulignement complet au survol */
+}
+
+
+/* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {
     position: fixed;
     top: 0;
@@ -746,4 +668,49 @@ header {
 .menu-video-item:hover h4::after {
     width: 100%; /* Soulignement complet au survol */
 }
+/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
+.scroll-down-arrow {
+    position: sticky;
+    top: 85vh; /* Ajuste la position verticale */
+    left: 50vw;
+    transform: translateX(-50%); /* Ajout pour centrer horizontalement */
+    margin-left: 0; /* Suppression de la marge */
+    width: 40px;
+    text-align: center;
+    z-index: 10;
+}
 
+.scroll-down-arrow div {
+    position: absolute;
+    top: 50%; /* Modification ici */
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translate(-50%, -50%) rotate(45deg); /* Modification ici */
+    animation: scroll-down 2s infinite;
+    opacity: 0;
+}
+
+.scroll-down-arrow span:nth-child(2) {
+    top: 40%;
+    animation-delay: .2s;
+}
+
+@keyframes scroll-down {
+    0% {
+        opacity: 0;
+ }
+    30% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        top: 70%;
+        opacity: 0;
+    }
+}
