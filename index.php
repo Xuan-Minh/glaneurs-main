@@ -7,6 +7,7 @@
     <meta name="description" content="Glaneurs de carton" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css" />
   </head>
   <body>
   <?php include 'includes/loading.php'; ?>

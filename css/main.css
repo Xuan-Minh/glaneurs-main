@@ -40,8 +40,13 @@ html, body {
 
 html{
   overflow-x:hidden;
+-webkit-user-select: none; /* Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+/Edge */
+user-select: none; /* Standard */ 
 }
 body{
+  
   width:100%;
   height:100vh;
   margin:0;
@@ -135,7 +140,7 @@ h2{
               left 1.5s ease-in-out,
               font-size 1.5s ease-in-out,
               opacity 1.5s ease-in-out;
-  cursor: pointer;
+  /*/*cursor: pointer;*/*/
 }
 h2:hover {
   
@@ -153,7 +158,7 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  cursor: pointer;
+  /*cursor: pointer;*/
   z-index: 10;
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
@@ -241,7 +246,7 @@ sliderButton {
     border: none;
     padding: 10px;
     font-size: 16px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .point1, .point2{
@@ -258,12 +263,12 @@ sliderButton {
 
 .empty{
   background-color:none;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 .slides >.sliderButton{
-  width:5%;
-  min-width:70px;
+  width:4%;
+  min-width:50px;
   height:auto;
   position: absolute;
   top: 80%;
@@ -304,7 +309,7 @@ header {
   background: none; /* Supprime le fond */
   padding: 5px 10px; /* Taille du bouton */
   font-size: 20px; /* Augmente légèrement la taille du texte */
-  cursor: pointer;
+  /*cursor: pointer;*/
   position: relative; /* Ajout de position relative */
   transition: color 0.3s ease; /* Transition uniquement sur la couleur */
 }
@@ -335,7 +340,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
+  /*cursor: pointer;*/
   padding: 3px;
   transition: transform 0.3s ease; /* Ajoute une transition pour l'ensemble du conteneur */
 }
@@ -367,12 +372,11 @@ header {
 
 .scroll-down-arrow {
     position: sticky;
-    top: 80vh; /* Ajuste la position verticale */
-    left: 50.7%;
+    top: 85vh; /* Ajuste la position verticale */
+    left: 50vw;
     transform: translateX(-50%); /* Ajout pour centrer horizontalement */
     margin-left: 0; /* Suppression de la marge */
     width: 40px;
-    height: 70px;
     text-align: center;
     z-index: 10;
 }
@@ -499,7 +503,7 @@ header {
     margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
     padding: 10px 20px;
     border: none;
-    cursor: pointer;
+    /*cursor: pointer;*/
     border-radius: 5px;
     position: relative; /* Ajout de position relative */
     transition: color 0.3s ease; /* Transition pour la couleur */
@@ -610,7 +614,7 @@ header {
     color: white;
     padding: 10px 20px;
     border: none;
-    cursor: pointer;
+    /*cursor: pointer;*/
     font-size: 1.5em;
     border-radius: 5px;
     position: relative; /* Ajout de position relative */
@@ -733,7 +737,7 @@ header {
     width: 100%;
     max-height: 150px; /* Ajuste la hauteur maximale des vidéos */
     object-fit: cover;
-    cursor: pointer;
+    /*cursor: pointer;*/
     transition: transform 0.3s ease;
 }
 

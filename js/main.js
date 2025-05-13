@@ -191,20 +191,6 @@ gsap.to(".scroll-down-arrow span", {
     ease: "power2.inOut"
 });
 
-// gsap.to(".scroll-down-arrow", {
-//   scrollTrigger: {
-//     trigger: ".slides:nth-child(2)", // Déclenche lorsque la 2ème slide atteint le haut de l'écran
-//     start: "top top", // Déclenche au sommet de la 2ème slide
-//     end: "bottom top", // Fin du déclenchement
-//     scrub: false, // animation non liée au défilement
-//     onEnter: () => gsap.to(".scroll-down-arrow", { opacity: 0, duration: 0.3 }), // Masque la flèche
-//     onLeaveBack: () => gsap.to(".scroll-down-arrow", { opacity: 1, duration: 0.3 }), // Affiche la flèche
-//     markers: false // Retirer les marqueurs
-//   },
-//   opacity: 1, // Opacité initiale
-//   duration: 0.3 // Durée de l'animation
-// });
-
 $(document).ready(function() {
     const loadingItems = $(".loading-item");
     let currentItem = 0;
@@ -343,3 +329,11 @@ $("#languageToggle").click(function () {
     }
 });
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    new kursor({
+        type: 1, // Style moderne (essaie 1, 2, 3 ou 4 pour voir les variantes)
+        color: "#FFFFFF", // Couleur dorée, change selon ton design
+        removeDefaultCursor: true, // Cache le curseur natif
+    });
+});
