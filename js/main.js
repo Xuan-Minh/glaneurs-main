@@ -153,7 +153,7 @@ $(".visionner-trigger-h3").click(function(event) {
     slide.find(".info").fadeOut(0);
 });
 
-gsap.to(".scroll-down-arrow span", {
+gsap.to(".scroll-down-arrow div", {
     y: 20,
     opacity: 0,
     repeat: -1,
@@ -217,6 +217,10 @@ $(document).ready(function() {
         $(".loading-screen").fadeOut(1000, function() { // Fade out de l'écran de chargement
             $(".container").fadeIn(1000, function() {
                 // Démarrer le son du premier chapitre
+                var sound = new Howl({
+                     src: ['audio/chap1.mp3']
+});
+                sound.play();
                 const firstAudio = document.getElementById('audio-slide-1');
                 if (firstAudio) {
                     firstAudio.volume = 0; // Volume initial à 0
@@ -244,19 +248,9 @@ $(document).ready(function() {
         // Récupérer l'index de la slide actuelle
         const slideIndex = $(slide).index() + 1;
 
-        // Faire un fadeOut de tous les sons
-        $("audio").animate({volume: 0}, 1000, function() {
-            this.pause();
-        });
 
-        // Faire un fadeIn du son de la nouvelle slide
-        const newAudio = document.getElementById(`audio-slide-${slideIndex}`);
-        if (newAudio) {
-            newAudio.volume = 0;
-            newAudio.play();
-            $(newAudio).animate({volume: 0.5}, 2000);
+
         }
-    }
 
     // Observer les changements de slide
     const slides = document.querySelectorAll('.slides');
@@ -304,13 +298,13 @@ $("#languageToggle").click(function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    new kursor({
-        type: 1, // Style moderne (essaie 1, 2, 3 ou 4 pour voir les variantes)
-        color: "#FFFFFF", // Couleur dorée, change selon ton design
-        removeDefaultCursor: true, // Cache le curseur natif
-    });
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//     new kursor({
+//         type: 1, // Style moderne (essaie 1, 2, 3 ou 4 pour voir les variantes)
+//         color: "#FFFFFF", // Couleur dorée, change selon ton design
+//         removeDefaultCursor: true, // Cache le curseur natif
+//     });
+// });
 
 $(document).on("click", ".menu-video-item", function() {
     var index = $(this).index(); // 0 = Chapitre 1, 1 = Chapitre 2, etc.
