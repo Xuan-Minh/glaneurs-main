@@ -57,8 +57,8 @@ foreach ($slides as $slide) {
         echo '</div>';
         echo '<h2 class="visionner-trigger">' . $slide["chapitre"] . '</h2>';
         echo '<div class="sliderButton">';
-        echo '<div class="point1 sliderFull"></div>';
-        echo '<div class="point2 sliderFull"></div>';
+        echo '<div class="point1 full"></div>';
+        echo '<div class="point2 empty"></div>';
         echo '</div>';
     }
 
