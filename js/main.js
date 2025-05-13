@@ -121,6 +121,9 @@ function resetOtherSlides(activeSlide) {
         slide.find(".info").fadeOut(0); // Masque les infos des autres slides
         slide.find("h2").removeClass("move"); // Supprime l'animation des titres
         slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
+
+        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
     });
 }
 
@@ -259,8 +262,10 @@ $(document).ready(function() {
             if (entry.isIntersecting) {
                 resetOtherSlides(entry.target); // <-- Ajout ici
                 $(".visionner").fadeOut(0);
+                
                 $("body").css("overflow", "auto");
                 handleSlideChange(entry.target);
+        
             }
         });
     }, {
