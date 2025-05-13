@@ -84,10 +84,10 @@ h1{
 }
 
 .slides {
-  width: 100vw; /* La largeur de la fenêtre */
-  height: 100vh; /* La hauteur de la fenêtre */
-  position: relative; /* Nécessaire pour positionner les vidéos et autres éléments */
-  overflow: hidden; /* Empêche les débordements */
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   scroll-snap-align: start; /* Aligne chaque diapositive au début de la fenêtre lors du défilement */
   margin: 0;
   padding: 0;
@@ -352,7 +352,7 @@ header {
   background-color: #fff;
   border-radius: 2px;
   transition: width 0.3s ease, background-color 0.3s ease; /* Transitions individuelles */
-  transform-origin: right; /* Important pour l'animation depuis la gauche */
+  transform-origin: left; /* Important pour l'animation depuis la gauche */
 }
 
 .menu-burger:hover span {
@@ -363,11 +363,11 @@ header {
 }
 
 .menu-burger:hover span:nth-child(2) {
-  width: 90%; /* Deuxième barre un peu plus petite */
+  width: 80%; /* Deuxième barre un peu plus petite */
 }
 
 .menu-burger:hover span:nth-child(3) {
-  width: 80%; /* Troisième barre encore plus petite */
+  width: 60%; /* Troisième barre encore plus petite */
 }
 
 .scroll-down-arrow {
