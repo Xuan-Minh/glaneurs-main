@@ -263,6 +263,9 @@ $(document).ready(function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                resetOtherSlides(entry.target); // <-- Ajout ici
+                $(".visionner").fadeOut(0);
+                $("body").css("overflow", "auto");
                 handleSlideChange(entry.target);
             }
         });
