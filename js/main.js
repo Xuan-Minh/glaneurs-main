@@ -17,6 +17,7 @@ function slideOut(slide, info) {
     slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
 
+
 $(".sliderButton .point2").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
@@ -29,6 +30,33 @@ $(".sliderButton .point1").click(function (event) {
     const slide = $(this).closest(".slides"); // Récupère la slide parente
     const info = slide.find(".info"); // Récupère l'élément .info de la slide
     slideOut(slide, info); // Appelle slideOut pour cette slide
+});
+
+function resetOtherSlides(activeSlide) {
+    $(".slides").not(activeSlide).each(function () {
+        const slide = $(this);
+        slide.find(".info").fadeOut(0); // Masque les infos des autres slides
+        slide.find("h2").removeClass("move"); // Supprime l'animation des titres
+        slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
+
+        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+    });
+}
+
+
+$(".close-visionner").click(function (event) {
+    event.stopPropagation(); // Empêche la propagation de l'événement
+    const slide = $(this).closest(".slides"); // Récupère la slide parente
+    const info = slide.find(".info"); // Récupère l'élément .info de la slide
+
+    $(".visionner").fadeOut(400);
+    $("body").css("overflow", "auto");
+    info.fadeIn(2000); // Affiche uniquement l'info de la slide active
+    slide.find("h2").addClass("move");
+    slide.find("video").addClass("flou");
+    slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+    slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 });
 
 $(".visionner-trigger").click(function(event) {
@@ -55,24 +83,11 @@ $(".visionner-trigger-h3").click(function(event) {
     slide.find(".info").fadeOut(0);
 });
 
-$(".close-visionner").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
 
-    $(".visionner").fadeOut(400);
-    $("body").css("overflow", "auto");
-    info.fadeIn(2000); // Affiche uniquement l'info de la slide active
-    slide.find("h2").addClass("move");
-    slide.find("video").addClass("flou");
-    slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-    slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-});
 
 $(window).on("scroll", function () {
     // Récupère la position actuelle de défilement
     let scrollPosition = $(window).scrollTop();
-
     // Vérifie si la position de défilement atteint ou dépasse 100vh
     if (scrollPosition >= $(window).height()) {
         // Déclenche la fonction
@@ -80,11 +95,6 @@ $(window).on("scroll", function () {
     }
 });
 
-// Fonction à déclencher
-function triggerFunction() {
-    alert("Vous avez scrollé 100vh !");
-    // Ajoute ici le code que tu veux exécuter
-}
 
 // Sélectionne toutes les slides
 const slides = document.querySelectorAll('.slides');
@@ -93,7 +103,6 @@ const slides = document.querySelectorAll('.slides');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            console.log(`Slide visible : ${entry.target.classList}`);
             triggerFunction(entry.target); // Appelle une fonction avec la slide visible
         }
     });
@@ -110,22 +119,9 @@ slides.forEach((slide) => {
 // Fonction déclenchée
 function triggerFunction(slide) {
     console.log(`Fonction déclenchée pour : ${slide.classList}`);
-    resetState();
     // Ajoute ici le code que tu veux exécuter
 }
 
-
-function resetOtherSlides(activeSlide) {
-    $(".slides").not(activeSlide).each(function () {
-        const slide = $(this);
-        slide.find(".info").fadeOut(0); // Masque les infos des autres slides
-        slide.find("h2").removeClass("move"); // Supprime l'animation des titres
-        slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
-
-        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    });
-}
 
 // Supprime tous les autres handlers sur .slides h2 AVANT ce bloc
 
@@ -146,15 +142,6 @@ $(".slides h2").off("click").on("click", function (event) {
     info.fadeOut(0);
 });
 
-$(".visionner-trigger-h3").click(function(event) {
-    event.stopPropagation();
-    const slide = $(this).closest(".slides");
-    const visionner = slide.find(".visionner");
-    console.log("visionner-trigger-h3 clicked");
-    visionner.fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    slide.find(".info").fadeOut(0);
-});
 
 gsap.to(".scroll-down-arrow div", {
     y: 20,
@@ -251,8 +238,6 @@ $(document).ready(function() {
         // Récupérer l'index de la slide actuelle
         const slideIndex = $(slide).index() + 1;
 
-
-
         }
 
     // Observer les changements de slide
@@ -262,7 +247,6 @@ $(document).ready(function() {
             if (entry.isIntersecting) {
                 resetOtherSlides(entry.target); // <-- Ajout ici
                 $(".visionner").fadeOut(0);
-                
                 $("body").css("overflow", "auto");
                 handleSlideChange(entry.target);
         
@@ -276,7 +260,7 @@ $(document).ready(function() {
         observer.observe(slide);
     });
 });
-
+// LANGUE
 $("#languageToggle").click(function () {
     const button = $(this);
     const isKR = button.text() === "KR"; // Vérifie si le bouton est en mode KR
