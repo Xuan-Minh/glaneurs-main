@@ -7,7 +7,6 @@ function slideIn(slide, info) {
     slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
     slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 }
-
 function slideOut(slide, info) {
     $("body").css("overflow", "auto");
     info.fadeOut(500); // Masque l'info de la slide active
@@ -16,8 +15,11 @@ function slideOut(slide, info) {
     slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
     slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
-
-
+// --------------------------------- slideTrigger changement de slide --------------------------------- //
+function slideTrigger(slide) {
+    console.log(`Fonction déclenchée pour : ${slide.classList}`);
+    // Ajoute ici le code que tu veux exécuter
+}
 $(".sliderButton .point2").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
@@ -32,19 +34,38 @@ $(".sliderButton .point1").click(function (event) {
     slideOut(slide, info); // Appelle slideOut pour cette slide
 });
 
+// Sélectionne toutes les slides
+const slides = document.querySelectorAll('.slides');
+// Crée un observateur
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            slideTrigger(entry.target); // Appelle une fonction avec la slide visible
+        }
+    });
+}, {
+    root: null, // Par défaut, la fenêtre visible
+    threshold: 0.5 // La slide doit être au moins à 50% visible
+});
+
+// Observe chaque slide
+slides.forEach((slide) => {
+    observer.observe(slide);
+});
+
+// --------------------------------- Reset Slide --------------------------------- //
 function resetOtherSlides(activeSlide) {
     $(".slides").not(activeSlide).each(function () {
         const slide = $(this);
         slide.find(".info").fadeOut(0); // Masque les infos des autres slides
         slide.find("h2").removeClass("move"); // Supprime l'animation des titres
         slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
-
         slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
         slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
     });
 }
 
-
+// --------------------------------- Player video --------------------------------- //
 $(".close-visionner").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
@@ -73,74 +94,14 @@ $(".visionner-trigger-h3").click(function(event) {
     const slide = $(this).closest(".slides");
     const visionner = slide.find(".visionner");
     const srcdocupart = slide.find("video source").attr("src"); // Récupère la source de la vidéo
-    console.log(srcdocupart); // Affiche la source dans la console
     // Met à jour la source de la vidéo dans le visionneur
     visionner.find("video source").attr("src", srcdocupart);
     visionner.find("video")[0].load(); // Recharge la vidéo
-
     visionner.fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
     slide.find(".info").fadeOut(0);
 });
 
-
-
-$(window).on("scroll", function () {
-    // Récupère la position actuelle de défilement
-    let scrollPosition = $(window).scrollTop();
-    // Vérifie si la position de défilement atteint ou dépasse 100vh
-    if (scrollPosition >= $(window).height()) {
-        // Déclenche la fonction
-        triggerFunction();
-    }
-});
-
-
-// Sélectionne toutes les slides
-const slides = document.querySelectorAll('.slides');
-
-// Crée un observateur
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            triggerFunction(entry.target); // Appelle une fonction avec la slide visible
-        }
-    });
-}, {
-    root: null, // Par défaut, la fenêtre visible
-    threshold: 0.5 // La slide doit être au moins à 50% visible
-});
-
-// Observe chaque slide
-slides.forEach((slide) => {
-    observer.observe(slide);
-});
-
-// Fonction déclenchée
-function triggerFunction(slide) {
-    console.log(`Fonction déclenchée pour : ${slide.classList}`);
-    // Ajoute ici le code que tu veux exécuter
-}
-
-
-// Supprime tous les autres handlers sur .slides h2 AVANT ce bloc
-
-$(".slides h2").off("click").on("click", function (event) {
-    event.stopPropagation();
-    const slide = $(this).closest(".slides");
-    const visionner = slide.find(".visionner");
-    const info = slide.find(".info");
-
-    // Réinitialise les autres slides
-    resetOtherSlides(slide);
-
-    // Ouvre le visionneur
-    visionner.fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-
-    // Masque l'info (si tu veux l'afficher, remplace fadeOut(0) par fadeIn(2000))
-    info.fadeOut(0);
-});
 
 
 gsap.to(".scroll-down-arrow div", {
@@ -225,7 +186,7 @@ $(document).ready(function() {
     $(".loading-screen").click(function() {
         showNextItem();
     });
-
+// --------------------------------- MENU BURGER --------------------------------- //
     const menuBurger = $("#menuBurger");
     const menuVolet = $("#menuVolet");
 
@@ -260,6 +221,25 @@ $(document).ready(function() {
         observer.observe(slide);
     });
 });
+
+// --------------------------------- Auto scroll MENU  --------------------------------- //
+$(document).on("click", ".menu-video-item", function() {
+    var index = $(this).index(); // 0 = Chapitre 1, 1 = Chapitre 2, etc.
+    var $slide = $('.slides').eq(index + 1); // +1 car la première slide est le documentaire
+
+    if ($slide.length === 0) return;
+
+    // Scroll smooth natif
+    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Ouvre le visionneur après un court délai (pour laisser le scroll finir)
+    setTimeout(function() {
+        $slide.find('h2').trigger('click');
+    }, 600);
+
+    // Ferme le menu-volet si besoin
+    $("#menuVolet").removeClass("open");
+});
 // LANGUE
 $("#languageToggle").click(function () {
     const button = $(this);
@@ -284,31 +264,4 @@ $("#languageToggle").click(function () {
         });
         button.text("KR"); // Change le texte du bouton en KR
     }
-});
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     new kursor({
-//         type: 1, // Style moderne (essaie 1, 2, 3 ou 4 pour voir les variantes)
-//         color: "#FFFFFF", // Couleur dorée, change selon ton design
-//         removeDefaultCursor: true, // Cache le curseur natif
-//     });
-// });
-
-$(document).on("click", ".menu-video-item", function() {
-    var index = $(this).index(); // 0 = Chapitre 1, 1 = Chapitre 2, etc.
-    var $slide = $('.slides').eq(index + 1); // +1 car la première slide est le documentaire
-
-    if ($slide.length === 0) return;
-
-    // Scroll smooth natif
-    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // Ouvre le visionneur après un court délai (pour laisser le scroll finir)
-    setTimeout(function() {
-        $slide.find('h2').trigger('click');
-    }, 600);
-
-    // Ferme le menu-volet si besoin
-    $("#menuVolet").removeClass("open");
 });

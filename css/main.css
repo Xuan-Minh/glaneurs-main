@@ -416,19 +416,7 @@ header {
     z-index: 2; /* Place le contenu au-dessus de la vidéo */
 }
 
-.universites {
-    display: flex;
-    justify-content: space-evenly; /* Espace entre les images */
-    width: 100%;
-    margin-top: 10px; /* Ajoute un espace au-dessus des images */
-    align-items: center;
-    
-}
-.universites img {
-    height: 150px; /* Ajuste la hauteur des images */
-    width: auto; /* Garde les proportions */
-    margin: 0 20px; /* Ajoute un espace entre les images */
-}
+
 
 .loading-item #loading-item3 .loading-text {
     display: flex;
@@ -446,6 +434,19 @@ header {
     justify-content: center;
     align-items: center;
     margin-top: 10px; /* Ajoute un espace au-dessus des images */
+}
+.universites {
+    display: flex;
+    justify-content: space-evenly; /* Espace entre les images */
+    width: 100%;
+    margin-top: 10px; /* Ajoute un espace au-dessus des images */
+    align-items: center;
+    
+}
+.universites img {
+    height: 150px; /* Ajuste la hauteur des images */
+    width: auto; /* Garde les proportions */
+    margin: 0 20px; /* Ajoute un espace entre les images */
 }
 
 .loading-item #loading-item3 .universites img:nth-child(1) {
