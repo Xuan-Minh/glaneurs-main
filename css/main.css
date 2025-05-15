@@ -209,7 +209,6 @@ position: relative; /* Permet de centrer la vidéo */
 .full{
   background-color:white;
 }
-
 .empty{
   background-color:none;
   cursor: pointer;
@@ -324,7 +323,7 @@ header {
     top: 0;
     left: 0;
     font-size: 2em;
-    width: 100%;
+    width: 100vw;
     height: 100vh; /* Utiliser vh pour la hauteur */
     background-color: rgba(0, 0, 0); /* Ajoute un fond noir semi-transparent pour assombrir */
     z-index: 9999;
@@ -349,6 +348,20 @@ header {
     width: 100%;
     height: 100%;
 }
+.loading-screen video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Place la vidéo derrière le contenu */
+}
+.loading-titre{
+  font-family : "Libre Baskerville", serif;
+  font-size: 2em !Important;
+  font-weight: 400;
+}
 
 .loading-item {
     position: absolute;
@@ -365,11 +378,7 @@ header {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
-.loading-titre{
-  font-family : "Libre Baskerville", serif !important;
-  font-size: 2em !Important;
-  font-weight: 400;
-}
+
 .blabla{
   font-size:0.7em !important; 
   font-style: italic;
@@ -391,8 +400,6 @@ header {
 .loading-item.active {
     opacity: 1; /* Visible lorsqu'il est actif */
 }
-
-
 /* Style pour l'écran de chargement */
 .loading-content {
     font-size: 1em;
@@ -401,15 +408,6 @@ header {
     text-align: center;
     margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
-.loading-screen video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1; /* Place la vidéo derrière le contenu */
-}
 
 .loading-items {
     position: relative;
@@ -417,6 +415,7 @@ header {
     height: 100vh;
     z-index: 2; /* Place le contenu au-dessus de la vidéo */
 }
+
 .universites {
     display: flex;
     justify-content: space-evenly; /* Espace entre les images */
@@ -429,14 +428,6 @@ header {
     height: 150px; /* Ajuste la hauteur des images */
     width: auto; /* Garde les proportions */
     margin: 0 20px; /* Ajoute un espace entre les images */
-}
-
-.loading-button{
-  width: 100%;
-  font-size: 0.5em;
-}
-.loading-item.active {
-    opacity: 1;
 }
 
 .loading-item #loading-item3 .loading-text {
@@ -453,7 +444,6 @@ header {
 .loading-item #loading-item3 .universites {
     display: flex;
     justify-content: center;
-    
     align-items: center;
     margin-top: 10px; /* Ajoute un espace au-dessus des images */
 }
@@ -487,6 +477,10 @@ header {
     margin-left: 15%; /* Ajoute un retrait à la première div */
 }
 /* -------------------- ENTER ---------------------------------------- */
+.loading-button{
+  width: 100%;
+  font-size: 0.5em;
+}
 #enter-button {
     background-color: rgba(0,0,0,0);
     font-family: "Figtree", sans-serif;
@@ -588,7 +582,6 @@ header {
     text-align: left;
     margin-top: 20px;
 }
-
 .menu-links h4 {
     font-size: 1.2em;
     font-family: "Figtree", sans-serif;
