@@ -148,7 +148,7 @@ h3:hover::after {
   z-index: 10; /* Place les boutons au-dessus des autres éléments */
 }
 
-.info{
+.infoChapitre{
   position: absolute;
   color: white;
   top: 30%;

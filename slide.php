@@ -7,7 +7,7 @@ $slides = array(
         "srcvideobg" => "video/chariot.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "",
+        "infoChapitre" => "",
         "urlsuite" => ""
     ),
     array(
@@ -15,7 +15,7 @@ $slides = array(
         "srcvideobg" => "video/ville.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Glaneurs de carton est un film documentaire...",
+        "infoChapitre" => "Glaneurs de carton est un film documentaire...",
         "urlsuite" => ""
     ),
     array(
@@ -23,7 +23,7 @@ $slides = array(
         "srcvideobg" => "video/bache.mov",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Consectetur adipiscing elit...",
+        "infoChapitre" => "Consectetur adipiscing elit...",
         "urlsuite" => ""
     ),
     array(
@@ -31,7 +31,7 @@ $slides = array(
         "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Sed do eiusmod tempor incididunt...",
+        "infoChapitre" => "Sed do eiusmod tempor incididunt...",
         "urlsuite" => ""
     )
 );
@@ -62,8 +62,8 @@ foreach ($slides as $slide) {
         echo '</div>';
     }
 
-    echo '<div class="info">';
-    echo '<div>' . $slide["info"] . '</div>';
+    echo '<div class="infoChapitre">';
+    echo '<div>' . $slide["infoChapitre"] . '</div>';
     echo '</div>';
     echo '</div>';
 
