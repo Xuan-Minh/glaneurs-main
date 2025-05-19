@@ -79,6 +79,14 @@ $(".close-visionner").click(function (event) {
     slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
     slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 });
+$(document).on("keydown", function (event) {
+    if (event.key === "Escape") { // Vérifie si la touche Échap est pressée
+        const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
+        if (closeButton.length > 0) {
+            closeButton.trigger("click"); // Simule un clic sur le bouton close
+        }
+    }
+});
 
 $(".visionner-trigger").click(function(event) {
     event.stopPropagation();
