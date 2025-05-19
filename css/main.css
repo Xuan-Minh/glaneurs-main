@@ -524,7 +524,7 @@ header {
     right: 0;
     width: 60%;
     height: 100vh;
-    background-color: #071217; /* Fond noir semi-transparent */
+    background-color: #050d1e; /* Fond noir semi-transparent */
     z-index: 999; /* Au-dessus du header */
     transform: translateX(100%); /* Cache le volet initialement */
     transition: transform 0.3s ease-in-out; /* Animation de transition */
