@@ -667,44 +667,30 @@ header {
     position: sticky;
     top: 85vh; /* Ajuste la position verticale */
     left: 50vw;
-    transform: translateX(-50%); /* Ajout pour centrer horizontalement */
-    margin-left: 0; /* Suppression de la marge */
-    width: 40px;
-    text-align: center;
+    transform: translateX(-50%); /* Centre horizontalement */
     z-index: 10;
+    width: 40px; /* Ajuste la largeur de l'image */
+    height: auto; /* Garde les proportions de l'image */
+    text-align: center;
 }
 
-.scroll-down-arrow div {
-    position: absolute;
-    top: 50%; /* Modification ici */
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: -12px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    transform: translate(-50%, -50%) rotate(45deg); /* Modification ici */
-    animation: scroll-down 2s infinite;
+.scroll-down-arrow img {
+    width: 40px; /* Taille de l'image */
+    animation: scroll-down 2s infinite; /* Applique l'animation */
     opacity: 0;
-}
-
-.scroll-down-arrow span:nth-child(2) {
-    top: 40%;
-    animation-delay: .2s;
 }
 
 @keyframes scroll-down {
     0% {
         opacity: 0;
- }
-    30% {
-        opacity: 1;
+        transform: translateY(0);
     }
-    60% {
+    50% {
         opacity: 1;
+        transform: translateY(10px); /* Déplace légèrement vers le bas */
     }
     100% {
-        top: 70%;
         opacity: 0;
+        transform: translateY(20px); /* Déplace encore plus vers le bas */
     }
 }

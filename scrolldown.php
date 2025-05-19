@@ -1,4 +1,4 @@
+<!-- filepath: c:\MAMP\htdocs\glaneurs-main\scrolldown.php -->
 <div class="scroll-down-arrow">
-        <div></div>
-        <div></div>
-    </div>
+    <img src="img/arrowdown.png" alt="Scroll Down" />
+</div>
