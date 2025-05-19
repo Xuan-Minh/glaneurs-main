@@ -664,14 +664,15 @@ header {
 }
 /* ----------------------------- FLECHE DE MERDE -------------------------------------- */
 .scroll-down-arrow {
-    position: sticky;
-    top: 85vh; /* Ajuste la position verticale */
-    left: 50vw;
-    transform: translateX(-50%); /* Centre horizontalement */
-    z-index: 10;
+    position: fixed; /* Fixe la flèche par rapport à la fenêtre */
+    bottom: 10%; /* Positionne la flèche à 20px du bas */
+    left: 50%; /* Centre horizontalement */
+    transform: translateX(-50%); /* Centre la flèche */
+    z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
     width: 40px; /* Ajuste la largeur de l'image */
     height: auto; /* Garde les proportions de l'image */
     text-align: center;
+    pointer-events: none; /* Empêche les interactions avec la flèche */
 }
 
 .scroll-down-arrow img {

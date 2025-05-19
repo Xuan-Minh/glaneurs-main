@@ -187,25 +187,24 @@ $(document).ready(function() {
         showNextItem();
     });
 // --------------------------------- MENU BURGER --------------------------------- //
+$(document).ready(function () {
     const menuBurger = $("#menuBurger");
     const menuVolet = $("#menuVolet");
 
-    menuBurger.click(function() {
+    // Gestion du clic sur le menuBurger
+    menuBurger.click(function () {
         menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
     });
 
+    // Gestion du clic en dehors du menuVolet ou du menuBurger
     $(document).click(function (event) {
-        const menuVolet = $("#menuVolet");
-        const menuBurger = $("#menuBurger");
-    
         // Vérifie si le clic est en dehors du menuVolet et du menuBurger
         if (!menuVolet.is(event.target) && menuVolet.has(event.target).length === 0 &&
             !menuBurger.is(event.target) && menuBurger.has(event.target).length === 0) {
-            if (menuVolet.hasClass("open")) {
-                menuVolet.removeClass("open"); // Ferme le menuVolet
-            }
+            menuVolet.removeClass("open"); // Ferme le menuVolet
         }
     });
+});
     // Fonction pour gérer le changement de slide et les sons
     function handleSlideChange(slide) {
         // Récupérer l'index de la slide actuelle
