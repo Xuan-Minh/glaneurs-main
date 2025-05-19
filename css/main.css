@@ -524,7 +524,7 @@ header {
     right: 0;
     width: 60%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+    background-color: #071217; /* Fond noir semi-transparent */
     z-index: 999; /* Au-dessus du header */
     transform: translateX(100%); /* Cache le volet initialement */
     transition: transform 0.3s ease-in-out; /* Animation de transition */
@@ -665,7 +665,7 @@ header {
 /* ----------------------------- FLECHE DE MERDE -------------------------------------- */
 .scroll-down-arrow {
     position: fixed; /* Fixe la flèche par rapport à la fenêtre */
-    bottom: 10%; /* Positionne la flèche à 20px du bas */
+    bottom: 20px; /* Positionne la flèche à 20px du bas */
     left: 50%; /* Centre horizontalement */
     transform: translateX(-50%); /* Centre la flèche */
     z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
