@@ -1,21 +1,21 @@
-// --------------------------------- Boutons infoChapitre --------------------------------- //
-function slideIn(slide, infoChapitre) {
+function slideIn(slide, info) {
     resetOtherSlides(slide); // Réinitialise les autres slides
     $("body").css("overflow", "auto");
-    infoChapitre.fadeIn(2000); // Affiche l'infoChapitre de la slide active
+    info.fadeIn(2000); // Affiche l'info de la slide active
     slide.find("h2").addClass("move");
     slide.find("video").addClass("flou");
-    // slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-    // slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+    slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+    slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 }
-function slideOut(slide, infoChapitre) {
+function slideOut(slide, info) {
     $("body").css("overflow", "auto");
-    infoChapitre.fadeOut(500); // Masque l'infoChapitre de la slide active
+    info.fadeOut(500); // Masque l'info de la slide active
     slide.find("h2").removeClass("move");
     slide.find("video").removeClass("flou");
-    // slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-    // slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+    slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+    slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
+// --------------------------------- slideTrigger changement de slide --------------------------------- //
 function slideTrigger(slide) {
     console.log(`Fonction déclenchée pour : ${slide.classList}`);
     // Ajoute ici le code que tu veux exécuter
@@ -23,28 +23,16 @@ function slideTrigger(slide) {
 $(".sliderButton .point2").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const infoChapitre = slide.find(".infoChapitre"); // Récupère l'élément .infoChapitre de la slide
-    slideIn(slide, infoChapitre); // Appelle slideIn pour cette slide
+    const info = slide.find(".info"); // Récupère l'élément .info de la slide
+    slideIn(slide, info); // Appelle slideIn pour cette slide
 });
 
 $(".sliderButton .point1").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const infoChapitre = slide.find(".infoChapitre"); // Récupère l'élément .infoChapitre de la slide
-    slideOut(slide, infoChapitre); // Appelle slideOut pour cette slide
+    const info = slide.find(".info"); // Récupère l'élément .info de la slide
+    slideOut(slide, info); // Appelle slideOut pour cette slide
 });
-
-function resetOtherSlides(activeSlide) {
-    $(".slides").not(activeSlide).each(function () {
-        const slide = $(this);
-        slide.find(".infoChapitre").fadeOut(0); // Masque les infos des autres slides
-        slide.find("h2").removeClass("move"); // Supprime l'animation des titres
-        slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
-        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    });
-}
-// --------------------------------- slideTrigger changement de slide --------------------------------- //
 
 // Sélectionne toutes les slides
 const slides = document.querySelectorAll('.slides');
@@ -65,16 +53,27 @@ slides.forEach((slide) => {
     observer.observe(slide);
 });
 
-// --------------------------------- Player video --------------------------------- //
+// --------------------------------- Reset Slide --------------------------------- //
+function resetOtherSlides(activeSlide) {
+    $(".slides").not(activeSlide).each(function () {
+        const slide = $(this);
+        slide.find(".info").fadeOut(0); // Masque les infos des autres slides
+        slide.find("h2").removeClass("move"); // Supprime l'animation des titres
+        slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
+        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+    });
+}
 
+// --------------------------------- Player video --------------------------------- //
 $(".close-visionner").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const infoChapitre = slide.find(".infoChapitre"); // Récupère l'élément .infoChapitre de la slide
+    const info = slide.find(".info"); // Récupère l'élément .info de la slide
 
     $(".visionner").fadeOut(400);
     $("body").css("overflow", "auto");
-    infoChapitre.fadeIn(2000); // Affiche uniquement l'infoChapitre de la slide active
+    info.fadeIn(2000); // Affiche uniquement l'info de la slide active
     slide.find("h2").addClass("move");
     slide.find("video").addClass("flou");
     slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
@@ -87,7 +86,7 @@ $(".visionner-trigger").click(function(event) {
     const visionner = slide.find(".visionner");
     visionner.fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
-    slide.find(".infoChapitre").fadeOut(0);
+    slide.find(".info").fadeOut(0);
 });
 
 $(".visionner-trigger-h3").click(function(event) {
@@ -100,10 +99,10 @@ $(".visionner-trigger-h3").click(function(event) {
     visionner.find("video")[0].load(); // Recharge la vidéo
     visionner.fadeIn(400).css("display", "flex");
     $("body").css("overflow", "hidden");
-    slide.find(".infoChapitre").fadeOut(0);
+    slide.find(".info").fadeOut(0);
 });
 
-// --------------------------------- FLECHE DE MERDE --------------------------------- //
+
 
 gsap.to(".scroll-down-arrow div", {
     y: 20,
@@ -114,7 +113,6 @@ gsap.to(".scroll-down-arrow div", {
     ease: "power2.inOut"
 });
 
-// --------------------------------- LOADING SCREEN --------------------------------- //
 $(document).ready(function() {
     const loadingItems = $(".loading-item");
     let currentItem = 0;
@@ -242,7 +240,7 @@ $(document).on("click", ".menu-video-item", function() {
     // Ferme le menu-volet si besoin
     $("#menuVolet").removeClass("open");
 });
-// ----------------------------------------------- LANGUE --------------------------------- //
+// LANGUE
 $("#languageToggle").click(function () {
     const button = $(this);
     const isKR = button.text() === "KR"; // Vérifie si le bouton est en mode KR
