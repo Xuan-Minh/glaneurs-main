@@ -1,4 +1,9 @@
 <header>
+        <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
+        <a href="index.php" class="logo-link">
+            <img src="img/favicon.png" alt="Logo" class="logo">
+        </a>
+    <?php endif; ?>
     <div class="header-controls">
         <button id="languageToggle">KR</button>
         <div class="menu-burger" id="menuBurger">
@@ -37,12 +42,12 @@
     <div class="menu-links">
         <ul>
            
-            <li><a href="#">Souvenirs</a></li>
-            <li><a href="#">Portraits</a></li>
-            <li><a href="#">Archives</a></li>
-            <li><a href="#">Données clés</a></li>
-            <li><a href="#">Associations</a></li>
-            <li><a href="bts.php">Derrière la caméra</a></li>
+            <li><a href="souvenirs.php">Souvenirs</a></li>
+            <li><a href="portraits.php">Portraits</a></li>
+            <li><a href="archives.php">Archives</a></li>
+            <li><a href="donnees-cles.php">Données clés</a></li>
+            <li><a href="associations.php">Associations</a></li>
+            <li><a href="derriere-la-camera.php">Derrière la caméra</a></li>
         </ul>
     </div>
 </div>
