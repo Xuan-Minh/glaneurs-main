@@ -10,6 +10,16 @@
 </head>
 <body>
     <?php include "includes/header.php"; ?>
+    <div class="portraits-container">
+    <div class="portrait-section section1">
+    </div>
+    <div class="portrait-section section2">
+    </div>
+    <div class="portrait-section section3">
+    </div>
+    <div class="portrait-section section4">
+    </div>
+    </div>
     <?php include "includes/jsinclude.php"; ?>
 <?php include "includes/visionner.php"; ?>
 </body>

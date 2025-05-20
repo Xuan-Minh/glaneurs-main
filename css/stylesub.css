@@ -48,52 +48,7 @@ body{
   height:100vh;
 }
 
-h1, h2, a.visionner-trigger-h3{
-  font-family: "Libre Baskerville", serif;
-  font-size:5em;
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  transition: top 1.5s ease-in-out, 
-              left 1.5s ease-in-out,
-              font-size 1.5s ease-in-out,
-              opacity 1.5s ease-in-out;
-}
-h2, a.visionner-trigger-h3{
-  cursor: pointer;
-}
-h2:hover, a.visionner-trigger-h3:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
-  transition: color 0.3s ease; /* Transition pour la couleur */
-  text-decoration: none; /* Pas de soulignement par défaut */
-}
-a.visionner-trigger-h3 {
-  font-family: "Figtree";
-  font-size: 1.5em;
-  font-weight: 400;
-  top: 60%;
-  position:relative; /*     Ajout de position relative */
-  display: inline-block; /* Important pour que la largeur s'adapte au contenu */
-}
 
-a.visionner-trigger-h3::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
-  left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  transition: width 0.5s ease; /* Animation de largeur */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
-}
-a.visionner-trigger-h3:hover::after {
-  width: 100%; /* Soulignement complet au survol */
-}
 .container{
   width:100%;
   height:100vh;
@@ -110,56 +65,7 @@ a.visionner-trigger-h3:hover::after {
 .hidden {
     display: none;
 }
-/* ---------------------- MAIN PAGE ------------------------------------ */
-.slides {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start; /* Aligne chaque diapositive au début de la fenêtre lors du défilement */
-  margin: 0;
-  padding: 0;
-}
-
-.slides > video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Assure que la vidéo remplit le conteneur sans déborder */
-  position: absolute; /* Positionne la vidéo pour qu'elle couvre tout le conteneur */
-  top: 0;
-  left: 0;
-  z-index: -1; /* Place la vidéo derrière les autres éléments */
-  transition: transform 0.5s ease, filter 0.5s ease;
-}
-
-.slides > video.flou {
-  filter: blur(0.3rem);
-  transform: scale(1.05); /* Agrandit légèrement la vidéo */
-}
-
-.slides h2.move {
-/*    top: 20%;*/
-    left:30%;
-}
-
-.sliderButton {
-  position: relative;
-  margin: 0;
-  z-index: 10; /* Place les boutons au-dessus des autres éléments */
-}
-
-.info{
-  position: absolute;
-  color: white;
-  top: 30%;
-  left:60%;
-  right: 20%;
-  z-index: 10;
-  display:none;
-  font-family : "figtree";
-  font-size: 1.2em;
-}
-
+/* ------------------------ Visionner ------------------------------------------- */
 .visionner{
     position: fixed;
     top: 0;
@@ -197,42 +103,7 @@ position: relative; /* Permet de centrer la vidéo */
     font-size: 16px;
     cursor: pointer;
 }
-/* -------------------------------- SLIDER BUTTON -------------------------------*/
-.point1, .point2{
-  width:15px;
-  height:15px;
-  border-radius:100%;
-  border:2px solid white ;
-  transition: background-color 0.3s ease-in-out
-}
 
-.full{
-  background-color:white;
-}
-.empty{
-  background-color:none;
-  cursor: pointer;
-}
-
-.empty:hover{
-  background-color:#ddd;
-  cursor: pointer;
-}
-
-.slides >.sliderButton{
-  width:4%;
-  min-width:50px;
-  height:auto;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  display:flex;
-  justify-content:space-between;
-  
-}
 /* -------------------------- Transition --------------------------  */
 
 #transition-overlay {
@@ -249,38 +120,66 @@ position: relative; /* Permet de centrer la vidéo */
   opacity: 1;
   pointer-events: all;
 }
+/* -------------------------- Portraits --------------------------  */
+/* Conteneur principal */
+.portraits-container {
+    display: flex;
+    flex-direction: row; /* Aligne les sections horizontalement */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Empêche le débordement */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Sections individuelles */
+.portrait-section {
+    flex: 1; /* Chaque section prend un quart de la largeur */
+    height: 100%; /* Prend toute la hauteur de la fenêtre */
+    transition: flex 0.5s ease, filter 0.5s ease; /* Transition pour l'agrandissement et le flou */
+}
+
+/* Effet au survol */
+.portrait-section:hover {
+    flex: 2; /* La section survolée prend plus de place */
+    filter: none; /* Supprime le flou */
+}
+.portraits-container.no-hover .portrait-section {
+    filter: none; /* Supprime le flou si aucune section n'est survolée */
+}
 
 
-/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
-.scroll-down-arrow {
-    position: fixed; /* Fixe la flèche par rapport à la fenêtre */
-    bottom: 40px; /* Positionne la flèche à 20px du bas */
-    left: 50%; /* Centre horizontalement */
-    transform: translateX(-50%); /* Centre la flèche */
-    z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
-    width: 40px; /* Ajuste la largeur de l'image */
-    height: auto; /* Garde les proportions de l'image */
+/* Floutage des autres sections */
+.portrait-section:not(:hover) {
+    filter: blur(5px); /* Applique un flou aux sections non survolées */
+}
+
+/* Couleurs différentes pour chaque section */
+.section1 {
+    background-color: #FF5733; /* Rouge orangé */
+}
+
+.section2 {
+    background-color: #33FF57; /* Vert */
+}
+
+.section3 {
+    background-color: #3357FF; /* Bleu */
+}
+
+.section4 {
+    background-color: #FF33A1; /* Rose */
+}
+
+.portrait-section h2 {
+    color: white;
     text-align: center;
-    pointer-events: none; /* Empêche les interactions avec la flèche */
+    margin-top: 50%;
+    transform: translateY(-50%);
+    font-family: "Figtree", sans-serif;
+    font-size: 2em;
+    transition: transform 0.3s ease;
 }
 
-.scroll-down-arrow img {
-    width: 40px; /* Taille de l'image */
-    animation: scroll-down 2s infinite; /* Applique l'animation */
-    opacity: 0;
-}
-
-@keyframes scroll-down {
-    0% {
-        opacity: 0;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(10px); /* Déplace légèrement vers le bas */
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(20px); /* Déplace encore plus vers le bas */
-    }
+.portrait-section:hover h2 {
+    transform: translateY(-40%); /* Légère animation du texte au survol */
 }

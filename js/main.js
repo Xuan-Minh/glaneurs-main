@@ -360,3 +360,17 @@ $(function() {
         setTimeout(function() { $("#black-fade").remove(); }, 800);
     }, 50);
 });
+// ----------------------------------------------- Portraits ---------------------------------- //
+$(document).ready(function () {
+    const container = $(".portraits-container");
+
+    // Ajoute la classe "no-hover" lorsque la souris quitte le conteneur
+    container.on("mouseleave", function () {
+        container.addClass("no-hover");
+    });
+
+    // Retire la classe "no-hover" lorsque la souris entre dans le conteneur
+    container.on("mouseenter", function () {
+        container.removeClass("no-hover");
+    });
+});
