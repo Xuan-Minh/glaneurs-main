@@ -28,7 +28,7 @@
         );
         foreach ($videoSources as $video) {
             echo '<div class="menu-video-item">';
-            echo '<video src="' . $video["src"] . '" muted loop class="menu-video"></video>';
+            echo '<video src="' . $video["src"] . '" autoplay muted loop class="menu-video"></video>';
             echo '<h4>' . $video["title"] . '</h4>'; // Affiche le titre de la vidéo
             echo '</div>';
         }

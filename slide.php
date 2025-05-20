@@ -49,7 +49,7 @@ foreach ($slides as $slide) {
         echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=en" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
         echo '<h1 data-krversion="' . $slide["krversion"] . '" data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
-        echo '<h3 class="visionner-trigger visionner-trigger-h3">Voir le documentaire en entier</h3>';
+        echo '<a class="visionner-trigger visionner-trigger-h3">Voir le documentaire en entier</a>';
     } else {
         echo '<div class="visionner">';
         echo '<div class="close-visionner">X</div>';
