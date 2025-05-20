@@ -195,6 +195,7 @@ $(document).ready(function() {
         showNextItem();
     });
 // --------------------------------- MENU BURGER --------------------------------- //
+
 $(document).ready(function () {
     const menuBurger = $("#menuBurger");
     const menuVolet = $("#menuVolet");
@@ -242,24 +243,48 @@ $(document).ready(function () {
 });
 
 // --------------------------------- Auto scroll MENU  --------------------------------- //
-$(document).on("click", ".menu-video-item", function() {
-    var index = $(this).index(); // 0 = Chapitre 1, 1 = Chapitre 2, etc.
-    var $slide = $('.slides').eq(index + 1); // +1 car la première slide est le documentaire
+$(document).on("click", ".menu-video-item", function () {
+    const videoSrc = $(this).find("video").attr("src"); // Récupère la source de la vidéo
+    const isIndexPage = $(".slides").length > 0; // Vérifie si on est sur l'index (les slides existent)
 
-    if ($slide.length === 0) return;
+    if (isIndexPage) {
+        // Si on est sur l'index, scrolle vers la slide correspondante
+        const index = $(this).index();
+        const $slide = $(".slides").eq(index + 1); // +1 car la première slide est le documentaire
+        if ($slide.length === 0) return;
 
-    // Scroll smooth natif
-    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+        $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // Ouvre le visionneur après un court délai (pour laisser le scroll finir)
-    setTimeout(function() {
-        $slide.find('h2').trigger('click');
-    }, 600);
+        // Simule un clic sur le H2 pour ouvrir le visionneur
+        setTimeout(function () {
+            $slide.find("h2").trigger("click");
+        }, 600);
+    } else {
+        // Si on n'est pas sur l'index, ouvre directement le visionneur
+        openVisionner(videoSrc);
+    }
 
-    // Ferme le menu-volet si besoin
+    // Ferme le menu-volet
     $("#menuVolet").removeClass("open");
 });
-// LANGUE
+
+// Fonction pour ouvrir le visionneur
+function openVisionner(videoSrc) {
+    const visionner = $(".visionner");
+    visionner.find("video source").attr("src", videoSrc); // Met à jour la source de la vidéo
+    visionner.find("video")[0].load(); // Recharge la vidéo
+    visionner.fadeIn(400).css("display", "flex"); // Affiche le visionneur
+    $("body").css("overflow", "hidden"); // Désactive le défilement de la page
+}
+
+// Gestion de la fermeture du visionneur
+$(document).on("click", ".close-visionner", function () {
+    $(".visionner").fadeOut(400, function () {
+        $("body").css("overflow", "auto"); // Réactive le défilement de la page
+    });
+});
+
+// ----------------------------------------------- LANGUE ---------------------------------- //
 $("#languageToggle").click(function () {
     const button = $(this);
     const isKR = button.text() === "KR"; // Vérifie si le bouton est en mode KR
@@ -284,15 +309,22 @@ $("#languageToggle").click(function () {
         button.text("KR"); // Change le texte du bouton en KR
     }
 });
-// Fade transition 
-$(document).on('click', '.menu-links a', function(e) {
+// ----------------------------------------------- Fade transition ---------------------------------- //
+$(document).on('click', '.menu-links a', function (e) {
     const href = $(this).attr('href');
     if (href && href !== "#" && !href.startsWith("javascript")) {
         e.preventDefault();
-        $("#transition-overlay").addClass("active");
-        setTimeout(function() {
-            window.location.href = href;
-        }, 700); // doit correspondre à la durée du transition CSS
+
+        // Ferme le menu-volet
+        $("#menuVolet").removeClass("open");
+
+        // Lance la transition overlay après un court délai
+        setTimeout(function () {
+            $("#transition-overlay").addClass("active");
+            setTimeout(function () {
+                window.location.href = href;
+            }, 700); // Correspond à la durée de la transition CSS
+        }, 300); // Délai pour laisser le menu-volet se fermer
     }
 });
 
