@@ -40,7 +40,7 @@
             <li><a href="#">Souvenirs</a></li>
             <li><a href="#">Portraits</a></li>
             <li><a href="#">Archives</a></li>
-            <li><a href="#">Données Clés</a></li>
+            <li><a href="#">Données clés</a></li>
             <li><a href="#">Associations</a></li>
             <li><a href="bts.php">Derrière la caméra</a></li>
         </ul>

@@ -284,3 +284,33 @@ $("#languageToggle").click(function () {
         button.text("KR"); // Change le texte du bouton en KR
     }
 });
+// Fade transition 
+$(document).on('click', '.menu-links a', function(e) {
+    const href = $(this).attr('href');
+    if (href && href !== "#" && !href.startsWith("javascript")) {
+        e.preventDefault();
+        $("#transition-overlay").addClass("active");
+        setTimeout(function() {
+            window.location.href = href;
+        }, 700); // doit correspondre à la durée du transition CSS
+    }
+});
+
+$(function() {
+    // Au chargement, overlay blanc puis fade out
+    $("body").prepend('<div id="black-fade"></div>');
+    $("#black-fade").css({
+        position: "fixed",
+        top: 0, left: 0,
+        width: "100vw", height: "100vh",
+        background: "#050d1e",
+        zIndex: 99999,
+        opacity: 1,
+        pointerEvents: "none",
+        transition: "opacity 0.7s cubic-bezier(.4,0,.2,1)"
+    });
+    setTimeout(function() {
+        $("#black-fade").css("opacity", 0);
+        setTimeout(function() { $("#black-fade").remove(); }, 800);
+    }, 50);
+});

@@ -213,6 +213,11 @@ position: relative; /* Permet de centrer la vidéo */
   cursor: pointer;
 }
 
+.empty:hover{
+  background-color:#ddd;
+  cursor: pointer;
+}
+
 .slides >.sliderButton{
   width:4%;
   min-width:50px;
@@ -227,8 +232,22 @@ position: relative; /* Permet de centrer la vidéo */
   justify-content:space-between;
   
 }
-/* -------------------------- NAV BAR --------------------------  */
+/* -------------------------- Transition --------------------------  */
 
+#transition-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #050d1e;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+}
+#transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
 
 
 /* ---------------------------------- LOADING ----------------------------------------------*/
@@ -239,7 +258,7 @@ position: relative; /* Permet de centrer la vidéo */
     font-size: 2em;
     width: 100vw;
     height: 100vh; /* Utiliser vh pour la hauteur */
-    background-color: rgba(0, 0, 0); /* Ajoute un fond noir semi-transparent pour assombrir */
+    background-color: #050d1e; /* Ajoute un fond noir semi-transparent pour assombrir */
     z-index: 9999;
     display: flex;
     justify-content: center;

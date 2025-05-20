@@ -10,9 +10,10 @@
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
   </head>
   <body>
+   
   <?php include 'includes/loading.php'; ?>
   <?php include 'includes/header.php';?>
-
+  <div id="transition-overlay"></div>
     <div class="container hidden">
       <?php 
       include 'includes/scrolldown.php';
