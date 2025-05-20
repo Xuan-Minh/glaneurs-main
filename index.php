@@ -1,3 +1,14 @@
+<?php
+session_start(); // Démarre la session PHP
+
+// Vérifie si l'utilisateur a déjà visité l'index
+if (!isset($_SESSION['hasVisitedIndex'])) {
+    $_SESSION['hasVisitedIndex'] = true; // Définit la session pour marquer la visite
+    $showLoading = true; // Affiche le loading
+} else {
+    $showLoading = false; // Ne pas afficher le loading
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,10 +22,12 @@
   </head>
   <body>
    
-  <?php include 'includes/loading.php'; ?>
+      <?php if ($showLoading): ?>
+        <?php include 'includes/loading.php'; ?>
+    <?php endif; ?>
   <?php include 'includes/header.php';?>
-  <div id="transition-overlay"></div>
-    <div class="container hidden">
+    <div id="transition-overlay"></div>
+    <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
       <?php 
       include 'includes/scrolldown.php';
       include 'slide.php';?>     

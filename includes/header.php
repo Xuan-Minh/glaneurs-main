@@ -1,10 +1,10 @@
 <header>
-        <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
-        <a href="index.php" class="logo-link">
-            <img src="img/favicon.png" alt="Logo" class="logo">
-        </a>
-    <?php endif; ?>
     <div class="header-controls">
+           <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
+            <a href="index.php" class="logo-link">
+                <img src="img/favicon.png" alt="Logo" class="logo">
+            </a>
+        <?php endif; ?>
         <button id="languageToggle">KR</button>
         <div class="menu-burger" id="menuBurger">
             <span></span>
@@ -48,6 +48,7 @@
             <li><a href="donnees-cles.php">Données clés</a></li>
             <li><a href="associations.php">Associations</a></li>
             <li><a href="derriere-la-camera.php">Derrière la caméra</a></li>
+            <li><a href="includes/reset.php">Reset</a></li>
         </ul>
     </div>
 </div>
