@@ -1,9 +1,9 @@
 <header>
     <div class="header-controls">
            <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
-            <a href="index.php" class="logo-link">
+            <!-- <a href="index.php" class="logo-link">
                 <img src="img/favicon.png" alt="Logo" class="logo">
-            </a>
+           </a> -->
         <?php endif; ?>
         <button id="languageToggle">KR</button>
         <div class="menu-burger" id="menuBurger">
