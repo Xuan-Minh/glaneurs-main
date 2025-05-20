@@ -1,0 +1,86 @@
+header {
+  position: fixed;
+  top: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Aligne les éléments à droite */
+  padding: 10px 20px;
+  z-index: 1000;
+  background: none; /* Pas de fond */
+}
+
+.header-controls {
+  position: fixed;
+  top: 5%;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacement entre le bouton et le menu burger */
+  z-index: 1000;
+}
+
+#languageToggle {
+  color: #fff; /* Texte blanc par défaut */
+  border: none; /* Supprime les contours */
+  background: none; /* Supprime le fond */
+  padding: 5px 10px; /* Taille du bouton */
+  font-size: 20px; /* Augmente légèrement la taille du texte */
+  cursor: pointer;
+  position: relative; /* Ajout de position relative */
+  transition: color 0.3s ease; /* Transition uniquement sur la couleur */
+}
+
+#languageToggle::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Ajuste la position du soulignement */
+  left: 0;
+  width: 0; /* Initialise la largeur à 0 */
+  height: 3px; /* Épaisseur du soulignement */
+  background-color: #ddd; /* Couleur du soulignement */
+  transition: width 0.5s ease; /* Animation de largeur */
+  z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+#languageToggle:hover {
+  color: #ddd; /* Légère modification de la couleur au survol */
+}
+#languageToggle:hover::after {
+  width: 100%; /* Soulignement complet au survol */
+}
+
+.menu-burger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 3px;
+  transition: transform 0.3s ease; /* Ajoute une transition pour l'ensemble du conteneur */
+}
+
+.menu-burger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: width 0.3s ease, background-color 0.3s ease; /* Transitions individuelles */
+  transform-origin: left; /* Important pour l'animation depuis la gauche */
+}
+
+.menu-burger:hover span {
+  transform: color (#ddd);}
+
+.menu-burger:hover span:nth-child(1) {
+  width: 100%; /* Première barre à sa taille originale */
+}
+
+.menu-burger:hover span:nth-child(2) {
+  width: 80%; /* Deuxième barre un peu plus petite */
+}
+
+.menu-burger:hover span:nth-child(3) {
+  width: 60%; /* Troisième barre encore plus petite */
+}

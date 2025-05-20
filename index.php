@@ -7,14 +7,15 @@
     <meta name="description" content="Glaneurs de carton" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
   </head>
   <body>
   <?php include 'includes/loading.php'; ?>
-  <?php include 'header.php';?>
+  <?php include 'includes/header.php';?>
 
     <div class="container hidden">
       <?php 
-      include 'scrolldown.php';
+      include 'includes/scrolldown.php';
       include 'slide.php';?>     
     </div>
   </body>
