@@ -122,6 +122,22 @@ gsap.to(".scroll-down-arrow div", {
 });
 
 $(document).ready(function() {
+     const hasVisited = localStorage.getItem("hasVisitedIndex");
+if (hasVisited) {
+        // Si déjà visité, masque directement l'écran de chargement
+        $(".loading-screen").hide();
+        $(".container").removeClass("hidden").fadeIn(1000);
+    } else {
+        // Si c'est la première visite, affiche l'écran de chargement
+        localStorage.setItem("hasVisitedIndex", "true");
+
+        // Gestion du clic sur le bouton "Entrer"
+        $("#enter-button").click(function () {
+            $(".loading-screen").fadeOut(1000, function () {
+                $(".container").fadeIn(1000);
+            });
+        });
+    }
     const loadingItems = $(".loading-item");
     let currentItem = 0;
     const totalItems = loadingItems.length;
