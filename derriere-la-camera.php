@@ -29,7 +29,7 @@ for ($i = 1; $i <= 16; $i++) {
     ],
     [
         "nom" => "Sakina DOUIOU",
-        "roles" => ["Réalisatrice", "Directrice de projet", "Photographe","Chef opérateur", "Scénariste", "Cadreuse", "Monteuse", "Etalonnage"],
+        "roles" => ["Réalisatrice", "Directrice de projet","Scénariste", "Photographe","Chef opératrice", "Cadreuse", "Monteuse", "Etalonnage"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
@@ -44,7 +44,7 @@ for ($i = 1; $i <= 16; $i++) {
     ], 
     [
         "nom" => "Romane VARO-TUPIN",
-        "roles" => ["Assistante de production", "Prise de contact","Organisatrice", "Transcription" ,"Sous-titreuse"],
+        "roles" => ["Assistante de production", "Prise de contact", "Organisatrice", "Transcription" ,"Sous-titreuse"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
@@ -94,12 +94,12 @@ for ($i = 1; $i <= 16; $i++) {
     ],     
       [
         "nom" => "Stephane LEVY",
-        "roles" => ["Tutrice"],
+        "roles" => ["Corps Enseignant","Tutrice"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Gihoon YU",
-        "roles" => ["Traducteur"],
+        "roles" => ["Corps Enseignant","Traducteur"],
         "image" => "img/equipe/membre2.jpg"
     ],
 
