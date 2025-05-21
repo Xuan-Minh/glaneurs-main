@@ -1,0 +1,140 @@
+/* ------------------------ GENERAL ------------------------------------------- */
+html, body {
+  font-family: "Figtree", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #050d1e;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  scrollbar-color: #050d1e #050d1e;
+  height: 100vh;
+}
+
+/* -------------------------- Transition --------------------------  */
+#transition-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #050d1e;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+}
+#transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+/* ----- Introduction ---------------------*/
+.team-intro {
+  width: 90vw;
+  max-width: 900px;
+  margin: 8vh auto 3vh auto;
+  color: #fff;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+}
+.team-intro h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+.team-intro p {
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+}
+/* -------------------------- Membre de l'équipe --------------------------  */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2vw;
+  width: 90vw;
+  max-width: 1400px;
+  margin: 5vh auto 0 auto;
+  min-height: 80vh;
+}
+
+.team-member {
+  aspect-ratio: 1/1;
+  position: relative;
+  cursor: pointer;
+  perspective: 600px;s
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  background: #222;
+  transition: box-shadow 0.3s;
+}
+.team-member:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.team-face {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transition: opacity 0.4s, transform 0.5s;
+  font-family: "Figtree", sans-serif;
+  font-size: 1.2em;
+}
+.team-photo {
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  border: 2px solid #fff;           /* Bordure blanche autour de la photo */
+  box-shadow: 0 2px 12px #0008;     /* Ombre douce pour le contraste */     /* Arrondi pour la photo si tu veux */
+  margin: 8px;                      /* Un peu d'espace autour de la photo */
+  background-color: #fff;           /* Optionnel : fond blanc si l'image a des zones transparentes */
+}
+.team-info {
+  background: rgba(20,20,30,0.97);
+  color: #fff;
+  flex-direction: column;
+  opacity: 0;
+  z-index: 2;
+  text-align: left; /* <-- change ici */
+  transform: scale(1.05);
+  transition: opacity 0.4s, transform 0.5s;
+}
+.team-member:hover .team-photo {
+  opacity: 0;
+  transform: scale(1.05);
+}
+.team-member:hover .team-info {
+  opacity: 1;
+  transform: scale(1);
+}
+.team-name {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.02em;
+}
+.team-role {
+  font-size: 1em;
+  opacity: 0.85;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
