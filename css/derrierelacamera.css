@@ -61,7 +61,7 @@ body {
 .team-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2vw;
+  gap: 1.5vw;
   width: 90vw;
   max-width: 1400px;
   margin: 5vh auto 0 auto;
@@ -69,56 +69,48 @@ body {
 }
 
 .team-member {
-  aspect-ratio: 1/1;
   position: relative;
-  cursor: pointer;
-  perspective: 600px;s
+  aspect-ratio: 1/1;
+  perspective: 600px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  background: #222;
+  background: #050d1e;
+  border : 1px solid #fff;
+  cursor: pointer;
   transition: box-shadow 0.3s;
-}
-.team-member:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
 .team-face {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   backface-visibility: hidden;
-  transition: opacity 0.4s, transform 0.5s;
+  transition: opacity 0.5s;
   font-family: "Figtree", sans-serif;
   font-size: 1.2em;
+  padding: 10%;
 }
 .team-photo {
   background-size: cover;
   background-position: center;
   z-index: 1;
-  border: 2px solid #fff;           /* Bordure blanche autour de la photo */
-  box-shadow: 0 2px 12px #0008;     /* Ombre douce pour le contraste */     /* Arrondi pour la photo si tu veux */
-  margin: 8px;                      /* Un peu d'espace autour de la photo */
-  background-color: #fff;           /* Optionnel : fond blanc si l'image a des zones transparentes */
+  opacity: 1;
+  border : 0;
+  transition: opacity 0.5s;
+  background-color: #fff;
 }
 .team-info {
-  background: rgba(20,20,30,0.97);
+  background: none; /* Pas d'overlay noir */
   color: #fff;
-  flex-direction: column;
-  opacity: 0;
   z-index: 2;
-  text-align: left; /* <-- change ici */
-  transform: scale(1.05);
-  transition: opacity 0.4s, transform 0.5s;
-}
-.team-member:hover .team-photo {
   opacity: 0;
-  transform: scale(1.05);
-}
-.team-member:hover .team-info {
-  opacity: 1;
-  transform: scale(1);
+  transition: opacity 0.5s;
+  text-align: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10%;
 }
 .team-name {
   font-size: 1.3em;
@@ -131,10 +123,11 @@ body {
   opacity: 0.85;
 }
 
-/* Responsive pour mobile */
-@media (max-width: 900px) {
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .team-grid { grid-template-columns: 1fr; }
-}
+.team-member.show-photo .team-photo { opacity: 1; }
+.team-member.show-photo .team-info { opacity: 0; }
+.team-member.show-info .team-photo { opacity: 0; }
+.team-member.show-info .team-info { opacity: 1; }
+.team-member.show-photo:hover .team-photo { opacity: 0; }
+.team-member.show-photo:hover .team-info { opacity: 1; }
+.team-member.show-info:hover .team-photo { opacity: 1; }
+.team-member.show-info:hover .team-info { opacity: 0; }

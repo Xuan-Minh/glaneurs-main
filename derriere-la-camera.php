@@ -17,98 +17,106 @@
         Notre documentaire est le fruit d’un travail collectif, guidé par une vision commune : donner la parole à ceux qu’on n’entend jamais, et révéler la dignité derrière chaque histoire. Découvrez l’équipe qui porte cette direction artistique et humaine.
     </p>
 </div>
-    <?php
-$equipe = [
+<?php
+$equipe = [];
+for ($i = 1; $i <= 16; $i++) {
+    $etat = rand(0, 1) ? 'image' : 'texte'; // aléatoire
+   $equipe = [
     [
-        "nom" => "Nom 1",
-        "role" => "Rôle 1",
+        "nom" => "Xuan-Minh TRAN",
+        "roles" => ["Chef de projet", "Développeur web", "Contact", "Technicien sonore"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 2",
-        "role" => "Rôle 2",
+        "nom" => "Sakina DOUIOU",
+        "roles" => ["Réalisatrice","Photographe","Chef opérateur", "Scénariste"],
         "image" => "img/equipe/membre2.jpg"
     ],
-    [
-        "nom" => "Nom 3",
-        "role" => "Rôle 3",
-        "image" => "img/equipe/membre3.jpg"
+      [
+        "nom" => "Dylan BLANDEL",
+        "roles" => ["Responsable montage FR", "Scénariste"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 4",
-        "role" => "Rôle 4",
-        "image" => "img/equipe/membre4.jpg"
+        "nom" => "Hyun-Beom",
+        "roles" => ["Compositeur musique originale", "Monteur son", "Interprète"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+      [
+        "nom" => "Inès DOS SANTOS",
+        "roles" => ["Webmaster", "UX designer"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 5",
-        "role" => "Rôle 5",
-        "image" => "img/equipe/membre5.jpg"
+        "nom" => "Sarah CROS",
+        "roles" => ["Graphiste", "UX/UI designer", "Monteuse"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+      [
+        "nom" => "Hugo LEULLIET",
+        "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 6",
-        "role" => "Rôle 6",
-        "image" => "img/equipe/membre6.jpg"
+        "nom" => "Romane VARO-TUPIN",
+        "roles" => ["Contact", "Assistante de production", "Organisatrice", "Transcription" ,"Sous-titreuse"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+      [
+        "nom" => "Alyssia BERSET",
+        "roles" => ["Responsable Montage KR", "Repérage"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 7",
-        "role" => "Rôle 7",
-        "image" => "img/equipe/membre7.jpg"
+        "nom" => "Jaeden DUONG",
+        "roles" => ["Traducteur", "Sous-titreuse"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+      [
+        "nom" => "Jung-Hyun",
+        "roles" => ["Captation sonore"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 8",
-        "role" => "Rôle 8",
-        "image" => "img/equipe/membre8.jpg"
+        "nom" => "Su-yeon",
+        "roles" => ["Interprète"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+      [
+        "nom" => "Stephane LEVY",
+        "roles" => ["Tutrice"],
+        "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Nom 9",
-        "role" => "Rôle 9",
-        "image" => "img/equipe/membre9.jpg"
+        "nom" => "Gihoon YU",
+        "roles" => ["Traducteur"],
+        "image" => "img/equipe/membre2.jpg"
     ],
-    [
-        "nom" => "Nom 10",
-        "role" => "Rôle 10",
-        "image" => "img/equipe/membre10.jpg"
+      [
+        "nom" => "Ji-woo",
+        "roles" => ["Transcripteuse"],
+        "image" => "img/equipe/membre1.jpg"
     ],
-    [
-        "nom" => "Nom 11",
-        "role" => "Rôle 11",
-        "image" => "img/equipe/membre11.jpg"
-    ],
-    [
-        "nom" => "Nom 12",
-        "role" => "Rôle 12",
-        "image" => "img/equipe/membre12.jpg"
-    ],
-    [
-        "nom" => "Nom 13",
-        "role" => "Rôle 13",
-        "image" => "img/equipe/membre13.jpg"
-    ],
-    [
-        "nom" => "Nom 14",
-        "role" => "Rôle 14",
-        "image" => "img/equipe/membre14.jpg"
-    ],
-    [
-        "nom" => "Nom 15",
-        "role" => "Rôle 15",
-        "image" => "img/equipe/membre15.jpg"
-    ],
-     [
-        "nom" => "Nom 16",
-        "role" => "Rôle 16",
-        "image" => "img/equipe/membre16.jpg"
-    ]
+      [
+        "nom" => "Ji-yeong",
+        "roles" => ["Réalisatrice", "Scénariste"],
+        "image" => "img/equipe/membre1.jpg"
+    ],     
 ];
+}
 ?>
     <?php include "includes/header.php"; ?>
 <div class="team-grid">
-    <?php foreach ($equipe as $membre): ?>
-        <div class="team-member">
-            <div class="team-face team-photo" style="background-image: url('<?php echo $membre['image']; ?>');"></div>
+    <?php foreach ($equipe as $i => $membre): ?>
+        <div class="team-member show-photo" data-index="<?php echo $i; ?>">
+            <div class="team-face team-photo" style="background-image: url('<?php echo htmlspecialchars($membre['image']); ?>');"></div>
             <div class="team-face team-info">
                 <div class="team-name"><?php echo htmlspecialchars($membre['nom']); ?></div>
-                <div class="team-role"><?php echo htmlspecialchars($membre['role']); ?></div>
+                <div class="team-role">
+                    <?php foreach ($membre['roles'] as $role): ?>
+                        <div><?php echo htmlspecialchars($role); ?></div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>
