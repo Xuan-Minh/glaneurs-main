@@ -24,32 +24,37 @@ for ($i = 1; $i <= 16; $i++) {
    $equipe = [
     [
         "nom" => "Xuan-Minh TRAN",
-        "roles" => ["Chef de projet", "Développeur web", "Contact", "Technicien sonore"],
+        "roles" => ["Directeur de projet", "Développeur web", "Prise de contact", "Technicien sonore", "Interprète", "Perch-man"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Sakina DOUIOU",
-        "roles" => ["Réalisatrice","Photographe","Chef opérateur", "Scénariste"],
+        "roles" => ["Réalisatrice", "Directrice de projet", "Photographe","Chef opérateur", "Scénariste", "Cadreuse", "Monteuse", "Etalonnage"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
         "nom" => "Dylan BLANDEL",
-        "roles" => ["Responsable montage FR", "Scénariste"],
+        "roles" => ["Responsable montage FR", "Scénariste", "Graphiste", "Cadreur"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Hyun-Beom",
-        "roles" => ["Compositeur musique originale", "Monteur son", "Interprète"],
+        "roles" => ["Compositeur musique originale", "Monteur son", "Interprète coréen"],
+        "image" => "img/equipe/membre2.jpg"
+    ], 
+    [
+        "nom" => "Romane VARO-TUPIN",
+        "roles" => ["Assistante de production", "Prise de contact","Organisatrice", "Transcription" ,"Sous-titreuse"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
         "nom" => "Inès DOS SANTOS",
-        "roles" => ["Webmaster", "UX designer"],
+        "roles" => ["Webmaster", "UX/UI designer", "Maquettiste", "Graphiste"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Sarah CROS",
-        "roles" => ["Graphiste", "UX/UI designer", "Monteuse"],
+        "roles" => ["Graphiste", "UX/UI designer","Maquettiste" ,"Monteuse"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
@@ -57,24 +62,19 @@ for ($i = 1; $i <= 16; $i++) {
         "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
         "image" => "img/equipe/membre1.jpg"
     ],
-    [
-        "nom" => "Romane VARO-TUPIN",
-        "roles" => ["Contact", "Assistante de production", "Organisatrice", "Transcription" ,"Sous-titreuse"],
-        "image" => "img/equipe/membre2.jpg"
-    ],
       [
         "nom" => "Alyssia BERSET",
-        "roles" => ["Responsable Montage KR", "Repérage"],
+        "roles" => ["Responsable Montage KR", "Repérage", "Interprète"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Jaeden DUONG",
-        "roles" => ["Traducteur", "Sous-titreuse"],
+        "roles" => ["Traductrice","Transcripteuse", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
         "nom" => "Jung-Hyun",
-        "roles" => ["Captation sonore"],
+        "roles" => ["Perch-man"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
@@ -82,6 +82,16 @@ for ($i = 1; $i <= 16; $i++) {
         "roles" => ["Interprète"],
         "image" => "img/equipe/membre2.jpg"
     ],
+    [
+        "nom" => "Ji-woo",
+        "roles" => ["Transcripteuse"],
+        "image" => "img/equipe/membre1.jpg"
+    ],
+      [
+        "nom" => "Ji-yeong",
+        "roles" => ["Interprète", "Transcripteuse"],
+        "image" => "img/equipe/membre1.jpg"
+    ],     
       [
         "nom" => "Stephane LEVY",
         "roles" => ["Tutrice"],
@@ -92,16 +102,7 @@ for ($i = 1; $i <= 16; $i++) {
         "roles" => ["Traducteur"],
         "image" => "img/equipe/membre2.jpg"
     ],
-      [
-        "nom" => "Ji-woo",
-        "roles" => ["Transcripteuse"],
-        "image" => "img/equipe/membre1.jpg"
-    ],
-      [
-        "nom" => "Ji-yeong",
-        "roles" => ["Réalisatrice", "Scénariste"],
-        "image" => "img/equipe/membre1.jpg"
-    ],     
+
 ];
 }
 ?>
