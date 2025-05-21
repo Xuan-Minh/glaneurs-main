@@ -99,7 +99,7 @@ a.visionner-trigger-h3:hover::after {
   position: absolute; /* Positionne la vidéo pour qu'elle couvre tout le conteneur */
   top: 0;
   left: 0;
-  z-index: 0 /* Place la vidéo derrière les autres éléments */
+  z-index: 0; /* Place la vidéo derrière les autres éléments */
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
