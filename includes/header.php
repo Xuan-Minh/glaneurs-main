@@ -49,6 +49,7 @@
             <li><a href="associations.php">Associations</a></li>
             <li><a href="derriere-la-camera.php">Derrière la caméra</a></li>
             <li><a href="includes/reset.php">Reset</a></li>
+            <li><a href="index.php">Home</a></li>
         </ul>
     </div>
-</div>
+</div>      
