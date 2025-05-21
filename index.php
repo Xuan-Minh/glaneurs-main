@@ -18,7 +18,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
     <meta name="description" content="Glaneurs de carton" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <?php include "includes/css.php"; ?>
   </head>
   <body>
    
