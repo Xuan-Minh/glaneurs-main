@@ -121,65 +121,104 @@ position: relative; /* Permet de centrer la vidéo */
   pointer-events: all;
 }
 /* -------------------------- Portraits --------------------------  */
+
 /* Conteneur principal */
 .portraits-container {
     display: flex;
-    flex-direction: row; /* Aligne les sections horizontalement */
+    flex-direction: row;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Empêche le débordement */
-    transition: all 0.3s ease-in-out;
+    overflow: hidden;
 }
 
 /* Sections individuelles */
 .portrait-section {
-    flex: 1; /* Chaque section prend un quart de la largeur */
-    height: 100%; /* Prend toute la hauteur de la fenêtre */
-    transition: flex 0.5s ease, filter 0.5s ease; /* Transition pour l'agrandissement et le flou */
+    flex: 1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.7s cubic-bezier(.4,0,.2,1), filter 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Effet au survol */
+/* Vidéo centrée, occupe tout le conteneur parent */
+.portrait-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
+    transform: translate(-45%, -50%);
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Effet rideau : agrandit la section au hover */
 .portrait-section:hover {
-    flex: 2; /* La section survolée prend plus de place */
-    filter: none; /* Supprime le flou */
-}
-.portraits-container.no-hover .portrait-section {
-    filter: none; /* Supprime le flou si aucune section n'est survolée */
+    flex: 2.5;
+    filter: none;
 }
 
-
-/* Floutage des autres sections */
+/* Floute les autres sections */
 .portrait-section:not(:hover) {
-    filter: blur(5px); /* Applique un flou aux sections non survolées */
+ filter: blur(0.3rem);
 }
 
-/* Couleurs différentes pour chaque section */
-.section1 {
-    background-color: #FF5733; /* Rouge orangé */
+/* Quand aucune section n'est hover, tout est net */
+.portraits-container.no-hover .portrait-section {
+    filter: none;
+}
+/* Portrait name sous chaque section */
+/* Conteneur des noms */
+.portrait-names {
+    display: flex;
+    width: 100vw;
+    justify-content: stretch;
+    margin-top: 10px;
 }
 
-.section2 {
-    background-color: #33FF57; /* Vert */
-}
-
-.section3 {
-    background-color: #3357FF; /* Bleu */
-}
-
-.section4 {
-    background-color: #FF33A1; /* Rose */
-}
-
-.portrait-section h2 {
-    color: white;
+/* Nom sous chaque section */
+.portrait-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+    width: 90%;
     text-align: center;
-    margin-top: 50%;
-    transform: translateY(-50%);
-    font-family: "Figtree", sans-serif;
+    color: white;
+    font-family: "Libre Baskerville", serif;
     font-size: 2em;
-    transition: transform 0.3s ease;
+    opacity: 0;
+    transition: opacity 0.5s 0.15s; /* délai = durée de l’animation flex */
+    pointer-events: none;
+    z-index: 2;
 }
 
-.portrait-section:hover h2 {
-    transform: translateY(-40%); /* Légère animation du texte au survol */
+.portrait-section:hover .portrait-name {
+    opacity: 1;
+}
+
+/* -------------------------- Portraits perso --------------------------  */
+
+.portrait-detail {
+    display: none;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #050d1e;
+    color: white;
+    font-family: "Figtree", sans-serif;
+    font-size: 1.5em;
+    padding: 40px 10vw;
+    box-sizing: border-box;
+}
+.portrait-detail.active {
+    display: flex;
 }

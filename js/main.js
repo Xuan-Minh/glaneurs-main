@@ -374,3 +374,18 @@ $(document).ready(function () {
         container.removeClass("no-hover");
     });
 });
+
+$(document).ready(function () {
+    $(".portrait-section").on("click", function () {
+        // Récupère la cible à afficher
+        const target = $(this).data("target");
+        // Masque tous les détails
+        $(".portrait-detail").removeClass("active");
+        // Affiche le détail correspondant
+        if (target) {
+            $(target).addClass("active");
+            // Scroll vers la section de détail
+            document.querySelector(target).scrollIntoView({ behavior: "smooth" });
+        }
+    });
+});
