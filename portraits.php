@@ -32,7 +32,7 @@
         <div class="portrait-name">Monsieur Arirang-song</div>
     </div>
     <div class="portrait-section section4" data-target="#detail4">
-        <video autoplay muted loop class="portrait-video">
+        <video autoplay muted loop class="portrait-video section4-video">
             <source src="video/glaneuse-test.mov" type="video/mp4">
         </video>
         <div class="portrait-name">Madame la glaneuse</div>
