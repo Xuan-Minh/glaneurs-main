@@ -58,7 +58,7 @@ for ($i = 1; $i <= 16; $i++) {
         "image" => "img/equipe/membre2.jpg"
     ],
       [
-        "nom" => "Hugo LEULLIET",
+        "nom" => "Hugo LEULIET",
         "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
         "image" => "img/equipe/membre1.jpg"
     ],

@@ -479,5 +479,6 @@ $(function() {
 
     setInterval(randomizeTeamStatesRespectHover, 3000);
     randomizeTeamStatesRespectHover();
+    
 
 });     
