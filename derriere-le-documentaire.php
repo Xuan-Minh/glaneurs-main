@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "includes/css.php"; ?>
-    <link rel="stylesheet" href="css/derrierelacamera.css">
+    <link rel="stylesheet" href="css/derriereledocumentaire.css">
     <?php include "includes/css.php"; ?>
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="icon" href="img/favicon.png" type="image/png" />

@@ -105,16 +105,14 @@ body {
   opacity: 1;
 }
 
-/* Floute les autres sections si une est hover OU active */
-.portraits-container:not(.no-hover) .portrait-section:not(:hover):not(.active),
-.portraits-container.has-active .portrait-section:not(.active) {
-  filter: blur(0.3rem);
+/* Floute les autres sections si une est hover OU active, sauf si .no-hover */
+.portraits-container:not(.no-hover) .portrait-section:not(.active):not(:hover) {
+    filter: blur(0.3rem);
 }
 
 /* Quand aucune section n'est hover ni active, tout est net */
-.portraits-container.no-hover .portrait-section,
-.portraits-container:not(.has-active):not(:hover) .portrait-section {
-  filter: none;
+.portraits-container.no-hover .portrait-section {
+    filter: none;
 }
 
 /* -------------------------- Portraits perso --------------------------  */
