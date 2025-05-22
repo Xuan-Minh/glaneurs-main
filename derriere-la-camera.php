@@ -24,7 +24,7 @@ for ($i = 1; $i <= 16; $i++) {
    $equipe = [
     [
         "nom" => "Xuan-Minh TRAN",
-        "roles" => ["Directeur de projet", "Développeur web", "Prise de contact", "Technicien sonore", "Interprète", "Perch-man"],
+        "roles" => ["Directeur de projet", "Développeur web", "Prise de contact", "Technicien sonore", "Interprète", "Perch-man", "Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
@@ -39,7 +39,7 @@ for ($i = 1; $i <= 16; $i++) {
     ],
     [
         "nom" => "Hyun-Beom",
-        "roles" => ["Compositeur musique originale", "Monteur son", "Interprète coréen"],
+        "roles" => ["Compositeur musique originale", "Monteur son", "Interprète coréen", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ], 
     [
@@ -74,22 +74,22 @@ for ($i = 1; $i <= 16; $i++) {
     ],
       [
         "nom" => "Jung-Hyun",
-        "roles" => ["Perch-man"],
+        "roles" => ["Perch-man", "Cadreur" ,"Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],
     [
         "nom" => "Su-yeon",
-        "roles" => ["Interprète"],
+        "roles" => ["Interprète", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ],
     [
         "nom" => "Ji-woo",
-        "roles" => ["Transcripteuse"],
+        "roles" => ["Transcripteuse", "Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],
       [
         "nom" => "Ji-yeong",
-        "roles" => ["Interprète", "Transcripteuse"],
+        "roles" => ["Interprète", "Transcripteuse", "Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],     
       [

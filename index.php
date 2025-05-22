@@ -26,7 +26,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
         <?php include 'includes/loading.php'; ?>
     <?php endif; ?>
   <?php include 'includes/header.php';?>
-    <div id="transition-overlay"></div>
+  
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
       <?php 
       include 'includes/scrolldown.php';

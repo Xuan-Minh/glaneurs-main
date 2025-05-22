@@ -459,48 +459,12 @@ window.addEventListener('scroll', function removeActiveOnTop() {
 });
 // ----------------------------------------------- Membre ---------------------------------- //
 $(function() {
-    // Fonction pour randomiser l'état, max 4 en texte
-    function randomizeTeamStates() {
-        const members = $('.team-member').toArray();
-        // On retire show-info partout
-        $(members).removeClass('show-info').addClass('show-photo');
-        // On choisit 4 indices uniques au hasard
-        const indices = [];
-        while (indices.length < 4 && indices.length < members.length) {
-            const idx = Math.floor(Math.random() * members.length);
-            if (!indices.includes(idx)) indices.push(idx);
-        }
-        // On applique show-info sur ces 4 membres
-        indices.forEach(idx => {
-            $(members[idx]).removeClass('show-photo').addClass('show-info');
-        });
-    }
-
-    // Random toutes les 5 secondes
-    setInterval(randomizeTeamStates, 5000);
-    // Random au chargement
-    randomizeTeamStates();
-
-    // Hover prioritaire : au hover, toujours texte, sans toucher au random
-    $(document).on('mouseenter', '.team-member', function() {
-        $(this).addClass('hover-force');
-        $(this).removeClass('show-photo').addClass('show-info');
-    }).on('mouseleave', '.team-member', function() {
-        $(this).removeClass('hover-force');
-        // Si ce bloc ne fait pas partie des 4 random, on remet show-photo
-        if (!$(this).hasClass('show-info')) {
-            $(this).removeClass('show-info').addClass('show-photo');
-        } else {
-            // On laisse l'état random si c'est l'un des 4
-            // (rien à faire)
-        }
-    });
-
-    // Quand on randomise, ne touche pas aux blocs hoverés
     function randomizeTeamStatesRespectHover() {
+        // Sélectionne uniquement les membres qui NE sont PAS hover
         const members = $('.team-member').not('.hover-force').toArray();
-        $('.team-member').not('.hover-force').removeClass('show-info').addClass('show-photo');
-        // On choisit 4 - nb de hover-force
+        // Remet tous ces membres en photo
+        $(members).removeClass('show-info').addClass('show-photo');
+        // Calcule combien de blocs texte il reste à afficher
         const hoverCount = $('.team-member.hover-force').length;
         const toShow = Math.max(0, 4 - hoverCount);
         const indices = [];
@@ -513,7 +477,7 @@ $(function() {
         });
     }
 
-    // Utilise la version qui respecte le hover
     setInterval(randomizeTeamStatesRespectHover, 3000);
     randomizeTeamStatesRespectHover();
-});
+
+});     
