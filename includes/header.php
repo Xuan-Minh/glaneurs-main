@@ -45,8 +45,8 @@
             <li><a href="souvenirs.php">Souvenirs</a></li>
             <li><a href="portraits.php">Portraits</a></li>
             <li><a href="archives.php">Archives</a></li>
-+            <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
-              <li><a href="associations.php">Associations</a></li>
+           <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
+            <li><a href="associations.php">Associations</a></li>
             <li><a href="includes/reset.php">Reset</a></li>
             <li><a href="index.php">Home</a></li>
         </ul>

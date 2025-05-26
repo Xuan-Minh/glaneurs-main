@@ -66,24 +66,14 @@ header {
   height: 3px;
   background-color: #fff;
   border-radius: 2px;
-  transition: width 0.3s ease, background-color 0.3s ease; /* Transitions individuelles */
-  transform-origin: left; /* Important pour l'animation depuis la gauche */
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), background-color 0.3s;
+  transform-origin: right;
+  transform: scaleX(1);
 }
 
-.menu-burger:hover span {
-  transform: color (#ddd);}
-
-.menu-burger:hover span:nth-child(1) {
-  width: 100%; /* Première barre à sa taille originale */
-}
-
-.menu-burger:hover span:nth-child(2) {
-  width: 80%; /* Deuxième barre un peu plus petite */
-}
-
-.menu-burger:hover span:nth-child(3) {
-  width: 60%; /* Troisième barre encore plus petite */
-}
+.menu-burger:hover span:nth-child(1) { transform: scaleX(1); }
+.menu-burger:hover span:nth-child(2) { transform: scaleX(0.8); }
+.menu-burger:hover span:nth-child(3) { transform: scaleX(0.6); }
 /* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {
     position: fixed;
