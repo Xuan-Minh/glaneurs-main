@@ -258,30 +258,41 @@ $(document).ready(function () {
 
 // --------------------------------- Auto scroll MENU  --------------------------------- //
 $(document).on("click", ".menu-video-item", function () {
-    const videoSrc = $(this).find("video").attr("src"); // Récupère la source de la vidéo
-    const isIndexPage = $(".slides").length > 0; // Vérifie si on est sur l'index (les slides existent)
+    const slideNumber = $(this).data("slide"); // Récupère le numéro de la slide
+    const isIndexPage = $(".slides").length > 0;
 
     if (isIndexPage) {
-        // Si on est sur l'index, scrolle vers la slide correspondante
-        const index = $(this).index();
-        const $slide = $(".slides").eq(index + 1); // +1 car la première slide est le documentaire
-        if ($slide.length === 0) return;
-
-        $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
-
-        // Simule un clic sur le H2 pour ouvrir le visionneur
-        setTimeout(function () {
-            $slide.find("h2").trigger("click");
-        }, 600);
+        // Si on est sur l'index, scrolle et simule le clic
+        scrollToAndTrigger(slideNumber);
     } else {
-        // Si on n'est pas sur l'index, ouvre directement le visionneur
-        openVisionner(videoSrc);
+        // Si on n'est pas sur l'index, redirige vers l'index avec un paramètre
+        window.location.href = "index.php?slide=" + slideNumber;
     }
 
-    // Ferme le menu-volet
     $("#menuVolet").removeClass("open");
 });
 
+// Fonction pour scroller et simuler le clic
+function scrollToAndTrigger(slideNumber) {
+    const $slide = $(".slides").eq(slideNumber); // Pas de -1 car slideNumber correspond déjà à l'index
+    if ($slide.length === 0) return;
+
+    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Simule un clic sur le H2 pour ouvrir le visionneur
+    setTimeout(function () {
+        $slide.find("h2").trigger("click");
+    }, 600);
+}
+
+// Au chargement de l'index, si un paramètre "slide" est présent, scrolle et simule le clic
+$(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const slideParam = urlParams.get('slide');
+    if (slideParam) {
+        scrollToAndTrigger(slideParam); // Décrémente slideParam pour correspondre à l'index
+    }
+});
 // Fonction pour ouvrir le visionneur
 function openVisionner(videoSrc) {
     const visionner = $(".visionner");
