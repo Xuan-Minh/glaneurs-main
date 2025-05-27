@@ -374,6 +374,15 @@ $("#languageToggle").click(function () {
         button.text("KR"); // Change le texte du bouton en KR
     }
 });
+
+$(document).on('click', '.lang-option', function() {
+    $('.lang-option').removeClass('active');
+    $(this).addClass('active');
+    // Ici, ajoute la logique pour changer la langue du site selon $(this).data('lang')
+    // Exemple : window.location.search = '?lang=' + $(this).data('lang');
+});
+
+
 // ----------------------------------------------- Fade transition ---------------------------------- //
 $(document).on('click', '.menu-links a', function (e) {
     const href = $(this).attr('href');

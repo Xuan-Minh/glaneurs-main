@@ -6,7 +6,13 @@
                 <img src="img/favicon.png" alt="Logo" class="logo">
            </a> -->
         <?php endif; ?>
-        <button id="languageToggle">KR</button>
+        <div class="language-selector">
+    <span class="lang-option active" data-lang="fr">FR</span>
+    <span class="lang-sep">/</span>
+    <span class="lang-option" data-lang="en">EN</span>
+    <span class="lang-sep">/</span>
+    <span class="lang-option" data-lang="kr">KR</span>
+</div>
         <div class="menu-burger" id="menuBurger">
             <span></span>
             <span></span>
