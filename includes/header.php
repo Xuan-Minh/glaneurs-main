@@ -50,7 +50,6 @@ foreach ($videoSources as $video) {
             <li><a href="souvenirs.php">Souvenirs</a></li>
             <li><a href="associations.php">Associations</a></li>
             <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
-
             <br>
             <br>
             <br>
