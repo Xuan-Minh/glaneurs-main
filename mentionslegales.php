@@ -19,6 +19,5 @@
 </div>
     <?php include "includes/header.php"; ?>
     <?php include "includes/jsinclude.php"; ?>
-<?php include "includes/visionner.php"; ?>
 </body>
 </html>
