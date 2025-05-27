@@ -1,4 +1,4 @@
-  <div id="transition-overlay"></div>   
+
    <div class="visionner">
     <div class="close-visionner">X</div>
     <video controls autoplay>

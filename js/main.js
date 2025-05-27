@@ -1,4 +1,8 @@
-
+$(document).ready(function() {
+    setTimeout(function() {
+        $("#transition-overlay").removeClass("active").addClass("hide");
+    }, 50);
+});
 function slideIn(slide, info) {
     resetOtherSlides(slide); // Réinitialise les autres slides
     $("body").css("overflow", "auto");
@@ -371,7 +375,8 @@ $(document).on('click', '.menu-links a', function (e) {
 
         // Lance la transition overlay après un court délai
         setTimeout(function () {
-            $("#transition-overlay").addClass("active");
+            // D'abord retire .hide, puis ajoute .active
+            $("#transition-overlay").removeClass("hide").addClass("active");
             setTimeout(function () {
                 window.location.href = href;
             }, 700); // Correspond à la durée de la transition CSS
@@ -476,6 +481,8 @@ window.addEventListener('scroll', function removeActiveOnTop() {
         $(".portraits-container").removeClass("has-active");
     }
 });
+
+
 // ----------------------------------------------- Membre ---------------------------------- //
 $(function() {
     function randomizeTeamStatesRespectHover() {

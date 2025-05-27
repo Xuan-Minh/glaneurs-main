@@ -1,3 +1,4 @@
+  <div id="transition-overlay" class="active"></div>   
 <header>
     <div class="header-controls">
            <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
@@ -44,15 +45,15 @@ foreach ($videoSources as $video) {
     </div>
     <div class="menu-links">
         <ul>
-           
-            <li><a href="souvenirs.php">Souvenirs</a></li>
             <li><a href="portraits.php">Portraits</a></li>
             <li><a href="archives.php">Archives</a></li>
-           <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
+            <li><a href="souvenirs.php">Souvenirs</a></li>
             <li><a href="associations.php">Associations</a></li>
+            <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
+            <li><a href="mentionslegales.php">Mentions légales</a></li>
             <li><a href="includes/reset.php">Reset</a></li>
             <li><a href="index.php">Home</a></li>
-            <li><a href="mentionslegales.php">Mentions légales</a></li>
+            
         </ul>
     </div>
 </div>      
