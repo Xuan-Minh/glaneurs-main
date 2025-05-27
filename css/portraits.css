@@ -35,7 +35,10 @@ body {
   opacity: 1;
   pointer-events: all;
 }
-
+#transition-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 /* -------------------------- Portraits --------------------------  */
 .portraits-container {
   display: flex;

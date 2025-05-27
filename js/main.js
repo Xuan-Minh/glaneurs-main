@@ -353,24 +353,6 @@ $(document).on('click', '.menu-links a', function (e) {
     }
 });
 
-$(function() {
-    // Au chargement, overlay blanc puis fade out
-    $("body").prepend('<div id="black-fade"></div>');
-    $("#black-fade").css({
-        position: "fixed",
-        top: 0, left: 0,
-        width: "100vw", height: "100vh",
-        background: "#050d1e",
-        zIndex: 99999,
-        opacity: 1,
-        pointerEvents: "none",
-        transition: "opacity 0.7s cubic-bezier(.4,0,.2,1)"
-    });
-    setTimeout(function() {
-        $("#black-fade").css("opacity", 0);
-        setTimeout(function() { $("#black-fade").remove(); }, 800);
-    }, 50);
-});
 // ----------------------------------------------- Portraits ---------------------------------- //
 
 $(document).ready(function () {

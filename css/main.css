@@ -220,7 +220,10 @@ position: relative; /* Permet de centrer la vidéo */
   opacity: 1;
   pointer-events: all;
 }
-
+#transition-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* ---------------------------------- LOADING ----------------------------------------------*/
 .loading-screen {

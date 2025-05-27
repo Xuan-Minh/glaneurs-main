@@ -35,6 +35,11 @@ body {
   opacity: 1;
   pointer-events: all;
 }
+#transition-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ----- Introduction ---------------------*/
 .team-intro {
   width: 90vw;

@@ -1,0 +1,63 @@
+/* ------------------------ GENERAL ------------------------------------------- */
+html, body {
+  font-family: "Figtree", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #050d1e;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  scrollbar-color: #050d1e #050d1e;
+  height: 100vh;
+}
+
+/* -------------------------- Transition --------------------------  */
+#transition-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #050d1e;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+}
+#transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+#transition-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+/* ----- Introduction ---------------------*/
+.team-intro {
+  width: 90vw;
+  max-width: 900px;
+  margin: 8vh auto 3vh auto;
+  color: #fff;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+}
+.team-intro h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+.team-intro p {
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+}
