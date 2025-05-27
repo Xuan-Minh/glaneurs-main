@@ -543,13 +543,15 @@ a.visionner-trigger-h3:hover::after {
     width: 40px; /* Ajuste la largeur de l'image */
     height: auto; /* Garde les proportions de l'image */
     text-align: center;
-    pointer-events: none; /* Empêche les interactions avec la flèche */
+    pointer-events: auto; /* Empêche les interactions avec la flèche */
 }
 
 .scroll-down-arrow img {
     width: 40px; /* Taille de l'image */
     animation: scroll-down 2s infinite; /* Applique l'animation */
     opacity: 0;
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+      
 }
 
 @keyframes scroll-down {
@@ -564,5 +566,26 @@ a.visionner-trigger-h3:hover::after {
     100% {
         opacity: 0;
         transform: translateY(20px); /* Déplace encore plus vers le bas */
+    }
+}
+
+.scroll-down-arrow.up img {
+    transform: rotate(180deg);
+    animation: scroll-up 2s infinite;
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+@keyframes scroll-up {
+    0% {
+        opacity: 0;
+        transform: rotate(180deg) translateY(-20px);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(180deg) translateY(-10px);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(180deg) translateY(0px);
     }
 }

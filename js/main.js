@@ -37,24 +37,29 @@ $(".sliderButton .point1").click(function (event) {
 
 // Sélectionne toutes les slides
 const slides = document.querySelectorAll('.slides');
+const scrollArrow = document.querySelector('.scroll-down-arrow');
 // Crée un observateur
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            slideTrigger(entry.target); // Appelle une fonction avec la slide visible
+            // Si la slide visible est la dernière
+            if (Array.from(slides).indexOf(entry.target) === slides.length - 1) {
+                scrollArrow.classList.add('up');
+            } else {
+                scrollArrow.classList.remove('up');
+            }
         }
     });
 }, {
-    root: null, // Par défaut, la fenêtre visible
-    threshold: 0.5 // La slide doit être au moins à 50% visible
+    root: null,
+    threshold: 0.5
 });
 
-// Observe chaque slide
 slides.forEach((slide) => {
     observer.observe(slide);
 });
-
 // --------------------------------- Reset Slide --------------------------------- //
+
 function resetOtherSlides(activeSlide) {
     $(".slides").not(activeSlide).each(function () {
         const slide = $(this);
@@ -110,9 +115,7 @@ $(".visionner-trigger-h3").click(function(event) {
     $("body").css("overflow", "hidden");
     slide.find(".info").fadeOut(0);
 });
-
-
-
+// --------------------------------- Scroll Down Arrow --------------------------------- //
 gsap.to(".scroll-down-arrow div", {
     y: 20,
     opacity: 0,
@@ -122,6 +125,29 @@ gsap.to(".scroll-down-arrow div", {
     ease: "power2.inOut"
 });
 
+$(document).on('click', '.scroll-down-arrow', function () {
+    const $arrow = $(this).closest('.scroll-down-arrow');
+    const $slides = $('.slides');
+
+    if ($arrow.hasClass('up')) {
+        // Flèche vers le haut : remonte tout en haut
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        // Flèche vers le bas : va à la prochaine slide
+        let nextSlide = null;
+        $slides.each(function (i, slide) {
+            const rect = slide.getBoundingClientRect();
+            if (rect.top > 10) {
+                nextSlide = slide;
+                return false;
+            }
+        });
+        if (nextSlide) {
+            nextSlide.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+// --------------------------------- Chargement de la page --------------------------------- //
 $(document).ready(function() {
 
    // Vérifie si l'écran de chargement est présent
