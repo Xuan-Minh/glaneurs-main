@@ -29,7 +29,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
       <?php 
       include 'includes/scrolldown.php';
-      include 'slide.php';?>     
+      include 'includes/slide.php';?>     
     </div>
   </body>
   

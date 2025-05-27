@@ -11,7 +11,7 @@
     <div class="team-intro">
     <h2>J'vais me flinguer</h2>
     <p>
-        Notre documentaire est le fruit d’un travail collectif, guidé par une vision commune : donner la parole à ceux qu’on n’entend jamais, et révéler la dignité derrière chaque histoire. Découvrez l’équipe qui porte cette direction artistique et humaine.
+        Notre documentaire est le fruit d’un travail collectif, guidé par une vision commune : donner la parole à ceux qu’on n’entend jamais, et révéler la dignité derrière chaque histoire. Découvrez l’équipe qui porte cette direction artistique et humaine.
     </p>
 </div>
 <?php
@@ -19,16 +19,17 @@ $equipe = [];
 for ($i = 1; $i <= 16; $i++) {
     $etat = rand(0, 1) ? 'image' : 'texte'; // aléatoire
    $equipe = [
+     [
+        "nom" => "Sakina DOUIOU",
+        "roles" => ["Réalisatrice", "Directrice de projet","Scénariste", "Photographe","Chef opératrice", "Cadreuse", "Monteuse", "Etalonnage", "Repérage"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
     [
         "nom" => "Xuan-Minh TRAN",
         "roles" => ["Directeur de projet", "Développeur web", "Prise de contact", "Technicien sonore", "Interprète", "Perch-man", "Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],
-    [
-        "nom" => "Sakina DOUIOU",
-        "roles" => ["Réalisatrice", "Directrice de projet","Scénariste", "Photographe","Chef opératrice", "Cadreuse", "Monteuse", "Etalonnage", "Repérage"],
-        "image" => "img/equipe/membre2.jpg"
-    ],
+   
       [
         "nom" => "Dylan BLANDEL",
         "roles" => ["Responsable montage FR", "Scénariste", "Graphiste", "Cadreur"],
@@ -103,7 +104,7 @@ for ($i = 1; $i <= 16; $i++) {
 ];
 }
 ?>
-    <?php include "includes/header.php"; ?>
+<?php include "includes/header.php"; ?>
 <div class="team-grid">
     <?php foreach ($equipe as $i => $membre): ?>
         <div class="team-member show-photo" data-index="<?php echo $i; ?>">
@@ -119,7 +120,6 @@ for ($i = 1; $i <= 16; $i++) {
         </div>
     <?php endforeach; ?>
 </div>
-    <?php include "includes/jsinclude.php"; ?>
-<?php include "includes/visionner.php"; ?>
+<?php include "includes/jsinclude.php"; ?>
 </body>
 </html>
