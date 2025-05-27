@@ -161,11 +161,21 @@ $(document).ready(function() {
     }
 
     // Gestion du clic sur le bouton "Entrer"
-    $("#enter-button").click(function () {
-        $(".loading-screen").fadeOut(1000, function () {
+  $("#enter-button").click(function() {
+    clearInterval(intervalId); // Arrête l'animation du loading
+
+    // 1. Fade out du loading
+    $(".loading-screen").fadeOut(1000, function () {
+        // 2. Juste après, on affiche l'overlay noir (reset les classes)
+        $("#transition-overlay").removeClass("hide").addClass("active");
+
+        // 3. Puis fade-out de l'overlay pour révéler l'index
+        setTimeout(function() {
             $(".container").removeClass("hidden").fadeIn(1000);
-        });
+            $("#transition-overlay").removeClass("active").addClass("hide");
+        }, 100); // Laisse l'overlay apparaître avant de le faire disparaître
     });
+});
     const loadingItems = $(".loading-item");
     let currentItem = 0;
     const totalItems = loadingItems.length;

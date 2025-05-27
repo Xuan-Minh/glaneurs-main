@@ -366,7 +366,9 @@ a.visionner-trigger-h3:hover::after {
 #enter-button:hover::after {
     width: 100%; /* Soulignement complet au survol */
 }
-
+#transition-overlay {
+  z-index: 10000; /* Plus haut que .loading-screen */
+}
 
 /* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {
