@@ -493,7 +493,7 @@ window.addEventListener('scroll', function removeActiveOnTop() {
 });
 
 
-// ----------------------------------------------- Membre ---------------------------------- //
+// ----------------------------------------------- Derrière le documentaire ---------------------------------- //
 $(function() {
     function randomizeTeamStatesRespectHover() {
         // Sélectionne uniquement les membres qui NE sont PAS hover
@@ -518,3 +518,14 @@ $(function() {
     
 
 });     
+
+// Reset
+$(document).on('keydown', function(e) {
+    // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
+    if (
+        e.key.toLowerCase() === 'r' &&
+        !$('input, textarea').is(':focus')
+    ) {
+        window.location.href = "includes/reset.php";
+    }
+});
