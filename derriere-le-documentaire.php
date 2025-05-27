@@ -29,7 +29,7 @@ for ($i = 1; $i <= 16; $i++) {
     ],
     [
         "nom" => "Sakina DOUIOU",
-        "roles" => ["Réalisatrice", "Directrice de projet","Scénariste", "Photographe","Chef opératrice", "Cadreuse", "Monteuse", "Etalonnage"],
+        "roles" => ["Réalisatrice", "Directrice de projet","Scénariste", "Photographe","Chef opératrice", "Cadreuse", "Monteuse", "Etalonnage", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
@@ -38,14 +38,34 @@ for ($i = 1; $i <= 16; $i++) {
         "image" => "img/equipe/membre1.jpg"
     ],
     [
-        "nom" => "Hyun-Beom",
+        "nom" => "Hyunbeom PARK",
         "roles" => ["Compositeur musique originale", "Monteur son", "Interprète coréen", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ], 
+     [
+        "nom" => "Hugo LEULIET",
+        "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
+        "image" => "img/equipe/membre1.jpg"
+    ],
     [
         "nom" => "Romane VARO-TUPIN",
         "roles" => ["Assistante de production", "Prise de contact", "Organisatrice", "Transcription" ,"Sous-titreuse"],
         "image" => "img/equipe/membre2.jpg"
+    ],
+    [
+        "nom" => "Jiwoo YUN",
+        "roles" => ["Transcripteuse", "Repérage"],
+        "image" => "img/equipe/membre1.jpg"
+    ],
+     [
+        "nom" => "Suyeon YANG",
+        "roles" => ["Interprète", "Repérage"],
+        "image" => "img/equipe/membre2.jpg"
+    ],
+       [
+        "nom" => "Alyssia BERSET",
+        "roles" => ["Responsable Montage KR", "Repérage", "Interprète"],
+        "image" => "img/equipe/membre1.jpg"
     ],
       [
         "nom" => "Inès DOS SANTOS",
@@ -57,38 +77,18 @@ for ($i = 1; $i <= 16; $i++) {
         "roles" => ["Graphiste", "UX/UI designer","Maquettiste" ,"Monteuse"],
         "image" => "img/equipe/membre2.jpg"
     ],
-      [
-        "nom" => "Hugo LEULIET",
-        "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
-        "image" => "img/equipe/membre1.jpg"
-    ],
-      [
-        "nom" => "Alyssia BERSET",
-        "roles" => ["Responsable Montage KR", "Repérage", "Interprète"],
-        "image" => "img/equipe/membre1.jpg"
-    ],
     [
         "nom" => "Jaeden DUONG",
         "roles" => ["Traductrice","Transcripteuse", "Repérage"],
         "image" => "img/equipe/membre2.jpg"
     ],
       [
-        "nom" => "Jung-Hyun",
+        "nom" => "Junghyun LIM",
         "roles" => ["Perch-man", "Cadreur" ,"Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],
-    [
-        "nom" => "Su-yeon",
-        "roles" => ["Interprète", "Repérage"],
-        "image" => "img/equipe/membre2.jpg"
-    ],
-    [
-        "nom" => "Ji-woo",
-        "roles" => ["Transcripteuse", "Repérage"],
-        "image" => "img/equipe/membre1.jpg"
-    ],
       [
-        "nom" => "Ji-yeong",
+        "nom" => "Jiyeong SIN",
         "roles" => ["Interprète", "Transcripteuse", "Repérage"],
         "image" => "img/equipe/membre1.jpg"
     ],     
