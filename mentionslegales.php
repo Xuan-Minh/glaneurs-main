@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "includes/css.php"; ?>
     <link rel="stylesheet" href="css/mentionslegales.css">
-    <?php include "includes/css.php"; ?>
-    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
-    <link rel="icon" href="img/favicon.png" type="image/png" />
     <title>Derrière la caméra</title>
 </head>
 <body>
