@@ -107,6 +107,7 @@
   height: 2px;
   background: #fff;
   transition: width 0.3s;
+  margin: 0; /* retire le centrage */
 }
 
 .team-member:hover .team-portfolio::after {
