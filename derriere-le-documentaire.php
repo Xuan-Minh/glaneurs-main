@@ -8,8 +8,8 @@
     <title>Derrière le documentaire</title>
 </head>
 <body>
-    <div class="team-intro">
-    <h2>J'vais me flinguer</h2>
+    <div class="page-intro">
+    <h2>Derrière le documentaire</h2>
     <p>
         Notre documentaire est le fruit d’un travail collectif, guidé par une vision commune : donner la parole à ceux qu’on n’entend jamais, et révéler la dignité derrière chaque histoire. Découvrez l’équipe qui porte cette direction artistique et humaine.
     </p>

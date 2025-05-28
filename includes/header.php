@@ -58,7 +58,6 @@ foreach ($videoSources as $video) {
             <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
             <br>
             <br>
-            <br>
             <li><a href="mentionslegales.php">Mentions légales</a></li>
             <li><a href="index.php">Home</a></li>
             
