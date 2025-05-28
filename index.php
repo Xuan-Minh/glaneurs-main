@@ -21,7 +21,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
   </head>
   <body>
    
-      <?php if ($showLoading): ?>
+    <?php if ($showLoading): ?>
         <?php include 'includes/loading.php'; ?>
     <?php endif; ?>
   <?php include 'includes/header.php';?>
@@ -30,6 +30,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
       <?php 
       include 'includes/scrolldown.php';
       include 'includes/slide.php';?>     
+      
     </div>
   </body>
   

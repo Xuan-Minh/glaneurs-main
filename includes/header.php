@@ -1,4 +1,4 @@
-  <div id="transition-overlay" class="active"></div>   
+ <div id="transition-overlay" class="active"></div>   
 <header>
     <div class="header-controls">
            <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>

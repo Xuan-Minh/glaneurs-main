@@ -3,6 +3,28 @@ $(document).ready(function() {
         $("#transition-overlay").removeClass("active").addClass("hide");
     }, 50);
 });
+
+// ----------------------------------------------- Fade transition ---------------------------------- //
+$(document).on('click', '.menu-links a', function (e) {
+    const href = $(this).attr('href');
+    if (href && href !== "#" && !href.startsWith("javascript")) {
+        e.preventDefault();
+
+        // Ferme le menu-volet
+        $("#menuVolet").removeClass("open");
+
+        // Lance la transition overlay après un court délai
+        setTimeout(function () {
+            // D'abord retire .hide, puis ajoute .active
+            $("#transition-overlay").removeClass("hide").addClass("active");
+            setTimeout(function () {
+                window.location.href = href;
+            }, 700); // Correspond à la durée de la transition CSS
+        }, 300); // Délai pour laisser le menu-volet se fermer
+    }
+});
+
+// ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
 function slideIn(slide, info) {
     resetOtherSlides(slide); // Réinitialise les autres slides
     $("body").css("overflow", "auto");
@@ -46,7 +68,7 @@ const scrollArrow = document.querySelector('.scroll-down-arrow');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            // Si la slide visible est la dernière
+            // Si la slide visible est la dernière, rotation de la flèche
             if (Array.from(slides).indexOf(entry.target) === slides.length - 1) {
                 scrollArrow.classList.add('up');
             } else {
@@ -350,57 +372,12 @@ $(document).on("click", ".close-visionner", function () {
 });
 
 // ----------------------------------------------- LANGUE ---------------------------------- //
-$("#languageToggle").click(function () {
-    const button = $(this);
-    const isKR = button.text() === "KR"; // Vérifie si le bouton est en mode KR
-
-    if (isKR) {
-        // Passe en coréen
-        $("h1").each(function () {
-            const krVersion = $(this).data("krversion"); // Récupère la version coréenne
-            if (krVersion) {
-                $(this).text(krVersion); // Change le texte du h1
-            }
-        });
-        button.text("FR"); // Change le texte du bouton en FR
-    } else {
-        // Passe en français
-        $("h1").each(function () {
-            const frVersion = $(this).data("frversion") || $(this).data("chapitre"); // Récupère la version française
-            if (frVersion) {
-                $(this).text(frVersion); // Change le texte du h1
-            }
-        });
-        button.text("KR"); // Change le texte du bouton en KR
-    }
-});
 
 $(document).on('click', '.lang-option', function() {
     $('.lang-option').removeClass('active');
     $(this).addClass('active');
     // Ici, ajoute la logique pour changer la langue du site selon $(this).data('lang')
     // Exemple : window.location.search = '?lang=' + $(this).data('lang');
-});
-
-
-// ----------------------------------------------- Fade transition ---------------------------------- //
-$(document).on('click', '.menu-links a', function (e) {
-    const href = $(this).attr('href');
-    if (href && href !== "#" && !href.startsWith("javascript")) {
-        e.preventDefault();
-
-        // Ferme le menu-volet
-        $("#menuVolet").removeClass("open");
-
-        // Lance la transition overlay après un court délai
-        setTimeout(function () {
-            // D'abord retire .hide, puis ajoute .active
-            $("#transition-overlay").removeClass("hide").addClass("active");
-            setTimeout(function () {
-                window.location.href = href;
-            }, 700); // Correspond à la durée de la transition CSS
-        }, 300); // Délai pour laisser le menu-volet se fermer
-    }
 });
 
 // ----------------------------------------------- Portraits ---------------------------------- //
@@ -526,13 +503,19 @@ $(function() {
     randomizeTeamStatesRespectHover();
     
 
-});     
+}); 
+//  ----------------------------------------------- Portfolio ---------------------------------- //
+$(document).on('click', '.team-member', function(e) {
+    if ($(e.target).is('.team-portfolio')) return;
+    var link = $(this).find('.team-portfolio').attr('href');
+    if (link) window.open(link, '_blank');
+});
 
 // Reset
 $(document).on('keydown', function(e) {
     // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
     if (
-        e.key.toLowerCase() === 'r' &&
+        e.key.toLowerCase() === 'p' &&
         !$('input, textarea').is(':focus')
     ) {
         window.location.href = "includes/reset.php";
