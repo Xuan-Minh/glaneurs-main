@@ -66,6 +66,7 @@
   background-color: #fff;
 }
 .team-info {
+  position : relative;
   background: none; /* Pas d'overlay noir */
   color: #fff;
   z-index: 2;
@@ -75,6 +76,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: 10%;
+  
 }
 .team-name {
   font-size: 1.3em;
@@ -86,6 +88,11 @@
   font-size: 1em;
   opacity: 0.85;
 }
+.team-portfolio {
+  font-size: 1em;
+  opacity: 0.85;
+  text-align : center;
+}
 
 .team-member.show-photo .team-photo { opacity: 1; }
 .team-member.show-photo .team-info { opacity: 0; }
@@ -96,3 +103,37 @@
 .team-member.show-photo:hover .team-info { opacity: 1; }
 .team-member.show-info:hover .team-photo { opacity: 0; }
 .team-member.show-info:hover .team-info { opacity: 1  ; }
+
+.team-portfolio {
+  position: absolute;
+  right: 25%;
+  bottom: 25%;
+  display: inline-block;
+  font-size: 1em;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+  opacity: 0.85;
+  text-align: right;
+  margin: 1em auto;
+  left: auto;
+  transform: none;
+}
+
+.team-portfolio::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s;
+}
+
+.team-member:hover .team-portfolio::after {
+  width: 100%; /* underline juste sous le texte */
+}
+
+.team-member:hover .team-portfolio {
+  color: #ddd;
+}
