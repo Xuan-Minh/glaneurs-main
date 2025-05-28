@@ -180,7 +180,7 @@ $(document).ready(function() {
     if ($(".loading-screen").length === 0) {
         // Si pas de loading-screen, rendre le conteneur visible
         $(".container").removeClass("hidden").fadeIn(1000);
-    }
+    }   
 
     // Gestion du clic sur le bouton "Entrer"
   $("#enter-button").click(function() {
@@ -294,7 +294,6 @@ $(document).ready(function () {
     function handleSlideChange(slide) {
         // Récupérer l'index de la slide actuelle
         const slideIndex = $(slide).index() + 1;
-
         }
 
     // Observer les changements de slide

@@ -84,7 +84,7 @@ for ($i = 1; $i <= 16; $i++) {
         "nom" => "Sarah CROS",
         "roles" => ["Graphiste", "UX/UI designer","Maquettiste" ,"Monteuse"],
         "image" => "img/equipe/membre2.jpg",
-        "portfolio" => ""
+        "portfolio" => "https://www.linkedin.com/in/sarahcros"
     ],
     [
         "nom" => "Jaeden DUONG",
