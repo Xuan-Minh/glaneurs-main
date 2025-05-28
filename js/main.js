@@ -504,20 +504,20 @@ $(function() {
     
 
 }); 
-//  ----------------------------------------------- Portfolio ---------------------------------- //
-$(document).on('click', '.team-member', function(e) {
-    if ($(e.target).is('.team-portfolio')) return;
-    var link = $(this).find('.team-portfolio').attr('href');
-    if (link) window.open(link, '_blank');
-});
+        //  ----------------------------------------------- Portfolio ---------------------------------- //
+        $(document).on('click', '.team-member', function(e) {
+            if ($(e.target).is('.team-portfolio')) return;
+            var link = $(this).find('.team-portfolio').attr('href');
+            if (link) window.open(link, '_blank');
+        });
 
-// Reset
-$(document).on('keydown', function(e) {
-    // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
-    if (
-        e.key.toLowerCase() === 'p' &&
-        !$('input, textarea').is(':focus')
-    ) {
-        window.location.href = "includes/reset.php";
-    }
-});
+        // Reset
+        $(document).on('keydown', function(e) {
+            // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
+            if (
+                e.key.toLowerCase() === 'p' &&
+                !$('input, textarea').is(':focus')
+            ) {
+                window.location.href = "includes/reset.php";
+            }
+        });
