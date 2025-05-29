@@ -48,7 +48,7 @@ for ($i = 1; $i <= 16; $i++) {
         "nom" => "Hugo LEULIET",
         "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
         "image" => "img/equipe/membre1.jpg",
-        "portfolio" => ""
+        "portfolio" => "https://pepi934.github.io/HugoLeuliet_Portfolio/"
     ],
     [
         "nom" => "Romane VARO-TUPIN",
