@@ -8,6 +8,7 @@
     <title>Derrière le documentaire</title>
 </head>
 <body>
+    <?php include "includes/header.php"; ?>
     <div class="page-intro">
     <h2>Derrière le documentaire</h2>
     <p>
@@ -120,7 +121,7 @@ for ($i = 1; $i <= 16; $i++) {
 ];
 }
 ?>
-<?php include "includes/header.php"; ?>
+
 <div class="team-grid">
     <?php foreach ($equipe as $i => $membre): ?>
         <div class="team-member show-photo" data-index="<?php echo $i; ?>">
