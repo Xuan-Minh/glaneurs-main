@@ -36,7 +36,7 @@ for ($i = 1; $i <= 16; $i++) {
         "nom" => "Dylan BLANDEL",
         "roles" => ["Responsable montage FR", "Scénariste", "Graphiste", "Cadreur"],
         "image" => "img/equipe/membre1.jpg",
-        "portfolio" => ""
+        "portfolio" => "https://www.linkedin.com/in/dylan-blandel-12991b187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
     ],
     [
         "nom" => "Hyunbeom PARK",
@@ -48,7 +48,7 @@ for ($i = 1; $i <= 16; $i++) {
         "nom" => "Hugo LEULIET",
         "roles" => ["Perch-man", "Monteur son", "Compositeur musique originale"],
         "image" => "img/equipe/membre1.jpg",
-        "portfolio" => "https://pepi934.github.io/HugoLeuliet_Portfolio/"
+        "portfolio" => ""
     ],
     [
         "nom" => "Romane VARO-TUPIN",
