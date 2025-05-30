@@ -9,6 +9,21 @@
 </head>
 <body>
     <?php include "includes/header.php"; ?>
+     <div class="associations-scroll">
+        <section class="associations-hero">
+            <video autoplay muted loop>
+                <source src="video/bache.mov" type="video/mp4">
+            </video>
+            <div class="associations-title">
+                <?php echo getTranslation("associations_titre", $lang); ?>
+            </div>
+        </section>
+        <section class="associationss-content">
+            <!-- Ici tu mets le reste de ta page associationss -->
+            <div>Contenu des associationss à venir...</div>
+        </section>
+    </div>
+
     <?php include "includes/jsinclude.php"; ?>
 </body>
 </html>

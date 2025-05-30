@@ -1,0 +1,45 @@
+.archive-hero {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            scrollbar-width: none;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .archive-hero video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .archive-hero .archive-title {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-family: "Libre Baskerville", serif;
+            font-size: 4vw;
+            text-align: center;
+        }
+        .archives-content {
+            min-height: 100vh;
+            background: #050d1e;
+            padding: 5vh 0 0 0;
+        }
+        .archives-scroll {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+    /* Cacher la scrollbar sur tous les navigateurs */
+.archives-scroll {
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE et Edge */
+}
+.archives-scroll::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
+}
