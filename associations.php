@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "includes/css.php"; ?>
     <link rel="stylesheet" href="css/associations.css">
-    <title>Associations</title>
+    <title><?php echo getTranslation("associations_titre", $lang)?></title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>

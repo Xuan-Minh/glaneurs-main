@@ -6,7 +6,7 @@
 
     <?php include "includes/css.php"; ?>
     <link rel="stylesheet" href="css/souvenirs.css">
-    <title>Souvenirs</title>
+    <title><?php echo getTranslation("souvenirs_titre", $lang)?></title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>
