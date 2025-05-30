@@ -526,3 +526,9 @@ $(function() {
                 window.location.href = "includes/reset.php";
             }
         });
+
+
+// ----------------------------------------------- animation texte ------------------------ //
+$(document).ready(function() {
+    $('.content-anim').addClass('visible');
+});

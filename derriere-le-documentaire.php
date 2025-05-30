@@ -24,13 +24,13 @@ unset($member);
 </head>
 <body>
     <?php include "includes/header.php"; ?>
-    <div class="page-intro">
+    <div class="page-intro content-anim">
     <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>
     <p>
         <?php echo getTranslation('derriereledocumentaire_intro', $lang); ?>
     </p>
 </div>
- <div class="team-grid">
+ <div class="team-grid content-anim">
         <?php foreach ($members as $i => $membre): ?>
             <div class="team-member show-photo" data-index="<?php echo $i; ?>">
                 <div class="team-face team-photo" style="background-image: url('<?php echo htmlspecialchars($membre['image']); ?>');"></div>
