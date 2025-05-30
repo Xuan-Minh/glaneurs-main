@@ -532,3 +532,19 @@ $(function() {
 $(document).ready(function() {
     $('.content-anim').addClass('visible');
 });
+// ----------------------------------------------- hide navbar apres scroll ------------------------ //
+let lastScroll = 0;
+const $header = $("header");
+
+window.addEventListener("scroll", function() {
+    const currentScroll = window.scrollY;
+    if (currentScroll > lastScroll && currentScroll > 200) {
+        // Scroll vers le bas : cache le header
+        $header.addClass("hide-header");
+    } else if (currentScroll < lastScroll) {
+        // Scroll vers le haut : montre le header
+        $header.removeClass("hide-header");
+    }
+     if (currentScroll < 20) $header.removeClass("hide-header");
+    lastScroll = currentScroll;
+});

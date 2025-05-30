@@ -42,6 +42,28 @@ h2:hover, a.visionner-trigger-h3:hover {
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
 }
+h2 {
+  position: relative;
+  display: inline-block; /* Nécessaire pour que le soulignement s'adapte au texte */
+  cursor: pointer;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Ajuste la position du soulignement */
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ddd;
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+h2:hover::after {
+  width: 100%;
+}
+
 a.visionner-trigger-h3 {
   font-family: "Figtree";
   font-size: 1.5em;
