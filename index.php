@@ -13,10 +13,11 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Glaneurs de carton</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Glaneurs de carton" />
     <?php include "includes/css.php"; ?>
+    <title><?php echo getTranslation("index_titre", $lang)?></title>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
   </head>
   <body>
