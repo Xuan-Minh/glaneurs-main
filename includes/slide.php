@@ -1,9 +1,7 @@
 <?php
 $slides = array(
     array(
-        "chapitre" => "Les glaneurs de carton", 
-        "krversion" => "폐지 줍는 사람들",
-        "sous-titre" => "Voir le documentaire en entier",
+        "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
         "srcvideobg" => "video/chariot.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
@@ -11,7 +9,7 @@ $slides = array(
         "urlsuite" => ""
     ),
     array(
-        "chapitre" => "Chapitre 1",
+        "chapitre" => getTranslation("index_chapitre1", $lang),
         "srcvideobg" => "video/ville.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
@@ -19,7 +17,7 @@ $slides = array(
         "urlsuite" => ""
     ),
     array(
-        "chapitre" => "Chapitre 2",
+        "chapitre" => getTranslation("index_chapitre2", $lang),
         "srcvideobg" => "video/bache.mov",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
@@ -27,7 +25,7 @@ $slides = array(
         "urlsuite" => ""
     ),
     array(
-        "chapitre" => "Chapitre 3",
+        "chapitre" => getTranslation("index_chapitre3", $lang),
         "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
@@ -49,7 +47,7 @@ foreach ($slides as $slide) {
         echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=en" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
         echo '<h1 data-krversion="' . $slide["krversion"] . '" data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
-        echo '<a class="visionner-trigger visionner-trigger-h3">Voir le documentaire en entier</a>';
+        echo '<a class="visionner-trigger visionner-trigger-h3">'. getTranslation("index_docufull", $lang).'</a>';
     } else {
         echo '<div class="visionner">';
         echo '<div class="close-visionner">X</div>';

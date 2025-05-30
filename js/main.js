@@ -197,6 +197,9 @@ $(document).ready(function() {
             $("#transition-overlay").removeClass("active").addClass("hide");
         }, 100); // Laisse l'overlay apparaître avant de le faire disparaître
     });
+    window.addEventListener('pageshow', function() {
+    $("#transition-overlay").removeClass("active").addClass("hide");
+});
 });
     const loadingItems = $(".loading-item");
     let currentItem = 0;
@@ -373,10 +376,13 @@ $(document).on("click", ".close-visionner", function () {
 // ----------------------------------------------- LANGUE ---------------------------------- //
 
 $(document).on('click', '.lang-option', function() {
+    var lang = $(this).data('lang');
     $('.lang-option').removeClass('active');
     $(this).addClass('active');
-    // Ici, ajoute la logique pour changer la langue du site selon $(this).data('lang')
-    // Exemple : window.location.search = '?lang=' + $(this).data('lang');
+    // Appelle le serveur pour changer la langue en session
+    $.post('includes/setlang.php', { lang: lang }, function() {
+        location.reload(); // Recharge la page pour afficher la langue choisie
+    });
 });
 
 // ----------------------------------------------- Portraits ---------------------------------- //

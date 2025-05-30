@@ -1,4 +1,8 @@
- <div id="transition-overlay" class="active"></div>   
+<?php 
+session_start();
+$lang = $_SESSION['lang'] ?? 'fr';
+include "includes/lang.php"; ?>
+<div id="transition-overlay" class="active"></div>   
 <header>
     <div class="header-controls">
            <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
@@ -6,12 +10,12 @@
                 <img src="img/favicon.png" alt="Logo" class="logo">
            </a> -->
         <?php endif; ?>
-        <div class="language-selector">
-    <span class="lang-option active" data-lang="fr">FR</span>
+<div class="language-selector">
+    <span class="lang-option <?php if($lang=='fr') echo 'active'; ?>" data-lang="fr">FR</span>
     <span class="lang-sep">/</span>
-    <span class="lang-option" data-lang="en">EN</span>
+    <span class="lang-option <?php if($lang=='en') echo 'active'; ?>" data-lang="en">EN</span>
     <span class="lang-sep">/</span>
-    <span class="lang-option" data-lang="kr">KR</span>
+    <span class="lang-option <?php if($lang=='kr') echo 'active'; ?>" data-lang="kr">KR</span>
 </div>
         <div class="menu-burger" id="menuBurger">
             <span></span>
@@ -27,17 +31,17 @@
 $videoSources = array(
     array(
         "src" => "video/ville.mov",
-        "title" => "Chapitre 1",
+        "title" => getTranslation("index_chapitre1", $lang),
         "slide" => 1 // Numéro de la slide (commence à 1)
     ),
     array(
         "src" => "video/bache.mov",
-        "title" => "Chapitre 2",
+        "title" => getTranslation("index_chapitre2", $lang),
         "slide" => 2
     ),
     array(
         "src" => "video/lee.mov",
-        "title" => "Chapitre 3",
+        "title" => getTranslation("index_chapitre3", $lang),
         "slide" => 3
     )
 );
@@ -51,15 +55,15 @@ foreach ($videoSources as $video) {
     </div>
     <div class="menu-links">
         <ul>
-            <li><a href="portraits.php">Portraits</a></li>
-            <li><a href="archives.php">Archives</a></li>
-            <li><a href="souvenirs.php">Souvenirs</a></li>
-            <li><a href="associations.php">Associations</a></li>
-            <li><a href="derriere-le-documentaire.php">Derrière le documentaire</a></li>
+            <li><a href="portraits.php"><?php echo getTranslation("portraits_titre", $lang)?></a></li>
+            <li><a href="archives.php"><?php echo getTranslation("archives_titre", $lang)?></a></li>
+            <li><a href="souvenirs.php"><?php echo getTranslation("souvenirs_titre", $lang)?></a></li>
+            <li><a href="associations.php"><?php echo getTranslation("associations_titre", $lang)?></a></li>
+            <li><a href="derriere-le-documentaire.php"><?php echo getTranslation("derriereledocumentaire_titre", $lang)?></a></li>
             <br>
             <br>
-            <li><a href="mentionslegales.php">Mentions légales</a></li>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="mentionslegales.php"><?php echo getTranslation("mentionslegales_titre", $lang)?></a></li>
+            <li><a href="index.php"><?php echo getTranslation("accueil", $lang)?></a></li>
             
         </ul>
     </div>
