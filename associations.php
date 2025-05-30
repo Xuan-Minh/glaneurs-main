@@ -18,7 +18,7 @@
                 <?php echo getTranslation("associations_titre", $lang); ?>
             </div>
         </section>
-        <section class="associationss-content">
+        <section class="associations-content">
             <!-- Ici tu mets le reste de ta page associationss -->
             <div>Contenu des associationss à venir...</div>
         </section>

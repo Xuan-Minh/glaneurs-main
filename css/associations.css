@@ -30,11 +30,11 @@
             background: #050d1e;
             padding: 5vh 0 0 0;
         }
-        .associations-scroll {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-        }
+     .associations-scroll {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+}
     /* Cacher la scrollbar sur tous les navigateurs */
 .associations-scroll {
     scrollbar-width: none;      /* Firefox */

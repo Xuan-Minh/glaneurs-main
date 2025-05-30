@@ -8,7 +8,7 @@
     <title><?php echo getTranslation("mentionslegales_titre", $lang)?></title>
 </head>
 <body>
-    <div class="team-intro mentions-legales">
+    <div class="team-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang)?></h2>
       <h3>Éditeur du site :<br></h3>
 <div> Glaneurs de carton<br>
