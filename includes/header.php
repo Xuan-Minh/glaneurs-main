@@ -1,7 +1,3 @@
-<?php 
-session_start();
-$lang = $_SESSION['lang'] ?? 'fr';
-include "includes/lang.php"; ?>
 <div id="transition-overlay" class="active"></div>   
 <header>
     <div class="header-controls">
