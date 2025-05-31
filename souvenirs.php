@@ -1,3 +1,4 @@
+<?php include 'includes/lang.php'; // Inclut le fichier pour gérer la langue?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>"<?php if ($lang == 'kr') echo ' class="kr-lang"'; ?>>
 <head>

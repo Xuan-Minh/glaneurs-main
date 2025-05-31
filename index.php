@@ -1,5 +1,5 @@
 <?php
-session_start(); // Démarre la session PHP
+include 'includes/lang.php'; // Inclut le fichier pour gérer la langue
 
 // Vérifie si l'utilisateur a déjà visité l'index
 if (!isset($_SESSION['hasVisitedIndex'])) {

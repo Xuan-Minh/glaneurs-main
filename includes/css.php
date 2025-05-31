@@ -3,7 +3,3 @@
 <link rel="stylesheet" href="css/navbar.css" type="text/css" />
 <link rel="stylesheet" href="css/visionner.css" type="text/css" />
 <link rel="icon" href="img/favicon.png" type="image/png" />
-<?php 
-session_start();
-$lang = $_SESSION['lang'] ?? 'fr';
-include "includes/lang.php"; ?>

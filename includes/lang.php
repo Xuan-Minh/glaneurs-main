@@ -1,4 +1,6 @@
 <?php
+session_start();
+$lang = $_SESSION['lang'] ?? 'fr';
 // Connexion PDO centralisée
 function getPDO() {
     static $pdo = null;
