@@ -10,10 +10,9 @@ $(document).ready(function () {
     container.on("mouseenter", function () {
         container.removeClass("no-hover");
     });
-});
 
-$(document).ready(function () {
-    $(".portrait-section").on("click", function () {
+//  ------------------------ Clic sur un portrait ------------------------ //
+      $(".portrait-section").on("click", function () {
         const target = $(this).data("target");
         // Retire .active de tous les portraits
         $(".portrait-section").removeClass("active");
@@ -93,4 +92,3 @@ window.addEventListener('scroll', function removeActiveOnTop() {
         $(".portraits-container").removeClass("has-active");
     }
 });
-
