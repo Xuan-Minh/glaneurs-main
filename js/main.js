@@ -319,20 +319,25 @@ $(document).on('click', '.scroll-down-arrow, .scroll-down-arrow img', function (
 });
 // --------------------------------- Auto scroll MENU  --------------------------------- //
 $(document).on("click", ".menu-video-item", function () {
-    const slideNumber = $(this).data("slide"); // Récupère le numéro de la slide
+    const slideNumber = $(this).data("slide");
     const isIndexPage = $(".slides").length > 0;
 
+    $("#menuVolet").removeClass("open");
+     $("#menuBurger").removeClass("open");
+
     if (isIndexPage) {
-        // Si on est sur l'index, scrolle et simule le clic
+        // Sur l'index : pas de transition, pas de délai
         scrollToAndTrigger(slideNumber);
     } else {
-        // Si on n'est pas sur l'index, redirige vers l'index avec un paramètre
-        window.location.href = "index.php?slide=" + slideNumber;
+        // Sur une autre page : transition overlay + délai
+        setTimeout(function () {
+            $("#transition-overlay").removeClass("hide").addClass("active");
+            setTimeout(function () {
+                window.location.href = "index.php?slide=" + slideNumber;
+            }, 700); // Durée de la transition CSS
+        }, 300); // Laisse le menu-volet se fermer
     }
-
-    $("#menuVolet").removeClass("open");
 });
-
 // Fonction pour scroller et simuler le clic
 function scrollToAndTrigger(slideNumber) {
     const $slide = $(".slides").eq(slideNumber); // Pas de -1 car slideNumber correspond déjà à l'index

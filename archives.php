@@ -21,7 +21,7 @@
         </section>
         <section class="archives-content">
             <!-- Ici tu mets le reste de ta page archives -->
-            <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis illo explicabo cumque aliquid earum ipsum natus facilis molestiae dolor! Sit ratione velit consectetur odit magni reprehenderit ab ullam omnis?</div>
+            <div class="page-intro"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis illo explicabo cumque aliquid earum ipsum natus facilis molestiae dolor! Sit ratione velit consectetur odit magni reprehenderit ab ullam omnis?</div>
         </section>
     </div>
 

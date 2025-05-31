@@ -21,7 +21,7 @@
         </section>
         <section class="associations-content">
             <!-- Ici tu mets le reste de ta page associationss -->
-            <div>Contenu des associationss à venir...</div>
+            <div class="page-intro">Contenu des associationss à venir...</div>
         </section>
     </div>
 

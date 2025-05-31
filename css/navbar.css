@@ -126,9 +126,9 @@ header.hide-header {
   .menu-burger:hover span:nth-child(2) { transform: scaleX(0.8); }
   .menu-burger:hover span:nth-child(3) { transform: scaleX(0.6); }
 
-.menu-burger.open span:nth-child(1) { transform: scaleX(0.9) rotate(-45deg); }
+.menu-burger.open span:nth-child(1) { transform: scaleX(0.9) rotate(-45deg); background-color: #ddd; }
   .menu-burger.open span:nth-child(2) {opacity: 0;}
-  .menu-burger.open span:nth-child(3) { transform: scaleX(0.9) rotate(45deg); }
+  .menu-burger.open span:nth-child(3) { transform: scaleX(0.9) rotate(45deg);  background-color: #ddd;}
   
 /* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {

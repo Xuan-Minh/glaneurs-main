@@ -1,5 +1,5 @@
 /* ----- Introduction ---------------------*/
-.team-intro {
+.page-intro {
   width: 90vw;
   max-width: 900px;
   margin: 8vh auto 3vh auto;
@@ -7,7 +7,7 @@
   text-align: left;
   font-family: "Figtree", sans-serif;
 }
-.team-intro h2 {
+.page-intro h2 {
   font-size: 2.2em;
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
@@ -15,14 +15,14 @@
   text-align: center;
   letter-spacing: 0.02em;
 }
-.team-intro h3 {
+.page-intro h3 {
   font-size: 1.5em;
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
   letter-spacing: 0.02em;
 }
-.team-intro p {
+.page-intro p {
   font-size: 1.2em;
   font-weight: 400;
   opacity: 0.85;

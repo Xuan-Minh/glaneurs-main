@@ -9,7 +9,7 @@
     <title><?php echo getTranslation("mentionslegales_titre", $lang)?></title>
 </head>
 <body>
-    <div class="team-intro mentions-legales content-anim">
+    <div class="page-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang)?></h2>
       <h3><?php echo getTranslation("mentionslegales_editeur", $lang)?><br></h3>
 <div>Les Glaneurs de carton<br>
