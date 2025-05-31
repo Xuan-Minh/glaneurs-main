@@ -373,7 +373,6 @@ $(document).on('click', '.lang-option', function() {
     });
 });
 
-
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
 let lastScroll = 0;
 const $header = $("header");
