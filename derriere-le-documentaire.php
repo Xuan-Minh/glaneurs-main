@@ -57,9 +57,9 @@ unset($member);
     </div>
     
    <div class="page-intro content-anim">
-    <h2>Remerciements </h2>
+    <h2><?php echo getTranslation("remerciements_titre", $lang); ?></h2>
     <p>
-        Tous les membres de l'équipe tiennent à remercier chaleureusement les personnes suivantes pour leur soutien et leur contribution précieuse à ce projet :
+       <?php echo getTranslation("derriereledocumentaire_messagemerci", $lang); ?>
         <?php echo getTranslation('derriereledocumentaire_remerciements', $lang); ?>
     
     </p>

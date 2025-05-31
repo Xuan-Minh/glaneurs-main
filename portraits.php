@@ -44,25 +44,25 @@
 ", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_master
 ", $lang); ?>...</p>
-         <button class="back-to-portraits">Voir les autres portraits</button>
+         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail2">
         <h2><?php echo getTranslation("portraits_lee", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_lee", $lang); ?>...</p>
-         <button class="back-to-portraits">Voir les autres portraits</button>
+         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail3">
         <h2>Monsieur Arirang-song</h2>
         <p>Informations spécifiques à Monsieur Arirang-song...</p>
-         <button class="back-to-portraits">Voir les autres portraits</button>
+         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail4">
         <h2><?php echo getTranslation("portraits_jo", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_jo", $lang); ?>...</p>
-         <button class="back-to-portraits">Voir les autres portraits</button>
+         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <?php include "includes/jsinclude.php"; ?>
