@@ -4,7 +4,6 @@
             position: relative;
             overflow: hidden;
             scrollbar-width: none;
-            scroll-snap-align: start;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -32,8 +31,6 @@
         }
         .archives-scroll {
             height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
         }
     /* Cacher la scrollbar sur tous les navigateurs */
 .archives-scroll {

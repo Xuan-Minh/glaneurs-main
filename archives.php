@@ -25,5 +25,6 @@
     </div>
 
     <?php include "includes/jsinclude.php"; ?>
+    <script src="js/archives.js"></script>
 </body>
 </html>

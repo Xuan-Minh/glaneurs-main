@@ -16,7 +16,7 @@ html, body {
 body {
   width: 100%;
   overflow-x: hidden;
-  scrollbar-color: #050d1e #050d1e;
+  /* scrollbar-color: #050d1e #050d1e; */
 }
 
 /* -------------------------- Transition --------------------------  */
