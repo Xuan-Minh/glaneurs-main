@@ -66,6 +66,7 @@
     </section>
 
     <?php include "includes/jsinclude.php"; ?>
+    <script src="js/portraits.js"></script>
     <?php include "includes/visionner.php"; ?>
 </body>
 </html>
