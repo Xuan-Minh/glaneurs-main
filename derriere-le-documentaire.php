@@ -65,5 +65,6 @@ unset($member);
     </p>
 
 <?php include "includes/jsinclude.php"; ?>
+<script src="js/derriereledocumentaire.js"></script>
 </body>
 </html>

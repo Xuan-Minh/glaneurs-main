@@ -92,3 +92,4 @@ window.addEventListener('scroll', function removeActiveOnTop() {
         $(".portraits-container").removeClass("has-active");
     }
 });
+

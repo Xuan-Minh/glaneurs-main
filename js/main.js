@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     // ----------------------------------------------- LOADING ---------------------------------- //
      if ($(".loading-screen").length === 0) {
         // Si pas de loading-screen, rendre le conteneur visible
@@ -214,10 +213,7 @@ function slideOut(slide, info) {
     slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
 // --------------------------------- slideTrigger changement de slide --------------------------------- //
-function slideTrigger(slide) {
-    console.log(`Fonction déclenchée pour : ${slide.classList}`);
-    // Ajoute ici le code que tu veux exécuter
-}
+
 $(".sliderButton .point2").click(function (event) {
     event.stopPropagation(); // Empêche la propagation de l'événement
     const slide = $(this).closest(".slides"); // Récupère la slide parente
@@ -349,8 +345,6 @@ function scrollToAndTrigger(slideNumber) {
     }, 600);
 }
 
-// Au chargement de l'index, si un paramètre "slide" est présent, scrolle et simule le clic
-
 // Fonction pour ouvrir le visionneur
 function openVisionner(videoSrc) {
     const visionner = $(".visionner");
@@ -380,50 +374,6 @@ $(document).on('click', '.lang-option', function() {
 });
 
 
-// ----------------------------------------------- Derrière le documentaire ---------------------------------- //
-$(function() {
-    function randomizeTeamStatesRespectHover() {
-        // Sélectionne uniquement les membres qui NE sont PAS hover
-        const members = $('.team-member').not('.hover-force').toArray();
-        // Remet tous ces membres en photo
-        $(members).removeClass('show-info').addClass('show-photo');
-        // Calcule combien de blocs texte il reste à afficher
-        const hoverCount = $('.team-member.hover-force').length;
-        const toShow = Math.max(0, 4 - hoverCount);
-        const indices = [];
-        while (indices.length < toShow && indices.length < members.length) {
-            const idx = Math.floor(Math.random() * members.length);
-            if (!indices.includes(idx)) indices.push(idx);
-        }
-        indices.forEach(idx => {
-            $(members[idx]).removeClass('show-photo').addClass('show-info');
-        });
-    }
-
-    setInterval(randomizeTeamStatesRespectHover, 3000);
-    randomizeTeamStatesRespectHover();
-    
-
-}); 
-        //  ----------------------------------------------- Portfolio ---------------------------------- //
-        $(document).on('click', '.team-member', function(e) {
-            if ($(e.target).is('.team-portfolio')) return;
-            var link = $(this).find('.team-portfolio').attr('href');
-            if (link) window.open(link, '_blank');
-        });
-
-        // Reset
-        $(document).on('keydown', function(e) {
-            // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
-            if (
-                e.key.toLowerCase() === 'p' &&
-                !$('input, textarea').is(':focus')
-            ) {
-                window.location.href = "includes/reset.php";
-            }
-        });
-
-
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
 let lastScroll = 0;
 const $header = $("header");
@@ -440,3 +390,13 @@ window.addEventListener("scroll", function() {
      if (currentScroll < 20) $header.removeClass("hide-header");
     lastScroll = currentScroll;
 });
+     // Reset
+        $(document).on('keydown', function(e) {
+            // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
+            if (
+                e.key.toLowerCase() === 'p' &&
+                !$('input, textarea').is(':focus')
+            ) {
+                window.location.href = "includes/reset.php";
+            }
+        });
