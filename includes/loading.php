@@ -5,14 +5,14 @@
     </video>
     <div class="loading-items">
         <div class="loading-item" id="loading-item1">
-            <div class="loading-content def">‘glaneur,-euse’, nom,</div>
-            <div class="loading-content blabla">Personne qui glane, c'est-à-dire qui ramasse des choses. Personne qui traîne à la fin des marchés pour récupérer les produits qui ont été jetés aux ordures.</div>
+            <div class="loading-content def"><?php echo getTranslation("loading_def_titre", $lang)?></div>
+            <div class="loading-content def-texte"><?php echo getTranslation("loading_def_texte", $lang)?></div>
         </div>
         <div class="loading-item" id="loading-item2">
-            <div class="loading-content loading-titre">Les glaneurs de carton</div>
+            <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", $lang)?></div>
         </div>
         <div class="loading-item" id="loading-item3">
-            <div class="loading-content">Une production de 
+            <div class="loading-content"><?php echo getTranslation("loading_production", $lang)?>
                 <div class="universites">
                     <img src="img/de_white.svg" alt="Dong Eui University">
                     <img src="img/uge_white.svg" alt="Université Gustave Eiffel">
@@ -26,7 +26,7 @@
                 </div>
             <div class="loading-content">
                 
-                Veuillez mettre un casque pour profiter d'une meilleure expérience
+                <?php echo getTranslation("loading_casque_message", $lang)?>
             </div>
             <div class="loading-button"><button id="enter-button">Entrer</button></div>
         </div>
