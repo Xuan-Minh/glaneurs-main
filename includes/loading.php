@@ -14,8 +14,8 @@
         <div class="loading-item" id="loading-item3">
             <div class="loading-content">Une production de 
                 <div class="universites">
-                    <img src="img/dongeui.svg" alt="Université 1">
-                    <img src="img/univeiffel.svg" alt="Université 2">
+                    <img src="img/de_white.svg" alt="Dong Eui University">
+                    <img src="img/uge_white.svg" alt="Université Gustave Eiffel">
                 </div>
             </div>
         </div>
