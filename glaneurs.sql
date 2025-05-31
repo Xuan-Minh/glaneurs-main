@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 30 mai 2025 à 19:25
+-- Généré le : sam. 31 mai 2025 à 21:42
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -53,7 +53,7 @@ INSERT INTO `team_members` (`id`, `nom_fr`, `nom_en`, `nom_kr`, `image`, `portfo
 (10, 'Inès DOS SANTOS', 'Inès DOS SANTOS', '이녜스 도스 산토스', 'img/equipe/membre1.jpg', ''),
 (11, 'Sarah CROS', 'Sarah CROS', '사라 그로스', 'img/equipe/membre2.jpg', 'https://www.linkedin.com/in/sarahcros'),
 (12, 'Jaeden DUONG', 'Jaeden DUONG', '제든 뒤옹', 'img/equipe/membre1.jpg', ''),
-(13, 'Jiyeong SIN ', 'Jiyeong SIN ', '신지영', 'img/equipe/membre2.jpg', ''),
+(13, 'Jiyeong SHIN ', 'Jiyeong SHIN ', '신지영', 'img/equipe/membre2.jpg', ''),
 (14, 'Junghyun LIM', 'Junghyun LIM', '임정현', 'img/equipe/membre2.jpg', ''),
 (15, 'Stéphane LEVY', 'Stéphane LEVY', '스테판레비', 'img/equipe/membre1.jpg', 'https://stephanelevy.net/?lang=fr#'),
 (16, 'Gihoon YU', 'Gihoon YU', '유기훈', 'img/equipe/membre1.jpg', '');
@@ -204,7 +204,21 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (47, 'derriereledocumentaire_intro', 'Notre documentaire est le fruit d\'un travail collectif, guidé par une vision commune : \r\ndonner la parole à ceux qu\'on n\'entend jamais, et révéler la dignité chaque histoire. \r\nDécouvre l\'équipe qui porte cette direction artistique et humaine', 'Our documentary is the result of a collective effort, guided by a shared vision: \r\ngiving a voice to those who are never heard, and revealing the dignity in every story. \r\nDiscover the team behind this artistic and human vision.', '우리 다큐멘터리는 공통된 비전을 바탕으로 한 공동 작업의 결과입니다.\r\n절대 들리지 않는 이들에게 목소리를 전하고,\r\n모든 이야기에 담긴 존엄성을 드러내는 것이 그 비전입니다.\r\n이 예술적이고 인간적인 방향을 이끄는 팀을 만나보세요.'),
 (48, 'portraits_master\r\n', 'WON Yong-chul', 'WON Yong-chul', '원용철'),
 (49, 'portraits_lee', 'LEE Sang-man', 'LEE Sang-man', '이상만'),
-(50, 'portraits_jo', 'JO Cheon-rae', 'JO Cheon-rae', '조천래');
+(50, 'portraits_jo', 'JO Cheon-rae', 'JO Cheon-rae', '조천래'),
+(51, 'portraits_voirlesautres', 'Voir les autres portraits', 'View other portraits', '다른 인물 사진 보기'),
+(52, 'derriereledocumentaire_messagemerci', 'Tous les membres de l\'équipe tiennent à remercier chaleureusement les personnes suivantes pour leur soutien et leur contribution précieuse à ce projet :', 'All members of the team would like to warmly thank the following people for their support and valuable contribution to this project:', '모든 팀원들은 이 프로젝트에 지원과 소중한 기여를 해주신 다음 분들께 진심으로 감사의 말씀을 드립니다:'),
+(53, 'remerciements_titre', 'Remerciements', 'Acknowledgements', '감사'),
+(54, 'mentionslegales_nom_entreprise', 'Glaneurs de carton', 'Cardboard Gleaners', '박스 줍는 사람들'),
+(55, 'mentionslegales_directeur_titre', 'Directeur de la publication :', 'Publication Director:', '발행 책임자:'),
+(56, 'mentionslegales_hebergeur_titre', 'Hébergeur :', 'Host:', '호스트:'),
+(57, 'mentionslegales_hebergeur_nom', 'Plesk', 'Plesk', '플레스크'),
+(58, 'mentionslegales_hebergeur_adresse_ip', '62.73.5.155', '62.73.5.155', '62.73.5.155'),
+(59, 'mentionslegales_hebergeur_telephone', 'Téléphone : Non communiqué', 'Phone: Not communicated', '전화: 미공개'),
+(60, 'mentionslegales_propriete_intellectuelle_titre', 'Propriété intellectuelle :', 'Intellectual Property:', '지적 재산권:'),
+(61, 'mentionslegales_propriete_intellectuelle_texte', 'Tous les contenus présents sur ce site sont protégés par le droit d’auteur. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.', 'All content on this site is protected by copyright. Any reproduction, representation, modification, publication, adaptation of all or part of the site\'s elements, regardless of the means or process used, is prohibited, except with prior written authorization.', '본 사이트의 모든 콘텐츠는 저작권으로 보호됩니다. 어떠한 수단이나 방법으로든 사이트 요소의 전체 또는 일부를 복제, 표현, 수정, 게시, 개작하는 것은 사전 서면 승인 없이는 금지됩니다.'),
+(62, 'mentionslegales_donnees_personnelles_titre', 'Données personnelles :', 'Personal Data:', '개인 데이터:'),
+(63, 'mentionslegales_donnees_personnelles_texte', 'Ce site ne collecte pas de données personnelles à l’insu des utilisateurs. Pour toute question, contactez-nous à l’adresse ci-dessus.', 'This site does not collect personal data without the users\' knowledge. For any questions, contact us at the address above.', '본 사이트는 사용자 몰래 개인 데이터를 수집하지 않습니다. 문의 사항은 위 주소로 연락해 주십시오.'),
+(64, 'mentionslegales_editeur\r\n', 'Éditeur du site :', 'Site publisher :', '사이트 게시자 :');
 
 --
 -- Index pour les tables déchargées
@@ -249,7 +263,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- Contraintes pour les tables déchargées
