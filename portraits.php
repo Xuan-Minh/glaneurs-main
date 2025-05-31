@@ -16,8 +16,7 @@
         <video autoplay muted loop class="portrait-video section1-video">
             <source src="video/glaneuse-test.mov" type="video/mp4">
         </video>
-        <div class="portrait-name"><?php echo getTranslation("portraits_master
-", $lang); ?></div>
+        <div class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></div>
     </div>
     <div class="portrait-section section2" data-target="#detail2">
         <video autoplay muted loop class="portrait-video section2-video">
@@ -40,10 +39,8 @@
 </div>
 
     <section class="portrait-detail" id="detail1">
-        <h2><?php echo getTranslation("portraits_master
-", $lang); ?></h2>
-        <p>Informations spécifiques à <?php echo getTranslation("portraits_master
-", $lang); ?>...</p>
+        <h2><?php echo getTranslation("portraits_master", $lang); ?></h2>
+        <p>Informations spécifiques à <?php echo getTranslation("portraits_master", $lang); ?>...</p>
          <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
