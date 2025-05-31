@@ -135,6 +135,9 @@ a.visionner-trigger-h3:hover::after {
     left:30%;
 }
 
+.slides:first-child {
+  scroll-snap-align: start;
+}
 .sliderButton {
   position: relative;
   margin: 0;
