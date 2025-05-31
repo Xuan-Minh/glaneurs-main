@@ -117,7 +117,7 @@ header.hide-header {
     height: 3px;
     background-color: #fff;
     border-radius: 2px;
-    transition: transform 0.3s cubic-bezier(.4,0,.2,1), background-color 0.3s;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), background-color 0.3s, opacity 0.2s; /* Ajoute une transition pour la couleur et l'opacité */
     transform-origin: right;
     transform: scaleX(1);
   }
@@ -125,6 +125,11 @@ header.hide-header {
   .menu-burger:hover span:nth-child(1) { transform: scaleX(1); }
   .menu-burger:hover span:nth-child(2) { transform: scaleX(0.8); }
   .menu-burger:hover span:nth-child(3) { transform: scaleX(0.6); }
+
+.menu-burger.open span:nth-child(1) { transform: scaleX(0.9) rotate(-45deg); }
+  .menu-burger.open span:nth-child(2) {opacity: 0;}
+  .menu-burger.open span:nth-child(3) { transform: scaleX(0.9) rotate(45deg); }
+  
 /* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {
     position: fixed;

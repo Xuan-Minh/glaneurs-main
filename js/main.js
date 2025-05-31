@@ -115,6 +115,7 @@ $(document).ready(function() {
 
     // Gestion du clic sur le menuBurger
     menuBurger.click(function () {
+        $(this).toggleClass('open');
         menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
     });
 
