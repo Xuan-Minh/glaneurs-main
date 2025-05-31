@@ -53,8 +53,8 @@ foreach ($videoSources as $video) {
         <ul>
             <li><a href="portraits.php"><?php echo getTranslation("portraits_titre", $lang)?></a></li>
             <li><a href="archives.php"><?php echo getTranslation("archives_titre", $lang)?></a></li>
-            <li><a href="souvenirs.php"><?php echo getTranslation("souvenirs_titre", $lang)?></a></li>
             <li><a href="associations.php"><?php echo getTranslation("associations_titre", $lang)?></a></li>
+            <li><a href="souvenirs.php"><?php echo getTranslation("souvenirs_titre", $lang)?></a></li>
             <li><a href="derriere-le-documentaire.php"><?php echo getTranslation("derriereledocumentaire_titre", $lang)?></a></li>
             <br>
             <br>

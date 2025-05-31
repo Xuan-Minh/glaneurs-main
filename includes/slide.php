@@ -46,7 +46,7 @@ foreach ($slides as $slide) {
         echo '<div class="close-visionner">X</div>';
         echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack='.$lang.'" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
-        echo '<h1 data-krversion="' . $slide["krversion"] . '" data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
+        echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
         echo '<a class="visionner-trigger visionner-trigger-h3">'. getTranslation("index_docufull", $lang).'</a>';
     } else {
         echo '<div class="visionner">';

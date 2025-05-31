@@ -11,7 +11,7 @@
     <div class="team-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang)?></h2>
       <h3><?php echo getTranslation("mentionslegales_editeur", $lang)?><br></h3>
-<div><?php echo getTranslation("mentionslegales_nom_entreprise", $lang)?><br>
+<div>Les Glaneurs de carton<br>
     Bâtiment C Bois de l’étang, Rue Galilée 77420, Champs-sur-Marne<br>
     glaneursdecarton.docu@gmail.com</div>
 
