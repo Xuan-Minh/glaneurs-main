@@ -10,7 +10,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $lang; ?>"<?php if ($lang == 'kr') echo ' class="kr-lang"'; ?>>
   <head>
     <meta charset="utf-8" />
     

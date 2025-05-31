@@ -28,3 +28,72 @@
   font-weight: Regular;
   font-style: Regular;
 }
+/* Noto Sans KR : import de toutes les graisses */
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../font/Noto sans KR/NotoSansKR-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+/* Pour tous les titres en coréen, remplace Libre Baskerville par Noto Sans KR */
+.kr-lang h1,
+.kr-lang h2,
+.kr-lang h3,
+.kr-lang h4,
+.kr-lang h5,
+.kr-lang h6,
+.kr-lang div {
+  font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
+}
+.kr-lang .archive-title,
+.kr-lang .page-intro h2 {
+  font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
+}

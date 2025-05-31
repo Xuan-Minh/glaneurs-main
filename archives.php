@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $lang; ?>"<?php if ($lang == 'kr') echo ' class="kr-lang"'; ?>>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
             <video autoplay muted loop>
                 <source src="video/ville.mov" type="video/mp4">
             </video>
-            <div class="archive-title">
+            <div class="archive-title content-anim">
                 <?php echo getTranslation("archives_titre", $lang); ?>
             </div>
         </section>
