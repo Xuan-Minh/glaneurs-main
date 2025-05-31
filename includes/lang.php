@@ -5,14 +5,14 @@ $lang = $_SESSION['lang'] ?? 'fr';
 function getPDO() {
     static $pdo = null;
     if ($pdo === null) {
-        // $servername = "localhost";
-        // $database = "glaneurs";
-        // $username = "root";
-        // $password = "root";
-        $servername = "localhost:3306";
-        $database = "glaneursdecarton";
-        $username = "glaneurs_admin";
-        $password = "Wlm7nZGs!pz%d7s0";
+        $servername = "localhost";
+        $database = "glaneurs";
+        $username = "root";
+        $password = "root";
+        // $servername = "localhost:3306";
+        // $database = "glaneursdecarton";
+        // $username = "glaneurs_admin";
+        // $password = "Wlm7nZGs!pz%d7s0";
 
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
