@@ -114,7 +114,7 @@ header.hide-header {
   display: block;
   width: 100%;
   height: 3px;
-  background-color: #fff;
+  background-color: #ddd;
   border-radius: 2px;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s,
     opacity 0.2s; /* Ajoute une transition pour la couleur et l'opacité */
@@ -124,12 +124,15 @@ header.hide-header {
 
 .menu-burger:hover span:nth-child(1) {
   transform: scaleX(1);
+  background-color: #888;
 }
 .menu-burger:hover span:nth-child(2) {
   transform: scaleX(0.8);
+  background-color: #888;
 }
 .menu-burger:hover span:nth-child(3) {
   transform: scaleX(0.6);
+  background-color: #888;
 }
 
 .menu-burger.open span:nth-child(1) {
@@ -143,6 +146,15 @@ header.hide-header {
   transform: scaleX(0.9) rotate(45deg);
   background-color: #ddd;
 }
+.menu-burger.open:hover span:nth-child(1) {
+  transform: scaleX(0.9) rotate(-45deg);
+  background-color: #888;
+}
+.menu-burger.open:hover span:nth-child(3) {
+  transform: scaleX(0.9) rotate(45deg);
+  background-color: #888;
+}
+
 
 /* --------------------- MENU VOLET ------------------------------------------- */
 .menu-volet {
