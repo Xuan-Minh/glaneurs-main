@@ -148,11 +148,11 @@ header.hide-header {
 }
 .menu-burger.open:hover span:nth-child(1) {
   transform: scaleX(0.9) rotate(-45deg);
-  background-color: #888;
+  background-color: #ddd;
 }
 .menu-burger.open:hover span:nth-child(3) {
   transform: scaleX(0.9) rotate(45deg);
-  background-color: #888;
+  background-color: #ddd;
 }
 
 

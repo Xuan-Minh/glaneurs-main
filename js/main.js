@@ -129,6 +129,7 @@ $(document).ready(function () {
       menuBurger.has(event.target).length === 0
     ) {
       menuVolet.removeClass("open"); // Ferme le menuVolet
+       $("#menuBurger").removeClass("open");
     }
   });
   const slides = document.querySelectorAll(".slides");
@@ -197,6 +198,8 @@ $(document).on("click", ".menu-links a", function (e) {
 
     // Ferme le menu-volet
     $("#menuVolet").removeClass("open");
+    $("#menuBurger").removeClass("open");
+    
 
     // Lance la transition overlay après un court délai
     setTimeout(function () {
