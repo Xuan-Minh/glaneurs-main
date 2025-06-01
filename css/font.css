@@ -1,30 +1,33 @@
 /* ------------------------ LES FONTS ------------------------------------------- */
 @font-face {
   font-family: "Figtree";
-  src:url("../font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
+  src: url("../font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Libre Baskerville";
-  src:url("../font/Libre_Baskerville/LibreBaskerville-Regular.ttf") format("truetype");
+  src: url("../font/Libre_Baskerville/LibreBaskerville-Regular.ttf")
+    format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Libre Baskerville";
-  src:url("../font/Libre_Baskerville/LibreBaskerville-Italic.ttf") format("truetype");
+  src: url("../font/Libre_Baskerville/LibreBaskerville-Italic.ttf")
+    format("truetype");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: "Libre Baskerville";
-  src:url("../font/Libre_Baskerville/LibreBaskerville-Bold.ttf") format("truetype");
+  src: url("../font/Libre_Baskerville/LibreBaskerville-Bold.ttf")
+    format("truetype");
   font-weight: bold;
   font-style: normal;
 }
-@Font-face {
+@font-face {
   font-family: "New Edge";
-  src:url("../font/NewEdgeSoftPower4-LightRounded.otf") format("truetype");
+  src: url("../font/NewEdgeSoftPower4-LightRounded.otf") format("truetype");
   font-weight: Regular;
   font-style: Regular;
 }

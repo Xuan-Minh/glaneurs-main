@@ -1,37 +1,37 @@
-.visionner{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex; /* Active Flexbox */
-    align-items: center; /* Centre verticalement */
-    justify-content: center; /* Centre horizontalement */
-    z-index: 9999;
-    display: none; /* Masque par défaut */
+.visionner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex; /* Active Flexbox */
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  z-index: 9999;
+  display: none; /* Masque par défaut */
 }
 
-.visionner video{
-  width:auto;
-  height:80vh;
+.visionner video {
+  width: auto;
+  height: 80vh;
   max-width: 100%; /* Empêche la vidéo de dépasser la largeur de l'écran */
   max-height: 100%; /* Empêche la vidéo de dépasser la hauteur de l'écran */
   align-self: center; /* Centre la vidéo dans Flexbox */
   margin: auto; /* Ajoute une marge automatique pour garantir le centrage */
-position: relative; /* Permet de centrer la vidéo */
+  position: relative; /* Permet de centrer la vidéo */
   top: auto;
   left: auto;
 }
 
 .close-visionner {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

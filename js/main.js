@@ -1,407 +1,425 @@
-$(document).ready(function() {
-    // ----------------------------------------------- LOADING ---------------------------------- //
-     if ($(".loading-screen").length === 0) {
-        // Si pas de loading-screen, rendre le conteneur visible
-        $(".container").removeClass("hidden").fadeIn(1000);
-    }   
+$(document).ready(function () {
+  // ----------------------------------------------- LOADING ---------------------------------- //
+  if ($(".loading-screen").length === 0) {
+    // Si pas de loading-screen, rendre le conteneur visible
+    $(".container").removeClass("hidden").fadeIn(1000);
+  }
 
-    // Gestion du clic sur le bouton "Entrer"
-    $("#enter-button").click(function() {
+  // Gestion du clic sur le bouton "Entrer"
+  $("#enter-button").click(function () {
     clearInterval(intervalId); // Arrête l'animation du loading
 
     // 1. Fade out du loading
     $(".loading-screen").fadeOut(1000, function () {
-        // 2. Juste après, on affiche l'overlay noir (reset les classes)
-        $("#transition-overlay").removeClass("hide").addClass("active");
+      // 2. Juste après, on affiche l'overlay noir (reset les classes)
+      $("#transition-overlay").removeClass("hide").addClass("active");
 
-        // 3. Puis fade-out de l'overlay pour révéler l'index
-        setTimeout(function() {
-            $(".container").removeClass("hidden").fadeIn(1000);
-            $("#transition-overlay").removeClass("active").addClass("hide");
-        }, 100); // Laisse l'overlay apparaître avant de le faire disparaître
+      // 3. Puis fade-out de l'overlay pour révéler l'index
+      setTimeout(function () {
+        $(".container").removeClass("hidden").fadeIn(1000);
+        $("#transition-overlay").removeClass("active").addClass("hide");
+      }, 100); // Laisse l'overlay apparaître avant de le faire disparaître
     });
 
-
-    window.addEventListener('pageshow', function() {
-    $("#transition-overlay").removeClass("active").addClass("hide");
+    window.addEventListener("pageshow", function () {
+      $("#transition-overlay").removeClass("active").addClass("hide");
     });
-});
+  });
 
-// ----------------------------------------------- LOADING SCREEN ANIMATION ---------------------------------- //
-    const loadingItems = $(".loading-item");
-    let currentItem = 0;
-    const totalItems = loadingItems.length;
-    const fadeDuration = 500; // Durée du fondu en millisecondes
-    const displayDuration = 4000; // Durée d'affichage de chaque item en millisecondes
-    let intervalId; // Variable pour stocker l'ID de l'intervalle
-    let isAnimating = false; // Variable pour éviter les clics multiples
+  // ----------------------------------------------- LOADING SCREEN ANIMATION ---------------------------------- //
+  const loadingItems = $(".loading-item");
+  let currentItem = 0;
+  const totalItems = loadingItems.length;
+  const fadeDuration = 500; // Durée du fondu en millisecondes
+  const displayDuration = 4000; // Durée d'affichage de chaque item en millisecondes
+  let intervalId; // Variable pour stocker l'ID de l'intervalle
+  let isAnimating = false; // Variable pour éviter les clics multiples
 
-    // Affiche le premier item
-    loadingItems.eq(0).addClass("active");
+  // Affiche le premier item
+  loadingItems.eq(0).addClass("active");
 
-    // Fonction pour afficher l'item suivant
-    function showNextItem() {
-        if (isAnimating) return; // Empêche les clics multiples
-        isAnimating = true;
+  // Fonction pour afficher l'item suivant
+  function showNextItem() {
+    if (isAnimating) return; // Empêche les clics multiples
+    isAnimating = true;
 
-        // Fait disparaître l'item actuel si ce n'est pas le dernier
-        if (currentItem < totalItems - 1) {
-            loadingItems.eq(currentItem).removeClass("active");
-        }
-
-        // Incrémente l'index
-        currentItem++;
-
-        // Vérifie si on est arrivé à l'avant-dernier item
-        if (currentItem < totalItems - 1) {
-            // Affiche l'item suivant
-            setTimeout(function() {
-                loadingItems.eq(currentItem).addClass("active");
-                isAnimating = false;
-            }, fadeDuration); // Délai pour que le fondu sortant soit terminé
-        } else if (currentItem === totalItems - 1) {
-            // Affiche le dernier item sans le faire disparaître
-            setTimeout(function() {
-                loadingItems.eq(currentItem).addClass("active");
-                isAnimating = false;
-            }, fadeDuration);
-            clearInterval(intervalId); // Arrête l'intervalle
-        } else {
-            // On est arrivé au dernier item, on arrête l'intervalle
-            clearInterval(intervalId);
-            isAnimating = false;
-        }
+    // Fait disparaître l'item actuel si ce n'est pas le dernier
+    if (currentItem < totalItems - 1) {
+      loadingItems.eq(currentItem).removeClass("active");
     }
 
-    // Défilement automatique des loading-item
-    intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
+    // Incrémente l'index
+    currentItem++;
 
-    // Gestion du clic sur le bouton "Entrer"
-    $("#enter-button").click(function() {
-        clearInterval(intervalId); // Arrête l'animation
-        $(".loading-screen").fadeOut(1000, function() { // Fade out de l'écran de chargement
-            $(".container").fadeIn(1000, function() {
-                // Démarrer le son du premier chapitre
-                var sound = new Howl({
-                     src: ['audio/chap1.mp3']
-});
-                sound.play();
-                const firstAudio = document.getElementById('audio-slide-1');
-                if (firstAudio) {
-                    firstAudio.volume = 0; // Volume initial à 0
-                    firstAudio.play();
-                    $(firstAudio).animate({volume: 0.5}, 2000); // Fade in jusqu'à 50%
-                }
-            }); // Fade in du container
-        });
-    });
-
-    // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
-    $(".loading-screen").click(function() {
-        showNextItem();
-    });
-    // ----------------------------------------------- Transition overlay ---------------------------------- //
-    setTimeout(function() {
-        $("#transition-overlay").removeClass("active").addClass("hide");
-    }, 50);
-
-/// ----------------------------------------------- Animation de contenu ---------------------------------- //
-    $('.content-anim').addClass('visible');
-
-    // ----------------------------------------------- Menu Burger ---------------------------------- //
-    // Sélectionne les éléments du menuBurger et du menuVolet
-    const menuBurger = $("#menuBurger");
-    const menuVolet = $("#menuVolet");
-
-    // Gestion du clic sur le menuBurger
-    menuBurger.click(function () {
-        $(this).toggleClass('open');
-        menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
-    });
-
-    // Gestion du clic en dehors du menuVolet ou du menuBurger
-    $(document).click(function (event) {
-        // Vérifie si le clic est en dehors du menuVolet et du menuBurger
-        if (!menuVolet.is(event.target) && menuVolet.has(event.target).length === 0 &&
-            !menuBurger.is(event.target) && menuBurger.has(event.target).length === 0) {
-            menuVolet.removeClass("open"); // Ferme le menuVolet
-        }
-    });
- const slides = document.querySelectorAll('.slides');
-const scrollArrow = document.querySelector('.scroll-down-arrow');
-if (slides.length && scrollArrow) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                if (Array.from(slides).indexOf(entry.target) === slides.length - 1) {
-                    scrollArrow.classList.add('up');
-                    console.log('Flèche UP');
-                } else {
-                    scrollArrow.classList.remove('up');
-                    console.log('Flèche DOWN');
-                }
-            }
-        });
-    }, { threshold: 0.5 });
-    slides.forEach(slide => observer.observe(slide));
-}
-
-// Handler de clic sur la flèche (à l'extérieur de l'observer)
-$(document).on('click', '.scroll-down-arrow, .scroll-down-arrow img', function (event) {
-    event.stopPropagation();
-    const $arrow = $(this).closest('.scroll-down-arrow');
-    if ($arrow.hasClass('up')) {
-        console.log('Flèche UP cliquée');
-        $('.container')[0].scrollTo({ top: 0, behavior: 'smooth' });
+    // Vérifie si on est arrivé à l'avant-dernier item
+    if (currentItem < totalItems - 1) {
+      // Affiche l'item suivant
+      setTimeout(function () {
+        loadingItems.eq(currentItem).addClass("active");
+        isAnimating = false;
+      }, fadeDuration); // Délai pour que le fondu sortant soit terminé
+    } else if (currentItem === totalItems - 1) {
+      // Affiche le dernier item sans le faire disparaître
+      setTimeout(function () {
+        loadingItems.eq(currentItem).addClass("active");
+        isAnimating = false;
+      }, fadeDuration);
+      clearInterval(intervalId); // Arrête l'intervalle
     } else {
-        const $slides = $('.slides');
+      // On est arrivé au dernier item, on arrête l'intervalle
+      clearInterval(intervalId);
+      isAnimating = false;
+    }
+  }
+
+  // Défilement automatique des loading-item
+  intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
+
+  // Gestion du clic sur le bouton "Entrer"
+  $("#enter-button").click(function () {
+    clearInterval(intervalId); // Arrête l'animation
+    $(".loading-screen").fadeOut(1000, function () {
+      // Fade out de l'écran de chargement
+      $(".container").fadeIn(1000, function () {
+        // Démarrer le son du premier chapitre
+        var sound = new Howl({
+          src: ["audio/chap1.mp3"],
+        });
+        sound.play();
+        const firstAudio = document.getElementById("audio-slide-1");
+        if (firstAudio) {
+          firstAudio.volume = 0; // Volume initial à 0
+          firstAudio.play();
+          $(firstAudio).animate({ volume: 0.5 }, 2000); // Fade in jusqu'à 50%
+        }
+      }); // Fade in du container
+    });
+  });
+
+  // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
+  $(".loading-screen").click(function () {
+    showNextItem();
+  });
+  // ----------------------------------------------- Transition overlay ---------------------------------- //
+  setTimeout(function () {
+    $("#transition-overlay").removeClass("active").addClass("hide");
+  }, 50);
+
+  /// ----------------------------------------------- Animation de contenu ---------------------------------- //
+  $(".content-anim").addClass("visible");
+
+  // ----------------------------------------------- Menu Burger ---------------------------------- //
+  // Sélectionne les éléments du menuBurger et du menuVolet
+  const menuBurger = $("#menuBurger");
+  const menuVolet = $("#menuVolet");
+
+  // Gestion du clic sur le menuBurger
+  menuBurger.click(function () {
+    $(this).toggleClass("open");
+    menuVolet.toggleClass("open"); // Ajoute/supprime la classe "open"
+  });
+
+  // Gestion du clic en dehors du menuVolet ou du menuBurger
+  $(document).click(function (event) {
+    // Vérifie si le clic est en dehors du menuVolet et du menuBurger
+    if (
+      !menuVolet.is(event.target) &&
+      menuVolet.has(event.target).length === 0 &&
+      !menuBurger.is(event.target) &&
+      menuBurger.has(event.target).length === 0
+    ) {
+      menuVolet.removeClass("open"); // Ferme le menuVolet
+    }
+  });
+  const slides = document.querySelectorAll(".slides");
+  const scrollArrow = document.querySelector(".scroll-down-arrow");
+  if (slides.length && scrollArrow) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (
+              Array.from(slides).indexOf(entry.target) ===
+              slides.length - 1
+            ) {
+              scrollArrow.classList.add("up");
+              console.log("Flèche UP");
+            } else {
+              scrollArrow.classList.remove("up");
+              console.log("Flèche DOWN");
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    slides.forEach((slide) => observer.observe(slide));
+  }
+
+  // Handler de clic sur la flèche (à l'extérieur de l'observer)
+  $(document).on(
+    "click",
+    ".scroll-down-arrow, .scroll-down-arrow img",
+    function (event) {
+      event.stopPropagation();
+      const $arrow = $(this).closest(".scroll-down-arrow");
+      if ($arrow.hasClass("up")) {
+        console.log("Flèche UP cliquée");
+        $(".container")[0].scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        const $slides = $(".slides");
         let nextSlide = null;
         $slides.each(function (i, slide) {
-            const rect = slide.getBoundingClientRect();
-            if (rect.top > 10) {
-                nextSlide = slide;
-                return false;
-            }
+          const rect = slide.getBoundingClientRect();
+          if (rect.top > 10) {
+            nextSlide = slide;
+            return false;
+          }
         });
         if (nextSlide) {
-            nextSlide.scrollIntoView({ behavior: 'smooth' });
+          nextSlide.scrollIntoView({ behavior: "smooth" });
         }
+      }
     }
-});
-// ----------------------------------------------- Scroll depuis d'autres pages---------------------------------- //
-    const urlParams = new URLSearchParams(window.location.search);
-    const slideParam = urlParams.get('slide');
-    if (slideParam) {
-        scrollToAndTrigger(slideParam); // Décrémente slideParam pour correspondre à l'index
-    }
+  );
+  // ----------------------------------------------- Scroll depuis d'autres pages---------------------------------- //
+  const urlParams = new URLSearchParams(window.location.search);
+  const slideParam = urlParams.get("slide");
+  if (slideParam) {
+    scrollToAndTrigger(slideParam); // Décrémente slideParam pour correspondre à l'index
+  }
 });
 // ----------------------------------------------- Fade transition ---------------------------------- //
-$(document).on('click', '.menu-links a', function (e) {
-    const href = $(this).attr('href');
-    if (href && href !== "#" && !href.startsWith("javascript")) {
-        e.preventDefault();
+$(document).on("click", ".menu-links a", function (e) {
+  const href = $(this).attr("href");
+  if (href && href !== "#" && !href.startsWith("javascript")) {
+    e.preventDefault();
 
-        // Ferme le menu-volet
-        $("#menuVolet").removeClass("open");
+    // Ferme le menu-volet
+    $("#menuVolet").removeClass("open");
 
-        // Lance la transition overlay après un court délai
-        setTimeout(function () {
-            // D'abord retire .hide, puis ajoute .active
-            $("#transition-overlay").removeClass("hide").addClass("active");
-            setTimeout(function () {
-                window.location.href = href;
-            }, 700); // Correspond à la durée de la transition CSS
-        }, 300); // Délai pour laisser le menu-volet se fermer
-    }
+    // Lance la transition overlay après un court délai
+    setTimeout(function () {
+      // D'abord retire .hide, puis ajoute .active
+      $("#transition-overlay").removeClass("hide").addClass("active");
+      setTimeout(function () {
+        window.location.href = href;
+      }, 700); // Correspond à la durée de la transition CSS
+    }, 300); // Délai pour laisser le menu-volet se fermer
+  }
 });
 
 // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
 function slideIn(slide, info) {
-    resetOtherSlides(slide); // Réinitialise les autres slides
-    $("body").css("overflow", "auto");
-    info.fadeIn(2000); // Affiche l'info de la slide active
-    slide.find("h2").addClass("move");
-    slide.find("video").addClass("flou");
-    slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-    slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+  resetOtherSlides(slide); // Réinitialise les autres slides
+  $("body").css("overflow", "auto");
+  info.fadeIn(2000); // Affiche l'info de la slide active
+  slide.find("h2").addClass("move");
+  slide.find("video").addClass("flou");
+  slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+  slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 }
 function slideOut(slide, info) {
-    $("body").css("overflow", "auto");
-    info.fadeOut(500); // Masque l'info de la slide active
-    slide.find("h2").removeClass("move");
-    slide.find("video").removeClass("flou");
-    slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-    slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+  $("body").css("overflow", "auto");
+  info.fadeOut(500); // Masque l'info de la slide active
+  slide.find("h2").removeClass("move");
+  slide.find("video").removeClass("flou");
+  slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+  slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
 // --------------------------------- slideTrigger changement de slide --------------------------------- //
 
 $(".sliderButton .point2").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
-    slideIn(slide, info); // Appelle slideIn pour cette slide
+  event.stopPropagation(); // Empêche la propagation de l'événement
+  const slide = $(this).closest(".slides"); // Récupère la slide parente
+  const info = slide.find(".info"); // Récupère l'élément .info de la slide
+  slideIn(slide, info); // Appelle slideIn pour cette slide
 });
 
 $(".sliderButton .point1").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
-    slideOut(slide, info); // Appelle slideOut pour cette slide
+  event.stopPropagation(); // Empêche la propagation de l'événement
+  const slide = $(this).closest(".slides"); // Récupère la slide parente
+  const info = slide.find(".info"); // Récupère l'élément .info de la slide
+  slideOut(slide, info); // Appelle slideOut pour cette slide
 });
 
 // --------------------------------- Reset Slide --------------------------------- //
 
 function resetOtherSlides(activeSlide) {
-    $(".slides").not(activeSlide).each(function () {
-        const slide = $(this);
-        slide.find(".info").fadeOut(0); // Masque les infos des autres slides
-        slide.find("h2").removeClass("move"); // Supprime l'animation des titres
-        slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
-        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+  $(".slides")
+    .not(activeSlide)
+    .each(function () {
+      const slide = $(this);
+      slide.find(".info").fadeOut(0); // Masque les infos des autres slides
+      slide.find("h2").removeClass("move"); // Supprime l'animation des titres
+      slide.find("video").removeClass("flou"); // Supprime l'effet de flou des vidéos
+      slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+      slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
     });
 }
 
 // --------------------------------- Player video --------------------------------- //
 $(".close-visionner").click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement
-    const slide = $(this).closest(".slides"); // Récupère la slide parente
-    const info = slide.find(".info"); // Récupère l'élément .info de la slide
+  event.stopPropagation(); // Empêche la propagation de l'événement
+  const slide = $(this).closest(".slides"); // Récupère la slide parente
+  const info = slide.find(".info"); // Récupère l'élément .info de la slide
 
-    $(".visionner").fadeOut(400);
-    $("body").css("overflow", "auto");
-    info.fadeIn(2000); // Affiche uniquement l'info de la slide active
-    slide.find("h2").addClass("move");
-    slide.find("video").addClass("flou");
-    slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-    slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+  $(".visionner").fadeOut(400);
+  $("body").css("overflow", "auto");
+  info.fadeIn(2000); // Affiche uniquement l'info de la slide active
+  slide.find("h2").addClass("move");
+  slide.find("video").addClass("flou");
+  slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+  slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 });
 $(document).on("keydown", function (event) {
-    if (event.key === "Escape") { // Vérifie si la touche Échap est pressée
-        const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
-        if (closeButton.length > 0) {
-            closeButton.trigger("click"); // Simule un clic sur le bouton close
-        }
+  if (event.key === "Escape") {
+    // Vérifie si la touche Échap est pressée
+    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
+    if (closeButton.length > 0) {
+      closeButton.trigger("click"); // Simule un clic sur le bouton close
     }
+  }
 });
 
-$(".visionner-trigger").click(function(event) {
-    event.stopPropagation();
-    const slide = $(this).closest(".slides");
-    const visionner = slide.find(".visionner");
-    visionner.fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    slide.find(".info").fadeOut(0);
+$(".visionner-trigger").click(function (event) {
+  event.stopPropagation();
+  const slide = $(this).closest(".slides");
+  const visionner = slide.find(".visionner");
+  visionner.fadeIn(400).css("display", "flex");
+  $("body").css("overflow", "hidden");
+  slide.find(".info").fadeOut(0);
 });
 
-$(".visionner-trigger-h3").click(function(event) {
-    event.stopPropagation();
-    const slide = $(this).closest(".slides");
-    const visionner = slide.find(".visionner");
-    const srcdocupart = slide.find("video source").attr("src"); // Récupère la source de la vidéo
-    // Met à jour la source de la vidéo dans le visionneur
-    visionner.find("video source").attr("src", srcdocupart);
-    visionner.find("video")[0].load(); // Recharge la vidéo
-    visionner.fadeIn(400).css("display", "flex");
-    $("body").css("overflow", "hidden");
-    slide.find(".info").fadeOut(0);
+$(".visionner-trigger-h3").click(function (event) {
+  event.stopPropagation();
+  const slide = $(this).closest(".slides");
+  const visionner = slide.find(".visionner");
+  const srcdocupart = slide.find("video source").attr("src"); // Récupère la source de la vidéo
+  // Met à jour la source de la vidéo dans le visionneur
+  visionner.find("video source").attr("src", srcdocupart);
+  visionner.find("video")[0].load(); // Recharge la vidéo
+  visionner.fadeIn(400).css("display", "flex");
+  $("body").css("overflow", "hidden");
+  slide.find(".info").fadeOut(0);
 });
 // --------------------------------- Scroll Down Arrow --------------------------------- //
 gsap.to(".scroll-down-arrow div", {
-    y: 20,
-    opacity: 0,
-    repeat: -1,
-    yoyo: true,
-    duration: 1,
-    ease: "power2.inOut"
+  y: 20,
+  opacity: 0,
+  repeat: -1,
+  yoyo: true,
+  duration: 1,
+  ease: "power2.inOut",
 });
 
-$(document).on('click', '.scroll-down-arrow, .scroll-down-arrow img', function () {
-    const $arrow = $(this).closest('.scroll-down-arrow');
-    if ($arrow.hasClass('up')) {
-        // Flèche vers le haut : remonte tout en haut
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+$(document).on(
+  "click",
+  ".scroll-down-arrow, .scroll-down-arrow img",
+  function () {
+    const $arrow = $(this).closest(".scroll-down-arrow");
+    if ($arrow.hasClass("up")) {
+      // Flèche vers le haut : remonte tout en haut
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-        // Flèche vers le bas : va à la prochaine slide
-        const $slides = $('.slides');
-        let nextSlide = null;
-        $slides.each(function (i, slide) {
-            const rect = slide.getBoundingClientRect();
-            if (rect.top > 10) {
-                nextSlide = slide;
-                return false;
-            }
-        });
-        if (nextSlide) {
-            nextSlide.scrollIntoView({ behavior: 'smooth' });
+      // Flèche vers le bas : va à la prochaine slide
+      const $slides = $(".slides");
+      let nextSlide = null;
+      $slides.each(function (i, slide) {
+        const rect = slide.getBoundingClientRect();
+        if (rect.top > 10) {
+          nextSlide = slide;
+          return false;
         }
+      });
+      if (nextSlide) {
+        nextSlide.scrollIntoView({ behavior: "smooth" });
+      }
     }
-});
+  }
+);
 // --------------------------------- Auto scroll MENU  --------------------------------- //
 $(document).on("click", ".menu-video-item", function () {
-    const slideNumber = $(this).data("slide");
-    const isIndexPage = $(".slides").length > 0;
+  const slideNumber = $(this).data("slide");
+  const isIndexPage = $(".slides").length > 0;
 
-    $("#menuVolet").removeClass("open");
-     $("#menuBurger").removeClass("open");
+  $("#menuVolet").removeClass("open");
+  $("#menuBurger").removeClass("open");
 
-    if (isIndexPage) {
-        // Sur l'index : pas de transition, pas de délai
-        scrollToAndTrigger(slideNumber);
-    } else {
-        // Sur une autre page : transition overlay + délai
-        setTimeout(function () {
-            $("#transition-overlay").removeClass("hide").addClass("active");
-            setTimeout(function () {
-                window.location.href = "index.php?slide=" + slideNumber;
-            }, 700); // Durée de la transition CSS
-        }, 300); // Laisse le menu-volet se fermer
-    }
+  if (isIndexPage) {
+    // Sur l'index : pas de transition, pas de délai
+    scrollToAndTrigger(slideNumber);
+  } else {
+    // Sur une autre page : transition overlay + délai
+    setTimeout(function () {
+      $("#transition-overlay").removeClass("hide").addClass("active");
+      setTimeout(function () {
+        window.location.href = "index.php?slide=" + slideNumber;
+      }, 700); // Durée de la transition CSS
+    }, 300); // Laisse le menu-volet se fermer
+  }
 });
 // Fonction pour scroller et simuler le clic
 function scrollToAndTrigger(slideNumber) {
-    const $slide = $(".slides").eq(slideNumber); // Pas de -1 car slideNumber correspond déjà à l'index
-    if ($slide.length === 0) return;
+  const $slide = $(".slides").eq(slideNumber); // Pas de -1 car slideNumber correspond déjà à l'index
+  if ($slide.length === 0) return;
 
-    $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+  $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // Simule un clic sur le H2 pour ouvrir le visionneur
-    setTimeout(function () {
-        $slide.find("h2").trigger("click");
-    }, 600);
+  // Simule un clic sur le H2 pour ouvrir le visionneur
+  setTimeout(function () {
+    $slide.find("h2").trigger("click");
+  }, 600);
 }
 
 // Fonction pour ouvrir le visionneur
 function openVisionner(videoSrc) {
-    const visionner = $(".visionner");
-    visionner.find("video source").attr("src", videoSrc); // Met à jour la source de la vidéo
-    visionner.find("video")[0].load(); // Recharge la vidéo
-    visionner.fadeIn(400).css("display", "flex"); // Affiche le visionneur
-    $("body").css("overflow", "hidden"); // Désactive le défilement de la page
+  const visionner = $(".visionner");
+  visionner.find("video source").attr("src", videoSrc); // Met à jour la source de la vidéo
+  visionner.find("video")[0].load(); // Recharge la vidéo
+  visionner.fadeIn(400).css("display", "flex"); // Affiche le visionneur
+  $("body").css("overflow", "hidden"); // Désactive le défilement de la page
 }
 
 // Gestion de la fermeture du visionneur
 $(document).on("click", ".close-visionner", function () {
-    $(".visionner").fadeOut(400, function () {
-        $("body").css("overflow", "auto"); // Réactive le défilement de la page
-    });
+  $(".visionner").fadeOut(400, function () {
+    $("body").css("overflow", "auto"); // Réactive le défilement de la page
+  });
 });
 
 // ----------------------------------------------- LANGUE ---------------------------------- //
 
-$(document).on('click', '.lang-option', function() {
-    var lang = $(this).data('lang');
-    $('.lang-option').removeClass('active');
-    $(this).addClass('active');
-    // Appelle le serveur pour changer la langue en session
-    $.post('includes/setlang.php', { lang: lang }, function() {
-        location.reload(); // Recharge la page pour afficher la langue choisie
-    });
+$(document).on("click", ".lang-option", function () {
+  var lang = $(this).data("lang");
+  $(".lang-option").removeClass("active");
+  $(this).addClass("active");
+  // Appelle le serveur pour changer la langue en session
+  $.post("includes/setlang.php", { lang: lang }, function () {
+    location.reload(); // Recharge la page pour afficher la langue choisie
+  });
 });
 
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
 let lastScroll = 0;
 const $header = $("header");
 
-window.addEventListener("scroll", function() {
-    const currentScroll = window.scrollY;
-    if (currentScroll > lastScroll && currentScroll > 200) {
-        // Scroll vers le bas : cache le header
-        $header.addClass("hide-header");
-    } else if (currentScroll < lastScroll) {
-        // Scroll vers le haut : montre le header
-        $header.removeClass("hide-header");
-    }
-     if (currentScroll < 20) $header.removeClass("hide-header");
-    lastScroll = currentScroll;
+window.addEventListener("scroll", function () {
+  const currentScroll = window.scrollY;
+  if (currentScroll > lastScroll && currentScroll > 200) {
+    // Scroll vers le bas : cache le header
+    $header.addClass("hide-header");
+  } else if (currentScroll < lastScroll) {
+    // Scroll vers le haut : montre le header
+    $header.removeClass("hide-header");
+  }
+  if (currentScroll < 20) $header.removeClass("hide-header");
+  lastScroll = currentScroll;
 });
-     // Reset
-        $(document).on('keydown', function(e) {
-            // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
-            if (
-                e.key.toLowerCase() === 'p' &&
-                !$('input, textarea').is(':focus')
-            ) {
-                window.location.href = "includes/reset.php";
-            }
-        });
+// Reset
+$(document).on("keydown", function (e) {
+  // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
+  if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
+    window.location.href = "includes/reset.php";
+  }
+});

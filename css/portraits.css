@@ -13,7 +13,7 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  transition: flex 0.7s cubic-bezier(.4,0,.2,1), filter 0.5s;
+  transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,10 +34,18 @@
   z-index: 1;
   pointer-events: none;
 }
-.section1-video { transform: translate(-45%, -50%); }
-.section2-video { transform: translate(-40%, -50%); }
-.section3-video { transform: translate(-70%, -45%); }
-.section4-video { transform: translate(-45%, -55%); }
+.section1-video {
+  transform: translate(-45%, -50%);
+}
+.section2-video {
+  transform: translate(-40%, -50%);
+}
+.section3-video {
+  transform: translate(-70%, -45%);
+}
+.section4-video {
+  transform: translate(-45%, -55%);
+}
 
 /* Effet rideau : agrandit la section au hover ou active */
 .portrait-section.active,
@@ -69,12 +77,12 @@
 
 /* Floute les autres sections si une est hover OU active, sauf si .no-hover */
 .portraits-container:not(.no-hover) .portrait-section:not(.active):not(:hover) {
-    filter: blur(0.3rem);
+  filter: blur(0.3rem);
 }
 
 /* Quand aucune section n'est hover ni active, tout est net */
 .portraits-container.no-hover .portrait-section {
-    filter: none;
+  filter: none;
 }
 
 /* -------------------------- Portraits perso --------------------------  */

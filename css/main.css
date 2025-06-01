@@ -1,5 +1,6 @@
 /* ------------------------ GENERAL ------------------------------------------- */
-html, body {
+html,
+body {
   font-family: "Figtree", sans-serif;
   margin: 0;
   padding: 0;
@@ -22,13 +23,15 @@ body {
 /* -------------------------- Transition --------------------------  */
 #transition-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: #050d1e;
   opacity: 1; /* Commence visible */
   pointer-events: all;
   z-index: 99999;
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 #transition-overlay.active {
   opacity: 1;
@@ -65,7 +68,8 @@ body {
 .content-anim {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .content-anim.visible {
