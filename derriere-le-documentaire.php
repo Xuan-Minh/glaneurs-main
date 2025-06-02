@@ -59,14 +59,14 @@
         <?php endforeach; ?>
     </div>
 
-    <div class="page-intro content-anim">
+    <section class="dld-remerciements content-anim">
         <h2><?php echo getTranslation("remerciements_titre", $lang); ?></h2>
         <p>
             <?php echo getTranslation("derriereledocumentaire_messagemerci", $lang); ?>
             <?php echo getTranslation('derriereledocumentaire_remerciements', $lang); ?>
 
         </p>
-
+    </section>
         <?php include "includes/jsinclude.php"; ?>
         <script src="js/derriereledocumentaire.js"></script>
 </body>

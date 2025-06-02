@@ -37,6 +37,7 @@
     </div>
   </div>
   </div>
+  
   <?php include "includes/header.php"; ?>
   <?php include "includes/jsinclude.php"; ?>
 </body>

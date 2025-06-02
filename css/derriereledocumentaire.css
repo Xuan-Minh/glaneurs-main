@@ -131,3 +131,27 @@
 .team-member:hover .team-portfolio {
   color: #ddd;
 }
+/* ---------------------------------- */
+
+.dld-remerciements {
+  height: 100vh;
+  width: 90vw;
+  max-width: 900px;
+  margin: 10vh auto 3vh auto;
+  color: #fff;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+}
+.dld-remerciements h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+.dld-remerciements p {
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+}

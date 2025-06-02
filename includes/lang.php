@@ -18,7 +18,7 @@ function getPDO() {
         $database = "glaneurs";
         $username = "root";
         $password = "root";
-        //  $servername = "localhost:3306";
+        // $servername = "localhost:3306";
         // $database = "glaneursdecarton";
         // $username = "glaneurs_admin";
         // $password = "Wlm7nZGs!pz%d7s0";

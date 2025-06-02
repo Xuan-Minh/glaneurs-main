@@ -105,9 +105,6 @@ $(document).ready(function () {
     $("#transition-overlay").removeClass("active").addClass("hide");
   }, 50);
 
-  /// ----------------------------------------------- Animation de contenu ---------------------------------- //
-  $(".content-anim").addClass("visible");
-
   // ----------------------------------------------- Menu Burger ---------------------------------- //
   // Sélectionne les éléments du menuBurger et du menuVolet
   const menuBurger = $("#menuBurger");
@@ -434,4 +431,21 @@ $(document).on("keydown", function (e) {
   if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
     window.location.href = "includes/reset.php";
   }
+});
+// ----------------------------------------------- Animation de contenu ---------------------------------- //
+$(function () {
+  // Sélectionne tous les éléments à animer
+  const anims = document.querySelectorAll('.content-anim');
+
+  // Crée l'observer
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');  
+        obs.unobserve(entry.target); // Optionnel : n'observe plus après animation
+      }
+    });
+  }, { threshold: 0.2 }); // 20% visible
+
+  anims.forEach(el => observer.observe(el));
 });
