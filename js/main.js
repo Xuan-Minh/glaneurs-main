@@ -395,12 +395,22 @@ $(document).on("click", ".close-visionner", function () {
 
 $(document).on("click", ".lang-option", function () {
   var lang = $(this).data("lang");
+  // Si la langue est déjà active, on ne fait rien
+  if ($(this).hasClass("active")) return;
+
   $(".lang-option").removeClass("active");
   $(this).addClass("active");
-  // Appelle le serveur pour changer la langue en session
-  $.post("includes/setlang.php", { lang: lang }, function () {
-    location.reload(); // Recharge la page pour afficher la langue choisie
-  });
+  $("#menuVolet").removeClass("open");
+
+  // Lance l'animation overlay
+  $("#transition-overlay").removeClass("hide").addClass("active");
+
+  // Après la transition, change la langue
+  setTimeout(function () {
+    $.post("includes/setlang.php", { lang: lang }, function () {
+      location.reload(); // Recharge la page pour afficher la langue choisie
+    });
+  }, 700); // 700ms = durée de la transition CSS
 });
 
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
