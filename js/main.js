@@ -221,7 +221,7 @@ function slideIn(slide, info) {
 }
 function slideOut(slide, info) {
   $("body").css("overflow", "auto");
-  info.fadeOut(500); // Masque l'info de la slide active
+  info.fadeOut(200); // Masque l'info de la slide active
   slide.find("h2").removeClass("move");
   slide.find("video").removeClass("flou");
   slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
@@ -302,6 +302,48 @@ $(".visionner-trigger-h3").click(function (event) {
   visionner.fadeIn(400).css("display", "flex");
   $("body").css("overflow", "hidden");
   slide.find(".info").fadeOut(0);
+});
+// -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
+$(function () {
+  $('.visionner iframe').each(function () {
+    // Crée un player Vimeo pour chaque iframe
+    var player = new Vimeo.Player(this);
+
+    player.on('ended', function () {
+      // Ferme le visionneur quand la vidéo est terminée
+      const $visionner = $(this.element).closest('.visionner');
+      const $slide = $visionner.closest('.slides');
+      const $info = $slide.find('.info');
+      $visionner.fadeOut(400, function () {
+        $("body").css("overflow", "auto");
+        // Affiche l'info comme lors du clic sur la croix
+        $info.fadeIn(2000);
+        $slide.find("h2").addClass("move");
+        $slide.find("video").addClass("flou");
+        $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+        $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+      });
+    });
+  });
+});
+
+$(function () {
+  // Observer pour fermer l'info quand la slide sort du viewport
+  const slides = document.querySelectorAll('.slides');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        // Si la slide sort du viewport, ferme son info
+        const $slide = $(entry.target);
+        const $info = $slide.find('.info');
+        if ($info.is(':visible')) {
+          slideOut($slide, $info);
+        }
+      }
+    });
+  }, { threshold: 0.2 }); // 20% visible
+
+  slides.forEach(slide => observer.observe(slide));
 });
 // --------------------------------- Scroll Down Arrow --------------------------------- //
 gsap.to(".scroll-down-arrow div", {

@@ -42,5 +42,6 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
 
 <?php
 include 'includes/jsinclude.php'; ?>
+<script src="https://player.vimeo.com/api/player.js"></script>
 
 </html>
