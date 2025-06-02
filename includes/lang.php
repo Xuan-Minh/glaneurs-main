@@ -1,6 +1,15 @@
+
 <?php
 session_start();
-$lang = $_SESSION['lang'] ?? 'fr';
+
+// Si ?lang=... dans l'URL, on l'utilise et on met à jour la session
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'kr'])) {
+    $lang = $_GET['lang'];
+    $_SESSION['lang'] = $lang;
+} else {
+    $lang = $_SESSION['lang'] ?? 'fr';
+}
+
 // Connexion PDO centralisée
 function getPDO() {
     static $pdo = null;
@@ -9,11 +18,10 @@ function getPDO() {
         // $database = "glaneurs";
         // $username = "root";
         // $password = "root";
-        $servername = "localhost:3306";
+         $servername = "localhost:3306";
         $database = "glaneursdecarton";
         $username = "glaneurs_admin";
         $password = "Wlm7nZGs!pz%d7s0";
-
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
