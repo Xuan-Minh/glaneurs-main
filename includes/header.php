@@ -51,15 +51,14 @@
     </div>
     <div class="menu-links">
         <ul>
-            <li><a href="portraits.php"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
-            <li><a href="archives.php"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
-            <li><a href="associations.php"><?php echo getTranslation("associations_titre", $lang) ?></a></li>
-            <li><a href="souvenirs.php"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
-            <li><a href="derriere-le-documentaire.php"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
+            <li><a href="portraits"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
+            <li><a href="archives"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
+            <li><a href="souvenirs"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
+            <li><a href="derriere-le-documentaire"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
             <br>
             <br>
-            <li><a href="mentionslegales.php"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
-            <li><a href="index.php"><?php echo getTranslation("accueil", $lang) ?></a></li>
+            <li><a href="mentionslegales"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
+            <li><a href="./"><?php echo getTranslation("accueil", $lang) ?></a></li>
 
         </ul>
     </div>

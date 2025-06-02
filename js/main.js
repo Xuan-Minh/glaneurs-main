@@ -357,7 +357,7 @@ $(document).on("click", ".menu-video-item", function () {
     setTimeout(function () {
       $("#transition-overlay").removeClass("hide").addClass("active");
       setTimeout(function () {
-        window.location.href = "index.php?slide=" + slideNumber;
+        window.location.href = "index?slide=" + slideNumber;
       }, 700); // Durée de la transition CSS
     }, 300); // Laisse le menu-volet se fermer
   }
