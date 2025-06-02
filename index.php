@@ -20,6 +20,9 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
   <?php include "includes/css.php"; ?>
   <title><?php echo getTranslation("mentionslegales_nom_entreprise", $lang) ?></title>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
+  <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />
+  <link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/?lang=kr" />
 </head>
 
 <body>
