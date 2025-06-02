@@ -395,7 +395,6 @@ $(document).on("click", ".close-visionner", function () {
 
 $(document).on("click", ".lang-option", function () {
   var lang = $(this).data("lang");
-  // Si la langue est déjà active, on ne fait rien
   if ($(this).hasClass("active")) return;
 
   $(".lang-option").removeClass("active");
@@ -405,11 +404,11 @@ $(document).on("click", ".lang-option", function () {
   // Lance l'animation overlay
   $("#transition-overlay").removeClass("hide").addClass("active");
 
-  // Après la transition, change la langue
+  // Après la transition, change la langue via l'URL
   setTimeout(function () {
-    $.post("includes/setlang.php", { lang: lang }, function () {
-      location.reload(); // Recharge la page pour afficher la langue choisie
-    });
+    var url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.location.href = url.toString();
   }, 700); // 700ms = durée de la transition CSS
 });
 
