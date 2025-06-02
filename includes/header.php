@@ -11,7 +11,7 @@
             <span class="lang-sep">/</span>
             <span class="lang-option <?php if ($lang == 'en') echo 'active'; ?>" data-lang="en">EN</span>
             <span class="lang-sep">/</span>
-            <span class="lang-option <?php if ($lang == 'kr') echo 'active'; ?>" data-lang="kr">KR</span>
+            <span class="lang-option <?php if ($lang == 'kr') echo 'active'; ?>" data-lang="kr">한국</span>
         </div>
         <div class="menu-burger" id="menuBurger">
             <span></span>
