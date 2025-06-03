@@ -1,3 +1,4 @@
+/* ---------------------------- HERO --------------------- */
 .archive-hero {
   width: 100vw;
   height: 100vh;
@@ -45,7 +46,7 @@
 .archives-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-
+/* ---------------------------- texte --------------------- */
 .archives-intro{
   width: 90vw;
   max-width: 900px;
@@ -68,7 +69,7 @@ p {
   opacity: 0.85;
   margin: 0;
 }
-
+/* ---------------------------- GALLERIE OVERLAY --------------------- */
 .archive-gallery {
   display: flex;
   flex-wrap: wrap;
