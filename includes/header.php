@@ -57,8 +57,8 @@
             <li><a href="derriere-le-documentaire"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
             <br>
             <br>
-            <li><a href="mentionslegales"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
             <li><a href="./"><?php echo getTranslation("accueil", $lang) ?></a></li>
+                        <li class="mentionslegales-right"><a href="mentionslegales"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
 
         </ul>
     </div>

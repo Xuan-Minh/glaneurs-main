@@ -182,7 +182,6 @@ header.hide-header {
   margin-top: 10%;
   width: 80%;
   max-width: 1200px; /* Ajuste la largeur maximale */
-  text-align: center;
   display: flex;
   flex-direction: row; /* Aligne les éléments horizontalement */
   justify-content: space-around; /* Distribue l'espace entre les éléments */
@@ -221,6 +220,11 @@ header.hide-header {
   width: 80%;
   text-align: left;
   margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
 }
 .menu-links h4 {
   font-size: 1.2em;
@@ -230,6 +234,7 @@ header.hide-header {
 }
 
 .menu-links ul {
+  width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -243,7 +248,7 @@ header.hide-header {
   color: white;
   text-decoration: none;
   font-family: "Figtree", sans-serif;
-  font-size: 2em; /* Agrandit la taille de la police */
+  font-size: 1.7em; /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
   transition: color 0.3s ease;
@@ -302,6 +307,10 @@ header.hide-header {
   width: 100%; /* Soulignement complet au survol */
 }
 
+.mentionslegales-right{
+  font-size: 0.1em;
+  justify-self: flex-end; /* Aligne le lien à droite */
+}
 /* ----------------------------- LOGO ------------------------ */
 .logo-link {
   position: absolute;
