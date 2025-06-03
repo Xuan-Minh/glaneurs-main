@@ -14,7 +14,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
 
 <head>
   <meta charset="utf-8" />
-  <meta name="google-site-verification" content="1oXinmXVir1iGbN-YoqDnfEDeYvBjQ51oopfPBWfFzg" />
+<meta name="google-site-verification" content="SqLd-amWWnwxOMs6Pdy83NxVwahFKlwSSGXjcXE11KM" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Glaneurs de carton" />
   <?php include "includes/css.php"; ?>
