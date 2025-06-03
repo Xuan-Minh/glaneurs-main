@@ -193,22 +193,24 @@ $(document).on("click", ".menu-links a", function (e) {
   if (href && href !== "#" && !href.startsWith("javascript")) {
     e.preventDefault();
 
+    // Fade out toutes les pistes en 0.8s
+    if (typeof gains !== "undefined" && gains.length) {
+      gains.forEach(g => fadeTo(g, 0, 0.8));
+    }
+
     // Ferme le menu-volet
     $("#menuVolet").removeClass("open");
     $("#menuBurger").removeClass("open");
-    
 
     // Lance la transition overlay après un court délai
     setTimeout(function () {
-      // D'abord retire .hide, puis ajoute .active
       $("#transition-overlay").removeClass("hide").addClass("active");
       setTimeout(function () {
         window.location.href = href;
-      }, 700); // Correspond à la durée de la transition CSS
-    }, 300); // Délai pour laisser le menu-volet se fermer
+      }, 800); // Correspond à la durée du fade
+    }, 300);
   }
 });
-
 // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
 function slideIn(slide, info) {
   resetOtherSlides(slide); // Réinitialise les autres slides

@@ -214,3 +214,30 @@ function fadeTo(gainNode, to, duration = 0.6) {
   gainNode.gain.setValueAtTime(gainNode.gain.value, now);
   gainNode.gain.linearRampToValueAtTime(to * masterVolume, now + duration);
 }
+
+window.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") {
+    // Fade out toutes les pistes en 0.8s
+    if (gains && gains.length) {
+      gains.forEach(g => fadeTo(g, 0, 0.8));
+    }
+  }
+   if (document.visibilityState === "visible") {
+    // Si aucun portrait n'est en focus, fade in ambiance
+    if (gains && gains.length && !keepFocus) {
+      fadeTo(gains[0], 1, 1.2); // ambiance, fade in douce
+      gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+    }
+    // Si un portrait est en focus, ne relance que la piste correspondante
+    if (gains && gains.length && keepFocus && currentIndex !== null) {
+      fadeTo(gains[0], 0, 1.2);
+      gains.forEach((g, i) => fadeTo(g, i === currentIndex ? 1 : 0, 0.4));
+    }
+  }
+});
+window.addEventListener("beforeunload", function () {
+  // Fade out toutes les pistes en 0.8s
+  if (gains && gains.length) {
+    gains.forEach(g => fadeTo(g, 0, 0.8));
+  }
+});
