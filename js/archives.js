@@ -16,3 +16,59 @@ $(function () {
   }
 });
 
+$(function () {
+  // Récupère toutes les images de la galerie
+  const $galleryItems = $('.archive-gallery-item');
+  let currentIndex = 0;
+
+  // Stocke les infos de chaque archive dans un tableau
+  const archives = $galleryItems.map(function () {
+    return {
+      titre: $(this).data('titre'),
+      src: $(this).data('src'),
+      date: $(this).data('date'),
+      auteur: $(this).data('auteur')
+    };
+  }).get();
+
+  function showOverlay(index) {
+    if (index < 0 || index >= archives.length) return;
+    currentIndex = index;
+    const data = archives[index];
+    $('#archive-overlay .archive-overlay-photo img').attr('src', data.src);
+    $('#archive-overlay .archive-overlay-title').text(data.titre);
+    $('#archive-overlay .archive-overlay-date').text(data.date);
+    $('#archive-overlay .archive-overlay-auteur').text(data.auteur);
+    $('#archive-overlay').fadeIn(300);
+    $('body').css('overflow', 'hidden');
+  }
+
+  // Ouvre l'overlay au clic sur une image
+  $galleryItems.on('click', function () {
+    showOverlay($(this).data('index'));
+  });
+
+  // Navigation flèches
+  $('.archive-overlay-arrow.left').on('click', function (e) {
+    e.stopPropagation();
+    showOverlay((currentIndex - 1 + archives.length) % archives.length);
+  });
+  $('.archive-overlay-arrow.right').on('click', function (e) {
+    e.stopPropagation();
+    showOverlay((currentIndex + 1) % archives.length);
+  });
+
+  // Ferme l'overlay
+  $('.archive-overlay-close, .archive-overlay-bg').on('click', function () {
+    $('#archive-overlay').fadeOut(300);
+    $('body').css('overflow', 'auto');
+  });
+
+  // Navigation clavier (optionnel)
+  $(document).on('keydown', function (e) {
+    if (!$('#archive-overlay').is(':visible')) return;
+    if (e.key === "ArrowLeft") $('.archive-overlay-arrow.left').click();
+    if (e.key === "ArrowRight") $('.archive-overlay-arrow.right').click();
+    if (e.key === "Escape") $('.archive-overlay-close').click();
+  });
+});

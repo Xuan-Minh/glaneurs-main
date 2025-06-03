@@ -1,5 +1,11 @@
 <?php include 'includes/lang.php'; // Inclut le fichier pour gérer la langue
 ?>
+<?php
+// ...avant le </div> de .archives-scroll...
+// Récupère les archives depuis la base
+$pdo = getPDO();
+$archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>" <?php if ($lang == 'kr') echo ' class="kr-lang"'; ?>>
 
@@ -23,10 +29,12 @@
             </div>
         </section>
         <section class="archives-content">
-           <section class="archives-intro">
-
-
+           <section class="archives-intro content-anim">
+            “Le glanage est d’un autre âge, le geste est inchangé dans notre société qui mange à satiété. Glaneurs agricoles ou urbains, ils se baissent pour ramasser. 
+Il n’y a pas de honte : il y a du tracas, du désarroi.”
+ Agnès Varda, Les Glaneurs et la Glaneuse. 2000
            </section>
+           <?php include "includes/archives-gallery.php"?>
 
         </section>
     </div>

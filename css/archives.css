@@ -29,6 +29,10 @@
   min-height: 100vh;
   background: #050d1e;
   padding: 5vh 0 0 0;
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 1;
+  margin: 0;
 }
 .archives-scroll {
   height: 100vh;
@@ -41,3 +45,113 @@
 .archives-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+.archives-intro{
+  width: 90vw;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #fff;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+
+}
+.archives-citation {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+p {
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.archive-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.archive-thumb {
+  width: 180px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #0005;
+  transition: transform 0.2s;
+}
+.archive-thumb img {
+  width: 100%;
+  display: block;
+  transition: transform 0.2s;
+}
+.archive-thumb:hover img {
+  transform: scale(1.05);
+}
+.archive-overlay {
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.archive-overlay-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+}
+.archive-overlay-content {
+  position: relative;
+  display: flex;
+  background: #222;
+  border-radius: 10px;
+  z-index: 1;
+  max-width: 900px;
+  width: 90vw;
+  max-height: 80vh;
+  overflow: hidden;
+  align-items: center;
+}
+.archive-overlay-photo img {
+  max-width: 350px;
+  max-height: 80vh;
+  display: block;
+  border-radius: 8px 0 0 8px;
+}
+.archive-overlay-info {
+  color: #fff;
+  padding: 30px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.archive-overlay-close {
+  position: absolute;
+  top: 10px; right: 20px;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 2;
+}
+.archive-overlay-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 2.5em;
+  cursor: pointer;
+  z-index: 2;
+  user-select: none;
+  padding: 0 10px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.archive-overlay-arrow.left { left: 10px; }
+.archive-overlay-arrow.right { right: 10px; }
+.archive-overlay-arrow:hover { opacity: 1; }
