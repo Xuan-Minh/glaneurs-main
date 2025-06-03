@@ -83,10 +83,16 @@ p {
   box-shadow: 0 2px 8px #0005;
   transition: transform 0.2s;
 }
+
 .archive-thumb img {
   width: 100%;
   display: block;
   transition: transform 0.2s;
+}
+
+/* Applique le zoom sur le conteneur ET l'image */
+.archive-thumb:hover {
+  transform: scale(1.05);
 }
 .archive-thumb:hover img {
   transform: scale(1.05);

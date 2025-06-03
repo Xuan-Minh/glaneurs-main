@@ -32,16 +32,27 @@ $(function () {
   }).get();
 
   function showOverlay(index) {
-    if (index < 0 || index >= archives.length) return;
-    currentIndex = index;
-    const data = archives[index];
-    $('#archive-overlay .archive-overlay-photo img').attr('src', data.src);
-    $('#archive-overlay .archive-overlay-title').text(data.titre);
-    $('#archive-overlay .archive-overlay-date').text(data.date);
-    $('#archive-overlay .archive-overlay-auteur').text(data.auteur);
-    $('#archive-overlay').fadeIn(300);
-    $('body').css('overflow', 'hidden');
-  }
+  if (index < 0 || index >= archives.length) return;
+  currentIndex = index;
+  const data = archives[index];
+
+  // 1. Retire l'animation
+  const $info = $('#archive-overlay .archive-overlay-info');
+  $info.removeClass('visible');
+
+  // Mets à jour le contenu
+  $('#archive-overlay .archive-overlay-photo img').attr('src', data.src);
+  $('#archive-overlay .archive-overlay-title').text(data.titre);
+  $('#archive-overlay .archive-overlay-date').text(data.date);
+  $('#archive-overlay .archive-overlay-auteur').text(data.auteur);
+  $('#archive-overlay').fadeIn(300);
+  $('body').css('overflow', 'hidden');
+
+  // 2. Relance l'animation après un court délai (pour forcer le repaint)
+  setTimeout(function() {
+    $info.addClass('visible');
+  }, 10);
+}
 
   // Ouvre l'overlay au clic sur une image
   $galleryItems.on('click', function () {
@@ -72,3 +83,5 @@ $(function () {
     if (e.key === "Escape") $('.archive-overlay-close').click();
   });
 });
+// 
+
