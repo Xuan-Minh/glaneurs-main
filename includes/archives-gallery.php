@@ -1,7 +1,7 @@
 <?php foreach ($archives as $i => $archive): ?>
   <div class="archive-thumb">
     <img
-      class="archive-gallery-item"
+      class="archive-gallery-item content-anim"
       data-index="<?php echo $i; ?>"
       data-titre="<?php echo htmlspecialchars($archive['archives_titre']); ?>"
       data-src="<?php echo htmlspecialchars($archive['archives_src']); ?>"

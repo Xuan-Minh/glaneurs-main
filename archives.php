@@ -35,6 +35,7 @@ Il n’y a pas de honte : il y a du tracas, du désarroi.”
  Agnès Varda, Les Glaneurs et la Glaneuse. 2000
            </section>
            <?php include "includes/archives-gallery.php"?>
+           <?php include "includes/archives-overlay.php"?>
 
         </section>
     </div>
