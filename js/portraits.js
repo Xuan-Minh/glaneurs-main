@@ -52,6 +52,14 @@ window.addEventListener("scroll", function removeActiveOnTop() {
   if (window.scrollY === 0) {
     $(".portrait-section").removeClass("active");
     $(".portrait-detail").removeClass("active");
+    $(".portraits-container").removeClass("has-active");
+    // Remet l'ambiance sonore globale
+    if (gains.length) {
+      keepFocus = false;
+      currentIndex = null;
+      fadeTo(gains[0], 1, 1.2); // ambiance, fade in plus long (1.2s)
+      gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+    }
   }
 });
 $(document).ready(function () {
@@ -118,7 +126,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 1 : 0; // ambiance à 1, solos à 0
+    gain.gain.value = (i === 0) ? 0.4 : 0; // ambiance à 0.4, solos à 0
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -131,11 +139,6 @@ Promise.all(files.map(url =>
   sources.forEach(src => src.start(now));
 });
 
-// Helper pour fade
-function fadeTo(gainNode, to, duration = 0.2) {
-  gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-  gainNode.gain.linearRampToValueAtTime(to, audioCtx.currentTime + duration);
-}
 
 // Hover sur un portrait
 $('.portrait-section').on('mouseenter', function () {
@@ -194,3 +197,20 @@ $(document).on('mouseleave', function (e) {
     gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
   }
 });
+// ----------------------- VOLUME ------------------------ //
+let masterVolume = 0.4; // même valeur que ci-dessus
+
+$('#volumeRange').on('input', function () {
+  masterVolume = parseFloat(this.value);
+  gains.forEach((gain, i) => {
+    // On garde la valeur cible (1 ou 0) mais on applique le masterVolume
+    fadeTo(gain, (gain.gain.value > 0 ? 1 : 0), 0.4); // transition douce
+  });
+});
+function fadeTo(gainNode, to, duration = 0.6) {
+  const now = audioCtx.currentTime;
+  gainNode.gain.cancelScheduledValues(now);
+  // Fixe la valeur de départ à la valeur actuelle pour éviter les sauts
+  gainNode.gain.setValueAtTime(gainNode.gain.value, now);
+  gainNode.gain.linearRampToValueAtTime(to * masterVolume, now + duration);
+}

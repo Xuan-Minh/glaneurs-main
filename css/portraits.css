@@ -118,3 +118,14 @@
 .back-to-portraits:hover {
   background: #444;
 }
+
+.volume-control {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  z-index: 100;
+}
+#volumeRange {
+  vertical-align: middle;
+}
