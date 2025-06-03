@@ -1,5 +1,5 @@
 <div class="visionner">
-    <div class="close-visionner">X</div>
+    <div class="close-visionner"></div>
     <video controls autoplay>
         <source src="" type="video/mp4">
         Your browser does not support HTML5 video.
