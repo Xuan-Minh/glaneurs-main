@@ -557,3 +557,38 @@ document.addEventListener('click', function(e) {
   document.body.appendChild(halo);
   setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
 });
+
+// Animation de la ligne blanche dans le header (uniquement sur l'index)
+if ($('.sound-wave-header .sound-wave-line').length && typeof playArirangAudio === "function") {
+  let wavePhase = 0;
+  let lastVol = 0;
+
+  function updateHeaderSoundWave(volume) {
+    const amplitude = 8 + 12 * Math.pow(volume, 1.3); // amplitude adaptée
+    const length = 120;
+    const steps = 32;
+    const points = [];
+    wavePhase += 0.045 + 0.01 * volume;
+
+    for (let i = 0; i <= steps; i++) {
+      const x = (i / steps) * length;
+      const y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.2 + volume) + wavePhase) * amplitude;
+      points.push(`${x},${y}`);
+    }
+    $(".sound-wave-header .sound-wave-line").attr("points", points.join(" "));
+    lastVol = volume;
+  }
+
+  function animateHeaderSoundWave() {
+    // Utilise le volume de l'audio principal (Arirang)
+    let audio = document.getElementById("audio-arirang");
+    let vol = 0;
+    if (audio && !audio.paused) {
+      vol = audio.volume; // ou utilise une variable volume si tu fais un fade
+    }
+    updateHeaderSoundWave(vol);
+    requestAnimationFrame(animateHeaderSoundWave);
+  }
+
+  animateHeaderSoundWave();
+}
