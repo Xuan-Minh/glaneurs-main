@@ -219,27 +219,47 @@ window.addEventListener("visibilitychange", function () {
 // ----------------------------------------------- Fade transition ---------------------------------- //
 $(document).on("click", ".menu-links a", function (e) {
   const href = $(this).attr("href");
-  if (href && href !== "#" && !href.startsWith("javascript")) {
+  if (!href || href === "#" || href.startsWith("javascript")) return;
+
+  // Normalise l'URL courante et la cible
+  const current = window.location.pathname.replace(/\/$/, "").replace(/^\/index\.php$/, "/");
+  let target = href.replace(/^\.\//, "/").replace(/\/$/, "");
+  if (target === "" || target === "/") target = "/index.php";
+  if (!target.startsWith("/")) target = "/" + target;
+
+  // Si on est déjà sur la page demandée, ne rien faire (juste fermer le menu)
+  if (
+    current === target ||
+    (current === "/index.php" && (target === "/" || target === "/index.php")) ||
+    (current === "/" && (target === "/" || target === "/index.php"))
+  ) {
     e.preventDefault();
-
-    // Fade out toutes les pistes en 0.8s
-    if (typeof gains !== "undefined" && gains.length) {
-      gains.forEach(g => fadeTo(g, 0, 0.8));
-    }
-
-    // Ferme le menu-volet
     $("#menuVolet").removeClass("open");
     $("#menuBurger").removeClass("open");
-
-    // Lance la transition overlay après un court délai
-    setTimeout(function () {
-      $("#transition-overlay").removeClass("hide").addClass("active");
-      setTimeout(function () {
-        stopArirangAudio();
-        window.location.href = href;
-      }, 800); // Correspond à la durée du fade
-    }, 300);
+    return;
   }
+
+  // Sinon, navigation normale avec transition
+  e.preventDefault();
+
+  // Fade out audio si besoin
+  if (typeof gains !== "undefined" && gains.length) {
+    gains.forEach(g => fadeTo(g, 0, 0.8));
+  }
+  if (typeof stopArirangAudio === "function") stopArirangAudio();
+
+  // Ferme le menu-volet
+  $("#menuVolet").removeClass("open");
+  $("#menuBurger").removeClass("open");
+
+  // Lance la transition overlay après un court délai
+  setTimeout(function () {
+    $("#transition-overlay").removeClass("hide").addClass("active");
+    setTimeout(function () {
+      if (typeof stopArirangAudio === "function") stopArirangAudio();
+      window.location.href = href;
+    }, 800); // Correspond à la durée du fade
+  }, 300);
 });
 // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
 function slideIn(slide, info) {
