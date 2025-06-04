@@ -47,24 +47,66 @@
     </div>
 
     <section class="portrait-detail" id="detail1">
+        <div class="sound-wave-container">
+            
+            <svg class="sound-wave-svg" width="120" height="40" viewBox="0 0 120 40">
+                <!-- <polyline class="sound-wave-line" fill="none" stroke="#fff" stroke-width="3" points="0,20 120,20" /> -->
+                <defs>
+                    <filter id="blur" x="-10" y="-10" width="140" height="60">
+                        <feGaussianBlur stdDeviation="4" />
+                    </filter>
+                </defs>
+                <polygon class="sound-wave-cloud" fill="#fff" opacity="0.18" filter="url(#blur)" points="0,20 120,20" />
+            </svg>
+        </div>
         <h2><?php echo getTranslation("portraits_master", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_master", $lang); ?>...</p>
         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail2">
+        <div class="sound-wave-container">
+            <svg class="sound-wave-svg" width="120" height="40" viewBox="0 0 120 40">
+                <defs>
+                    <filter id="blur" x="-10" y="-10" width="140" height="60">
+                        <feGaussianBlur stdDeviation="4" />
+                    </filter>
+                </defs>
+                <polygon class="sound-wave-cloud" fill="#fff" opacity="0.18" filter="url(#blur)" points="0,20 120,20" />
+            </svg>
+        </div>
         <h2><?php echo getTranslation("portraits_lee", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_lee", $lang); ?>...</p>
         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail3">
+        <div class="sound-wave-container">
+            <svg class="sound-wave-svg" width="120" height="40" viewBox="0 0 120 40">
+                <defs>
+                    <filter id="blur" x="-10" y="-10" width="140" height="60">
+                        <feGaussianBlur stdDeviation="4" />
+                    </filter>
+                </defs>
+                <polygon class="sound-wave-cloud" fill="#fff" opacity="0.18" filter="url(#blur)" points="0,20 120,20" />
+            </svg>
+        </div>
         <h2>Monsieur Arirang-song</h2>
         <p>Informations spécifiques à Monsieur Arirang-song...</p>
         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
     </section>
 
     <section class="portrait-detail" id="detail4">
+        <div class="sound-wave-container">
+            <svg class="sound-wave-svg" width="120" height="40" viewBox="0 0 120 40">
+                <defs>
+                    <filter id="blur" x="-10" y="-10" width="140" height="60">
+                        <feGaussianBlur stdDeviation="4" />
+                    </filter>
+                </defs>
+                <polygon class="sound-wave-cloud" fill="#fff" opacity="0.18" filter="url(#blur)" points="0,20 120,20" />
+            </svg>
+        </div>
         <h2><?php echo getTranslation("portraits_jo", $lang); ?></h2>
         <p>Informations spécifiques à <?php echo getTranslation("portraits_jo", $lang); ?>...</p>
         <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
