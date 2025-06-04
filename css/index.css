@@ -193,7 +193,66 @@ a.visionner-trigger-h3:hover::after {
   display: flex;
   justify-content: space-between;
 }
+#transition-overlay {
+  z-index: 10000; /* Plus haut que .loading-screen */
+}
 
+/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
+.scroll-down-arrow {
+  position: fixed; /* Fixe la flèche par rapport à la fenêtre */
+  bottom: 40px; /* Positionne la flèche à 20px du bas */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%); /* Centre la flèche */
+  z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
+  width: 40px; /* Ajuste la largeur de l'image */
+  height: auto; /* Garde les proportions de l'image */
+  text-align: center;
+  pointer-events: auto; /* Empêche les interactions avec la flèche */
+}
+
+.scroll-down-arrow img {
+  width: 40px; /* Taille de l'image */
+  animation: scroll-down 2s infinite; /* Applique l'animation */
+  opacity: 0;
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px); /* Déplace légèrement vers le bas */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px); /* Déplace encore plus vers le bas */
+  }
+}
+
+.scroll-down-arrow.up img {
+  transform: rotate(180deg);
+  animation: scroll-up 2s infinite;
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+@keyframes scroll-up {
+  0% {
+    opacity: 0;
+    transform: rotate(180deg) translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(180deg) translateY(0px);
+  }
+}
+/* Loading  */
 /* ---------------------------------- LOADING ----------------------------------------------*/
 .loading-screen {
   position: fixed;
@@ -207,6 +266,7 @@ a.visionner-trigger-h3:hover::after {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   color: white; /* Pour que le texte soit visible */
   overflow: hidden; /* Important pour masquer le défilement horizontal */
   /* filter: blur(5px); /* Retire l'effet de flou de l'écran de chargement */
@@ -239,21 +299,40 @@ a.visionner-trigger-h3:hover::after {
   font-size: 2em !important;
   font-weight: 400;
 }
-
+.loading-items {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Centre verticalement */
+  align-items: center;       /* Centre horizontalement */
+}
 .loading-item {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column; /* Ajout pour organiser verticalement */
-  justify-content: center; /* Centre verticalement */
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;   /* Centre verticalement */
+  align-items: center;       /* Centre horizontalement */
   font-size: 1.5em;
   text-align: center;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0; left: 0;
+}
+.loading-item.active {
+  opacity: 1; /* Visible lorsqu'il est actif */
+}
+/* Style pour l'écran de chargement */
+.loading-content {
+  font-size: 1em;
+  width: 70%;
+  height: 10%;
+  text-align: center;
+  margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
 
 .def_texte {
@@ -272,18 +351,6 @@ a.visionner-trigger-h3:hover::after {
   margin-left: 10%; /* Ajoute un retrait à la première div */
   text-align: left; /* Aligne le texte à gauche */
   font-size: 1em; /* Ajuste la taille de la police */
-}
-
-.loading-item.active {
-  opacity: 1; /* Visible lorsqu'il est actif */
-}
-/* Style pour l'écran de chargement */
-.loading-content {
-  font-size: 1em;
-  width: 70%;
-  height: 10%;
-  text-align: center;
-  margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
 
 .loading-items {
@@ -348,12 +415,14 @@ a.visionner-trigger-h3:hover::after {
 
 .loading-item#loading-item1 .loading-content:first-child {
   margin-bottom: 0; /* Ajoute un espace en bas du texte */
-  margin-left: 15%; /* Ajoute un retrait à la première div */
+  /* margin-left: 15%; Ajoute un retrait à la première div */
 }
 /* -------------------- ENTER ---------------------------------------- */
 .loading-button {
   width: 100%;
   font-size: 0.5em;
+  display: flex;
+  justify-content: center;
 }
 #enter-button {
   background-color: rgba(0, 0, 0, 0);
@@ -387,63 +456,4 @@ a.visionner-trigger-h3:hover::after {
 
 #enter-button:hover::after {
   width: 100%; /* Soulignement complet au survol */
-}
-#transition-overlay {
-  z-index: 10000; /* Plus haut que .loading-screen */
-}
-
-/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
-.scroll-down-arrow {
-  position: fixed; /* Fixe la flèche par rapport à la fenêtre */
-  bottom: 40px; /* Positionne la flèche à 20px du bas */
-  left: 50%; /* Centre horizontalement */
-  transform: translateX(-50%); /* Centre la flèche */
-  z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
-  width: 40px; /* Ajuste la largeur de l'image */
-  height: auto; /* Garde les proportions de l'image */
-  text-align: center;
-  pointer-events: auto; /* Empêche les interactions avec la flèche */
-}
-
-.scroll-down-arrow img {
-  width: 40px; /* Taille de l'image */
-  animation: scroll-down 2s infinite; /* Applique l'animation */
-  opacity: 0;
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
-}
-
-@keyframes scroll-down {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(10px); /* Déplace légèrement vers le bas */
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(20px); /* Déplace encore plus vers le bas */
-  }
-}
-
-.scroll-down-arrow.up img {
-  transform: rotate(180deg);
-  animation: scroll-up 2s infinite;
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
-}
-
-@keyframes scroll-up {
-  0% {
-    opacity: 0;
-    transform: rotate(180deg) translateY(-20px);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(180deg) translateY(-10px);
-  }
-  100% {
-    opacity: 0;
-    transform: rotate(180deg) translateY(0px);
-  }
 }
