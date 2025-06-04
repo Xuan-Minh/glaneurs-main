@@ -16,9 +16,9 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
   <meta charset="utf-8" />
 <meta name="google-site-verification" content="SqLd-amWWnwxOMs6Pdy83NxVwahFKlwSSGXjcXE11KM" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Glaneurs de carton" />
+  <meta name="description" content="Les glaneurs de carton" />
   <?php include "includes/css.php"; ?>
-  <title><?php echo getTranslation("mentionslegales_nom_entreprise", $lang) ?></title>
+  <title><?php echo getTranslation("index_titre", $lang) ?></title>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
   <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />

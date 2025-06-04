@@ -493,3 +493,13 @@ $(function () {
 
   anims.forEach(el => observer.observe(el));
 });
+// halo
+// Effet halo brumeux au clic
+document.addEventListener('click', function(e) {
+  const halo = document.createElement('div');
+  halo.className = 'halo-click';
+  halo.style.left = (e.clientX - 90) + 'px'; // centre l'effet sur le clic
+  halo.style.top = (e.clientY - 90) + 'px';
+  document.body.appendChild(halo);
+  setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
+});
