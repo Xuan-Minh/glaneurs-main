@@ -1,8 +1,47 @@
 $(document).ready(function () {
   // ----------------------------------------------- LOADING ---------------------------------- //
+    function fadeAudio(audio, to, duration = 1000) {
+  if (!audio) return;
+  const start = audio.volume;
+  const step = (to - start) / (duration / 50);
+  let current = start;
+  let count = 0;
+  const interval = setInterval(() => {
+    current += step;
+    count += 1;
+    audio.volume = Math.max(0, Math.min(1, current));
+    if ((step > 0 && current >= to) || (step < 0 && current <= to) || count > duration / 50) {
+      audio.volume = to;
+      clearInterval(interval);
+      if (to === 0) audio.pause();
+    }
+  }, 50);
+}
+
+function playArirangAudio() {
+  const audio = document.getElementById("audio-arirang");
+  if (!audio) return;
+  audio.volume = 0;
+  // Ne pas remettre audio.currentTime = 0;
+  audio.play();
+  fadeAudio(audio, 0.5, 1200); // Fade in jusqu'à 50% en 1.2s
+}
+
+function stopArirangAudio() {
+  const audio = document.getElementById("audio-arirang");
+  if (!audio) return;
+  fadeAudio(audio, 0, 800); // Fade out en 0.8s
+}
+window.addEventListener("beforeunload", stopArirangAudio);
+window.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") stopArirangAudio();
+  if (document.visibilityState === "visible") playArirangAudio();
+});
+
   if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);
+    playArirangAudio();
   }
 
   // Gestion du clic sur le bouton "Entrer"
@@ -76,30 +115,20 @@ $(document).ready(function () {
   intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
 
   // Gestion du clic sur le bouton "Entrer"
-  $("#enter-button").click(function () {
-    clearInterval(intervalId); // Arrête l'animation
-    $(".loading-screen").fadeOut(1000, function () {
-      // Fade out de l'écran de chargement
-      $(".container").fadeIn(1000, function () {
-        // Démarrer le son du premier chapitre
-        var sound = new Howl({
-          src: ["audio/chap1.mp3"],
-        });
-        sound.play();
-        const firstAudio = document.getElementById("audio-slide-1");
-        if (firstAudio) {
-          firstAudio.volume = 0; // Volume initial à 0
-          firstAudio.play();
-          $(firstAudio).animate({ volume: 0.5 }, 2000); // Fade in jusqu'à 50%
-        }
-      }); // Fade in du container
+ $("#enter-button").click(function () {
+  clearInterval(intervalId); // Arrête l'animation
+  $(".loading-screen").fadeOut(1000, function () {
+    $(".container").fadeIn(1000, function () {
+      playArirangAudio();
     });
   });
-
+});
   // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
   $(".loading-screen").click(function () {
     showNextItem();
   });
+  
+
   // ----------------------------------------------- Transition overlay ---------------------------------- //
   setTimeout(function () {
     $("#transition-overlay").removeClass("active").addClass("hide");
@@ -206,6 +235,7 @@ $(document).on("click", ".menu-links a", function (e) {
     setTimeout(function () {
       $("#transition-overlay").removeClass("hide").addClass("active");
       setTimeout(function () {
+        stopArirangAudio();
         window.location.href = href;
       }, 800); // Correspond à la durée du fade
     }, 300);
@@ -273,7 +303,9 @@ $(".close-visionner").click(function (event) {
   slide.find("video").addClass("flou");
   slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+   setTimeout(playArirangAudio, 400);
 });
+
 $(document).on("keydown", function (event) {
   if (event.key === "Escape") {
     // Vérifie si la touche Échap est pressée
@@ -291,6 +323,7 @@ $(".visionner-trigger").click(function (event) {
   visionner.fadeIn(400).css("display", "flex");
   $("body").css("overflow", "hidden");
   slide.find(".info").fadeOut(0);
+   stopArirangAudio();
 });
 
 $(".visionner-trigger-h3").click(function (event) {
@@ -304,6 +337,7 @@ $(".visionner-trigger-h3").click(function (event) {
   visionner.fadeIn(400).css("display", "flex");
   $("body").css("overflow", "hidden");
   slide.find(".info").fadeOut(0);
+   stopArirangAudio();
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
 $(function () {

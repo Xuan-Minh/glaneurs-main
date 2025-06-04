@@ -30,6 +30,7 @@ if (!isset($_SESSION['hasVisitedIndex'])) {
   <?php if ($showLoading): ?>
     <?php include 'includes/loading.php'; ?>
   <?php endif; ?>
+  <audio id="audio-arirang" src="audio/Arirang.wav" loop preload="auto"></audio>
   <?php include 'includes/header.php'; ?>
 
   <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
