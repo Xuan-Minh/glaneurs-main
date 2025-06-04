@@ -27,8 +27,16 @@
 
 <body>
     <?php include "includes/header.php"; ?>
+
+    <section class="dld-hero">
+        <video autoplay muted loop>
+            <source src="video/ville.mov" type="video/mp4">
+        </video>
+        <div class="dld-title content-anim">
+            <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>
+        </div>
+    </section>
     <div class="page-intro content-anim">
-        <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>
         <p>
             <?php echo getTranslation('derriereledocumentaire_intro', $lang); ?>
         </p>
@@ -67,8 +75,8 @@
 
         </p>
     </section>
-        <?php include "includes/jsinclude.php"; ?>
-        <script src="js/derriereledocumentaire.js"></script>
+    <?php include "includes/jsinclude.php"; ?>
+    <script src="js/derriereledocumentaire.js"></script>
 </body>
 
 </html>
