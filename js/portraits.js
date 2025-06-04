@@ -126,7 +126,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0.4 : 0; // ambiance à 0.4, solos à 0
+    gain.gain.value = (i === 0) ? 0 : 0; // ambiance à 0.4, solos à 0
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -137,6 +137,10 @@ Promise.all(files.map(url =>
   // Démarre toutes les pistes en même temps
   const now = audioCtx.currentTime + 0.1;
   sources.forEach(src => src.start(now));
+  if (gains.length) {
+  gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
+  gains[0].gain.linearRampToValueAtTime(masterVolume, audioCtx.currentTime + 1.2); // 1.2s de fade in
+}
 });
 
 
@@ -198,16 +202,16 @@ $(document).on('mouseleave', function (e) {
   }
 });
 // ----------------------- VOLUME ------------------------ //
-let masterVolume = 0.4; // même valeur que ci-dessus
+let masterVolume = 0.1; // même valeur que ci-dessus
 
 $('#volumeRange').on('input', function () {
   masterVolume = parseFloat(this.value);
   gains.forEach((gain, i) => {
     // On garde la valeur cible (1 ou 0) mais on applique le masterVolume
-    fadeTo(gain, (gain.gain.value > 0 ? 1 : 0), 0.4); // transition douce
+    fadeTo(gain, (gain.gain.value > 0 ? 0.3 : 0), 0.1); // transition douce
   });
 });
-function fadeTo(gainNode, to, duration = 0.6) {
+function fadeTo(gainNode, to, duration = 1.2) {
   const now = audioCtx.currentTime;
   gainNode.gain.cancelScheduledValues(now);
   // Fixe la valeur de départ à la valeur actuelle pour éviter les sauts
@@ -217,9 +221,9 @@ function fadeTo(gainNode, to, duration = 0.6) {
 
 window.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "hidden") {
-    // Fade out toutes les pistes en 0.8s
+    // Fade out toutes les pistes en 2s
     if (gains && gains.length) {
-      gains.forEach(g => fadeTo(g, 0, 0.8));
+      gains.forEach(g => fadeTo(g, 0, 2));
     }
   }
    if (document.visibilityState === "visible") {
@@ -240,4 +244,4 @@ window.addEventListener("beforeunload", function () {
   if (gains && gains.length) {
     gains.forEach(g => fadeTo(g, 0, 0.8));
   }
-});
+})
