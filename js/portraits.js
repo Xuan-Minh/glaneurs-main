@@ -202,13 +202,14 @@ $(document).on('mouseleave', function (e) {
   }
 });
 // ----------------------- VOLUME ------------------------ //
-let masterVolume = 0.1; // même valeur que ci-dessus
+let masterVolume = 0.05; // même valeur que ci-dessus
+$('#volumeRange').val(masterVolume); 
 
 $('#volumeRange').on('input', function () {
   masterVolume = parseFloat(this.value);
   gains.forEach((gain, i) => {
     // On garde la valeur cible (1 ou 0) mais on applique le masterVolume
-    fadeTo(gain, (gain.gain.value > 0 ? 0.3 : 0), 0.1); // transition douce
+    fadeTo(gain, (gain.gain.value > 0 ? 0.5 : 0), 0.1); // transition douce
   });
 });
 function fadeTo(gainNode, to, duration = 1.2) {
