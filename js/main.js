@@ -1,18 +1,20 @@
-$(document).ready(function () {
-  // ----------------------------------------------- LOADING ---------------------------------- //
-    function fadeAudio(audio, to, duration = 1000) {
+let fadeInterval = null;
+
+function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
+  if (fadeInterval) clearInterval(fadeInterval); // Annule tout fade en cours
   const start = audio.volume;
   const step = (to - start) / (duration / 50);
   let current = start;
   let count = 0;
-  const interval = setInterval(() => {
+  fadeInterval = setInterval(() => {
     current += step;
     count += 1;
     audio.volume = Math.max(0, Math.min(1, current));
     if ((step > 0 && current >= to) || (step < 0 && current <= to) || count > duration / 50) {
       audio.volume = to;
-      clearInterval(interval);
+      clearInterval(fadeInterval);
+      fadeInterval = null;
       if (to === 0) audio.pause();
     }
   }, 50);
@@ -24,7 +26,7 @@ function playArirangAudio() {
   audio.volume = 0;
   // Ne pas remettre audio.currentTime = 0;
   audio.play();
-  fadeAudio(audio, 0.5, 1200); // Fade in jusqu'à 50% en 1.2s
+  fadeAudio(audio, 0.3, 2000); // Fade in jusqu'à 50% en 1.2s
 }
 
 function stopArirangAudio() {
@@ -32,6 +34,9 @@ function stopArirangAudio() {
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
 }
+$(document).ready(function () {
+  // ----------------------------------------------- LOADING ---------------------------------- //
+
 window.addEventListener("beforeunload", stopArirangAudio);
 window.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "hidden") stopArirangAudio();
@@ -170,10 +175,8 @@ window.addEventListener("visibilitychange", function () {
               slides.length - 1
             ) {
               scrollArrow.classList.add("up");
-              console.log("Flèche UP");
             } else {
               scrollArrow.classList.remove("up");
-              console.log("Flèche DOWN");
             }
           }
         });
@@ -315,49 +318,27 @@ $(".close-visionner").click(function (event) {
   event.stopPropagation(); // Empêche la propagation de l'événement
   const slide = $(this).closest(".slides"); // Récupère la slide parente
   const info = slide.find(".info"); // Récupère l'élément .info de la slide
-
+  const visionner = slide.find(".visionner");
   $(".visionner").fadeOut(400);
+  playArirangAudio();
   $("body").css("overflow", "auto");
   info.fadeIn(2000); // Affiche uniquement l'info de la slide active
   slide.find("h2").addClass("move");
   slide.find("video").addClass("flou");
   slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-   setTimeout(playArirangAudio, 400);
 });
 
-$(document).on("keydown", function (event) {
-  if (event.key === "Escape") {
-    // Vérifie si la touche Échap est pressée
-    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
-    if (closeButton.length > 0) {
-      closeButton.trigger("click"); // Simule un clic sur le bouton close
-    }
-  }
-});
 
-$(".visionner-trigger").click(function (event) {
+$(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   event.stopPropagation();
+  stopArirangAudio();
   const slide = $(this).closest(".slides");
   const visionner = slide.find(".visionner");
-  visionner.fadeIn(400).css("display", "flex");
-  $("body").css("overflow", "hidden");
-  slide.find(".info").fadeOut(0);
-   stopArirangAudio();
-});
-
-$(".visionner-trigger-h3").click(function (event) {
-  event.stopPropagation();
-  const slide = $(this).closest(".slides");
-  const visionner = slide.find(".visionner");
-  const srcdocupart = slide.find("video source").attr("src"); // Récupère la source de la vidéo
-  // Met à jour la source de la vidéo dans le visionneur
-  visionner.find("video source").attr("src", srcdocupart);
-  visionner.find("video")[0].load(); // Recharge la vidéo
-  visionner.fadeIn(400).css("display", "flex");
-  $("body").css("overflow", "hidden");
-  slide.find(".info").fadeOut(0);
-   stopArirangAudio();
+  visionner.fadeIn(400, function () {
+    $("body").css("overflow", "hidden");
+    slide.find(".info").fadeOut(0);
+  }).css("display", "flex");
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
 $(function () {
@@ -470,21 +451,6 @@ function scrollToAndTrigger(slideNumber) {
   }, 600);
 }
 
-// Fonction pour ouvrir le visionneur
-function openVisionner(videoSrc) {
-  const visionner = $(".visionner");
-  visionner.find("video source").attr("src", videoSrc); // Met à jour la source de la vidéo
-  visionner.find("video")[0].load(); // Recharge la vidéo
-  visionner.fadeIn(400).css("display", "flex"); // Affiche le visionneur
-  $("body").css("overflow", "hidden"); // Désactive le défilement de la page
-}
-
-// Gestion de la fermeture du visionneur
-$(document).on("click", ".close-visionner", function () {
-  $(".visionner").fadeOut(400, function () {
-    $("body").css("overflow", "auto"); // Réactive le défilement de la page
-  });
-});
 
 // ----------------------------------------------- LANGUE ---------------------------------- //
 
@@ -529,6 +495,13 @@ $(document).on("keydown", function (e) {
   if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
     window.location.href = "includes/reset.php";
   }
+  if (e.key === "Escape") {
+    // Vérifie si la touche Échap est pressée
+    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
+    if (closeButton.length > 0) {
+      closeButton.trigger("click"); // Simule un clic sur le bouton close
+    }
+  }
 });
 // ----------------------------------------------- Animation de contenu ---------------------------------- //
 $(function () {
@@ -547,7 +520,7 @@ $(function () {
 
   anims.forEach(el => observer.observe(el));
 });
-// halo
+
 // Effet halo brumeux au clic
 document.addEventListener('click', function(e) {
   const halo = document.createElement('div');

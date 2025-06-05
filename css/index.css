@@ -130,10 +130,16 @@ a.visionner-trigger-h3:hover::after {
   filter: blur(0.3rem);
   transform: scale(1.05); /* Agrandit légèrement la vidéo */
 }
+.slides h2 {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  transition: transform 1.5s cubic-bezier(0.4,0,0.2,1), color 0.3s;
+}
 
 .slides h2.move {
-  /*    top: 20%;*/
-  left: 30%;
+ transform: translate(-30vw,-50%);
 }
 
 .slides:first-child {
