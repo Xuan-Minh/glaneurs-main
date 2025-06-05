@@ -45,6 +45,41 @@ $(document).on("keydown", function (e) {
     $(".visionner:visible").each(function () {
       $(this).find(".close-visionner").trigger("click");
     });
+
+
+    
+  }
+    if (
+    !$("input, textarea").is(":focus") && // Pas dans un champ texte
+    $(".slides").length > 1
+  ) {
+    const $slides = $(".slides");
+    // Trouve la slide la plus visible (milieu de l'écran)
+    let currentIndex = 0;
+    let minDist = Infinity;
+    const viewportMiddle = window.innerHeight / 2;
+    $slides.each(function (i, slide) {
+      const rect = slide.getBoundingClientRect();
+      const slideMiddle = rect.top + rect.height / 2;
+      const dist = Math.abs(slideMiddle - viewportMiddle);
+      if (dist < minDist) {
+        minDist = dist;
+        currentIndex = i;
+      }
+    });
+
+    if (e.key === "ArrowDown") {
+      // Flèche bas : slide suivante
+      if (currentIndex < $slides.length - 1) {
+        $slides.eq(currentIndex + 1)[0].scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    if (e.key === "ArrowUp") {
+      // Flèche haut : slide précédente
+      if (currentIndex > 0) {
+        $slides.eq(currentIndex - 1)[0].scrollIntoView({ behavior: "smooth" });
+      }
+    }
   }
 });
 $(document).ready(function () {
