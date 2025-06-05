@@ -104,6 +104,25 @@ a.visionner-trigger-h3:hover::after {
 .hidden {
   display: none;
 }
+.visionner iframe {
+  width: 90vw !important;
+  max-width: 100vw;
+  height: 50vw !important;
+  max-height: 80vh;
+  min-height: 200px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .visionner iframe {
+    width: 100vw !important;
+    height: 56vw !important; /* 16:9 ratio */
+    min-height: 180px;
+    max-height: 60vh;
+    border-radius: 0;
+  }
+}
 /* ---------------------- MAIN PAGE ------------------------------------ */
 .slides {
   position: relative;
