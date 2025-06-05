@@ -34,6 +34,20 @@ function stopArirangAudio() {
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
 }
+
+$(document).on("keydown", function (e) {
+  // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
+  if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
+    window.location.href = "includes/reset.php";
+  }
+  if (e.key === "Escape") {
+    // Vérifie si la touche Échap est pressée
+    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
+    if (closeButton.length > 0) {
+      closeButton.trigger("click"); // Simule un clic sur le bouton close
+    }
+  }
+});
 $(document).ready(function () {
   // ----------------------------------------------- LOADING ---------------------------------- //
 
@@ -344,7 +358,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 $(function () {
   $('.visionner iframe').each(function () {
     // Crée un player Vimeo pour chaque iframe
-    var player = new Vimeo.Player(this);
+    let player = new Vimeo.Player(this);
 
     player.on('ended', function () {
       // Ferme le visionneur quand la vidéo est terminée
@@ -455,7 +469,7 @@ function scrollToAndTrigger(slideNumber) {
 // ----------------------------------------------- LANGUE ---------------------------------- //
 
 $(document).on("click", ".lang-option", function () {
-  var lang = $(this).data("lang");
+  let lang = $(this).data("lang");
   if ($(this).hasClass("active")) return;
 
   $(".lang-option").removeClass("active");
@@ -467,7 +481,7 @@ $(document).on("click", ".lang-option", function () {
 
   // Après la transition, change la langue via l'URL
   setTimeout(function () {
-    var url = new URL(window.location.href);
+    let url = new URL(window.location.href);
     url.searchParams.set('lang', lang);
     window.location.href = url.toString();
   }, 700); // 700ms = durée de la transition CSS
@@ -490,19 +504,7 @@ window.addEventListener("scroll", function () {
   lastScroll = currentScroll;
 });
 // Reset
-$(document).on("keydown", function (e) {
-  // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
-  if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
-    window.location.href = "includes/reset.php";
-  }
-  if (e.key === "Escape") {
-    // Vérifie si la touche Échap est pressée
-    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
-    if (closeButton.length > 0) {
-      closeButton.trigger("click"); // Simule un clic sur le bouton close
-    }
-  }
-});
+
 // ----------------------------------------------- Animation de contenu ---------------------------------- //
 $(function () {
   // Sélectionne tous les éléments à animer
