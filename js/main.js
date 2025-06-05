@@ -40,12 +40,11 @@ $(document).on("keydown", function (e) {
   if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
     window.location.href = "includes/reset.php";
   }
-  if (e.key === "Escape") {
-    // Vérifie si la touche Échap est pressée
-    const closeButton = $(".visionner:visible").find(".close-visionner"); // Trouve le bouton close dans le visionneur visible
-    if (closeButton.length > 0) {
-      closeButton.trigger("click"); // Simule un clic sur le bouton close
-    }
+  if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+    // Ferme tous les visionneurs ouverts
+    $(".visionner:visible").each(function () {
+      $(this).find(".close-visionner").trigger("click");
+    });
   }
 });
 $(document).ready(function () {
@@ -333,6 +332,7 @@ $(".close-visionner").click(function (event) {
   const slide = $(this).closest(".slides"); // Récupère la slide parente
   const info = slide.find(".info"); // Récupère l'élément .info de la slide
   const visionner = slide.find(".visionner");
+  visionner.find("iframe").remove(); // Nettoie l'iframe
   $(".visionner").fadeOut(400);
   playArirangAudio();
   $("body").css("overflow", "auto");
@@ -343,40 +343,50 @@ $(".close-visionner").click(function (event) {
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 });
 
+let vimeoPlayer = null;
 
 $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   event.stopPropagation();
   stopArirangAudio();
   const slide = $(this).closest(".slides");
   const visionner = slide.find(".visionner");
+  const vimeoId = $(this).data("vimeo");
+  const lang = $(this).data("lang") || "fr";
+  const vimeoUrl = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&texttrack=${lang}`;
+
+  // Supprime tout iframe existant dans le visionneur
+  visionner.find("iframe").remove();
+
+  // Crée et injecte le nouvel iframe
+  const iframe = $(`<iframe src="${vimeoUrl}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`);
+  visionner.append(iframe);
+
+  // Détruit l'ancien player Vimeo s'il existe
+  if (vimeoPlayer) {
+    vimeoPlayer.unload().catch(()=>{});
+    vimeoPlayer = null;
+  }
+
+  // Crée un nouveau player Vimeo et attache l'event 'ended'
+  vimeoPlayer = new Vimeo.Player(iframe[0]);
+  vimeoPlayer.on('ended', function () {
+    visionner.fadeOut(400, function () {
+      $("body").css("overflow", "auto");
+      const info = slide.find('.info');
+      info.fadeIn(2000);
+      slide.find("h2").addClass("move");
+      slide.find("video").addClass("flou");
+      slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+      slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+    });
+  });
+
   visionner.fadeIn(400, function () {
     $("body").css("overflow", "hidden");
     slide.find(".info").fadeOut(0);
   }).css("display", "flex");
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
-$(function () {
-  $('.visionner iframe').each(function () {
-    // Crée un player Vimeo pour chaque iframe
-    let player = new Vimeo.Player(this);
-
-    player.on('ended', function () {
-      // Ferme le visionneur quand la vidéo est terminée
-      const $visionner = $(this.element).closest('.visionner');
-      const $slide = $visionner.closest('.slides');
-      const $info = $slide.find('.info');
-      $visionner.fadeOut(400, function () {
-        $("body").css("overflow", "auto");
-        // Affiche l'info comme lors du clic sur la croix
-        $info.fadeIn(2000);
-        $slide.find("h2").addClass("move");
-        $slide.find("video").addClass("flou");
-        $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-        $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-      });
-    });
-  });
-});
 
 $(function () {
   // Observer pour fermer l'info quand la slide sort du viewport
