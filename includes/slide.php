@@ -42,24 +42,28 @@ foreach ($slides as $slide) {
     echo '</video>';
 
     if ($isFirst) {
+        // Récupère l'ID Vimeo
+        $vimeoId = substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1);
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
-        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      
         echo '</div>';
         echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
-        echo '<a class="visionner-trigger visionner-trigger-h3">' . getTranslation("index_docufull", $lang) . '</a>';
+        // Ajoute les data-attributes ici :
+        echo '<a class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</a>';
     } else {
+        $vimeoId = substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1);
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
-        echo '<iframe src="https://player.vimeo.com/video/' . substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1) . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+        echo '<iframe src="https://player.vimeo.com/video/' . $vimeoId . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
-        echo '<h2 class="visionner-trigger">' . $slide["chapitre"] . '</h2>';
+        // Ajoute les data-attributes ici :
+        echo '<h2 class="visionner-trigger" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . $slide["chapitre"] . '</h2>';
         echo '<div class="sliderButton">';
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
     }
-
     echo '<div class="info">';
     echo '<div>' . $slide["info"] . '</div>';
     echo '</div>';
