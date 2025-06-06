@@ -1,15 +1,14 @@
+
 header {
   position: fixed;
-  top: 10%;
+  top: 0;
+  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: flex-end; /* Aligne les éléments à droite */
-  padding: 10px 20px;
   z-index: 1000;
-  background: none; /* Pas de fond */
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 header.hide-header {
   opacity: 0;
   pointer-events: none;
@@ -18,9 +17,10 @@ header.hide-header {
   position: fixed;
   top: 5%;
   right: 40px;
+
   display: flex;
   align-items: center;
-  gap: 30px; /* Espacement entre le bouton et le menu burger */
+  gap: 30px; 
   z-index: 1000;
 }
 
@@ -55,10 +55,14 @@ header.hide-header {
 }
 /* Language selector */
 .language-selector {
-  display: flex;
+ display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 20px;
+
+  /* Ancien code : font-size: 20px; */
+  /* Nouveau code : */
+  font-size: clamp(16px, 1.2vw, 22px);
+
   font-family: "Figtree", sans-serif;
   color: #fff;
   user-select: none;
@@ -157,21 +161,24 @@ header.hide-header {
 
 
 /* --------------------- MENU VOLET ------------------------------------------- */
+/* Dans css/navbar.css */
+
 .menu-volet {
   position: fixed;
   top: 0;
   right: 0;
-  width: 60%;
+  width: 60%; /* Conserve la largeur de base */
+  max-width: 1100px; /* Ajout : Limite la largeur max sur très grands écrans */
   height: 100vh;
-  background-color: #050d1e; /* Fond noir semi-transparent */
-  z-index: 999; /* Au-dessus du header */
-  transform: translateX(100%); /* Cache le volet initialement */
-  transition: transform 0.3s ease-in-out; /* Animation de transition */
+  background-color: #050d1e;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
   display: flex;
-  flex-direction: column; /* Change la direction pour empiler les éléments */
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Aligne le contenu en haut */
-  padding-top: 20px; /* Ajoute un espace en haut */
+  justify-content: flex-start;
+  padding-top: 20px;
 }
 
 .menu-volet.open {
@@ -181,25 +188,27 @@ header.hide-header {
 .menu-volet-content {
   margin-top: 10%;
   width: 80%;
-  max-width: 1200px; /* Ajuste la largeur maximale */
+  max-width: 1200px;
   display: flex;
-  flex-direction: row; /* Aligne les éléments horizontalement */
-  justify-content: space-around; /* Distribue l'espace entre les éléments */
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start; /* Aligne les items par le haut */
   color: white;
-  align-items: center; /* Centre verticalement les éléments */
+  gap: 20px; /* Espace entre les items */
 }
 
 .menu-video-item {
-  width: 30%; /* Ajuste la largeur de chaque élément vidéo */
-  margin: 10px;
+  flex: 1 1 200px; /* flex-grow, flex-shrink, flex-basis. Permet de rétrécir mais pas en dessous de 200px. */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Aligne les éléments à gauche */
+  align-items: center; /* Centre la vidéo et le texte à l'intérieur */
 }
 
 .menu-video {
   width: 100%;
-  max-height: 150px; /* Ajuste la hauteur maximale des vidéos */
+  height: auto;
+  aspect-ratio: 16 / 9; /* Garde le format vidéo, très important */
+  min-height: 80px; /* Empêche la vidéo de devenir trop petite */
   object-fit: cover;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -210,10 +219,13 @@ header.hide-header {
 }
 
 .menu-volet-content h4 {
-  font-size: 1em;
+  /* La police devient fluide avec une limite basse très faible */
+  font-size: clamp(0.75rem, 1.5vw, 1em);
   font-family: "Figtree", sans-serif;
-  margin-top: 5px;
-  text-align: left; /* Aligne le texte à gauche */
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+  white-space: normal; /* Permet au texte de passer à la ligne si besoin */
 }
 
 .menu-links {
@@ -313,9 +325,6 @@ header.hide-header {
 }
 /* ----------------------------- LOGO ------------------------ */
 .logo-link {
-  position: absolute;
-  top: 5%;
-  left: 20px;
   z-index: 1000;
   display: flex;
   align-items: center;

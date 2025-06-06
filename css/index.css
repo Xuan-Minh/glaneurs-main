@@ -22,7 +22,6 @@ h1,
 h2,
 a.visionner-trigger-h3 {
   font-family: "Libre Baskerville", serif;
-  font-size: 5em;
   position: absolute;
   color: white;
   top: 40%;
@@ -32,6 +31,23 @@ a.visionner-trigger-h3 {
   z-index: 10;
   transition: top 1.5s ease-in-out, left 1.5s ease-in-out,
     font-size 1.5s ease-in-out, opacity 1.5s ease-in-out;
+}
+h1,
+h2 {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(2rem, 5vw, 4em);
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  transition: top 1.5s ease-in-out, left 1.5s ease-in-out, opacity 1.5s ease-in-out;
+  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
+
+  /* --- AJOUTS --- */
+  white-space: nowrap;      /* Empêche le texte de passer à la ligne */
 }
 h2,
 a.visionner-trigger-h3 {
@@ -180,8 +196,11 @@ a.visionner-trigger-h3:hover::after {
   display: none;
   font-family: "figtree";
   font-size: 1.2em;
-}
 
+  /* Ajouts pour la robustesse */
+  min-width: 250px; /* Empêche le bloc de devenir illisiblement étroit */
+  max-width: 450px; /* Empêche le bloc d'être démesurément large sur écrans 4K */
+}
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
 .point1,
 .point2 {
