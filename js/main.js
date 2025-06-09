@@ -116,6 +116,24 @@ window.addEventListener("visibilitychange", function () {
     window.addEventListener("pageshow", function () {
       $("#transition-overlay").removeClass("active").addClass("hide");
     });
+
+
+     $(".menu-video-item").on("mouseenter", function () {
+    const video = $(this).find(".menu-video")[0];
+    if (video) {
+      video.play().catch(error => {
+        // Gère les erreurs potentielles si l'autoplay est bloqué
+        // console.warn("Video play被阻止:", error);
+      });
+    }
+  });
+
+  $(".menu-video-item").on("mouseleave", function () {
+    const video = $(this).find(".menu-video")[0];
+    if (video) {
+      video.pause();
+    }
+  });
   });
 
   // ----------------------------------------------- LOADING SCREEN ANIMATION ---------------------------------- //

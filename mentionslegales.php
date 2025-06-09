@@ -25,6 +25,12 @@
     <div> contact@mastercmw.com</div>
     <div> 01 60 95 71 79</div>
 
+    <h3><?php echo getTranslation("mentionslegales_conception", $lang) ?><br></h3>
+    <div> Sakina DOUIOU, Ines DOS SANTOS, Sarah CROS, Xuan-Minh TRAN</div>
+
+    <h3><?php echo getTranslation("mentionslegales_dvt", $lang) ?><br></h3>
+    <div> Xuan-Minh TRAN</div>
+
     <h3><?php echo getTranslation("mentionslegales_hebergeur_titre", $lang) ?><br></h3>
     <div> <?php echo getTranslation("mentionslegales_hebergeur_nom", $lang) ?><br>
       <?php echo getTranslation("mentionslegales_hebergeur_adresse_ip", $lang) ?><br>

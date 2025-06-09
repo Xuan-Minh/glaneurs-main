@@ -41,9 +41,10 @@
                 "slide" => 3
             )
         );
-        foreach ($videoSources as $video) {
+       foreach ($videoSources as $video) {
             echo '<div class="menu-video-item" data-slide="' . $video["slide"] . '">';
-            echo '<video src="' . $video["src"] . '" autoplay muted loop class="menu-video"></video>';
+            // Retire autoplay d'ici :
+            echo '<video src="' . $video["src"] . '" muted loop class="menu-video"></video>';
             echo '<h4>' . $video["title"] . '</h4>';
             echo '</div>';
         }
