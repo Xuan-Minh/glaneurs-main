@@ -20,25 +20,25 @@
     </div>
 
     <div class="portraits-container">
-        <div class="portrait-section section1" data-target="#detail1" data-audio="audio/ow_harmonica.mp3">
+        <div class="portrait-section section1" data-target="#detail1" data-audio="audio/arirang_bass.mp3">
             <video autoplay muted loop class="portrait-video section1-video">
                 <source src="video/glaneuse-test.mov" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></div>
         </div>
-        <div class="portrait-section section2" data-target="#detail2" data-audio="audio/ow_banjo.mp3">
+        <div class="portrait-section section2" data-target="#detail2" data-audio="audio/arirang_harp.mp3">
             <video autoplay muted loop class="portrait-video section2-video">
                 <source src="video/lee-test.mov" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_lee", $lang); ?></div>
         </div>
-        <div class="portrait-section section3" data-target="#detail3" data-audio="audio/ow_whistle.mp3">
+        <div class="portrait-section section3" data-target="#detail3" data-audio="audio/arirang_piano.mp3">
             <video autoplay muted loop class="portrait-video section3-video">
                 <source src="video/arirang-test.mov" type="video/mp4">
             </video>
             <div class="portrait-name">Monsieur Arirang-song</div>
         </div>
-        <div class="portrait-section section4" data-target="#detail4" data-audio="audio/ow_flute.mp3">
+        <div class="portrait-section section4" data-target="#detail4" data-audio="audio/arirang_oboe.mp3">
             <video autoplay muted loop class="portrait-video section4-video">
                 <source src="video/glaneuse-test.mov" type="video/mp4">
             </video>

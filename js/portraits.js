@@ -103,11 +103,11 @@ window.addEventListener("scroll", function removeActiveOnTop() {
 // ---------------- SONS PORTRAITS ---------------- //
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const files = [
-  'audio/ow_full.mp3',         // ambiance globale
-  'audio/ow_harmonica.mp3',    // portrait 1
-  'audio/ow_banjo.mp3',        // portrait 2
-  'audio/ow_whistling.mp3',    // portrait 3
-  'audio/ow_flute.mp3'         // portrait 4
+  'audio/arirang_full.mp3',         // ambiance globale
+  'audio/arirang_bass.mp3',    // portrait 1
+  'audio/arirang_harp.mp3',        // portrait 2
+  'audio/arirang_piano.mp3',    // portrait 3
+  'audio/arirang_oboe.mp3'         // portrait 4
 ];
 
 let buffers = [];
@@ -126,7 +126,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0 : 0; // ambiance à 0.4, solos à 0
+    gain.gain.value = (i === 0) ? 0 : 0.9; // ambiance à 0.4, solos à 0
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -202,7 +202,7 @@ $(document).on('mouseleave', function (e) {
   }
 });
 // ----------------------- VOLUME ------------------------ //
-let masterVolume = 0.05; // même valeur que ci-dessus
+let masterVolume = 0.9; // même valeur que ci-dessus
 $('#volumeRange').val(masterVolume); 
 
 $('#volumeRange').on('input', function () {
