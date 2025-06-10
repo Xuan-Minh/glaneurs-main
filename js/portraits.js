@@ -126,7 +126,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0 : 0.9; // ambiance à 0.4, solos à 0
+    gain.gain.value = (i === 0) ? 0 : 0.6; // ambiance à 0.4, solos à 0
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -202,7 +202,7 @@ $(document).on('mouseleave', function (e) {
   }
 });
 // ----------------------- VOLUME ------------------------ //
-let masterVolume = 0.9; // même valeur que ci-dessus
+let masterVolume = 0.6; // même valeur que ci-dessus
 $('#volumeRange').val(masterVolume); 
 
 $('#volumeRange').on('input', function () {
