@@ -33,7 +33,9 @@ body {
 .hidden {
   display: none;
 }
-h1,h2,a.visionner-trigger-h3 {
+h1,
+h2,
+a.visionner-trigger-h3 {
   font-family: "Libre Baskerville", serif;
   font-size: clamp(2rem, 4vw, 4em);
   position: absolute;
@@ -44,7 +46,7 @@ h1,h2,a.visionner-trigger-h3 {
   text-align: center;
   z-index: 10;
   max-width: 90%; /* Important pour que l'ellipsis fonctionne */
-  white-space: nowrap;      /* Empêche le texte de passer à la ligne */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
 }
 
 h2:hover,
@@ -68,7 +70,8 @@ a.visionner-trigger-h3 {
   display: inline-block;
 }
 
-h2::after, a.visionner-trigger-h3::after {
+h2::after,
+a.visionner-trigger-h3::after {
   content: "";
   position: absolute;
   bottom: -5px; /* Ajuste la position du soulignement */
@@ -84,7 +87,6 @@ a.visionner-trigger-h3:hover::after {
   width: 100%;
   transition: width 0.5s ease;
 }
-
 
 .visionner iframe {
   width: 90vw !important;
@@ -143,11 +145,11 @@ a.visionner-trigger-h3:hover::after {
 /* NOUVELLE CLASSE pour activer l'animation de transform */
 .slides h2.animate-transform {
   transition-property: transform, color; /* Cible transform et réaffirme color */
-  transition-duration: 1.5s, 0.3s;     /* 1.5s pour transform, 0.3s pour color */
-  transition-timing-function: cubic-bezier(0.4,0,0.2,1), ease; /* Fonctions respectives */
+  transition-duration: 1.5s, 0.3s; /* 1.5s pour transform, 0.3s pour color */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1), ease; /* Fonctions respectives */
 }
 .slides h2.move {
- transform: translate(-30vw,-50%);
+  transform: translate(-30vw, -50%);
 }
 .slides:first-child {
   scroll-snap-align: start;
@@ -160,6 +162,7 @@ a.visionner-trigger-h3:hover::after {
 }
 
 .info {
+  width: 40%;
   position: absolute;
   color: white;
   top: 30%;
@@ -167,7 +170,6 @@ a.visionner-trigger-h3:hover::after {
   z-index: 10;
   display: none;
   font-size: clamp(0.8rem, 1vw, 2em);
-  /* Ajouts pour la robustesse */
   min-width: 250px; /* Empêche le bloc de devenir illisiblement étroit */
   max-width: 450px; /* Empêche le bloc d'être démesurément large sur écrans 4K */
   margin-left: 10%;
@@ -269,17 +271,6 @@ a.visionner-trigger-h3:hover::after {
 /* Loading  */
 
 
-
-.container,
-.loading-screen,
-.loading-items,
-.slides {
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  box-sizing: border-box;
-}
 
 /* @media (max-width: 1400px) {
   html { font-size: 16px; }

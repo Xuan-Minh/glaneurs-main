@@ -3,7 +3,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  font-size: 2em;
   width: 100vw;
   height: 100vh; /* Utiliser vh pour la hauteur */
   background-color: #050d1e; /* Ajoute un fond noir semi-transparent pour assombrir */
@@ -14,7 +13,6 @@
   flex-direction: column;
   color: white; /* Pour que le texte soit visible */
   overflow: hidden; /* Important pour masquer le défilement horizontal */
-  /* filter: blur(5px); /* Retire l'effet de flou de l'écran de chargement */
 }
 .loading-screen::before {
   content: "";
@@ -48,8 +46,9 @@
   position: relative;
   z-index: 2;
   width: 100vw;
-  height: 100vh;
+  height: 100vh;  
 }
+
 .loading-item {
   width: 100%;
   height: 100%;
@@ -76,29 +75,24 @@
   margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
 
-.def_texte {
-  font-size: 0.7em !important;
-  font-style: italic;
-  font-family: "Figtree", sans-serif;
-}
-
-/* Style spécifique pour la première page */
-.loading-item#loading-item1 {
-  justify-content: flex-start; /* Aligne le contenu en haut */
-  align-items: flex-start; /* Aligne le contenu à gauche */
-}
-
 .loading-item#loading-item1 .loading-content {
-  margin-left: 10%; /* Ajoute un retrait à la première div */
   text-align: left; /* Aligne le texte à gauche */
   font-size: 1em; /* Ajuste la taille de la police */
+   margin-bottom: 0; /* Ajoute un espace en bas du texte */
 }
 
-.loading-items {
-  position: relative;
-  width: 100;
-  height: 100vh;
-  z-index: 2; /* Place le contenu au-dessus de la vidéo */
+.loading-item #loading-item1 .loading-text {
+  text-align: left;
+  font-size: 2em; /* Ajuste la taille de la police */
+  margin-bottom: 20px; /* Ajoute un espace en bas du texte */
+}
+
+.loading-item#loading-item1 {
+  text-align: left; /* Aligne le texte à gauche */
+  font-size: 1.5em; /* Ajuste la taille de la police */
+  margin-bottom: 10px; /* Réduit l'espace en bas du texte */
+  justify-content: center; /* Aligne le contenu en haut */
+  align-items: center; /* Aligne le contenu à gauche */
 }
 
 .loading-item #loading-item3 .loading-text {
@@ -106,18 +100,7 @@
   flex-direction: column;
   align-items: center;
 }
-.loading-item #loading-item1 .loading-text {
-  text-align: left;
-  font-size: 2em; /* Ajuste la taille de la police */
-  margin-bottom: 20px; /* Ajoute un espace en bas du texte */
-}
 
-.loading-item #loading-item3 .universites {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px; /* Ajoute un espace au-dessus des images */
-}
 .universites {
   display: flex;
   justify-content: space-evenly; /* Espace entre les images */
@@ -131,33 +114,13 @@
   margin: 0 20px; /* Ajoute un espace entre les images */
 }
 
-.loading-item #loading-item3 .universites img:nth-child(1) {
-  height: 150px; /* Ajuste la hauteur des images */
-  margin: 0 20px; /* Ajoute un espace entre les images */
-}
-
-.loading-item #loading-item3 .universites img:nth-child(2) {
-  height: 50px; /* Réduit la hauteur du second logo */
-  width: auto; /* Garde les proportions */
-}
 .universites > img:nth-child(2) {
   height: 100px; /* Réduit la hauteur du second logo */
   width: auto; /* Garde les proportions */
   margin: 0;
 }
 
-.loading-item#loading-item1 {
-  text-align: left; /* Aligne le texte à gauche */
-  font-size: 1.5em; /* Ajuste la taille de la police */
-  margin-bottom: 10px; /* Réduit l'espace en bas du texte */
-  justify-content: center; /* Aligne le contenu en haut */
-  align-items: center; /* Aligne le contenu à gauche */
-}
 
-.loading-item#loading-item1 .loading-content:first-child {
-  margin-bottom: 0; /* Ajoute un espace en bas du texte */
-  /* margin-left: 15%; Ajoute un retrait à la première div */
-}
 /* -------------------- ENTER ---------------------------------------- */
 .loading-button {
   width: 100%;

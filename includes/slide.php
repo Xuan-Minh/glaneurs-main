@@ -64,9 +64,8 @@ foreach ($slides as $slide) {
         echo '<div class="point2 empty"></div>';
         echo '</div>';
     }
-    echo '<div class="info">';
-    echo '<div>' . $slide["info"] . '</div>';
-    echo '</div>';
+    echo '<div class="info">' . $slide["info"] . '</div>';
+
     echo '</div>';
 
     $index += 1;
