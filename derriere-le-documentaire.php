@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <audio id="audio-arirang" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
     <?php include "includes/header.php"; ?>
 
     <section class="dld-hero">
