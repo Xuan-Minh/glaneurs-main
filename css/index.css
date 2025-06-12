@@ -1,10 +1,14 @@
 /* ------------------------ GENERAL ------------------------------------------- */
 html,
 body {
+  width: 100vw;
+  height: 100vh;
+  min-width: 320px;
+  min-height: 400px;
   font-family: "Figtree", sans-serif;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Empêche le défilement horizontal */
+  overflow: hidden; /* Empêche le défilement horizontal */
   box-sizing: border-box;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -13,97 +17,6 @@ body {
   background-color: #050d1e; /* Fond noir */
 }
 
-body {
-  width: 100%;
-  height: 100vh;
-}
-
-h1,
-h2,
-a.visionner-trigger-h3 {
-  font-family: "Libre Baskerville", serif;
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  transition: top 1.5s ease-in-out, left 1.5s ease-in-out,
-    font-size 1.5s ease-in-out, opacity 1.5s ease-in-out;
-}
-h1,
-h2 {
-  font-family: "Libre Baskerville", serif;
-  font-size: clamp(2rem, 5vw, 4em);
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  transition: top 1.5s ease-in-out, left 1.5s ease-in-out, opacity 1.5s ease-in-out;
-  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
-
-  /* --- AJOUTS --- */
-  white-space: nowrap;      /* Empêche le texte de passer à la ligne */
-}
-h2,
-a.visionner-trigger-h3 {
-  cursor: pointer;
-}
-h2:hover,
-a.visionner-trigger-h3:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
-  transition: color 0.3s ease; /* Transition pour la couleur */
-  text-decoration: none; /* Pas de soulignement par défaut */
-}
-h2 {
-  position: relative;
-  display: inline-block; /* Nécessaire pour que le soulignement s'adapte au texte */
-  cursor: pointer;
-}
-
-h2::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #ddd;
-  transition: width 0.5s ease;
-  z-index: -1;
-}
-
-h2:hover::after {
-  width: 100%;
-}
-
-a.visionner-trigger-h3 {
-  font-family: "Figtree";
-  font-size: 1.5em;
-  font-weight: 400;
-  top: 60%;
-  position: relative; /* Ajout de position relative */
-  display: inline-block; /* Important pour que la largeur s'adapte au contenu */
-}
-
-a.visionner-trigger-h3::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
-  left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  transition: width 0.5s ease; /* Animation de largeur */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
-}
-a.visionner-trigger-h3:hover::after {
-  width: 100%; /* Soulignement complet au survol */
-}
 .container {
   width: 100%;
   height: 100vh;
@@ -120,6 +33,59 @@ a.visionner-trigger-h3:hover::after {
 .hidden {
   display: none;
 }
+h1,h2,a.visionner-trigger-h3 {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(2rem, 4vw, 4em);
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
+  white-space: nowrap;      /* Empêche le texte de passer à la ligne */
+}
+
+h2:hover,
+a.visionner-trigger-h3:hover {
+  color: #ddd; /* Légère modification de la couleur au survol */
+  transition: color 0.3s ease; /* Transition pour la couleur */
+  text-decoration: none; /* Pas de soulignement par défaut */
+  cursor: pointer;
+}
+h2 {
+  position: relative;
+  display: inline-block; /* Nécessaire pour que le soulignement s'adapte au texte */
+}
+
+a.visionner-trigger-h3 {
+  font-family: "Figtree";
+  font-size: clamp(1em, 2vw, 1.5em);
+  font-weight: 400;
+  top: 60%;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after, a.visionner-trigger-h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Ajuste la position du soulignement */
+  left: 0;
+  width: 0; /* Initialise la largeur à 0 */
+  height: 2px; /* Épaisseur du soulignement */
+  background-color: #ddd; /* Couleur du soulignement */
+  z-index: -1; /* Pour que le soulignement passe sous le texte */
+}
+
+h2:hover::after,
+a.visionner-trigger-h3:hover::after {
+  width: 100%;
+  transition: width 0.5s ease;
+}
+
+
 .visionner iframe {
   width: 90vw !important;
   max-width: 100vw;
@@ -170,16 +136,23 @@ a.visionner-trigger-h3:hover::after {
   left: 50%;
   top: 40%;
   transform: translate(-50%, -50%);
-  transition: transform 1.5s cubic-bezier(0.4,0,0.2,1), color 0.3s;
+  /* Transition par défaut UNIQUEMENT pour la couleur, PAS pour transform */
+  transition: color 0.3s ease;
 }
 
+/* NOUVELLE CLASSE pour activer l'animation de transform */
+.slides h2.animate-transform {
+  transition-property: transform, color; /* Cible transform et réaffirme color */
+  transition-duration: 1.5s, 0.3s;     /* 1.5s pour transform, 0.3s pour color */
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1), ease; /* Fonctions respectives */
+}
 .slides h2.move {
  transform: translate(-30vw,-50%);
 }
-
 .slides:first-child {
   scroll-snap-align: start;
 }
+
 .sliderButton {
   position: relative;
   margin: 0;
@@ -191,26 +164,24 @@ a.visionner-trigger-h3:hover::after {
   color: white;
   top: 30%;
   left: 60%;
-  right: 20%;
   z-index: 10;
   display: none;
-  font-family: "figtree";
-  font-size: 1.2em;
-
+  font-size: clamp(0.8rem, 1vw, 2em);
   /* Ajouts pour la robustesse */
   min-width: 250px; /* Empêche le bloc de devenir illisiblement étroit */
   max-width: 450px; /* Empêche le bloc d'être démesurément large sur écrans 4K */
+  margin-left: 10%;
+  margin-right: 10%;
 }
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
 .point1,
 .point2 {
-  width: 15px;
-  height: 15px;
+  width: clamp(10px, 1.8vw, 12px);
+  height: clamp(10px, 1.8vw, 12px);
   border-radius: 100%;
   border: 2px solid white;
   transition: background-color 0.3s ease-in-out;
 }
-
 .full {
   background-color: white;
 }
@@ -218,15 +189,14 @@ a.visionner-trigger-h3:hover::after {
   background-color: none;
   cursor: pointer;
 }
-
 .empty:hover {
   background-color: #ddd;
   cursor: pointer;
 }
 
 .slides > .sliderButton {
-  width: 4%;
-  min-width: 50px;
+  width: 5%;
+  min-width: 70px;
   height: auto;
   position: absolute;
   top: 80%;
@@ -235,7 +205,7 @@ a.visionner-trigger-h3:hover::after {
   text-align: center;
   z-index: 10;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 #transition-overlay {
   z-index: 10000; /* Plus haut que .loading-screen */
@@ -297,207 +267,42 @@ a.visionner-trigger-h3:hover::after {
   }
 }
 /* Loading  */
-/* ---------------------------------- LOADING ----------------------------------------------*/
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  font-size: 2em;
-  width: 100vw;
-  height: 100vh; /* Utiliser vh pour la hauteur */
-  background-color: #050d1e; /* Ajoute un fond noir semi-transparent pour assombrir */
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white; /* Pour que le texte soit visible */
-  overflow: hidden; /* Important pour masquer le défilement horizontal */
-  /* filter: blur(5px); /* Retire l'effet de flou de l'écran de chargement */
-}
-.loading-screen::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+
+
+
+.container,
+.loading-screen,
+.loading-items,
+.slides {
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place le pseudo-élément derrière le contenu */
-}
-.loading-screen .loading-items {
-  position: relative; /* Ajout de position relative */
-  width: 100%;
-  height: 100%;
-}
-.loading-screen video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1; /* Place la vidéo derrière le contenu */
-}
-.loading-titre {
-  font-family: "Libre Baskerville", serif;
-  font-size: 2em !important;
-  font-weight: 400;
-}
-.loading-items {
-  position: relative;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* Centre verticalement */
-  align-items: center;       /* Centre horizontalement */
-}
-.loading-item {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* Centre verticalement */
-  align-items: center;       /* Centre horizontalement */
-  font-size: 1.5em;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  position: absolute;
-  top: 0; left: 0;
-}
-.loading-item.active {
-  opacity: 1; /* Visible lorsqu'il est actif */
-}
-/* Style pour l'écran de chargement */
-.loading-content {
-  font-size: 1em;
-  width: 70%;
-  height: 10%;
-  text-align: center;
-  margin-bottom: 20px; /* Ajoute une marge en bas du texte */
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
 }
 
-.def_texte {
-  font-size: 0.7em !important;
-  font-style: italic;
-  font-family: "Figtree", sans-serif;
+/* @media (max-width: 1400px) {
+  html { font-size: 16px; }
 }
-
-/* Style spécifique pour la première page */
-.loading-item#loading-item1 {
-  justify-content: flex-start; /* Aligne le contenu en haut */
-  align-items: flex-start; /* Aligne le contenu à gauche */
+@media (max-width: 900px) {
+  html { font-size: 12px; }
 }
-
-.loading-item#loading-item1 .loading-content {
-  margin-left: 10%; /* Ajoute un retrait à la première div */
-  text-align: left; /* Aligne le texte à gauche */
-  font-size: 1em; /* Ajuste la taille de la police */
+@media (max-width: 700px), (max-height: 500px) {
+  body > *:not(.mobile-warning) { display: none !important; }
+  .mobile-warning {
+    display: flex !important;
+    position: fixed;
+    z-index: 999999;
+    background: #050d1e;
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5vw;
+  }
 }
-
-.loading-items {
-  position: relative;
-  width: 100;
-  height: 100vh;
-  z-index: 2; /* Place le contenu au-dessus de la vidéo */
-}
-
-.loading-item #loading-item3 .loading-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.loading-item #loading-item1 .loading-text {
-  text-align: left;
-  font-size: 2em; /* Ajuste la taille de la police */
-  margin-bottom: 20px; /* Ajoute un espace en bas du texte */
-}
-
-.loading-item #loading-item3 .universites {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px; /* Ajoute un espace au-dessus des images */
-}
-.universites {
-  display: flex;
-  justify-content: space-evenly; /* Espace entre les images */
-  width: 100%;
-  margin-top: 10px; /* Ajoute un espace au-dessus des images */
-  align-items: center;
-}
-.universites img {
-  height: 150px; /* Ajuste la hauteur des images */
-  width: auto; /* Garde les proportions */
-  margin: 0 20px; /* Ajoute un espace entre les images */
-}
-
-.loading-item #loading-item3 .universites img:nth-child(1) {
-  height: 150px; /* Ajuste la hauteur des images */
-  margin: 0 20px; /* Ajoute un espace entre les images */
-}
-
-.loading-item #loading-item3 .universites img:nth-child(2) {
-  height: 50px; /* Réduit la hauteur du second logo */
-  width: auto; /* Garde les proportions */
-}
-.universites > img:nth-child(2) {
-  height: 100px; /* Réduit la hauteur du second logo */
-  width: auto; /* Garde les proportions */
-  margin: 0;
-}
-
-.loading-item#loading-item1 {
-  text-align: left; /* Aligne le texte à gauche */
-  font-size: 1.5em; /* Ajuste la taille de la police */
-  margin-bottom: 10px; /* Réduit l'espace en bas du texte */
-  justify-content: center; /* Aligne le contenu en haut */
-  align-items: center; /* Aligne le contenu à gauche */
-}
-
-.loading-item#loading-item1 .loading-content:first-child {
-  margin-bottom: 0; /* Ajoute un espace en bas du texte */
-  /* margin-left: 15%; Ajoute un retrait à la première div */
-}
-/* -------------------- ENTER ---------------------------------------- */
-.loading-button {
-  width: 100%;
-  font-size: 0.5em;
-  display: flex;
-  justify-content: center;
-}
-#enter-button {
-  background-color: rgba(0, 0, 0, 0);
-  font-family: "Figtree", sans-serif;
-  font-size: 1.5em;
-  color: white;
-  margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  position: relative; /* Ajout de position relative */
-  transition: color 0.3s ease; /* Transition pour la couleur */
-}
-
-#enter-button::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
-  left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  transition: width 0.5s ease; /* Animation de largeur */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
-}
-
-#enter-button:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
-}
-
-#enter-button:hover::after {
-  width: 100%; /* Soulignement complet au survol */
-}
+.mobile-warning { display: none; } */
