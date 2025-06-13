@@ -162,18 +162,23 @@ a.visionner-trigger-h3:hover::after {
 }
 
 .info {
-  width: 40%;
-  position: absolute;
-  color: white;
-  top: 30%;
-  left: 60%;
+ position: absolute;
+color: white;
+  top: 30%; /* Votre position verticale préférée */
+  right: 10%; /* Positionne le bloc à 5% du bord droit du parent */
+             /* Vous pouvez ajuster cette valeur (ex: 10%, 20px) */
+  
+  width: 35%; /* Une largeur de base, par exemple 35% du parent */
+              /* Ajustez cette valeur en fonction de la quantité de texte typique */
+  min-width: 150px; /* VOTRE TAILLE MINIMALE : empêche le bloc d'être trop étroit */
+                    /* Augmentez cette valeur si 250px est encore trop petit pour votre texte */
+  max-width: 450px; /* Limite la largeur maximale */
+
   z-index: 10;
-  display: none;
-  font-size: clamp(0.8rem, 1vw, 2em);
-  min-width: 250px; /* Empêche le bloc de devenir illisiblement étroit */
-  max-width: 450px; /* Empêche le bloc d'être démesurément large sur écrans 4K */
-  margin-left: 10%;
-  margin-right: 10%;
+  display: none; /* Géré par JavaScript */
+  font-size: clamp(0.8rem, 1.1vw, 1.2em); /* J'ai légèrement ajusté le clamp pour la lisibilité, 
+                                             1vw peut devenir très petit, et 2em très grand. À tester. */
+  line-height: 1.5;
 }
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
 .point1,

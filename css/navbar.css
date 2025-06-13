@@ -222,7 +222,10 @@ header.hide-header {
 }
 
 .menu-volet-content {
-  margin-top: 10%;
+ /* margin-top: 10%; */ /* Remplacé par padding-top pour plus de contrôle */
+  padding-top: 5vh; /* Espace en haut relatif à la hauteur de la fenêtre */
+                     /* Vous pouvez aussi utiliser une valeur en px, ex: 40px */
+   padding-bottom: 3vh; /* Espace en bas pour le contenu */
   width: 80%;
   max-width: 1200px;
   display: flex;
@@ -299,7 +302,7 @@ header.hide-header {
   color: white;
   text-decoration: none;
   font-family: "Figtree", sans-serif;
-  font-size: 1.7em; /* Agrandit la taille de la police */
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem); /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
   transition: color 0.3s ease;
