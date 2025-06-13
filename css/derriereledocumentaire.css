@@ -42,7 +42,7 @@
   height: 100vh;
 }
 .dld-title h2 {
-  font-size: 4vw;
+  font-size: clamp(2rem, 4vw, 3.5rem);
   margin: 0;
   padding: 0 2vw;
   color: #fff;
@@ -104,19 +104,21 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: 10%;
+  box-sizing: border-box; /* S'assurer que le padding est inclus */
 }
 .team-name {
-  font-size: 1.3em;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: bold;
   margin-bottom: 0.5em;
   letter-spacing: 0.02em;
 }
 .team-role {
-  font-size: 1em;
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
   opacity: 0.85;
+  line-height: 1.3;
 }
 .team-portfolio {
-  font-size: 1em;
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
   opacity: 0.85;
   text-align: center;
 }
@@ -149,16 +151,16 @@
 
 .team-portfolio {
   position: absolute;
-  right: 25%;
-  bottom: 25%;
+  right: 10%; /* Ajusté pour correspondre au padding */
+  bottom: 10%;/* Ajusté pour correspondre au padding */
   display: inline-block;
-  font-size: 1em;
+  /* font-size: 1em; */ /* Déjà défini plus haut avec clamp */
   color: #fff;
   text-decoration: none;
   transition: color 0.3s;
-  opacity: 0.85;
+  /* opacity: 0.85; */ /* Déjà défini plus haut */
   text-align: right;
-  margin: 1em auto;
+  /* margin: 1em auto; */ /* Retiré pour un positionnement plus précis */
   left: auto;
   transform: none;
 }
@@ -184,24 +186,80 @@
 /* ---------------------------------- */
 
 .dld-remerciements {
-  height: 100vh;
+  height: auto; /* Changé de 100vh à auto pour s'adapter au contenu */
+  min-height: 50vh; /* Assure une hauteur minimale */
   width: 90vw;
   max-width: 900px;
-  margin: 10vh auto 3vh auto;
+  margin: 10vh auto 8vh auto; /* Augmenté la marge en bas */
   color: #fff;
   text-align: center;
   font-family: "Figtree", sans-serif;
+  padding-bottom: 5vh; /* Ajout d'un padding en bas */
 }
 .dld-remerciements h2 {
-  font-size: 2.2em;
+  /* font-size: 2.2em; */
+  font-size: clamp(1.8rem, 3vw, 2.5rem); /* Responsive font size */
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
   letter-spacing: 0.02em;
 }
 .dld-remerciements p {
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
+  font-size: clamp(1rem, 1.8vw, 1.3rem); /* Responsive font size */
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
+  line-height: 1.6; /* Améliore la lisibilité */
+}
+
+/* Media Query pour tablettes et écrans plus petits */
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr); /* Passage à 2 colonnes */
+    gap: 2.5vw; /* Peut-être augmenter légèrement le gap relatif */
+  }
+  .team-member {
+    min-width: 160px; /* Peut être légèrement réduit si nécessaire */
+  }
+  .team-face, .team-info {
+    padding: 8%; /* Réduire légèrement le padding interne */
+  }
+  .team-portfolio {
+    right: 8%;
+    bottom: 8%;
+  }
+}
+
+@media (max-width: 576px) { /* Pour les écrans encore plus petits, si besoin d'ajustements fins */
+  .team-grid {
+    gap: 20px; /* Passage à un gap fixe pour plus de contrôle */
+  }
+  .team-member {
+    min-width: 150px;
+  }
+  .team-face, .team-info {
+    padding: 15px; /* Padding fixe */
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Ajuster la base de police pour les petits écrans */
+  }
+  .team-name {
+    font-size: clamp(1rem, 2.8vw, 1.3rem);
+  }
+  .team-role {
+    font-size: clamp(0.8rem, 2.2vw, 1rem);
+  }
+  .team-portfolio {
+    font-size: clamp(0.8rem, 2.2vw, 1rem);
+    right: 15px;
+    bottom: 15px;
+  }
+  .dld-title h2 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+  }
+  .dld-remerciements h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  .dld-remerciements p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  }
 }
