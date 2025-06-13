@@ -364,39 +364,95 @@ document.addEventListener('click', function(e) {
   setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
 });
 
-// Animation de la ligne blanche dans le header (uniquement sur l'index)
-if ($('.sound-wave-header .sound-wave-line').length && typeof playArirangAudio === "function") {
-  let wavePhase = 0;
-  let lastVol = 0;
 
-  function updateHeaderSoundWave(volume) {
-    const amplitude = 8 + 12 * Math.pow(volume, 1.3); // amplitude adaptée
-    const length = 120;
-    const steps = 32;
-    const points = [];
-    wavePhase += 0.045 + 0.01 * volume;
+document.addEventListener('DOMContentLoaded', () => {
+    const audioContainer = document.getElementById('global-audio-control-container');
+    const waveCanvas = document.getElementById('wave');
+    const iconSoundOn = document.getElementById('icon-sound-on');
+    const iconSoundOff = document.getElementById('icon-sound-off');
 
-    for (let i = 0; i <= steps; i++) {
-      const x = (i / steps) * length;
-      const y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.2 + volume) + wavePhase) * amplitude;
-      points.push(`${x},${y}`);
+    if (!audioContainer || !waveCanvas || !iconSoundOn || !iconSoundOff) {
+        // console.warn("Éléments du contrôle audio global non trouvés.");
+        return;
     }
-    $(".sound-wave-header .sound-wave-line").attr("points", points.join(" "));
-    lastVol = volume;
-  }
 
-  function animateHeaderSoundWave() {
-    // Utilise le volume de l'audio principal (Arirang)
-    let audio = document.getElementById("audio-arirang");
-    let vol = 0;
-    if (audio && !audio.paused) {
-      vol = audio.volume; // ou utilise une variable volume si tu fais un fade
+    const ctx = waveCanvas.getContext('2d');
+    const canvasWidth = waveCanvas.width;
+    const canvasHeight = waveCanvas.height;
+    let isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true'; // Lire l'état sauvegardé
+    let animationFrameId;
+    let waveXOffset = 0;
+
+    function drawFlatLine() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.beginPath();
+        ctx.moveTo(0, canvasHeight / 2);
+        ctx.lineTo(canvasWidth, canvasHeight / 2);
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
     }
-    updateHeaderSoundWave(vol);
-    requestAnimationFrame(animateHeaderSoundWave);
-  }
 
-  animateHeaderSoundWave();
-}
+    function drawMovingWave() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.beginPath();
+        ctx.moveTo(0, canvasHeight / 2);
+        for (let x = 0; x < canvasWidth; x++) {
+            const y = canvasHeight / 2 + Math.sin((x + waveXOffset) * 0.4) * (canvasHeight / 3.5);
+            ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        waveXOffset += 0.3;
+        if (waveXOffset > Math.PI * 100) waveXOffset = 0; // Reset pour éviter des nombres trop grands
 
+        if (!isGloballyMuted) {
+            animationFrameId = requestAnimationFrame(drawMovingWave);
+        }
+    }
 
+    function updateAudioElements() {
+        const mediaElements = document.querySelectorAll('audio, video');
+        mediaElements.forEach(media => {
+            // Exclure la vidéo de l'écran de chargement qui doit toujours être mutée
+            if (media.closest('.loading-screen')) {
+                media.muted = true;
+            } else {
+                media.muted = isGloballyMuted;
+            }
+        });
+    }
+
+    function updateUI() {
+        if (isGloballyMuted) {
+            iconSoundOn.style.display = 'none';
+            iconSoundOff.style.display = 'block';
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            drawFlatLine();
+        } else {
+            iconSoundOn.style.display = 'block';
+            iconSoundOff.style.display = 'none';
+            drawMovingWave();
+        }
+        localStorage.setItem('isSiteMuted', isGloballyMuted); // Sauvegarder l'état
+    }
+
+    function toggleGlobalSound() {
+        isGloballyMuted = !isGloballyMuted;
+        updateAudioElements();
+        updateUI();
+    }
+
+    audioContainer.addEventListener('click', toggleGlobalSound);
+
+    // État initial au chargement de la page
+    updateUI();
+    updateAudioElements();
+
+    // Gérer les éléments médias ajoutés dynamiquement (plus avancé, optionnel pour l'instant)
+    // const observer = new MutationObserver(() => updateAudioElements());
+    // observer.observe(document.body, { childList: true, subtree: true });
+});

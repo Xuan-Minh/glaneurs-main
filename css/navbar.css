@@ -382,3 +382,28 @@ header.hide-header {
 .logo:hover {
   transform: scale(1.1); /* Agrandit légèrement le logo au survol */
 }
+
+#global-audio-control-container {
+  position: fixed; /* Ou 'absolute' si votre header est 'fixed' */
+  top: 20px; /* Ajustez selon votre design */
+  left: 20px; /* Ajustez selon votre design */
+  z-index: 30000; /* Doit être au-dessus des autres éléments */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: rgba(0,0,0,0.2); /* Optionnel pour la visibilité */
+  border-radius: 5px;
+}
+
+#global-audio-control-container svg {
+  width: 20px; /* Ajustez la taille */
+  height: 20px; /* Ajustez la taille */
+  fill: white; /* Couleur de l'icône */
+  margin-right: 8px; /* Espace entre l'icône et le canvas */
+}
+
+#wave {
+  /* Le canvas est petit, pas besoin de beaucoup de style ici */
+  vertical-align: middle; /* Pour un meilleur alignement avec l'icône */
+}
