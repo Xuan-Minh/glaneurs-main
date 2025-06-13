@@ -68,7 +68,6 @@
 }
 /* Style pour l'écran de chargement */
 .loading-content {
-  font-size: 1em;
   width: 70%;
   height: 10%;
   text-align: center;
@@ -77,7 +76,7 @@
 
 .loading-item#loading-item1 .loading-content {
   text-align: left; /* Aligne le texte à gauche */
-  font-size: 1em; /* Ajuste la taille de la police */
+  font-size: clamp(1em, 2vw, 2em);
    margin-bottom: 0; /* Ajoute un espace en bas du texte */
 }
 
@@ -102,36 +101,46 @@
 }
 
 .universites {
-  display: flex;
-  justify-content: space-evenly; /* Espace entre les images */
-  width: 100%;
-  margin-top: 10px; /* Ajoute un espace au-dessus des images */
-  align-items: center;
+ display: flex;
+  /* justify-content: space-evenly; */ /* Modifié ci-dessous */
+  justify-content: center; /* Pour centrer les logos à l'intérieur */
+  width: 80%; 
+  max-width: 600px; 
+  /* margin-top: 20px; */ /* Combiné dans la ligne margin ci-dessous */
+  /* align-self: center; */ /* Retiré car .loading-content n'est pas flex, remplacé par margin: auto */
+  margin: 20px auto 0 auto; /* Centre la div .universites horizontalement et conserve la marge haute */
+  align-items: center; /* Garde l'alignement vertical des logos */
+  gap: 30px; /* Ajoute un espace de 30px entre les logos. Ajustez cette valeur selon vos besoins. */
 }
+
 .universites img {
-  height: 150px; /* Ajuste la hauteur des images */
+  /* Taille responsive avec min, valeur préférée (basée sur vw), et max */
+  height: clamp(60px, 10vw, 150px);
   width: auto; /* Garde les proportions */
-  margin: 0 20px; /* Ajoute un espace entre les images */
+  margin: 0 20px; /* Ajuste l'espace entre les images */
+  object-fit: contain; /* S'assure que l'image entière est visible */
 }
 
 .universites > img:nth-child(2) {
-  height: 100px; /* Réduit la hauteur du second logo */
+  /* Le deuxième logo peut être un peu plus petit, en gardant la proportion */
+  height: clamp(40px, 8vw, 100px);
   width: auto; /* Garde les proportions */
-  margin: 0;
 }
-
+.loading-item#loading-item4{
+  font-size: clamp(1.5em, 2vw, 2em);
+}
 
 /* -------------------- ENTER ---------------------------------------- */
 .loading-button {
   width: 100%;
-  font-size: 0.5em;
+  font-size: clamp(1em, 2vw, 1.5em);
   display: flex;
   justify-content: center;
 }
-#enter-button {
+#enter-button { 
   background-color: rgba(0, 0, 0, 0);
   font-family: "Figtree", sans-serif;
-  font-size: 1.5em;
+  font-size: clamp(1em, 2vw, 2em);
   color: white;
   margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
   padding: 10px 20px;
