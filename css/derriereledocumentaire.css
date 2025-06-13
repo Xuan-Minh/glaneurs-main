@@ -1,7 +1,7 @@
 .dld-hero {
   position: relative;
-  width: 100vw;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -23,11 +23,15 @@
 }
 .dld-hero video {
   position: absolute;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translateX(-50%) translateY(-50%);
   object-fit: cover;
-  z-index: 1;
 }
 .dld-title {
   position: relative;
@@ -42,11 +46,11 @@
   height: 100vh;
 }
 .dld-title h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 4.5vw, 3.8rem); /* Ajustement du clamp pour une bonne lisibilité */
   margin: 0;
-  padding: 0 2vw;
+  padding: 0 3vw; /* Empêche le texte de toucher les bords sur petits écrans */
   color: #fff;
-  text-shadow: 0 2px 8px #000a;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 /* -------------------------- Membre de l'équipe --------------------------  */
 .team-grid {
