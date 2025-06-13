@@ -59,6 +59,12 @@ h2 {
   font-weight: bold;
   letter-spacing: 0.02em;
 }
+.page-intro h2 {
+  /* font-size: 2.2em; */
+  font-size: clamp(1.8rem, 3vw, 2.5rem); /* Exemple avec clamp */
+  margin-bottom: 0.5em;}
+
+
 p {
   font-size: 1.2em;
   font-weight: 400;

@@ -82,7 +82,7 @@
   text-align: center;
   color: white;
   font-family: "Libre Baskerville", serif;
-  font-size: 2em;
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem); /* Responsive font size */
   opacity: 0;
   transition: opacity 0.5s 0.15s;
   pointer-events: none;
@@ -114,17 +114,30 @@
   background: #050d1e;
   color: white;
   font-family: "Figtree", sans-serif;
-  font-size: 1.5em;
   padding: 40px 10vw;
   box-sizing: border-box;
 }
 .portrait-detail.active {
   display: flex;
 }
+.portrait-detail h2 {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(1.8rem, 4vw, 3rem); /* Responsive title */
+  margin-bottom: 0.7em;
+}
+
+.portrait-detail p {
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem); /* Responsive paragraph */
+  line-height: 1.6;
+  max-width: 65ch; /* Limite la largeur des lignes pour la lisibilité */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5em;
+}
 .back-to-portraits {
   margin-top: 40px;
-  padding: 12px 32px;
-  font-size: 1em;
+  padding: clamp(10px, 1.5vw, 14px) clamp(25px, 3vw, 35px);
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
   font-family: "Figtree", sans-serif;
   background: #222;
   color: #fff;
@@ -175,4 +188,71 @@
 }
 .portrait-detail {
   position: relative; /* pour le positionnement absolu du container */
+}
+
+
+
+/* Media Query pour tablettes et écrans plus petits */
+@media (max-width: 992px) {
+  .portrait-name {
+    font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+    bottom: 12%; /* Ajuster si besoin */
+  }
+
+  .portrait-section.active,
+  .portrait-section:hover {
+    flex: 2.2; /* Peut-être réduire légèrement l'expansion si c'est trop */
+  }
+
+  .portrait-detail {
+    padding: 30px 6vw;
+  }
+
+  .portrait-detail h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  }
+
+  .portrait-detail p {
+    font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .portrait-name {
+    font-size: clamp(1rem, 2.5vw, 1.6rem); /* Encore un peu plus petit sur mobile si besoin */
+    bottom: 10%;
+  }
+
+  .portrait-section.active,
+  .portrait-section:hover {
+    flex: 2; /* Réduire encore l'expansion */
+  }
+  
+  /* Optionnel: Si 4 sections sont trop nombreuses, vous pourriez envisager de les faire défiler horizontalement */
+  /* ou de passer à une grille 2x2, mais cela demanderait une refonte HTML/JS plus importante. */
+  /* Pour l'instant, on garde les 4 sections flex. */
+
+  .portrait-detail {
+    padding: 25px 5vw;
+  }
+  .portrait-detail h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+  .portrait-detail p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+  .back-to-portraits {
+    padding: clamp(8px, 1.2vw, 12px) clamp(20px, 2.5vw, 30px);
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+  .volume-control {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  }
+  #volumeRange {
+    width: clamp(70px, 12vw, 100px);
+  }
+  .sound-wave-container {
+    width: clamp(60px, 12vw, 100px);
+    height: clamp(25px, 6vw, 35px);
+  }
 }
