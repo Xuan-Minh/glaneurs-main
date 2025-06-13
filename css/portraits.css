@@ -51,6 +51,7 @@
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
+   transform-origin: center center; /* Assure que le scale se fait depuis le centre */
 }
 .section1-video {
   transform: translate(-45%, -50%);
@@ -65,6 +66,44 @@
   transform: translate(-45%, -55%);
 }
 
+
+@media (max-width: 992px) {
+ 
+
+  /* "Scale down" les vidéos pour voir plus de contenu */
+  /* Note: Elles ne couvriront plus entièrement la section */
+  .section1-video {
+    transform: translate(-45%, -50%) scale(0.9); /* Exemple: réduit à 90% */
+  }
+  .section2-video {
+    transform: translate(-40%, -50%) scale(0.9);
+  }
+  .section3-video {
+    /* Les valeurs de translate pourraient aussi nécessiter un ajustement car elles s'appliquent à un objet scalé différemment */
+    transform: translate(-65%, -45%) scale(0.9); 
+  }
+  .section4-video {
+    transform: translate(-45%, -55%) scale(0.9);
+  }
+}
+
+@media (max-width: 768px) {
+  
+
+  /* "Scale down" encore plus si nécessaire */
+  .section1-video {
+    transform: translate(-45%, -50%) scale(0.8); /* Exemple: réduit à 80% */
+  }
+  .section2-video {
+    transform: translate(-42.5%, -50%) scale(0.8);
+  }
+  .section3-video {
+    transform: translate(-65%, -46%) scale(0.8);
+  }
+  .section4-video {
+    transform: translate(-45%, -55%) scale(0.8);
+  }
+}
 /* Effet rideau : agrandit la section au hover ou active */
 .portrait-section.active,
 .portrait-section:hover {

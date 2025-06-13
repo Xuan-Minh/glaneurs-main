@@ -26,6 +26,7 @@ body {
   margin: 0;
   padding: 0;
   scrollbar-width: none; /* Cacher la barre de défilement dans Firefox */
+  max-width: 2560px; /* Empêche le débordement horizontal */
 }
 .container::-webkit-scrollbar {
   display: none; /* Cacher la barre de défilement dans Chrome, Edge et Safari */
@@ -176,7 +177,7 @@ color: white;
 
   z-index: 10;
   display: none; /* Géré par JavaScript */
-  font-size: clamp(0.8rem, 1.1vw, 1.2em); /* J'ai légèrement ajusté le clamp pour la lisibilité, 
+  font-size: clamp(0.9rem, 1.1vw, 1.2em); /* J'ai légèrement ajusté le clamp pour la lisibilité, 
                                              1vw peut devenir très petit, et 2em très grand. À tester. */
   line-height: 1.5;
 }

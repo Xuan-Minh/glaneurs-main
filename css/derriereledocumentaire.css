@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 2560px; /* Empêche le débordement horizontal */
 }
 
 .dld-hero::after {
@@ -46,7 +47,7 @@
   height: 100vh;
 }
 .dld-title h2 {
-  font-size: clamp(2rem, 4.5vw, 3.8rem); /* Ajustement du clamp pour une bonne lisibilité */
+  font-size: clamp(2rem, 4.5vw, 3.8rem); 
   margin: 0;
   padding: 0 3vw; /* Empêche le texte de toucher les bords sur petits écrans */
   color: #fff;
