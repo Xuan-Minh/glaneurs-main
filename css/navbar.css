@@ -396,11 +396,21 @@ header.hide-header {
 }
 
 #global-audio-control-container svg {
-  width: 20px; /* Ajustez la taille */
-  height: 20px; /* Ajustez la taille */
-  fill: white; /* Couleur de l'icône */
-  margin-right: 8px; /* Espace entre l'icône et le canvas */
+  width: 20px;
+  height: 20px;
+  fill: white;
+  margin-right: 8px;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.3s ease-in-out, margin-right 0.3s ease-in-out; /* Transitions ajoutées/modifiées */
+  /* display: inline-block; est le comportement par défaut dans un flex container */
 }
+#global-audio-control-container svg.icon-hidden {
+  opacity: 0;
+  transform: scale(0.7); /* Léger effet de rétrécissement */
+  pointer-events: none; /* Empêche l'interaction avec l'icône cachée */
+  width: 0; /* Fait disparaître l'icône de la mise en page */
+  margin-right: 0; /* Retire la marge quand l'icône est cachée */
+}
+
 
 #wave {
   /* Le canvas est petit, pas besoin de beaucoup de style ici */

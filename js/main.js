@@ -379,11 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = waveCanvas.getContext('2d');
     const canvasWidth = waveCanvas.width;
     const canvasHeight = waveCanvas.height;
-    let isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true'; // Lire l'état sauvegardé
+    let isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true';
     let animationFrameId;
     let waveXOffset = 0;
 
     function drawFlatLine() {
+        // ... (code existant)
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.moveTo(0, canvasHeight / 2);
@@ -394,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function drawMovingWave() {
+        // ... (code existant)
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.moveTo(0, canvasHeight / 2);
@@ -405,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.lineWidth = 1;
         ctx.stroke();
         waveXOffset += 0.3;
-        if (waveXOffset > Math.PI * 100) waveXOffset = 0; // Reset pour éviter des nombres trop grands
+        if (waveXOffset > Math.PI * 100) waveXOffset = 0;
 
         if (!isGloballyMuted) {
             animationFrameId = requestAnimationFrame(drawMovingWave);
@@ -413,9 +415,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateAudioElements() {
+        // ... (code existant)
         const mediaElements = document.querySelectorAll('audio, video');
         mediaElements.forEach(media => {
-            // Exclure la vidéo de l'écran de chargement qui doit toujours être mutée
             if (media.closest('.loading-screen')) {
                 media.muted = true;
             } else {
@@ -426,18 +428,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateUI() {
         if (isGloballyMuted) {
-            iconSoundOn.style.display = 'none';
-            iconSoundOff.style.display = 'block';
+            // iconSoundOn.style.display = 'none'; // Ancien
+            // iconSoundOff.style.display = 'block'; // Ancien
+            iconSoundOn.classList.add('icon-hidden');
+            iconSoundOff.classList.remove('icon-hidden');
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
             }
             drawFlatLine();
         } else {
-            iconSoundOn.style.display = 'block';
-            iconSoundOff.style.display = 'none';
+            // iconSoundOn.style.display = 'block'; // Ancien
+            // iconSoundOff.style.display = 'none'; // Ancien
+            iconSoundOn.classList.remove('icon-hidden');
+            iconSoundOff.classList.add('icon-hidden');
             drawMovingWave();
         }
-        localStorage.setItem('isSiteMuted', isGloballyMuted); // Sauvegarder l'état
+        localStorage.setItem('isSiteMuted', isGloballyMuted);
     }
 
     function toggleGlobalSound() {
@@ -449,10 +455,14 @@ document.addEventListener('DOMContentLoaded', () => {
     audioContainer.addEventListener('click', toggleGlobalSound);
 
     // État initial au chargement de la page
-    updateUI();
-    updateAudioElements();
-
-    // Gérer les éléments médias ajoutés dynamiquement (plus avancé, optionnel pour l'instant)
-    // const observer = new MutationObserver(() => updateAudioElements());
-    // observer.observe(document.body, { childList: true, subtree: true });
+    // Appliquer la classe initiale avant le premier updateUI pour éviter un flash
+    if (isGloballyMuted) {
+        iconSoundOn.classList.add('icon-hidden');
+        iconSoundOff.classList.remove('icon-hidden'); // Assure que l'icône off est visible si muté
+    } else {
+        iconSoundOn.classList.remove('icon-hidden'); // Assure que l'icône on est visible si non muté
+        iconSoundOff.classList.add('icon-hidden');
+    }
+    updateUI(); // Met à jour le canvas et sauvegarde
+    updateAudioElements(); // Met à jour les éléments audio
 });
