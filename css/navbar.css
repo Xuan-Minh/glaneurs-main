@@ -223,7 +223,7 @@ header.hide-header {
 
 .menu-volet-content {
  /* margin-top: 10%; */ /* Remplacé par padding-top pour plus de contrôle */
-  padding-top: 5vh; /* Espace en haut relatif à la hauteur de la fenêtre */
+  padding-top: 10vh; /* Espace en haut relatif à la hauteur de la fenêtre */
                      /* Vous pouvez aussi utiliser une valeur en px, ex: 40px */
    padding-bottom: 3vh; /* Espace en bas pour le contenu */
   width: 80%;
@@ -233,7 +233,8 @@ header.hide-header {
   justify-content: space-around;
   align-items: flex-start; /* Aligne les items par le haut */
   color: white;
-  gap: 20px; /* Espace entre les items */
+  gap: clamp(20px, 3vw, 40px);
+  box-sizing: border-box;
 }
 
 .menu-video-item {
@@ -241,6 +242,7 @@ header.hide-header {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centre la vidéo et le texte à l'intérieur */
+  max-width: 280px;
 }
 
 .menu-video {
@@ -271,10 +273,7 @@ header.hide-header {
   width: 80%;
   text-align: left;
   margin-top: 20px;
-  display: flex;
   justify-content: flex-start;
-  flex-direction: row;
-  flex-wrap: nowrap;
 
 }
 .menu-links h4 {
