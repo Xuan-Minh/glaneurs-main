@@ -1,8 +1,17 @@
 $(document).ready(function() {
-      if ($(".loading-screen").length === 0) {
+     if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);
-    playArirangAudio();
+    // Ne pas appeler playArirangAudio() directement.
+    // Attendre la première interaction de l'utilisateur.
+    $(document).one('click.startAudio keydown.startAudio', function() {
+        const audio = document.getElementById("audio-arirang");
+        // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
+        // et qu'il n'y a pas de modale vidéo active
+        if (audio && audio.paused && $('.visionner:visible').length === 0) {
+            playArirangAudio();
+        }
+    });
   }
 });
 
@@ -55,15 +64,7 @@ $(document).ready(function() {
   // Défilement automatique des loading-item
   intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
 
-  // Gestion du clic sur le bouton "Entrer"
- $("#enter-button").click(function () {
-  clearInterval(intervalId); // Arrête l'animation
-  $(".loading-screen").fadeOut(1000, function () {
-    $(".container").fadeIn(1000, function () {
-      playArirangAudio();
-    });
-  });
-});
+
   // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
   $(".loading-screen").click(function () {
     showNextItem();
