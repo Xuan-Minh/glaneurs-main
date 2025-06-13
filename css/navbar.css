@@ -392,7 +392,6 @@ header.hide-header {
   display: flex;
   align-items: center;
   padding: 8px;
-  background-color: rgba(0,0,0,0.2); /* Optionnel pour la visibilité */
   border-radius: 5px;
 }
 
