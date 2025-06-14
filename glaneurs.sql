@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 31 mai 2025 à 21:42
+-- Généré le : sam. 14 juin 2025 à 23:37
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `glaneurs`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `archives`
+--
+
+CREATE TABLE `archives` (
+  `id` int(11) NOT NULL,
+  `archives_titre` varchar(255) NOT NULL,
+  `archives_src` varchar(255) NOT NULL,
+  `archives_date` varchar(255) NOT NULL,
+  `archives_auteur` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `archives`
+--
+
+INSERT INTO `archives` (`id`, `archives_titre`, `archives_src`, `archives_date`, `archives_auteur`) VALUES
+(1, 'Chiffonnier', 'img/archives/1960-Chiffonnier.jpg', '1960', 'À remplir'),
+(2, 'chiffonniers', 'img/archives/1960-chiffonniers.jpg', '1960', 'À remplir'),
+(3, 'remise-etat-1', 'img/archives/1961-remise-etat-1.JPG', '1961', 'À remplir'),
+(4, 'remise-etat-2', 'img/archives/1961-remise-etat-2.JPG', '1961', 'À remplir'),
+(5, 'remise-etat-3', 'img/archives/1961-remise-etat-3.JPG', '1961', 'À remplir'),
+(6, 'remise-etat-4', 'img/archives/1961-remise-etat-4.JPG', '1961', 'À remplir'),
+(7, 'chiffonnier', 'img/archives/1969-chiffonnier.png', '1969', 'À remplir'),
+(8, 'bidonville-2', 'img/archives/1973-bidonville-2.jpg', '1973', 'À remplir'),
+(9, 'bidonville', 'img/archives/1973-bidonville.jpg', '1973', 'À remplir'),
+(10, 'chariot-chiffonnier', 'img/archives/1973-chariot-chiffonnier.jpg', '1973', 'À remplir'),
+(11, 'chiffonnier-cartons', 'img/archives/1973-chiffonnier-cartons.jpg', '1973', 'À remplir'),
+(12, 'chiffonnier', 'img/archives/1973-chiffonnier.jpg', '1973', 'À remplir'),
+(13, 'pere-jungilwoo', 'img/archives/1973-pere-jungilwoo.jpg', '1973', 'À remplir'),
+(14, 'porteuse-bidonville', 'img/archives/1973-porteuse-bidonville.jpg', '1973', 'À remplir'),
+(15, 'chiffonnier-cartons', 'img/archives/1976-chiffonnier-cartons.jpeg', '1976', 'À remplir'),
+(16, 'collecteur-dechets', 'img/archives/1978-collecteur-dechets.jpg', '1978', 'À remplir');
 
 -- --------------------------------------------------------
 
@@ -156,7 +192,7 @@ CREATE TABLE `translations` (
 
 INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (1, 'index_titre', 'Les glaneurs de carton', 'Cardboard gleaners', '폐지 줍는 사람들'),
-(2, 'index_docufull', 'Voir le documentaire en entier', 'Watch the full documentary', '다큐멘터리 관람하기'),
+(2, 'index_docufull', 'Voir le documentaire', 'Watch the documentary', '다큐멘터리 관람하기'),
 (3, 'index_chapitre1', 'Chapitre 1', 'Chapter 1', '1장'),
 (4, 'index_chapitre2', 'Chapitre 2', 'Chapter 2', '2장'),
 (5, 'index_chapitre3', 'Chapitre 3', 'Chapter 3', '3장'),
@@ -202,7 +238,7 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (45, 'monteur', 'Monteur ', 'Editor', '편집자'),
 (46, 'cadreur', 'Cadreur', 'Camera Operator', '카메라 오퍼레이터'),
 (47, 'derriereledocumentaire_intro', 'Notre documentaire est le fruit d\'un travail collectif, guidé par une vision commune : \r\ndonner la parole à ceux qu\'on n\'entend jamais, et révéler la dignité chaque histoire. \r\nDécouvre l\'équipe qui porte cette direction artistique et humaine', 'Our documentary is the result of a collective effort, guided by a shared vision: \r\ngiving a voice to those who are never heard, and revealing the dignity in every story. \r\nDiscover the team behind this artistic and human vision.', '우리 다큐멘터리는 공통된 비전을 바탕으로 한 공동 작업의 결과입니다.\r\n절대 들리지 않는 이들에게 목소리를 전하고,\r\n모든 이야기에 담긴 존엄성을 드러내는 것이 그 비전입니다.\r\n이 예술적이고 인간적인 방향을 이끄는 팀을 만나보세요.'),
-(48, 'portraits_master\r\n', 'WON Yong-chul', 'WON Yong-chul', '원용철'),
+(48, 'portraits_master', 'WON Yong-chul', 'WON Yong-chul', '원용철'),
 (49, 'portraits_lee', 'LEE Sang-man', 'LEE Sang-man', '이상만'),
 (50, 'portraits_jo', 'JO Cheon-rae', 'JO Cheon-rae', '조천래'),
 (51, 'portraits_voirlesautres', 'Voir les autres portraits', 'View other portraits', '다른 인물 사진 보기'),
@@ -211,18 +247,30 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (54, 'mentionslegales_nom_entreprise', 'Glaneurs de carton', 'Cardboard Gleaners', '박스 줍는 사람들'),
 (55, 'mentionslegales_directeur_titre', 'Directeur de la publication :', 'Publication Director:', '발행 책임자:'),
 (56, 'mentionslegales_hebergeur_titre', 'Hébergeur :', 'Host:', '호스트:'),
-(57, 'mentionslegales_hebergeur_nom', 'Plesk', 'Plesk', '플레스크'),
-(58, 'mentionslegales_hebergeur_adresse_ip', '62.73.5.155', '62.73.5.155', '62.73.5.155'),
-(59, 'mentionslegales_hebergeur_telephone', 'Téléphone : Non communiqué', 'Phone: Not communicated', '전화: 미공개'),
+(57, 'mentionslegales_hebergeur_nom', 'AXINET', 'AXINET', 'AXINET'),
+(58, 'mentionslegales_hebergeur_adresse_ip', 'support@axinet.fr', 'support@axinet.fr', 'support@axinet.fr'),
+(59, 'mentionslegales_hebergeur_telephone', 'Téléphone : 04 56 38 15 15', 'Phone: +334 56 38 15 15', '전화: +334 56 38 15 15'),
 (60, 'mentionslegales_propriete_intellectuelle_titre', 'Propriété intellectuelle :', 'Intellectual Property:', '지적 재산권:'),
 (61, 'mentionslegales_propriete_intellectuelle_texte', 'Tous les contenus présents sur ce site sont protégés par le droit d’auteur. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.', 'All content on this site is protected by copyright. Any reproduction, representation, modification, publication, adaptation of all or part of the site\'s elements, regardless of the means or process used, is prohibited, except with prior written authorization.', '본 사이트의 모든 콘텐츠는 저작권으로 보호됩니다. 어떠한 수단이나 방법으로든 사이트 요소의 전체 또는 일부를 복제, 표현, 수정, 게시, 개작하는 것은 사전 서면 승인 없이는 금지됩니다.'),
 (62, 'mentionslegales_donnees_personnelles_titre', 'Données personnelles :', 'Personal Data:', '개인 데이터:'),
 (63, 'mentionslegales_donnees_personnelles_texte', 'Ce site ne collecte pas de données personnelles à l’insu des utilisateurs. Pour toute question, contactez-nous à l’adresse ci-dessus.', 'This site does not collect personal data without the users\' knowledge. For any questions, contact us at the address above.', '본 사이트는 사용자 몰래 개인 데이터를 수집하지 않습니다. 문의 사항은 위 주소로 연락해 주십시오.'),
-(64, 'mentionslegales_editeur\r\n', 'Éditeur du site :', 'Site publisher :', '사이트 게시자 :');
+(64, 'mentionslegales_editeur', 'Éditeur du site :', 'Site publisher :', '사이트 게시자 :'),
+(65, 'loading_def_titre', '‘glaneur,-euse’, nom,', '‘gleaner’, noun,', '‘줍는 사람’, 명사,'),
+(66, 'loading_def_texte', 'Personne qui glane, c\'est-à-dire qui ramasse des choses. Personne qui traîne à la fin des marchés pour récupérer les produits qui ont été jetés aux ordures.', 'A person who gleans, i.e., who collects things. A person who lingers at the end of markets to pick up discarded produce.', '물건을 줍는 사람, 즉 물건을 모으는 사람. 시장이 끝날 무렵 쓰레기로 버려진 물건들을 주우러 다니는 사람.'),
+(68, 'loading_production', 'Une production de', 'A production by', '제작'),
+(69, 'loading_casque_message', 'Veuillez mettre un casque pour profiter d\'une meilleure expérience', 'Please wear headphones for a better experience', '더 나은 경험을 위해 헤드폰을 착용해 주십시오'),
+(70, 'mentionslegales_conception', 'Conception', 'Design', '디자인'),
+(71, 'mentionslegales_dvt', 'Developpement', 'Web Development', '개발');
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `archives`
+--
+ALTER TABLE `archives`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `team_members`
@@ -248,6 +296,12 @@ ALTER TABLE `translations`
 --
 
 --
+-- AUTO_INCREMENT pour la table `archives`
+--
+ALTER TABLE `archives`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT pour la table `team_members`
 --
 ALTER TABLE `team_members`
@@ -263,7 +317,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Contraintes pour les tables déchargées
