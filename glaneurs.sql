@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 14 juin 2025 à 23:37
+-- Généré le : lun. 16 juin 2025 à 00:20
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -42,20 +42,20 @@ CREATE TABLE `archives` (
 INSERT INTO `archives` (`id`, `archives_titre`, `archives_src`, `archives_date`, `archives_auteur`) VALUES
 (1, 'Chiffonnier', 'img/archives/1960-Chiffonnier.jpg', '1960', 'À remplir'),
 (2, 'chiffonniers', 'img/archives/1960-chiffonniers.jpg', '1960', 'À remplir'),
-(3, 'remise-etat-1', 'img/archives/1961-remise-etat-1.JPG', '1961', 'À remplir'),
-(4, 'remise-etat-2', 'img/archives/1961-remise-etat-2.JPG', '1961', 'À remplir'),
-(5, 'remise-etat-3', 'img/archives/1961-remise-etat-3.JPG', '1961', 'À remplir'),
-(6, 'remise-etat-4', 'img/archives/1961-remise-etat-4.JPG', '1961', 'À remplir'),
+(3, 'Remise de l\'état 1', 'img/archives/1961-remise-etat-1.JPG', '1961', 'À remplir'),
+(4, 'Remise de l\'état 2', 'img/archives/1961-remise-etat-2.JPG', '1961', 'À remplir'),
+(5, 'Remise de l\'état 3', 'img/archives/1961-remise-etat-3.JPG', '1961', 'À remplir'),
+(6, 'Remise de l\'état 4', 'img/archives/1961-remise-etat-4.JPG', '1961', 'À remplir'),
 (7, 'chiffonnier', 'img/archives/1969-chiffonnier.png', '1969', 'À remplir'),
-(8, 'bidonville-2', 'img/archives/1973-bidonville-2.jpg', '1973', 'À remplir'),
-(9, 'bidonville', 'img/archives/1973-bidonville.jpg', '1973', 'À remplir'),
-(10, 'chariot-chiffonnier', 'img/archives/1973-chariot-chiffonnier.jpg', '1973', 'À remplir'),
-(11, 'chiffonnier-cartons', 'img/archives/1973-chiffonnier-cartons.jpg', '1973', 'À remplir'),
-(12, 'chiffonnier', 'img/archives/1973-chiffonnier.jpg', '1973', 'À remplir'),
-(13, 'pere-jungilwoo', 'img/archives/1973-pere-jungilwoo.jpg', '1973', 'À remplir'),
-(14, 'porteuse-bidonville', 'img/archives/1973-porteuse-bidonville.jpg', '1973', 'À remplir'),
-(15, 'chiffonnier-cartons', 'img/archives/1976-chiffonnier-cartons.jpeg', '1976', 'À remplir'),
-(16, 'collecteur-dechets', 'img/archives/1978-collecteur-dechets.jpg', '1978', 'À remplir');
+(8, 'Bidonville 2', 'img/archives/1973-bidonville-2.jpg', '1973', 'À remplir'),
+(9, 'Bidonville', 'img/archives/1973-bidonville.jpg', '1973', 'À remplir'),
+(10, 'Chariot de Chiffoniers', 'img/archives/1973-chariot-chiffonnier.jpg', '1973', 'À remplir'),
+(11, 'Chiffoniers et Cartons', 'img/archives/1973-chiffonnier-cartons.jpg', '1973', 'À remplir'),
+(12, 'Chiffonier', 'img/archives/1973-chiffonnier.jpg', '1973', 'À remplir'),
+(13, 'Pere Jungilwoo', 'img/archives/1973-pere-jungilwoo.jpg', '1973', 'À remplir'),
+(14, 'Porteuse Bidonville', 'img/archives/1973-porteuse-bidonville.jpg', '1973', 'À remplir'),
+(15, 'Chiffoniers et Cartons', 'img/archives/1976-chiffonnier-cartons.jpeg', '1976', 'À remplir'),
+(16, 'Collecteur et déchets', 'img/archives/1978-collecteur-dechets.jpg', '1978', 'À remplir');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,6 @@ INSERT INTO `team_roles` (`id`, `member_id`, `key_name`) VALUES
 (3, 1, 'scenariste'),
 (4, 1, 'photographe'),
 (5, 1, 'chef_op'),
-(6, 1, 'cadreuse'),
 (7, 1, 'monteuse'),
 (8, 1, 'etalonnage'),
 (9, 1, 'reperage'),
@@ -138,13 +137,13 @@ INSERT INTO `team_roles` (`id`, `member_id`, `key_name`) VALUES
 (25, 5, 'perch_man'),
 (26, 5, 'monteur_son'),
 (27, 5, 'compositeur_bo'),
-(28, 6, 'assistante_prod'),
-(29, 6, 'contact_prise'),
-(30, 6, 'orga'),
-(31, 6, 'transcription'),
-(32, 6, 'sous_titres'),
-(33, 7, 'transcription'),
-(34, 7, 'reperage'),
+(28, 6, 'recherche'),
+(29, 6, 'transcription'),
+(30, 6, 'contact_prise'),
+(31, 6, 'sous_titres'),
+(32, 6, 'orga'),
+(33, 7, 'reperage'),
+(34, 7, 'transcription'),
 (35, 8, 'interprete'),
 (36, 8, 'reperage'),
 (37, 9, 'res_montageKR'),
@@ -158,9 +157,9 @@ INSERT INTO `team_roles` (`id`, `member_id`, `key_name`) VALUES
 (45, 11, 'uxui'),
 (46, 11, 'maquettiste'),
 (47, 11, 'monteuse'),
-(48, 12, 'trad'),
+(48, 12, 'reperage'),
 (49, 12, 'transcription'),
-(50, 12, 'reperage'),
+(50, 12, 'trad'),
 (51, 14, 'perch_man'),
 (52, 14, 'cadreur'),
 (53, 14, 'reperage'),
@@ -170,7 +169,9 @@ INSERT INTO `team_roles` (`id`, `member_id`, `key_name`) VALUES
 (57, 15, 'enseignant'),
 (58, 15, 'tutrice'),
 (59, 16, 'enseignant'),
-(60, 16, 'trad');
+(60, 16, 'traducteur'),
+(62, 1, 'recherche'),
+(63, 6, 'assistante_prod');
 
 -- --------------------------------------------------------
 
@@ -260,7 +261,10 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (68, 'loading_production', 'Une production de', 'A production by', '제작'),
 (69, 'loading_casque_message', 'Veuillez mettre un casque pour profiter d\'une meilleure expérience', 'Please wear headphones for a better experience', '더 나은 경험을 위해 헤드폰을 착용해 주십시오'),
 (70, 'mentionslegales_conception', 'Conception', 'Design', '디자인'),
-(71, 'mentionslegales_dvt', 'Developpement', 'Web Development', '개발');
+(71, 'mentionslegales_dvt', 'Developpement', 'Web Development', '개발'),
+(72, 'entrer', 'Entrer', 'Enter', '방문하다'),
+(73, 'recherche', 'Responsable recherche', 'Research Manager', '연구 관리자'),
+(74, 'traducteur', 'Traducteur', 'Translator', '역자');
 
 --
 -- Index pour les tables déchargées
@@ -311,13 +315,13 @@ ALTER TABLE `team_members`
 -- AUTO_INCREMENT pour la table `team_roles`
 --
 ALTER TABLE `team_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Contraintes pour les tables déchargées

@@ -136,7 +136,7 @@
   font-size: clamp(1em, 2vw, 1.5em); /* Note: font-size ici aussi */
   display: flex;
   justify-content: center;
-}
+} 
 #enter-button { 
   background-color: rgba(0, 0, 0, 0);
   font-family: "Figtree", sans-serif;
