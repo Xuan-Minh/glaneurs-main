@@ -19,6 +19,7 @@
     format("truetype");
   font-weight: normal;
   font-style: italic;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Libre Baskerville";
@@ -26,12 +27,14 @@
     format("truetype");
   font-weight: bold;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "New Edge";
   src: url("../font/NewEdgeSoftPower4-LightRounded.otf") format("truetype");
   font-weight: Regular;
   font-style: Regular;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 /* Noto Sans KR : import de toutes les graisses */
 @font-face {
@@ -39,54 +42,63 @@
   src: url("../font/Noto sans KR/NotoSansKR-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
+  font-display: swap; /* Ajoutez cette ligne */
 }
 /* Pour tous les titres en coréen, remplace Libre Baskerville par Noto Sans KR */
 .kr-lang h1,
