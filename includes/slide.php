@@ -10,7 +10,7 @@ $slides = array(
     ),
     array(
         "chapitre" => getTranslation("index_chapitre1", $lang),
-        "srcvideobg" => "video/ville.mov",
+        "srcvideobg" => "video/cartons.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "Glaneurs de carton est un film documentaire...",
