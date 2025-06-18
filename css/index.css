@@ -48,6 +48,7 @@ a.visionner-trigger-h3 {
   z-index: 10;
   max-width: 90%; /* Important pour que l'ellipsis fonctionne */
   white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 h2:hover,
@@ -78,15 +79,16 @@ a.visionner-trigger-h3::after {
   bottom: -5px; /* Ajuste la position du soulignement */
   left: 0;
   width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
+  height: 4px; /* Épaisseur du soulignement */
   background-color: #ddd; /* Couleur du soulignement */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
+  transition: width 0.5s ease-in-out;
 }
 
 h2:hover::after,
 a.visionner-trigger-h3:hover::after {
   width: 100%;
-  transition: width 0.5s ease;
+  
 }
 
 .visionner iframe {

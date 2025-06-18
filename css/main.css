@@ -58,6 +58,7 @@ h2 {
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
   letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 .page-intro h2 {
   /* font-size: 2.2em; */
