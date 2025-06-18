@@ -37,7 +37,7 @@ $index = 1;
 $isFirst = true;
 foreach ($slides as $slide) {
     echo '<div class="slides slide' . $index . '">';
-    echo '<video autoplay muted loop>';
+    echo '<video autoplay muted loop playsinline>';
     echo '<source src="' . $slide["srcvideobg"] . '" type="video/mp4" />';
     echo '</video>';
 

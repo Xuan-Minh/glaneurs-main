@@ -16,7 +16,7 @@
   <div class="page-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang) ?></h2>
     <h3><?php echo getTranslation("mentionslegales_editeur", $lang) ?><br></h3>
-    <p>Master Cultures et Métiers du Web<br>
+    <p>L'équipe Les glaneurs de carton<br>
       Bureau C110, Bâtiment Bois de l’Étang (bâtiment C)<br>
       77420 CHAMPS-SUR-MARNE<br>
       glaneursdecarton.docu@gmail.com</p>
@@ -45,6 +45,9 @@
     </p>
     <h3><?php echo getTranslation("mentionslegales_donnees_personnelles_titre", $lang) ?><br></h3>
     <p><?php echo getTranslation("mentionslegales_donnees_personnelles_texte", $lang) ?>
+    </p>
+     <h3><?php echo getTranslation("mentionslegales_sources_titre", $lang) ?><br></h3>
+    <p><?php echo getTranslation("mentionslegales_sources_texte", $lang) ?>
     </p>
   </div>
   </div>

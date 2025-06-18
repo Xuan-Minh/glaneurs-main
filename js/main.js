@@ -1,4 +1,6 @@
 let fadeInterval = null;
+let isGloballyMuted = true; 
+let audioContextStarted = false;
 
 function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
@@ -20,6 +22,8 @@ function fadeAudio(audio, to, duration = 1000) {
   }, 50);
 }
 
+// ... (le code au-dessus reste le même)
+
 function playArirangAudio() {
   const audio = document.getElementById("audio-arirang");
   if (audio) {
@@ -35,16 +39,16 @@ function playArirangAudio() {
           }
           fadeAudio(audio, 0.3, 2000); // Appliquer le fondu au volume désiré
           console.log("Arirang audio playback started successfully.");
+          $(document).off('click.autoplay keydown.autoplay');
         }).catch(error => {
           console.error("Arirang audio autoplay was prevented or failed:", error);
-          // Optionnel : Informer l'utilisateur ou proposer un bouton pour démarrer manuellement
-          if (!document.getElementById('audio-manual-start-button')) {
-            $('body').append('<button id="audio-manual-start-button" style="position:fixed; bottom:10px; left:10px; z-index:10000; padding:10px; background: #fff; color:#000; border:1px solid #000;">Activer le son</button>');
-            $('#audio-manual-start-button').one('click', function() {
-              playArirangAudio(); // Réessayer après ce clic explicite
-              $(this).remove();
-            });
-          }
+          $(document).one('click.autoplay keydown.autoplay', function() {
+              // On vérifie à nouveau que le son n'est pas coupé globalement avant de jouer
+              if (!isGloballyMuted) {
+                  console.log("User interacted, retrying audio playback.");
+                  playArirangAudio();
+              }
+          });
         });
       }
     } else if (!audio.muted && audio.volume < 0.3) {
@@ -53,6 +57,8 @@ function playArirangAudio() {
     }
   }
 }
+
+// ... (le reste de votre code reste le même)
 
 function stopArirangAudio() {
   const audio = document.getElementById("audio-arirang");
@@ -110,8 +116,16 @@ $(document).ready(function () {
 
 window.addEventListener("beforeunload", stopArirangAudio);
 window.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "hidden") stopArirangAudio();
-  if (document.visibilityState === "visible") playArirangAudio();
+  // Ne fait rien si l'utilisateur n'a jamais activé le son
+  if (!audioContextStarted) return;
+
+  if (document.visibilityState === "hidden") {
+    stopArirangAudio();
+  }
+  // Ne relance le son que s'il n'est pas coupé globalement
+  if (document.visibilityState === "visible" && !isGloballyMuted) {
+    playArirangAudio();
+  }
 });
 
 
@@ -364,7 +378,6 @@ document.addEventListener('click', function(e) {
   setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const audioContainer = document.getElementById('global-audio-control-container');
     const waveCanvas = document.getElementById('wave');
@@ -372,19 +385,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconSoundOff = document.getElementById('icon-sound-off');
 
     if (!audioContainer || !waveCanvas || !iconSoundOn || !iconSoundOff) {
-        // console.warn("Éléments du contrôle audio global non trouvés.");
         return;
     }
 
     const ctx = waveCanvas.getContext('2d');
     const canvasWidth = waveCanvas.width;
     const canvasHeight = waveCanvas.height;
-    let isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true';
+    
+
+    
     let animationFrameId;
     let waveXOffset = 0;
 
+    // --- NOUVELLE LOGIQUE DE PERSISTANCE ---
+    // Au chargement de la page, on vérifie si l'utilisateur a déjà activé le son par le passé.
+    if (localStorage.getItem('audioHasBeenInitialized') === 'true') {
+        audioContextStarted = true;
+        // On récupère son dernier choix (activé ou coupé)
+        isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true';
+
+        // Si le son doit être activé, on tente de le lancer
+        if (!isGloballyMuted) {
+            // On utilise un petit délai pour s'assurer que les scripts des autres pages (portraits.js) sont chargés
+            setTimeout(() => {
+                if (typeof playArirangAudio === 'function') {
+                    playArirangAudio();
+                }
+                if (typeof startPortraitsAudio === 'function') {
+                    startPortraitsAudio();
+                }
+            }, 100);
+        }
+    }
+    // --- FIN DE LA NOUVELLE LOGIQUE ---
+
     function drawFlatLine() {
-        // ... (code existant)
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.moveTo(0, canvasHeight / 2);
@@ -395,7 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function drawMovingWave() {
-        // ... (code existant)
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.moveTo(0, canvasHeight / 2);
@@ -414,8 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateAudioElements() {
-        // ... (code existant)
+   function updateAudioElements() {
         const mediaElements = document.querySelectorAll('audio, video');
         mediaElements.forEach(media => {
             if (media.closest('.loading-screen')) {
@@ -424,12 +457,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 media.muted = isGloballyMuted;
             }
         });
+
+        // AJOUT : Communique l'état du son au script des portraits s'il est présent
+        if (typeof window.setPortraitsMuteState === 'function') {
+            window.setPortraitsMuteState(isGloballyMuted);
+        }
     }
 
     function updateUI() {
         if (isGloballyMuted) {
-            // iconSoundOn.style.display = 'none'; // Ancien
-            // iconSoundOff.style.display = 'block'; // Ancien
             iconSoundOn.classList.add('icon-hidden');
             iconSoundOff.classList.remove('icon-hidden');
             if (animationFrameId) {
@@ -437,32 +473,75 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             drawFlatLine();
         } else {
-            // iconSoundOn.style.display = 'block'; // Ancien
-            // iconSoundOff.style.display = 'none'; // Ancien
             iconSoundOn.classList.remove('icon-hidden');
             iconSoundOff.classList.add('icon-hidden');
             drawMovingWave();
         }
-        localStorage.setItem('isSiteMuted', isGloballyMuted);
+        // On sauvegarde l'état uniquement après la première interaction
+        if (audioContextStarted) {
+            localStorage.setItem('isSiteMuted', isGloballyMuted);
+        }
     }
 
-    function toggleGlobalSound() {
-        isGloballyMuted = !isGloballyMuted;
+    function initAudio() {
+        if (audioContextStarted) return;
+        
+        isGloballyMuted = false;
+        audioContextStarted = true;
+
+        // --- MODIFICATION ---
+        // On sauvegarde que l'utilisateur a activé le son pour la première fois.
+        localStorage.setItem('audioHasBeenInitialized', 'true');
+        localStorage.setItem('isSiteMuted', 'false'); // On sauvegarde l'état "activé"
+
+        if (typeof playArirangAudio === 'function') {
+            playArirangAudio();
+        }
+        if (typeof startPortraitsAudio === 'function') {
+            startPortraitsAudio();
+        }
+
         updateAudioElements();
         updateUI();
     }
 
-    audioContainer.addEventListener('click', toggleGlobalSound);
+    // ... (le code de initAudio() reste le même) ...
 
-    // État initial au chargement de la page
-    // Appliquer la classe initiale avant le premier updateUI pour éviter un flash
-    if (isGloballyMuted) {
-        iconSoundOn.classList.add('icon-hidden');
-        iconSoundOff.classList.remove('icon-hidden'); // Assure que l'icône off est visible si muté
-    } else {
-        iconSoundOn.classList.remove('icon-hidden'); // Assure que l'icône on est visible si non muté
-        iconSoundOff.classList.add('icon-hidden');
+    function handleSoundIconClick() {
+        // Si le contexte audio n'a pas encore été initié par l'utilisateur (via le bouton "Entrer"),
+        // l'icône de son ne doit rien faire. C'est le bouton "Entrer" qui a la priorité.
+        if (!audioContextStarted) {
+            return;
+        }
+
+        // Si on arrive ici, c'est que initAudio() a déjà été appelé au moins une fois.
+        // L'icône peut maintenant gérer le changement d'état (muet/non muet).
+        isGloballyMuted = !isGloballyMuted; // On inverse l'état
+        
+        // Si on vient de réactiver le son, on s'assure que la lecture est bien lancée.
+        if (!isGloballyMuted) {
+            if (typeof playArirangAudio === 'function') {
+                playArirangAudio();
+            }
+            if (typeof startPortraitsAudio === 'function') {
+                startPortraitsAudio();
+            }
+        }
+        
+        // On met à jour les éléments audio et l'icône.
+        updateAudioElements();
+        updateUI();
     }
-    updateUI(); // Met à jour le canvas et sauvegarde
-    updateAudioElements(); // Met à jour les éléments audio
+
+
+    audioContainer.addEventListener('click', handleSoundIconClick);
+
+    const enterButton = document.getElementById('enter-button');
+    if (enterButton) {
+        enterButton.addEventListener('click', initAudio);
+    }
+
+    // État initial au chargement (prend en compte le localStorage)
+    updateUI();
+    updateAudioElements();
 });

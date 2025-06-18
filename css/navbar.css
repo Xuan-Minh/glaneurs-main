@@ -360,9 +360,11 @@ header.hide-header {
   width: 100%; /* Soulignement complet au survol */
 }
 
-.mentionslegales-right a{
-  font-size: 0.8em;
-  justify-self: flex-end; /* Aligne le lien à droite */
+li.mentionslegales-right{
+  text-align: right; /* Taille de police plus petite */
+}
+li.mentionslegales-right a{
+  font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
 }
 /* ----------------------------- LOGO ------------------------ */
 .logo-link {

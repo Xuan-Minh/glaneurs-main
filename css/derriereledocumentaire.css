@@ -51,7 +51,7 @@
   margin: 0;
   padding: 0 3vw; /* Empêche le texte de toucher les bords sur petits écrans */
   color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  /* text-shadow: 0 2px 8px rgba(0,0,0,0.6); */
 }
 /* -------------------------- Membre de l'équipe --------------------------  */
 .team-grid {
@@ -77,8 +77,8 @@
 .team-face {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+ /* width: 100%;
+  height: 100%;*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
