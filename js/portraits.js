@@ -291,100 +291,100 @@ function animateSoundWave() {
   requestAnimationFrame(animateSoundWave);
 }
 
-// Lance l'animation si une .portrait-detail est visible
-$(function () {
-  if ($(".portrait-detail").length) {
-    animateSoundWave();
-  }
-});
-let wavePhase = 0;
-let lastVol = 0;
+// // Lance l'animation si une .portrait-detail est visible
+// $(function () {
+//   if ($(".portrait-detail").length) {
+//     animateSoundWave();
+//   }
+// });
+// let wavePhase = 0;
+// let lastVol = 0;
 
-function updateSoundCloud(volume) {
-  // Amplitude adaptée
-  const amplitude = 2 + 18 * Math.pow(volume, 1.5);
-  const length = 120;
-  const steps = 40;
-  const points = [];
-  wavePhase += 0.025 + 0.01 * volume;
+// function updateSoundCloud(volume) {
+//   // Amplitude adaptée
+//   const amplitude = 2 + 18 * Math.pow(volume, 1.5);
+//   const length = 120;
+//   const steps = 40;
+//   const points = [];
+//   wavePhase += 0.025 + 0.01 * volume;
 
-  // Haut de la forme (onde principale)
-  for (let i = 0; i <= steps; i++) {
-    const x = (i / steps) * length;
-    let y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.5 + volume) + wavePhase) * amplitude;
-    // Pic sur attaque
-    const attack = Math.max(0, volume - lastVol) * 2.2;
-    if (attack > 0.01) {
-      const center = steps / 2;
-      const spread = 2 + 10 * attack;
-      const peak = Math.exp(-Math.pow(i - center, 2) / (2 * spread * spread)) * 32 * attack;
-      y -= peak;
-    }
-    points.push(`${x},${y}`);
-  }
-  // Bas de la forme (retour par le bas, onde inversée ou ligne droite)
-  for (let i = steps; i >= 0; i--) {
-    const x = (i / steps) * length;
-    let y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.5 + volume) + wavePhase + Math.PI) * (amplitude * 0.5) + 10;
-    points.push(`${x},${y + 15}`);
-  }
-  $(".sound-wave-cloud").attr("points", points.join(" "));
-  lastVol = volume;
-}
+//   // Haut de la forme (onde principale)
+//   for (let i = 0; i <= steps; i++) {
+//     const x = (i / steps) * length;
+//     let y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.5 + volume) + wavePhase) * amplitude;
+//     // Pic sur attaque
+//     const attack = Math.max(0, volume - lastVol) * 2.2;
+//     if (attack > 0.01) {
+//       const center = steps / 2;
+//       const spread = 2 + 10 * attack;
+//       const peak = Math.exp(-Math.pow(i - center, 2) / (2 * spread * spread)) * 32 * attack;
+//       y -= peak;
+//     }
+//     points.push(`${x},${y}`);
+//   }
+//   // Bas de la forme (retour par le bas, onde inversée ou ligne droite)
+//   for (let i = steps; i >= 0; i--) {
+//     const x = (i / steps) * length;
+//     let y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.5 + volume) + wavePhase + Math.PI) * (amplitude * 0.5) + 10;
+//     points.push(`${x},${y + 15}`);
+//   }
+//   $(".sound-wave-cloud").attr("points", points.join(" "));
+//   lastVol = volume;
+// }
 
-// Animation frame pour suivre le volume de l'instrument actif
-function animateSoundCloud() {
-  let vol = 0;
-  if (keepFocus && currentIndex !== null && gains[currentIndex]) {
-    vol = Math.min(1, gains[currentIndex].gain.value / masterVolume);
-  } else if (gains[0]) {
-    vol = Math.min(1, gains[0].gain.value / masterVolume);
-  }
-  updateSoundCloud(vol);
-  requestAnimationFrame(animateSoundCloud);
-}
+// // Animation frame pour suivre le volume de l'instrument actif
+// function animateSoundCloud() {
+//   let vol = 0;
+//   if (keepFocus && currentIndex !== null && gains[currentIndex]) {
+//     vol = Math.min(1, gains[currentIndex].gain.value / masterVolume);
+//   } else if (gains[0]) {
+//     vol = Math.min(1, gains[0].gain.value / masterVolume);
+//   }
+//   updateSoundCloud(vol);
+//   requestAnimationFrame(animateSoundCloud);
+// }
 
-// Lance l'animation si une .portrait-detail est visible
-$(function () {
-  if ($(".portrait-detail").length) {
-    animateSoundCloud();
-  }
-});
+// // Lance l'animation si une .portrait-detail est visible
+// $(function () {
+//   if ($(".portrait-detail").length) {
+//     animateSoundCloud();
+//   }
+// });
 
 
 
-// Animation de la ligne blanche dans le header (uniquement sur l'index)
-if ($('.sound-wave-header .sound-wave-line').length && typeof playArirangAudio === "function") {
-  let wavePhase = 0;
-  let lastVol = 0;
+// // Animation de la ligne blanche dans le header (uniquement sur l'index)
+// if ($('.sound-wave-header .sound-wave-line').length && typeof playArirangAudio === "function") {
+//   let wavePhase = 0;
+//   let lastVol = 0;
 
-  function updateHeaderSoundWave(volume) {
-    const amplitude = 8 + 12 * Math.pow(volume, 1.3); // amplitude adaptée
-    const length = 120;
-    const steps = 32;
-    const points = [];
-    wavePhase += 0.045 + 0.01 * volume;
+//   function updateHeaderSoundWave(volume) {
+//     const amplitude = 8 + 12 * Math.pow(volume, 1.3); // amplitude adaptée
+//     const length = 120;
+//     const steps = 32;
+//     const points = [];
+//     wavePhase += 0.045 + 0.01 * volume;
 
-    for (let i = 0; i <= steps; i++) {
-      const x = (i / steps) * length;
-      const y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.2 + volume) + wavePhase) * amplitude;
-      points.push(`${x},${y}`);
-    }
-    $(".sound-wave-header .sound-wave-line").attr("points", points.join(" "));
-    lastVol = volume;
-  }
+//     for (let i = 0; i <= steps; i++) {
+//       const x = (i / steps) * length;
+//       const y = 20 + Math.sin((i / steps) * Math.PI * 2 * (2.2 + volume) + wavePhase) * amplitude;
+//       points.push(`${x},${y}`);
+//     }
+//     $(".sound-wave-header .sound-wave-line").attr("points", points.join(" "));
+//     lastVol = volume;
+//   }
 
-  function animateHeaderSoundWave() {
-    // Utilise le volume de l'audio principal (Arirang)
-    let audio = document.getElementById("audio-arirang");
-    let vol = 0;
-    if (audio && !audio.paused) {
-      vol = audio.volume; // ou utilise une variable volume si tu fais un fade
-    }
-    updateHeaderSoundWave(vol);
-    requestAnimationFrame(animateHeaderSoundWave);
-  }
+//   function animateHeaderSoundWave() {
+//     // Utilise le volume de l'audio principal (Arirang)
+//     let audio = document.getElementById("audio-arirang");
+//     let vol = 0;
+//     if (audio && !audio.paused) {
+//       vol = audio.volume; // ou utilise une variable volume si tu fais un fade
+//     }
+//     updateHeaderSoundWave(vol);
+//     requestAnimationFrame(animateHeaderSoundWave);
+//   }
 
-  animateHeaderSoundWave();
-}
+//   animateHeaderSoundWave();
+// }
 
