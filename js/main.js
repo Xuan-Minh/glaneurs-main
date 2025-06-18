@@ -27,32 +27,25 @@ function fadeAudio(audio, to, duration = 1000) {
 function playArirangAudio() {
   const audio = document.getElementById("audio-arirang");
   if (audio) {
-    // Si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué ou a été stoppé)
     if (audio.paused) {
       const playPromise = audio.play();
-
       if (playPromise !== undefined) {
         playPromise.then(_ => {
-          // La lecture a démarré avec succès
-          if (audio.muted) { // Si c'était muté (par ex. par défaut)
-            audio.muted = false;
-          }
-          fadeAudio(audio, 0.3, 2000); // Appliquer le fondu au volume désiré
-          console.log("Arirang audio playback started successfully.");
+          if (audio.muted) audio.muted = false;
+          fadeAudio(audio, 0.3, 2000);
           $(document).off('click.autoplay keydown.autoplay');
         }).catch(error => {
+          // Ajout d’un log plus détaillé
           console.error("Arirang audio autoplay was prevented or failed:", error);
+          if (audio.error) {
+            console.error("Audio error code:", audio.error.code);
+          }
           $(document).one('click.autoplay keydown.autoplay', function() {
-              // On vérifie à nouveau que le son n'est pas coupé globalement avant de jouer
-              if (!isGloballyMuted) {
-                  console.log("User interacted, retrying audio playback.");
-                  playArirangAudio();
-              }
+            if (!isGloballyMuted) playArirangAudio();
           });
         });
       }
     } else if (!audio.muted && audio.volume < 0.3) {
-      // Si déjà en train de jouer mais avec un volume trop bas, ou si le volume a été baissé
       fadeAudio(audio, 0.3, 2000);
     }
   }
