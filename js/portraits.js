@@ -107,7 +107,7 @@ const files = [
   'audio/arirang_bass.mp3',    // portrait 1
   'audio/arirang_harp.mp3',        // portrait 2
   'audio/arirang_piano.mp3',    // portrait 3
-  'audio/arirang_oboe.mp3'         // portrait 4
+  'audio/arirang_oboe.mp3'         // portrait 4x
 ];
 
 let buffers = [];
@@ -189,7 +189,24 @@ $('.back-to-portraits').on('click', function () {
   fadeTo(gains[0], 1, 1.2); // ambiance, fade in plus long (1.2s)
   gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
 });
+window.setPortraitsMuteState = function(isMuted) {
+  const newMasterVolume = isMuted ? 0 : 0.6; // 0 si muet, 0.6 sinon
+  if (masterVolume === newMasterVolume) return; // Pas de changement nécessaire
 
+  masterVolume = newMasterVolume;
+
+  // Réapplique le volume à toutes les pistes en fonction de l'état actuel
+  // (portrait focus, ou ambiance générale) avec une transition douce.
+  const duration = 0.3;
+  if (keepFocus && currentIndex !== null) {
+    // Un portrait est sélectionné, on restaure son son
+    gains.forEach((g, i) => fadeTo(g, i === currentIndex ? 1 : 0, duration));
+  } else {
+    // Personne n'est sélectionné, on restaure l'ambiance
+    fadeTo(gains[0], 1, duration);
+    gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, duration); });
+  }
+};
 // Quand le curseur quitte la fenêtre du navigateur
 $(document).on('mouseleave', function (e) {
   // Vérifie que ce n'est pas juste un leave d'un élément interne
