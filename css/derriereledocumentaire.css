@@ -54,7 +54,11 @@
   /* text-shadow: 0 2px 8px rgba(0,0,0,0.6); */
 }
 .dld-presentation{
+  max-width: 1500px;
   padding: 5vw;
+}
+.dld-presentation h2{
+ padding: 0 0 1vw 0;
 }
 /* -------------------------- Membre de l'équipe --------------------------  */
 .team-grid {
@@ -202,7 +206,7 @@
   color: #fff;
   text-align: center;
   font-family: "Figtree", sans-serif;
-  padding-bottom: 5vh; /* Ajout d'un padding en bas */
+  padding-bottom: 10vh; /* Ajout d'un padding en bas */
 }
 .dld-remerciements h2 {
   /* font-size: 2.2em; */
@@ -213,10 +217,12 @@
   letter-spacing: 0.02em;
 }
 .dld-remerciements p {
+  text-align: left; /* Alignement du texte à gauche */
   font-size: clamp(1rem, 1.8vw, 1.1rem); /* Responsive font size */
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
+  margin-bottom: 5vh;
   line-height: 1.6; /* Améliore la lisibilité */
 }
 
