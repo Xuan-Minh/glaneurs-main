@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : mer. 18 juin 2025 à 14:30
--- Version du serveur : 5.7.39
--- Version de PHP : 7.4.33
+-- Hôte : localhost:3306
+-- Généré le : mer. 18 juin 2025 à 14:53
+-- Version du serveur : 5.7.24
+-- Version de PHP : 8.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -77,7 +77,7 @@ CREATE TABLE `team_members` (
 --
 
 INSERT INTO `team_members` (`id`, `nom_fr`, `nom_en`, `nom_kr`, `image`, `portfolio`) VALUES
-(1, 'Sakina DOUIOU', 'Sakina DOUIOU', '사키나 두이우', 'img/equipe/sakina.jpg', 'https://sakinadouiou.github.io'),
+(1, 'Sakina DOUIOU', 'Sakina DOUIOU', '사키나 두이우', 'img/equipe/saki.jpg', 'https://sakinadouiou.github.io'),
 (2, 'Xuan-Minh TRAN', 'Xuan-Minh TRAN', '슈안-민 트란', 'img/equipe/xuan.jpg', 'https://xuan-minh.github.io/'),
 (3, 'Dylan BLANDEL', 'Dylan BLANDEL', '딜란 브랑델', 'img/equipe/dylan.jpg', 'https://www.linkedin.com/in/dylan-blandel-12991b187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'),
 (4, 'Hyunbeom PARK ', 'Hyunbeom PARK ', '박현범', 'img/equipe/hyunbeom.jpg', ''),
@@ -194,8 +194,8 @@ CREATE TABLE `translations` (
 INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (1, 'index_titre', 'Les glaneurs de carton', 'Cardboard gleaners', '폐지 줍는 사람들'),
 (2, 'index_docufull', 'Voir le documentaire', 'Watch the documentary', '다큐멘터리 관람하기'),
-(3, 'index_chapitre1', 'Chapitre 1', 'Chapter 1', '1장'),
-(4, 'index_chapitre2', 'Chapitre 2', 'Chapter 2', '2장'),
+(3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées»', 'Chapter 1', '1장'),
+(4, 'index_chapitre2', '« Une personne d\'un autre temps »', 'Chapter 2', '2장'),
 (5, 'index_chapitre3', 'Chapitre 3', 'Chapter 3', '3장'),
 (6, 'portraits_titre', 'Portraits', 'Portraits', '인물 소개'),
 (7, 'archives_titre', 'Archives', 'Archives', '아카이브'),
