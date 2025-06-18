@@ -74,10 +74,14 @@
         <h2><?php echo getTranslation("remerciements_titre", $lang); ?></h2>
         <p>
             <?php echo getTranslation("derriereledocumentaire_messagemerci", $lang); ?></p>
+    </section>       
+    <section class="dld-remerciements content-anim">
         <h2><?php echo getTranslation('derriereledocumentaire_collaborationtitre', $lang); ?></h2>
         <p>
             <?php echo getTranslation('derriereledocumentaire_collaboration', $lang); ?>
         </p>
+    </section>
+    <section class="dld-remerciements content-anim">
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
         <p>
             <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>

@@ -152,7 +152,7 @@ a.visionner-trigger-h3:hover::after {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1), ease; /* Fonctions respectives */
 }
 .slides h2.move {
-  transform: translate(-30vw, -50%);
+  transform: translate(50vw, -50%);
 }
 .slides:first-child {
   scroll-snap-align: start;

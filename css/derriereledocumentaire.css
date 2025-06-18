@@ -201,7 +201,7 @@
   height: auto; /* Changé de 100vh à auto pour s'adapter au contenu */
   min-height: 50vh; /* Assure une hauteur minimale */
   width: 90vw;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 10vh auto 8vh auto; /* Augmenté la marge en bas */
   color: #fff;
   text-align: center;
