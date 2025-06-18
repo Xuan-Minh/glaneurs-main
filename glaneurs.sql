@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 18 juin 2025 à 22:20
+-- Généré le : mer. 18 juin 2025 à 23:09
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -269,7 +269,8 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (76, 'derriereledocumentaire_collaboration', 'Ce projet est une véritable collaboration franco-coréenne, et sa richesse tient en grande partie à l\'engagement de nos membres coréens : Hyunbeom PARK, Jiwoo YUN, Suyeon YANG, Jiyeong SHIN et Junghyun LIM. Merci à vous tous pour votre précieuse contribution.', 'This project is a true French-Korean collaboration, and its richness largely stems from the commitment of our Korean members: Hyunbeom PARK, Jiwoo YUN, Suyeon YANG, Jiyeong SHIN, and Junghyun LIM. Thank you all for your precious contribution.', '이 프로젝트는 진정한 한불 협력이며, 그 풍요로움은 저희 한국인 팀원들의 헌신 덕분입니다: 박 현범 (Hyunbeom PARK), 윤 지우 (Jiwoo YUN), 양 수연 (Suyeon YANG), 신 지영 (Jiyeong SHIN), 임 정현 (Junghyun LIM) 님께 감사드립니다. 여러분 모두의 귀중한 기여에 감사드립니다.'),
 (77, 'derriereledocumentaire_collaborationtitre', 'Une collaboration franco-coréenne', 'A French-Korean Collaboration', '한불 협력'),
 (78, 'derriereledocumentaire_soutiens', 'Nous souhaitons enfin remercier du fond du cœur tous ceux qui nous ont soutenus et conseillés de près ou de loin, même s\'ils ne sont pas cités individuellement ici. Votre aide a été inestimable.<br><br>\r\n\r\nUn immense merci à nos généreux contributeurs : ', 'Finally, we want to express our sincere thanks to everyone who supported and advised us, directly or indirectly, in the realization of this project, even if they are not individually mentioned here. Your help has been invaluable.<br><br>\r\n\r\nA huge thank you to our generous contributors:', '마지막으로, 이 프로젝트의 실현에 직간접적으로 지원과 조언을 아끼지 않으신 모든 분들께 진심으로 감사드립니다. 비록 여기에 개별적으로 언급되지는 않았지만, 여러분의 도움은 헤아릴 수 없을 정도로 소중했습니다.<br><br>\r\n\r\n저희의 후원자분들께 진심으로 감사드립니다: '),
-(79, 'derriereledocumentaire_soutienstitre', 'Nos précieux soutiens', 'Our Valued Supporters', '저희의 소중한 후원자들');
+(79, 'derriereledocumentaire_soutienstitre', 'Nos précieux soutiens', 'Our Valued Supporters', '저희의 소중한 후원자들'),
+(80, 'menu_voletchap1', 'Partie 1', 'Part 1', '장 1');
 
 --
 -- Index pour les tables déchargées
@@ -326,7 +327,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Contraintes pour les tables déchargées

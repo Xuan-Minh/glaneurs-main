@@ -36,17 +36,17 @@
         $videoSources = array(
             array(
                 "src" => "video/ville.mov",
-                "title" => getTranslation("index_chapitre1", $lang),
+                "title" => getTranslation("menu_voletchap1", $lang),
                 "slide" => 1 // Numéro de la slide (commence à 1)
             ),
             array(
                 "src" => "video/bache.mov",
-                "title" => getTranslation("index_chapitre2", $lang),
+                "title" => getTranslation("menu_voletchap2", $lang),
                 "slide" => 2
             ),
             array(
                 "src" => "video/lee.mov",
-                "title" => getTranslation("index_chapitre3", $lang),
+                "title" => getTranslation("menu_voletchap3", $lang),
                 "slide" => 3
             )
         );
