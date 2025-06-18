@@ -37,7 +37,7 @@
             <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>
         </div>
     </section>
-    <div class="page-intro content-anim">
+    <div class="page-intro dld-presentation content-anim">
         <p>
             <?php echo getTranslation('derriereledocumentaire_intro', $lang); ?>
         </p>

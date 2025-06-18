@@ -387,8 +387,8 @@ li.mentionslegales-right a{
 
 #global-audio-control-container {
   position: fixed; /* Ou 'absolute' si votre header est 'fixed' */
-  top: 20px; /* Ajustez selon votre design */
-  left: 20px; /* Ajustez selon votre design */
+  top: 5%; /* Ajustez selon votre design */
+  left: 40px; /* Ajustez selon votre design */
   z-index: 30000; /* Doit être au-dessus des autres éléments */
   cursor: pointer;
   display: flex;

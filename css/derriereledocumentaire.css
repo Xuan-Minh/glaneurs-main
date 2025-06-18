@@ -53,6 +53,9 @@
   color: #fff;
   /* text-shadow: 0 2px 8px rgba(0,0,0,0.6); */
 }
+.dld-presentation{
+  padding: 5vw;
+}
 /* -------------------------- Membre de l'équipe --------------------------  */
 .team-grid {
   display: grid;
@@ -210,8 +213,7 @@
   letter-spacing: 0.02em;
 }
 .dld-remerciements p {
-  /* font-size: 1.2em; */
-  font-size: clamp(1rem, 1.8vw, 1.3rem); /* Responsive font size */
+  font-size: clamp(1rem, 1.8vw, 1.2rem); /* Responsive font size */
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
