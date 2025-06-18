@@ -24,6 +24,12 @@
 }
 .dld-hero video {
   position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  /*position: absolute;
   top: 50%;
   left: 50%;
   min-width: 100%;
@@ -32,7 +38,7 @@
   height: auto;
   z-index: 0;
   transform: translateX(-50%) translateY(-50%);
-  object-fit: cover;
+  object-fit: cover;*/
 }
 .dld-title {
   position: relative;
