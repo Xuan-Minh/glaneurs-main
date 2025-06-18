@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 18 juin 2025 à 23:09
+-- Généré le : mer. 18 juin 2025 à 23:16
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -270,7 +270,9 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (77, 'derriereledocumentaire_collaborationtitre', 'Une collaboration franco-coréenne', 'A French-Korean Collaboration', '한불 협력'),
 (78, 'derriereledocumentaire_soutiens', 'Nous souhaitons enfin remercier du fond du cœur tous ceux qui nous ont soutenus et conseillés de près ou de loin, même s\'ils ne sont pas cités individuellement ici. Votre aide a été inestimable.<br><br>\r\n\r\nUn immense merci à nos généreux contributeurs : ', 'Finally, we want to express our sincere thanks to everyone who supported and advised us, directly or indirectly, in the realization of this project, even if they are not individually mentioned here. Your help has been invaluable.<br><br>\r\n\r\nA huge thank you to our generous contributors:', '마지막으로, 이 프로젝트의 실현에 직간접적으로 지원과 조언을 아끼지 않으신 모든 분들께 진심으로 감사드립니다. 비록 여기에 개별적으로 언급되지는 않았지만, 여러분의 도움은 헤아릴 수 없을 정도로 소중했습니다.<br><br>\r\n\r\n저희의 후원자분들께 진심으로 감사드립니다: '),
 (79, 'derriereledocumentaire_soutienstitre', 'Nos précieux soutiens', 'Our Valued Supporters', '저희의 소중한 후원자들'),
-(80, 'menu_voletchap1', 'Partie 1', 'Part 1', '장 1');
+(80, 'menu_voletchap1', 'Partie 1', 'Part 1', '장 1'),
+(81, 'menu_voletchap2', 'Partie 2', 'Part 2', '2장'),
+(82, 'menu_voletchap3', 'Partie 3', 'Part 3', '3장');
 
 --
 -- Index pour les tables déchargées
@@ -327,7 +329,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- Contraintes pour les tables déchargées
