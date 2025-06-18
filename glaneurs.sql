@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : mer. 18 juin 2025 à 12:41
--- Version du serveur : 5.7.24
--- Version de PHP : 8.3.1
+-- Hôte : localhost:8889
+-- Généré le : mer. 18 juin 2025 à 14:30
+-- Version du serveur : 5.7.39
+-- Version de PHP : 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -77,22 +77,22 @@ CREATE TABLE `team_members` (
 --
 
 INSERT INTO `team_members` (`id`, `nom_fr`, `nom_en`, `nom_kr`, `image`, `portfolio`) VALUES
-(1, 'Sakina DOUIOU', 'Sakina DOUIOU', '사키나 두이우', 'img/equipe/membre2.jpg', 'https://sakinadouiou.github.io'),
-(2, 'Xuan-Minh TRAN', 'Xuan-Minh TRAN', '슈안-민 트란', 'img/equipe/membre1.jpg', 'https://xuan-minh.github.io/'),
-(3, 'Dylan BLANDEL', 'Dylan BLANDEL', '딜란 브랑델', 'img/equipe/membre2.jpg', 'https://www.linkedin.com/in/dylan-blandel-12991b187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'),
-(4, 'Hyunbeom PARK ', 'Hyunbeom PARK ', '박현범', 'img/equipe/membre1.jpg', ''),
-(5, 'Hugo LEULIET', 'Hugo LEULIET', '위고 르리애', 'img/equipe/membre2.jpg', 'https://pepi934.github.io/HugoLeuliet_Portfolio/'),
-(6, 'Romane VARO-TUPIN', 'Romane VARO-TUPIN', '로만 바로-튀팡', 'img/equipe/membre1.jpg', ''),
-(7, 'Jiwoo YUN', 'Jiwoo YUN', '윤지우', 'img/equipe/membre2.jpg', ''),
-(8, 'Suyeon YANG', 'Suyeon YANG', '양수연', 'img/equipe/membre1.jpg', ''),
-(9, 'Alyssia BERSET', 'Alyssia BERSET', '알리시아 베르세', 'img/equipe/membre1.jpg', ''),
-(10, 'Inès DOS SANTOS', 'Inès DOS SANTOS', '이녜스 도스 산토스', 'img/equipe/membre1.jpg', ''),
-(11, 'Sarah CROS', 'Sarah CROS', '사라 그로스', 'img/equipe/membre2.jpg', 'https://www.linkedin.com/in/sarahcros'),
-(12, 'Jaeden DUONG', 'Jaeden DUONG', '제든 뒤옹', 'img/equipe/membre1.jpg', ''),
-(13, 'Jiyeong SHIN ', 'Jiyeong SHIN ', '신지영', 'img/equipe/membre2.jpg', ''),
-(14, 'Junghyun LIM', 'Junghyun LIM', '임정현', 'img/equipe/membre2.jpg', ''),
-(15, 'Stéphane LEVY', 'Stéphane LEVY', '스테판레비', 'img/equipe/membre1.jpg', 'https://stephanelevy.net/?lang=fr#'),
-(16, 'Gihoon YU', 'Gihoon YU', '유기훈', 'img/equipe/membre1.jpg', '');
+(1, 'Sakina DOUIOU', 'Sakina DOUIOU', '사키나 두이우', 'img/equipe/sakina.jpg', 'https://sakinadouiou.github.io'),
+(2, 'Xuan-Minh TRAN', 'Xuan-Minh TRAN', '슈안-민 트란', 'img/equipe/xuan.jpg', 'https://xuan-minh.github.io/'),
+(3, 'Dylan BLANDEL', 'Dylan BLANDEL', '딜란 브랑델', 'img/equipe/dylan.jpg', 'https://www.linkedin.com/in/dylan-blandel-12991b187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'),
+(4, 'Hyunbeom PARK ', 'Hyunbeom PARK ', '박현범', 'img/equipe/hyunbeom.jpg', ''),
+(5, 'Hugo LEULIET', 'Hugo LEULIET', '위고 르리애', 'img/equipe/hugo.jpg', 'https://pepi934.github.io/HugoLeuliet_Portfolio/'),
+(6, 'Romane VARO-TUPIN', 'Romane VARO-TUPIN', '로만 바로-튀팡', 'img/equipe/romane.jpg', ''),
+(7, 'Jiwoo YUN', 'Jiwoo YUN', '윤지우', 'img/equipe/jiwoo.jpg', ''),
+(8, 'Suyeon YANG', 'Suyeon YANG', '양수연', 'img/equipe/suyeon.jpg', ''),
+(9, 'Alyssia BERSET', 'Alyssia BERSET', '알리시아 베르세', 'img/equipe/alyssia.jpg', ''),
+(10, 'Inès DOS SANTOS', 'Inès DOS SANTOS', '이녜스 도스 산토스', 'img/equipe/ines.jpg', ''),
+(11, 'Sarah CROS', 'Sarah CROS', '사라 그로스', 'img/equipe/sarah.jpg', 'https://www.linkedin.com/in/sarahcros'),
+(12, 'Jaeden DUONG', 'Jaeden DUONG', '제든 뒤옹', 'img/equipe/jaeden.jpg', ''),
+(13, 'Jiyeong SHIN ', 'Jiyeong SHIN ', '신지영', 'img/equipe/jiyeong.jpg', ''),
+(14, 'Junghyun LIM', 'Junghyun LIM', '임정현', 'img/equipe/junghyun.jpg', ''),
+(15, 'Stéphane LEVY', 'Stéphane LEVY', '스테판레비', 'img/equipe/stephane.jpg', 'https://stephanelevy.net/?lang=fr#'),
+(16, 'Gihoon YU', 'Gihoon YU', '유기훈', 'img/equipe/gihoon.jpg', '');
 
 -- --------------------------------------------------------
 
