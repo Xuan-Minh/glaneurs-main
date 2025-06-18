@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 18 juin 2025 à 14:53
+-- Généré le : mer. 18 juin 2025 à 22:20
 -- Version du serveur : 5.7.24
--- Version de PHP : 8.3.1
+-- Version de PHP : 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -238,12 +238,12 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (44, 'portfolio', 'Portfolio', 'Portfolio', '포트폴리오'),
 (45, 'monteur', 'Monteur ', 'Editor', '편집자'),
 (46, 'cadreur', 'Cadreur', 'Camera Operator', '카메라 오퍼레이터'),
-(47, 'derriereledocumentaire_intro', 'Notre documentaire est le fruit d\'un travail collectif, guidé par une vision commune : \r\ndonner la parole à ceux qu\'on n\'entend jamais, et révéler la dignité chaque histoire. \r\nDécouvre l\'équipe qui porte cette direction artistique et humaine', 'Our documentary is the result of a collective effort, guided by a shared vision: \r\ngiving a voice to those who are never heard, and revealing the dignity in every story. \r\nDiscover the team behind this artistic and human vision.', '우리 다큐멘터리는 공통된 비전을 바탕으로 한 공동 작업의 결과입니다.\r\n절대 들리지 않는 이들에게 목소리를 전하고,\r\n모든 이야기에 담긴 존엄성을 드러내는 것이 그 비전입니다.\r\n이 예술적이고 인간적인 방향을 이끄는 팀을 만나보세요.'),
+(47, 'derriereledocumentaire_intro', 'Au cœur de notre démarche documentaire, il y a une ambition simple mais puissante : faire émerger les voix les plus discrètes et magnifier la dignité de chaque parcours. Inspirés par la réalité saisissante des glaneurs de carton en Corée du Sud – ces aînés contraints de survivre en marge d\'une société en plein essor – nous avons trouvé un paradoxe saisissant. Entre le faste de la Hallyu et une pauvreté silencieuse, se dessine une histoire méconnue. C\'est cette fracture, cette humanité délaissée, que notre équipe s\'attache à explorer avec une approche sensible et ambitieuse. Rencontrez les esprits qui œuvrent pour donner corps à cette vision artistique et profondément humaine.', 'At the heart of our documentary approach lies a simple yet powerful ambition: to bring forth the most discreet voices and magnify the dignity of every journey. Inspired by the striking reality of the cardboard gleaners in South Korea – these elders forced to survive on the fringes of a booming society – we found a striking paradox. Between the splendor of the Hallyu and a silent poverty, an unknown story unfolds. It is this fracture, this neglected humanity, that our team strives to explore with a sensitive and ambitious approach. Meet the minds that work to embody this artistic and profoundly human vision.', '저희 다큐멘터리 제작의 핵심에는 가장 조용한 목소리를 세상에 알리고 모든 여정의 존엄성을 드높이고자 하는 단순하지만 강력한 열망이 담겨 있습니다. 급성장하는 사회의 변두리에서 생존해야 하는 한국의 폐지 수집 노인들의 놀라운 현실에서 영감을 받아, 저희는 놀라운 역설을 발견했습니다. 한류의 화려함과 조용한 빈곤 사이에 숨겨진 이야기가 펼쳐집니다. 저희 팀은 이러한 균열, 즉 방치된 인간성을 섬세하고 야심찬 접근 방식으로 탐구하고자 합니다. 예술적이고 깊이 있는 인간적인 비전을 구현하기 위해 노력하는 이들을 만나보세요.'),
 (48, 'portraits_master', 'WON Yong-chul', 'WON Yong-chul', '원용철'),
 (49, 'portraits_lee', 'LEE Sang-man', 'LEE Sang-man', '이상만'),
 (50, 'portraits_jo', 'JO Cheon-rae', 'JO Cheon-rae', '조천래'),
 (51, 'portraits_voirlesautres', 'Voir les autres portraits', 'View other portraits', '다른 인물 사진 보기'),
-(52, 'derriereledocumentaire_messagemerci', 'Tous les membres de l\'équipe tiennent à remercier chaleureusement les personnes suivantes pour leur soutien et leur contribution précieuse à ce projet :', 'All members of the team would like to warmly thank the following people for their support and valuable contribution to this project:', '모든 팀원들은 이 프로젝트에 지원과 소중한 기여를 해주신 다음 분들께 진심으로 감사의 말씀을 드립니다:'),
+(52, 'derriereledocumentaire_messagemerci', 'Ce documentaire est le fruit d\'un engagement collectif et d\'une précieuse collaboration. Nous tenons à exprimer notre profonde gratitude à toutes celles et ceux qui ont rendu cette aventure possible.<br><br>\n\nNos premiers et chaleureux remerciements vont à Sang-man LEE, Yong-chul WON, et Cheon-rae JO. Leurs témoignages et le temps qu\'ils nous ont accordé lors de notre voyage ont donné une signification unique et essentielle à ce projet. Sans eux, ce documentaire n\'aurait tout simplement pas eu la même âme.<br><br>\n\nNous remercions également le Gamman Welfare Center et l\'association CCLIM, dont le soutien et l\'implication ont été déterminants. Leur rôle clé a permis de concrétiser de nombreux aspects de notre travail.<br><br>\n\nCe projet n\'aurait pas pu voir le jour sans le soutien académique et institutionnel. Un immense merci à nos professeurs Pierre BOUREAU, Sylvain ZORNINGER, Mariette AUVRAY et Stéphane LEVY pour leur écoute constante et leurs précieux conseils. Nous sommes également redevables à l\'Université Gustave Eiffel et à l\'Université de Dong-Eui pour leur cadre propice à la recherche et à la création. Un remerciement tout particulier à Thierry BONZON, Minchol CHA et Gihoon YU pour leur aide indispensable.', 'This documentary is the result of a collective commitment and invaluable collaboration. We want to express our deepest gratitude to everyone who made this adventure possible.<br><br>\n\nOur first and heartfelt thanks go to Sang-man LEE, Yong-chul WON, and Cheon-rae JO. Their testimonies and the time they granted us during our trip gave this project a unique and essential meaning. Without them, this documentary simply wouldn\'t have the same soul.<br><br>\n\nWe also thank the Gamman Welfare Center and the CCLIM association, whose support and involvement were crucial. Their key role helped to bring many aspects of our work to fruition.<br><br>\n\nThis project could not have come to life without academic and institutional support. A huge thank you to our professors Pierre BOUREAU, Sylvain ZORNINGER, Mariette AUVRAY, and Stéphane LEVY for their constant listening and invaluable advice. We are also indebted to Gustave Eiffel University and Dong-Eui University for providing a conducive environment for research and creation. A special thank you to Thierry BONZON, Minchol CHA, and Gihoon YU for their indispensable help.', '이 다큐멘터리는 공동의 노력과 귀중한 협력의 결실입니다. 이 여정을 가능하게 해주신 모든 분들께 깊은 감사를 표합니다.<br><br>\n\n저희의 첫 번째 진심 어린 감사는 저희가 여행 중에 만났던 이 상만 (Sang-man LEE), 원 용철 (Yong-chul WON), 조 천래 (Cheon-rae JO) 님께 전합니다. 그들의 증언과 저희에게 할애해주신 시간은 이 프로젝트에 특별하고 본질적인 의미를 부여했습니다. 그분들이 없었다면 이 다큐멘터리는 결코 같은 영혼을 가질 수 없었을 것입니다.<br><br>\n\n또한, 중요한 역할을 해주신 **감만복지관 (Gamman Welfare Center)**과 CCLIM 협회에도 감사드립니다. 그들의 지원과 참여는 저희 작업의 여러 측면을 실현하는 데 결정적이었습니다.<br><br>\n\n이 프로젝트는 학술적, 제도적 지원 없이는 불가능했을 것입니다. 항상 저희의 이야기에 귀 기울여주시고 귀중한 조언을 아끼지 않으신 교수님들 피에르 부로 (Pierre Boureau), 실뱅 조르닝거 (Sylvain Zorninger), 마리에트 오브레이 (Mariette Auvray), 스테판 레비 (Stéphane Lévy) 님께 진심으로 감사드립니다. 연구와 창작에 유리한 환경을 제공해주신 **귀스타브 에펠 대학교 (Université Gustave Eiffel)**와 **동의대학교 (Dong-Eui University)**에도 감사드립니다. 특히, 필수적인 도움을 주신 티에리 본종 (Thierry Bonzon), 차 민철 (Minchol Cha), 그리고 기훈 (Gihoon) 님께 특별한 감사를 드립니다.'),
 (53, 'remerciements_titre', 'Remerciements', 'Acknowledgements', '감사'),
 (54, 'mentionslegales_nom_entreprise', 'Glaneurs de carton', 'Cardboard Gleaners', '박스 줍는 사람들'),
 (55, 'mentionslegales_directeur_titre', 'Directeur de la publication :', 'Publication Director:', '발행 책임자:'),
@@ -264,7 +264,12 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (71, 'mentionslegales_dvt', 'Developpement', 'Web Development', '개발'),
 (72, 'entrer', 'Entrer', 'Enter', '방문하다'),
 (73, 'recherche', 'Responsable recherche', 'Research Manager', '연구 관리자'),
-(74, 'traducteur', 'Traducteur', 'Translator', '역자');
+(74, 'traducteur', 'Traducteur', 'Translator', '역자'),
+(75, 'derriereledocumentaire_approche', 'Notre approche', 'Our Endeavor', '우리의 노력'),
+(76, 'derriereledocumentaire_collaboration', 'Ce projet est une véritable collaboration franco-coréenne, et sa richesse tient en grande partie à l\'engagement de nos membres coréens : Hyunbeom PARK, Jiwoo YUN, Suyeon YANG, Jiyeong SHIN et Junghyun LIM. Merci à vous tous pour votre précieuse contribution.', 'This project is a true French-Korean collaboration, and its richness largely stems from the commitment of our Korean members: Hyunbeom PARK, Jiwoo YUN, Suyeon YANG, Jiyeong SHIN, and Junghyun LIM. Thank you all for your precious contribution.', '이 프로젝트는 진정한 한불 협력이며, 그 풍요로움은 저희 한국인 팀원들의 헌신 덕분입니다: 박 현범 (Hyunbeom PARK), 윤 지우 (Jiwoo YUN), 양 수연 (Suyeon YANG), 신 지영 (Jiyeong SHIN), 임 정현 (Junghyun LIM) 님께 감사드립니다. 여러분 모두의 귀중한 기여에 감사드립니다.'),
+(77, 'derriereledocumentaire_collaborationtitre', 'Une collaboration franco-coréenne', 'A French-Korean Collaboration', '한불 협력'),
+(78, 'derriereledocumentaire_soutiens', 'Nous souhaitons enfin remercier du fond du cœur tous ceux qui nous ont soutenus et conseillés de près ou de loin, même s\'ils ne sont pas cités individuellement ici. Votre aide a été inestimable.<br><br>\r\n\r\nUn immense merci à nos généreux contributeurs : ', 'Finally, we want to express our sincere thanks to everyone who supported and advised us, directly or indirectly, in the realization of this project, even if they are not individually mentioned here. Your help has been invaluable.<br><br>\r\n\r\nA huge thank you to our generous contributors:', '마지막으로, 이 프로젝트의 실현에 직간접적으로 지원과 조언을 아끼지 않으신 모든 분들께 진심으로 감사드립니다. 비록 여기에 개별적으로 언급되지는 않았지만, 여러분의 도움은 헤아릴 수 없을 정도로 소중했습니다.<br><br>\r\n\r\n저희의 후원자분들께 진심으로 감사드립니다: '),
+(79, 'derriereledocumentaire_soutienstitre', 'Nos précieux soutiens', 'Our Valued Supporters', '저희의 소중한 후원자들');
 
 --
 -- Index pour les tables déchargées
@@ -321,7 +326,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Contraintes pour les tables déchargées
