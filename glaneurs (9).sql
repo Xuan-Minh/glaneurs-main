@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 18 juin 2025 à 23:16
+-- Généré le : jeu. 19 juin 2025 à 00:15
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -198,7 +198,7 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (4, 'index_chapitre2', '« Une personne d\'un autre temps »', 'Chapter 2', '2장'),
 (5, 'index_chapitre3', 'Chapitre 3', 'Chapter 3', '3장'),
 (6, 'portraits_titre', 'Portraits', 'Portraits', '인물 소개'),
-(7, 'archives_titre', 'Archives', 'Archives', '아카이브'),
+(7, 'archives_titre', 'Traces du passé', 'Echoes of the Past', '과거의 흔적'),
 (8, 'souvenirs_titre', 'Souvenirs', 'Memories', '추억'),
 (9, 'associations_titre', 'Associations', 'Associations', '단체'),
 (10, 'derriereledocumentaire_titre', 'Derrière le documentaire', 'Behind the documentary', '다큐멘터리 뒤에'),

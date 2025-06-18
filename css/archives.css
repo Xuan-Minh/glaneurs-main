@@ -39,6 +39,8 @@
   font-family: "Libre Baskerville", serif;
   font-size: 4vw;
   text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+
 }
 .archives-content {
   min-height: 100vh;
@@ -68,8 +70,10 @@
   color: #fff;
   text-align: center;
   font-family: "Figtree", sans-serif;
+  padding-bottom: 5vh;
 
 }
+
 .archives-citation {
   font-size: clamp(1.8rem, 3vw, 2.2rem); /* Exemple */
   margin-bottom: 0.5em;
@@ -79,8 +83,14 @@
 }
 .archives-intro p { /* Si vous avez une règle spécifique */
   font-size: clamp(0.9rem, 1.6vw, 1.1rem); /* Exemple */
+
 }
-/* ---------------------------- GALLERIE OVERLAY --------------------- */
+section.archives-intro {
+  margin: 0 auto;
+  padding: 5vw 0;
+  max-width: 800px; /* Ajuste la largeur maximale */
+}
+/* -------------------------- GALLERIE OVERLAY --------------------- */
 .archive-gallery {
   display: flex;
   flex-wrap: wrap;

@@ -57,7 +57,7 @@
   margin: 0;
   padding: 0 3vw; /* Empêche le texte de toucher les bords sur petits écrans */
   color: #fff;
-  /* text-shadow: 0 2px 8px rgba(0,0,0,0.6); */
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 .dld-presentation{
   max-width: 1500px;
