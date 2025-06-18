@@ -213,7 +213,7 @@
   letter-spacing: 0.02em;
 }
 .dld-remerciements p {
-  font-size: clamp(1rem, 1.8vw, 1.2rem); /* Responsive font size */
+  font-size: clamp(1rem, 1.8vw, 1.1rem); /* Responsive font size */
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
