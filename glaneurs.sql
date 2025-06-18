@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 16 juin 2025 à 00:20
+-- Généré le : mer. 18 juin 2025 à 11:26
 -- Version du serveur : 5.7.24
--- Version de PHP : 7.4.16
+-- Version de PHP : 8.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -252,7 +252,7 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (58, 'mentionslegales_hebergeur_adresse_ip', 'support@axinet.fr', 'support@axinet.fr', 'support@axinet.fr'),
 (59, 'mentionslegales_hebergeur_telephone', 'Téléphone : 04 56 38 15 15', 'Phone: +334 56 38 15 15', '전화: +334 56 38 15 15'),
 (60, 'mentionslegales_propriete_intellectuelle_titre', 'Propriété intellectuelle :', 'Intellectual Property:', '지적 재산권:'),
-(61, 'mentionslegales_propriete_intellectuelle_texte', 'Tous les contenus présents sur ce site sont protégés par le droit d’auteur. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.', 'All content on this site is protected by copyright. Any reproduction, representation, modification, publication, adaptation of all or part of the site\'s elements, regardless of the means or process used, is prohibited, except with prior written authorization.', '본 사이트의 모든 콘텐츠는 저작권으로 보호됩니다. 어떠한 수단이나 방법으로든 사이트 요소의 전체 또는 일부를 복제, 표현, 수정, 게시, 개작하는 것은 사전 서면 승인 없이는 금지됩니다.'),
+(61, 'mentionslegales_propriete_intellectuelle_texte', 'Voici les détails des licences applicables à chaque type de contenu sur ce site :<br><br>\nLe film documentaire est distribué sous licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International (CC BY-NC-SA 4.0). Vous êtes autorisé à le partager, l\'adapter et le remixer à des fins non commerciales, tant que vous nous créditez et que vous distribuez vos créations sous des conditions identiques.<br><br>\nLes bandes sonores et les productions musicales sont mises à disposition sous licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International (CC BY-NC 4.0). Vous pouvez les utiliser et les partager à des fins non commerciales, à condition de créditer Les glaneurs de carton comme l\'auteur original.<br><br>\nL\'intégralité du code source et de l’interface de ce site web sont sous licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International (CC BY-NC-SA 4.0). Vous êtes libre de le partager et de l\'adapter à des fins non commerciales, à condition de nous créditer et de diffuser vos contributions sous des conditions identiques.<br><br>\n\nToutes les photographies réalisées par Sakina DOUIOU sont la pleine et entière propriété de leur auteur. Elles sont protégées par le Droit d\'Auteur (Copyright). Toute reproduction, représentation, diffusion ou modification est strictement interdite sans l\'autorisation écrite préalable de Sakina DOUIOU.<br><br>', 'Here are the details of the licenses applicable to each type of content on this site:<br><br>\n\nThe documentary film is distributed under a Creative Commons Attribution - NonCommercial - ShareAlike 4.0 International (CC BY-NC-SA 4.0) license You are authorized to share, adapt, and remix it for non-commercial purposes, as long as you credit us and distribute your creations under identical terms<br><br>\n\nThe soundtracks and musical productions are made available under a Creative Commons Attribution - NonCommercial 4.0 International (CC BY-NC 4.0) license You may use and share them for non-commercial purposes, provided you credit Les glaneurs de carton as the original author<br><br>\n\nThe entirety of this website\'s source code and interface are licensed under a Creative Commons Attribution - NonCommercial - ShareAlike 4.0 International (CC BY-NC-SA 4.0) license You are free to share and adapt it for non-commercial purposes, provided you credit us and distribute your contributions under identical terms<br><br>\n\nAll photographs taken by Sakina DOUIOU are the full and exclusive property of their author They are protected by Copyright Law Any reproduction, representation, distribution, or modification is strictly prohibited without the prior written authorization of Sakina DOUIOU<br><br>', '이 웹사이트의 각 콘텐츠 유형에 적용되는 라이선스 세부 정보는 다음과 같습니다<br><br>\n\n다큐멘터리 영화는 크리에이티브 커먼즈 저작자표시-비영리-동일조건변경허락 4.0 국제 (CC BY-NC-SA 4.0) 라이선스에 따라 배포됩니다 비영리 목적으로 공유, 각색 및 리믹스할 수 있으며, 이 경우 당사를 출처로 표시하고 동일한 조건으로 귀하의 창작물을 배포해야 합니다<br><br>\n\n사운드트랙 및 음악 제작물은 크리에이티브 커먼즈 저작자표시-비영리 4.0 국제 (CC BY-NC 4.0) 라이선스에 따라 제공됩니다 비영리 목적으로 사용 및 공유할 수 있으며, 이 경우 Les glaneurs de carton을 원저작자로 표시해야 합니다<br><br>\n\n이 웹사이트의 전체 소스 코드 및 인터페이스는 크리에이티브 커먼즈 저작자표시-비영리-동일조건변경허락 4.0 국제 (CC BY-NC-SA 4.0) 라이선스에 따라 라이선스됩니다 비영리 목적으로 자유롭게 공유하고 각색할 수 있으며, 이 경우 당사를 출처로 표시하고 동일한 조건으로 귀하의 기여물을 배포해야 합니다<br><br>\n\nSakina DOUIOU가 촬영한 모든 사진은 저작자의 완전하고 독점적인 재산입니다 이들은 저작권법에 의해 보호됩니다 Sakina DOUIOU의 사전 서면 승인 없이는 어떠한 복제, 표현, 배포 또는 수정도 엄격히 금지됩니다'),
 (62, 'mentionslegales_donnees_personnelles_titre', 'Données personnelles :', 'Personal Data:', '개인 데이터:'),
 (63, 'mentionslegales_donnees_personnelles_texte', 'Ce site ne collecte pas de données personnelles à l’insu des utilisateurs. Pour toute question, contactez-nous à l’adresse ci-dessus.', 'This site does not collect personal data without the users\' knowledge. For any questions, contact us at the address above.', '본 사이트는 사용자 몰래 개인 데이터를 수집하지 않습니다. 문의 사항은 위 주소로 연락해 주십시오.'),
 (64, 'mentionslegales_editeur', 'Éditeur du site :', 'Site publisher :', '사이트 게시자 :'),
@@ -315,7 +315,7 @@ ALTER TABLE `team_members`
 -- AUTO_INCREMENT pour la table `team_roles`
 --
 ALTER TABLE `team_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT pour la table `translations`
