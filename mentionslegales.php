@@ -46,6 +46,9 @@
     <h3><?php echo getTranslation("mentionslegales_donnees_personnelles_titre", $lang) ?><br></h3>
     <p><?php echo getTranslation("mentionslegales_donnees_personnelles_texte", $lang) ?>
     </p>
+     <h3><?php echo getTranslation("mentionslegales_sources_titre", $lang) ?><br></h3>
+    <p><?php echo getTranslation("mentionslegales_sources_texte", $lang) ?>
+    </p>
   </div>
   </div>
   
