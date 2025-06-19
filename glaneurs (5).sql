@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 19 juin 2025 à 00:15
+-- Généré le : jeu. 19 juin 2025 à 11:12
 -- Version du serveur : 5.7.24
--- Version de PHP : 7.4.16
+-- Version de PHP : 8.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -193,8 +193,8 @@ CREATE TABLE `translations` (
 
 INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (1, 'index_titre', 'Les glaneurs de carton', 'Cardboard gleaners', '폐지 줍는 사람들'),
-(2, 'index_docufull', 'Voir le documentaire', 'Watch the documentary', '다큐멘터리 관람하기'),
-(3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées»', 'Chapter 1', '1장'),
+(2, 'index_docufull', 'Regarder le documentaire', 'Watch the documentary', '다큐멘터리 관람하기'),
+(3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées »', 'Chapter 1', '1장'),
 (4, 'index_chapitre2', '« Une personne d\'un autre temps »', 'Chapter 2', '2장'),
 (5, 'index_chapitre3', 'Chapitre 3', 'Chapter 3', '3장'),
 (6, 'portraits_titre', 'Portraits', 'Portraits', '인물 소개'),
@@ -272,7 +272,10 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (79, 'derriereledocumentaire_soutienstitre', 'Nos précieux soutiens', 'Our Valued Supporters', '저희의 소중한 후원자들'),
 (80, 'menu_voletchap1', 'Partie 1', 'Part 1', '장 1'),
 (81, 'menu_voletchap2', 'Partie 2', 'Part 2', '2장'),
-(82, 'menu_voletchap3', 'Partie 3', 'Part 3', '3장');
+(82, 'menu_voletchap3', 'Partie 3', 'Part 3', '3장'),
+(83, 'index_voirpartie1', 'Regarder la première partie', 'Watch Part 1', '1부 보기'),
+(84, 'index_voirpartie2', 'Regarder la deuxième partie', 'Watch Part 2', '2부 보기'),
+(85, 'index_voirpartie3', 'Regarder la troisième partie', 'Watch Part 3', '3부 보기');
 
 --
 -- Index pour les tables déchargées
@@ -329,7 +332,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- Contraintes pour les tables déchargées
