@@ -62,7 +62,7 @@
     <div class="menu-links">
         <ul>
             <li><a href="portraits"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
-            <li><a href="archives"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
+            <li><a href="tracesdupasse"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
             <li><a href="souvenirs"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
             <li><a href="derriere-le-documentaire"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
             <li id="menu-accueil"><a href="./"><?php echo getTranslation("accueil", $lang) ?></a></li>
