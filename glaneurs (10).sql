@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 19 juin 2025 à 11:12
+-- Généré le : jeu. 19 juin 2025 à 18:00
 -- Version du serveur : 5.7.24
--- Version de PHP : 8.3.1
+-- Version de PHP : 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -194,9 +194,9 @@ CREATE TABLE `translations` (
 INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (1, 'index_titre', 'Les glaneurs de carton', 'Cardboard gleaners', '폐지 줍는 사람들'),
 (2, 'index_docufull', 'Regarder le documentaire', 'Watch the documentary', '다큐멘터리 관람하기'),
-(3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées »', 'Chapter 1', '1장'),
-(4, 'index_chapitre2', '« Une personne d\'un autre temps »', 'Chapter 2', '2장'),
-(5, 'index_chapitre3', 'Chapitre 3', 'Chapter 3', '3장'),
+(3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées »', '« It\'s work for the elderly. »', '« 어르신들을 위한 일입니다. »'),
+(4, 'index_chapitre2', '« Une personne d\'un autre temps »', '« A person from another era »', ' « 옛날 사람 »'),
+(5, 'index_chapitre3', ' « Au jour le jour »', '« Hand to mouth »', '« 하루하루 »'),
 (6, 'portraits_titre', 'Portraits', 'Portraits', '인물 소개'),
 (7, 'archives_titre', 'Traces du passé', 'Echoes of the Past', '과거의 흔적'),
 (8, 'souvenirs_titre', 'Souvenirs', 'Memories', '추억'),
