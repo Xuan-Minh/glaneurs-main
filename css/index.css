@@ -190,21 +190,68 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 }
 
 .info {
- position: absolute;
-color: white;
-  top: 30%; /* Votre position verticale préférée */
-  right: 10%; /* Positionne le bloc à 5% du bord droit du parent */
-             /* Vous pouvez ajuster cette valeur (ex: 10%, 20px) */
-  
-  width: 35%; /* Une largeur de base, par exemple 35% du parent */
-  min-width: 150px; /* VOTRE TAILLE MINIMALE : empêche le bloc d'être trop étroit */
-  max-width: 450px; /* Limite la largeur maximale */
-  z-index: 10;
-  display: none;
-  font-size: clamp(0.9rem, 1.1vw, 1.2em); /* J'ai légèrement ajusté le clamp pour la lisibilité, 
-                                             1vw peut devenir très petit, et 2em très grand. À tester. */
+  position: relative; /* IMPORTANT : Pour positionner le bouton à l'intérieur */
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 2vw 2.5vw;
+  width: 40%;
+  max-width: 500px;
+  position: absolute;
+  right: 10vw;
+  top: 30%;
+  color: white;
+  font-family: "Figtree", sans-serif;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   line-height: 1.5;
+  /* NOUVEAU : On s'assure qu'il y a assez de place en hauteur */
+  min-height: 30vh;
+  /* NOUVEAU : On ajoute du padding en bas pour que le texte ne passe pas sous le bouton */
+  padding-bottom: 80px; 
 }
+
+/* NOUVEAU STYLE POUR LE BOUTON DANS LE BLOC INFO */
+.info-button {
+  /* On retire la marge et on change le positionnement */
+  position: absolute;
+  bottom: 25px; /* Distance par rapport au bas */
+  right: 25px;  /* Distance par rapport à la droite */
+  
+  display: inline-flex; /* Pour bien aligner le texte et la flèche */
+  align-items: center;
+  gap: 12px; /* Espace entre le texte et la flèche */
+
+  padding: 12px 24px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.info-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+/* NOUVEAU : On ajoute la flèche avec un pseudo-élément */
+.info-button::after {
+  content: '→'; /* Vous pouvez utiliser '›' ou un autre caractère */
+  display: inline-block;
+  font-size: 1.2em;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* NOUVEAU : Animation de la flèche au survol */
+.info-button:hover::after {
+  transform: translateX(5px);
+}
+
+
 @media (max-width: 768px) {
   .slides h2.move {
     font-size: clamp(1.3rem, 3vw, 1.8rem);

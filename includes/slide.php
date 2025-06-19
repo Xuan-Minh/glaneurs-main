@@ -13,7 +13,7 @@ $slides = array(
         "srcvideobg" => "video/cartons.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Glaneurs de carton est un film documentaire...",
+        "info" => getTranslation("archives_chap1info", $lang),
         "urlsuite" => ""
     ),
     array(
@@ -21,15 +21,17 @@ $slides = array(
         "srcvideobg" => "video/bache.mov",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Consectetur adipiscing elit...",
-        "urlsuite" => ""
+        "info" => getTranslation("archives_chap2info", $lang),
+        "urlsuite" => "",
+        "info_button_text" => getTranslation("archives_titre", $lang), // Utilise la clé de traduction existante
+        "info_button_link" => "tracesdupasse" // Le lien vers votre page
     ),
     array(
         "chapitre" => getTranslation("index_chapitre3", $lang),
         "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "Sed do eiusmod tempor incididunt...",
+        "info" => getTranslation("archives_chap3info", $lang),
         "urlsuite" => ""
     )
 );
@@ -65,10 +67,16 @@ foreach ($slides as $slide) {
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
+          echo '<div class="info">' ;
+    echo $slide["info"];
+      if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
+        echo '<a href="' . $slide["info_button_link"] . '" class="info-button transition-link">' . $slide["info_button_text"] . '</a>';
     }
 
-    echo '<div class="info">' . $slide["info"] . '</div>';
+    echo '</div>';
+    }
 
+  
     echo '</div>';
 
     $index += 1;

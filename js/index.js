@@ -180,6 +180,7 @@ function resetOtherSlides(activeSlide) {
       $h2.removeClass("move");
 
       slide.find("video").removeClass("flou");
+      fadeVisionnerTriggerH3(slide, true);
       slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
       slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
     });

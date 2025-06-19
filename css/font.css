@@ -108,12 +108,12 @@
 .kr-lang h5,
 .kr-lang h6,
 .kr-lang div {
-  font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
-  font-weight: 500 !important; /* Utilise une graisse intermédiaire pour les titres */
-  font-display: swap; /* Ajoutez cette ligne */
+  /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
+  font-weight: 500 !important; 
+  font-display: swap;  */
 }
 .kr-lang .archive-title,
 .kr-lang .page-intro h2 {
-  font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
-  font-display: swap; /* Ajoutez cette ligne */
+  /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
+  font-display: swap; Ajoutez cette ligne */
 }
