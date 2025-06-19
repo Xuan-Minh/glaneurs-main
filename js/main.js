@@ -441,15 +441,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-   function updateAudioElements() {
-        const mediaElements = document.querySelectorAll('audio, video');
-        mediaElements.forEach(media => {
+function updateAudioElements() {
+    const mediaElements = document.querySelectorAll('audio, video');
+    mediaElements.forEach(media => {
+        if (media.tagName === "AUDIO") {
             if (media.closest('.loading-screen')) {
                 media.muted = true;
             } else {
                 media.muted = isGloballyMuted;
             }
-        });
+        }
+        // NE TOUCHE PAS AUX VIDEOS DE FOND
+    });
 
         // AJOUT : Communique l'état du son au script des portraits s'il est présent
         if (typeof window.setPortraitsMuteState === 'function') {
