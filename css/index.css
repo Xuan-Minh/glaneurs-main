@@ -210,7 +210,7 @@ color: white;
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     width: 45%;
     /* On ajuste le calcul pour la version mobile */
-    transform: translate(calc(-50% - (50vw - 20vw)), -110%) scale(0.7);
+    transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.7);
   }
   .info {
     right: 5vw; /* Plus près du bord */
