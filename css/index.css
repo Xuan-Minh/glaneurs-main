@@ -49,9 +49,10 @@ a.visionner-trigger-h3 {
   max-width: 90%; /* Important pour que l'ellipsis fonctionne */
   white-space: nowrap; /* Empêche le texte de passer à la ligne */
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  font-weight:400;
 }
 
-h2:hover,
+
 a.visionner-trigger-h3:hover {
   color: #ddd; /* Légère modification de la couleur au survol */
   transition: color 0.3s ease; /* Transition pour la couleur */
@@ -72,7 +73,7 @@ a.visionner-trigger-h3 {
   display: inline-block;
 }
 
-h2::after,
+
 a.visionner-trigger-h3::after {
   content: "";
   position: absolute;
