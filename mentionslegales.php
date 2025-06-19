@@ -15,7 +15,7 @@
    <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
   <div class="page-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang) ?></h2>
-    <h3><?php echo getTranslation("mentionslegales_editeur", $lang) ?><br></h3>
+   <section class="mentions-legales-content "> <h3><?php echo getTranslation("mentionslegales_editeur", $lang) ?><br></h3>
     <p>L'équipe Les glaneurs de carton<br>
       Bureau C110, Bâtiment Bois de l’Étang (bâtiment C)<br>
       77420 CHAMPS-SUR-MARNE<br>
@@ -51,7 +51,7 @@
     </p>
   </div>
   </div>
-  
+</section >
   <?php include "includes/header.php"; ?>
   <?php include "includes/jsinclude.php"; ?>
 </body>

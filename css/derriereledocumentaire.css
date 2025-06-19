@@ -205,14 +205,12 @@
 
 .dld-remerciements {
   height: auto; /* Changé de 100vh à auto pour s'adapter au contenu */
-  min-height: 50vh; /* Assure une hauteur minimale */
   width: 90vw;
   max-width: 1100px;
   margin: 10vh auto 8vh auto; /* Augmenté la marge en bas */
   color: #fff;
   text-align: center;
   font-family: "Figtree", sans-serif;
-  padding-bottom: 10vh; /* Ajout d'un padding en bas */
 }
 .dld-remerciements h2 {
   /* font-size: 2.2em; */
@@ -228,7 +226,6 @@
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
-  margin-bottom: 5vh;
   line-height: 1.6; /* Améliore la lisibilité */
 }
 
@@ -243,6 +240,10 @@
   }
   .team-face, .team-info {
     padding: 8%; /* Réduire légèrement le padding interne */
+     
+  }
+  .team-role {
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Ajuster la taille de police pour les écrans plus petits */
   }
   .team-portfolio {
     right: 8%;

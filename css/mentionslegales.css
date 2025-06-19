@@ -29,3 +29,6 @@
   margin: 0;
   text-align: left;
 }
+section.mentions-legales-content {
+margin-top: 5 vh;
+}
