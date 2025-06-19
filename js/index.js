@@ -119,6 +119,7 @@ function slideIn(slide, info) {
   resetOtherSlides(slide);
   $("body").css("overflow", "auto"); // Note: si tu utilises .scalable-wrapper, ceci pourrait ne pas être nécessaire
   info.fadeIn(2000);
+  fadeVisionnerTriggerH3(slide, true); 
 
   const $h2 = slide.find("h2");
   if (!$h2.hasClass("move")) { // Appliquer l'animation seulement si .move va être ajouté
@@ -133,6 +134,7 @@ function slideIn(slide, info) {
 function slideOut(slide, info) {
   $("body").css("overflow", "auto"); // Note: idem
   info.fadeOut(200);
+  fadeVisionnerTriggerH3(slide, false); 
 
   const $h2 = slide.find("h2");
   if ($h2.hasClass("move")) { // Appliquer l'animation seulement si .move va être retiré
@@ -153,7 +155,7 @@ event.stopPropagation();
   const slide = $(this).closest(".slides");
   const info = slide.find(".info");
   slideIn(slide, info);
-  fadeVisionnerTriggerH3(slide, true); // FADE OUT le <a>
+
 });
 
 $(".sliderButton .point1").click(function (event) {
@@ -161,7 +163,7 @@ $(".sliderButton .point1").click(function (event) {
   const slide = $(this).closest(".slides");
   const info = slide.find(".info");
   slideOut(slide, info);
-  fadeVisionnerTriggerH3(slide, false); // FADE IN le <a>
+
 });
 
 // --------------------------------- Reset Slide --------------------------------- //
@@ -180,7 +182,7 @@ function resetOtherSlides(activeSlide) {
       $h2.removeClass("move");
 
       slide.find("video").removeClass("flou");
-      fadeVisionnerTriggerH3(slide, true);
+      fadeVisionnerTriggerH3(slide, false);
       slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
       slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
     });
@@ -272,6 +274,7 @@ $(function () {
         const $info = $slide.find('.info');
         if ($info.is(':visible')) {
           slideOut($slide, $info);
+          fadeVisionnerTriggerH3(slide, false);
         }
       }
     });

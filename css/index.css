@@ -168,7 +168,7 @@ a.visionner-trigger-h3:hover::after {
 .slides h2.move {
  /* ON NE TOUCHE PLUS À 'left' OU 'top' */
   /* ON NE TOUCHE PLUS À 'font-size' pour l'animation */
-  font-size: clamp(1.5rem, 2.5vw, 2.9rem); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
+  font-size: clamp(1.5rem, 2vw, 2.9rem); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
   text-align: left;
   white-space: normal;
 
@@ -199,12 +199,13 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   width: 40%;
   max-width: 500px;
   position: absolute;
-  right: 10vw;
+  left: 55vw;
   top: 30%;
   color: white;
   font-family: "Figtree", sans-serif;
   font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   line-height: 1.5;
+  display: none;
   /* NOUVEAU : On s'assure qu'il y a assez de place en hauteur */
   min-height: 30vh;
   /* NOUVEAU : On ajoute du padding en bas pour que le texte ne passe pas sous le bouton */
@@ -226,7 +227,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
+  border-radius: 100px;
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.3s, border-color 0.3s;
@@ -240,10 +241,16 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 
 /* NOUVEAU : On ajoute la flèche avec un pseudo-élément */
 .info-button::after {
-  content: '→'; /* Vous pouvez utiliser '›' ou un autre caractère */
-  display: inline-block;
-  font-size: 1.2em;
+ content: ''; /* Le contenu est vide, mais le pseudo-élément existe */
+  display: block;
+  width: 20px;  /* Largeur de votre flèche */
+  height: 20px; /* Hauteur de votre flèche */
+  background-image: url('../img/arrowright.png'); /* Chemin vers votre image */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 /* NOUVEAU : Animation de la flèche au survol */
@@ -252,16 +259,18 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .slides h2.move {
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     width: 45%;
-    /* On ajuste le calcul pour la version mobile */
-    transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.7);
+    transform: translate(calc(-50% - (50vw - 20vw)), -110%) scale(0.7);
   }
+
   .info {
-    right: 5vw; /* Plus près du bord */
-    width: 45%; /* Un peu plus de largeur relative */
+    left: 52vw;      /* Le bloc commence toujours à 52% de la gauche */
+    right: 20px;     /* MAIS il doit s'arrêter à 20px du bord droit */
+    width: auto;     /* On laisse le navigateur calculer la largeur */
+    max-width: 90%;  /* Sécurité pour ne pas qu'il soit trop large */
   }
 }
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
