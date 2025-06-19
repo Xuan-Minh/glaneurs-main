@@ -66,7 +66,7 @@ h2 {
 
 a.visionner-trigger-h3 {
   font-family: "Figtree";
-  font-size: clamp(1em, 2vw, 1.5em);
+  font-size: clamp(1.3em, 2vw, 1.8em);
   font-weight: 400;
   top: 60%;
   position: relative;
@@ -77,18 +77,18 @@ a.visionner-trigger-h3 {
 a.visionner-trigger-h3::after {
   content: "";
   position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
+  bottom: -5px;
   left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 4px; /* Épaisseur du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
+  width: 100%; /* Soulignement visible par défaut */
+  height: 4px;
+  background-color: #ddd;
+  z-index: -1;
   transition: width 0.5s ease-in-out;
 }
 
 h2:hover::after,
 a.visionner-trigger-h3:hover::after {
-  width: 100%;
+   width: 0; /* Disparaît au hover */
   
 }
 
