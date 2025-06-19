@@ -47,18 +47,13 @@ a.visionner-trigger-h3 {
   text-align: center;
   z-index: 10;
   max-width: 90%; /* Important pour que l'ellipsis fonctionne */
-  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   font-weight:400;
 }
 
 
-a.visionner-trigger-h3:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
-  transition: color 0.3s ease; /* Transition pour la couleur */
-  text-decoration: none; /* Pas de soulignement par défaut */
-  cursor: pointer;
-}
+
 h2 {
   position: relative;
   display: inline-block; /* Nécessaire pour que le soulignement s'adapte au texte */
@@ -71,9 +66,17 @@ a.visionner-trigger-h3 {
   top: 60%;
   position: relative;
   display: inline-block;
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), visibility 0.5s;
+  visibility: visible;
+  
 }
-
-
+a.visionner-trigger-h3:hover {
+  color: #ddd; /* Légère modification de la couleur au survol */
+  transition: color 0.3s ease; /* Transition pour la couleur */
+  text-decoration: none; /* Pas de soulignement par défaut */
+  cursor: pointer;
+}
 a.visionner-trigger-h3::after {
   content: "";
   position: absolute;
@@ -85,7 +88,16 @@ a.visionner-trigger-h3::after {
   z-index: -1;
   transition: width 0.5s ease-in-out;
 }
-
+.visionner-trigger-h3.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.visionner-trigger-h3.fade-in {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 h2:hover::after,
 a.visionner-trigger-h3:hover::after {
    width: 0; /* Disparaît au hover */
@@ -141,22 +153,34 @@ a.visionner-trigger-h3:hover::after {
   position: absolute;
   left: 50%;
   top: 40%;
-  transform: translate(-50%, -50%);
-  /* Transition par défaut UNIQUEMENT pour la couleur, PAS pour transform */
+  /* On ajoute scale(1) pour avoir un point de départ pour l'animation */
+  transform: translate(-50%, -50%) scale(1);
   transition: color 0.3s ease;
+  white-space: nowrap;
+  /* On prévient le navigateur qu'on va animer cette propriété */
+  will-change: transform;
 }
 
 /* NOUVELLE CLASSE pour activer l'animation de transform */
 .slides h2.animate-transform {
-  transition-property: transform, color; /* Cible transform et réaffirme color */
-  transition-duration: 1.5s, 0.3s; /* 1.5s pour transform, 0.3s pour color */
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1), ease; /* Fonctions respectives */
+ transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .slides h2.move {
-  transform: translate(50vw, -50%);
+ /* ON NE TOUCHE PLUS À 'left' OU 'top' */
+  /* ON NE TOUCHE PLUS À 'font-size' pour l'animation */
+  font-size: clamp(1.5rem, 2.5vw, 2.9rem); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
+  text-align: left;
+  white-space: normal;
+
+  /* NOUVELLE STRATÉGIE DE TRANSFORM : */
+  /* On combine le scale et le translate pour tout faire en une seule propriété */
+transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
+  /* Explication du calcul ci-dessous */
 }
+
 .slides:first-child {
   scroll-snap-align: start;
+   line-height: 1.5;
 }
 
 .sliderButton {
@@ -173,16 +197,25 @@ color: white;
              /* Vous pouvez ajuster cette valeur (ex: 10%, 20px) */
   
   width: 35%; /* Une largeur de base, par exemple 35% du parent */
-              /* Ajustez cette valeur en fonction de la quantité de texte typique */
   min-width: 150px; /* VOTRE TAILLE MINIMALE : empêche le bloc d'être trop étroit */
-                    /* Augmentez cette valeur si 250px est encore trop petit pour votre texte */
   max-width: 450px; /* Limite la largeur maximale */
-
   z-index: 10;
-  display: none; /* Géré par JavaScript */
+  display: none;
   font-size: clamp(0.9rem, 1.1vw, 1.2em); /* J'ai légèrement ajusté le clamp pour la lisibilité, 
                                              1vw peut devenir très petit, et 2em très grand. À tester. */
   line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .slides h2.move {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    width: 45%;
+    /* On ajuste le calcul pour la version mobile */
+    transform: translate(calc(-50% - (50vw - 20vw)), -110%) scale(0.7);
+  }
+  .info {
+    right: 5vw; /* Plus près du bord */
+    width: 45%; /* Un peu plus de largeur relative */
+  }
 }
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
 .point1,

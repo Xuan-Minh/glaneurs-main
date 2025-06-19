@@ -106,7 +106,15 @@ $(document).ready(function() {
     $element.removeClass('animate-transform');
   }, TRANSFORM_ANIMATION_DURATION);
 }
-  
+function fadeVisionnerTriggerH3($slide, fadeOut = true) {
+  const $trigger = $slide.find('.visionner-trigger-h3');
+  if (!$trigger.length) return;
+  if (fadeOut) {
+    $trigger.removeClass('fade-in').addClass('fade-out');
+  } else {
+    $trigger.removeClass('fade-out').addClass('fade-in');
+  }
+}
 function slideIn(slide, info) {
   resetOtherSlides(slide);
   $("body").css("overflow", "auto"); // Note: si tu utilises .scalable-wrapper, ceci pourrait ne pas être nécessaire
@@ -136,20 +144,24 @@ function slideOut(slide, info) {
   slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
   slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
+
+
 // --------------------------------- slideTrigger changement de slide --------------------------------- //
 
 $(".sliderButton .point2").click(function (event) {
-  event.stopPropagation(); // Empêche la propagation de l'événement
-  const slide = $(this).closest(".slides"); // Récupère la slide parente
-  const info = slide.find(".info"); // Récupère l'élément .info de la slide
-  slideIn(slide, info); // Appelle slideIn pour cette slide
+event.stopPropagation();
+  const slide = $(this).closest(".slides");
+  const info = slide.find(".info");
+  slideIn(slide, info);
+  fadeVisionnerTriggerH3(slide, true); // FADE OUT le <a>
 });
 
 $(".sliderButton .point1").click(function (event) {
-  event.stopPropagation(); // Empêche la propagation de l'événement
-  const slide = $(this).closest(".slides"); // Récupère la slide parente
-  const info = slide.find(".info"); // Récupère l'élément .info de la slide
-  slideOut(slide, info); // Appelle slideOut pour cette slide
+ event.stopPropagation();
+  const slide = $(this).closest(".slides");
+  const info = slide.find(".info");
+  slideOut(slide, info);
+  fadeVisionnerTriggerH3(slide, false); // FADE IN le <a>
 });
 
 // --------------------------------- Reset Slide --------------------------------- //
@@ -180,13 +192,19 @@ $(".close-visionner").click(function (event) {
   const info = slide.find(".info");
   const visionner = slide.find(".visionner");
   visionner.find("iframe").remove();
-  $(".visionner").fadeOut(400);
+
+  // Correction ici : un seul fadeOut avec le callback
+  visionner.fadeOut(400, function () {
+    // On cache le lien car on affiche l'info
+    fadeVisionnerTriggerH3(slide, true); // CHANGEMENT ICI : de false à true
+  });
+
   playArirangAudio();
-  $("body").css("overflow", "auto"); // Note: idem
+  $("body").css("overflow", "auto");
   info.fadeIn(2000);
 
   const $h2 = slide.find("h2");
-  if (!$h2.hasClass("move")) { // Appliquer l'animation seulement si .move va être ajouté
+  if (!$h2.hasClass("move")) {
     triggerH2TransformAnimation($h2);
   }
   $h2.addClass("move");
@@ -228,6 +246,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       const info = slide.find('.info');
       info.fadeIn(2000);
       slide.find("h2").addClass("move");
+      fadeVisionnerTriggerH3(slide, true);
       slide.find("video").addClass("flou");
       slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
       slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
