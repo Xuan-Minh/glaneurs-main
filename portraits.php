@@ -36,7 +36,7 @@
             <video autoplay muted loop class="portrait-video section3-video">
                 <source src="video/arirang-test.mov" type="video/mp4">
             </video>
-            <div class="portrait-name">Monsieur Arirang-song</div>
+            <div class="portrait-name"><?php echo getTranslation("portraits_arirang", $lang); ?></div>
         </div>
         <div class="portrait-section section4" data-target="#detail4" data-audio="audio/arirang_oboe.mp3">
             <video autoplay muted loop class="portrait-video section4-video">
