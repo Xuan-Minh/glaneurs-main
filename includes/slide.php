@@ -13,7 +13,7 @@ $slides = array(
         "srcvideobg" => "video/cartons.mov",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("archives_chap1info", $lang),
+        "info" => getTranslation("index_chap1info", $lang),
         "urlsuite" => ""
     ),
     array(
@@ -21,7 +21,7 @@ $slides = array(
         "srcvideobg" => "video/bache.mov",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("archives_chap2info", $lang),
+        "info" => getTranslation("index_chap2info", $lang),
         "urlsuite" => "",
         "info_button_text" => getTranslation("archives_titre", $lang), // Utilise la clé de traduction existante
         "info_button_link" => "tracesdupasse" // Le lien vers votre page
@@ -31,7 +31,7 @@ $slides = array(
         "srcvideobg" => "video/lee.mov",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("archives_chap3info", $lang),
+        "info" => getTranslation("index_chap3info", $lang),
         "urlsuite" => ""
     )
 );
@@ -60,7 +60,7 @@ foreach ($slides as $slide) {
         echo '<div class="close-visionner"></div>';
         echo '<iframe src="https://player.vimeo.com/video/' . $vimeoId . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
-        echo '<h2 class="visionner-trigger" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . $slide["chapitre"] . '</h2>';
+        echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . $slide["chapitre"] . '</h2>';
         // Bouton "voir la partie X" sous le titre
         echo '<a class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '" style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</a>';
         echo '<div class="sliderButton">';
