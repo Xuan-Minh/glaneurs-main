@@ -51,7 +51,7 @@ foreach ($slides as $slide) {
         echo '<div class="close-visionner"></div>';
         echo '</div>';
         echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
-        echo '<div class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</div>';
+        echo '<div class="visionner-trigger visionner-trigger-h3 always-visible" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</div>';
     }
 
     // Slides 2, 3, 4 : bouton "voir la partie X"
