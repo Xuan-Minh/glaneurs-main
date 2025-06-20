@@ -235,14 +235,16 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-.info-button:hover {
+.info-button:hover,
+.info-button:focus {
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
 }
 
 /* NOUVEAU : On ajoute la flèche avec un pseudo-élément */
-.info-button::after {
+.info-button:hover::after,
+.info-button:focus::after {
  content: ''; /* Le contenu est vide, mais le pseudo-élément existe */
   display: block;
   width: 20px;  /* Largeur de votre flèche */
