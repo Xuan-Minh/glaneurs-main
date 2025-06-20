@@ -25,9 +25,9 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
             <video autoplay muted loop>
                 <source src="video/archives.mov" type="video/mp4">
             </video>
-            <div class="archive-title content-anim">
+            <h2 class="archive-title content-anim">
                 <?php echo getTranslation("archives_titre", $lang); ?>
-            </div>
+            </h2>
         </section>
         <section class="archives-content">
            <section class="archives-intro content-anim">
