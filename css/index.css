@@ -64,7 +64,7 @@ h2 {
 
 div.visionner-trigger-h3 {
   font-family: "Figtree";
-  font-size: clamp(1.3em, 1.9vw, 1.4em);
+  font-size: clamp(1.2em, 1.9vw, 1.4em);
   font-weight: 400;
   top: 60%;
   position: relative;
@@ -216,17 +216,22 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   padding-bottom: 80px; 
   text-indent: 40px;
 }
-
+@keyframes nudge-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
 /* NOUVEAU STYLE POUR LE BOUTON DANS LE BLOC INFO */
 .info-button {
   /* On retire la marge et on change le positionnement */
-  position: absolute;
-  bottom: 25px; /* Distance par rapport au bas */
-  right: 25px;  /* Distance par rapport à la droite */
-  
-  display: inline-flex; /* Pour bien aligner le texte et la flèche */
+   display: inline-flex;
   align-items: center;
-  gap: 12px; /* Espace entre le texte et la flèche */
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
 
   padding: 12px 24px;
   color: #fff;
@@ -239,33 +244,24 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-.info-button:hover,
-.info-button:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-}
-
-/* NOUVEAU : On ajoute la flèche avec un pseudo-élément */
-.info-button:hover::after,
-.info-button:focus::after {
- content: ''; /* Le contenu est vide, mais le pseudo-élément existe */
-  display: block;
-  width: 20px;  /* Largeur de votre flèche */
-  height: 20px; /* Hauteur de votre flèche */
-  background-image: url('../img/arrowright.png'); /* Chemin vers votre image */
+.info-button::after {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-left: 8px;
+  background-image: url('../img/arrowright.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  animation: nudge-right 1.2s infinite;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
+  vertical-align: middle;
 }
-
-/* NOUVEAU : Animation de la flèche au survol */
-.info-button:hover::after {
-  transform: translateX(5px);
+.info-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
 }
-
 
 @media (max-width: 1250px) {
   .slides h2.move {

@@ -132,15 +132,19 @@ function slideIn(slide, info) {
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 }
 function slideOut(slide, info) {
-  $("body").css("overflow", "auto"); // Note: idem
+  $("body").css("overflow", "auto");
   info.fadeOut(200);
-  fadeVisionnerTriggerH3(slide, false); 
+  fadeVisionnerTriggerH3(slide, false);
 
   const $h2 = slide.find("h2");
-  if ($h2.hasClass("move")) { // Appliquer l'animation seulement si .move va être retiré
+  if ($h2.hasClass("move")) {
     triggerH2TransformAnimation($h2);
+    // --- Correction ici : forcer un reflow avant de retirer la classe ---
+    $h2.removeClass("move");
+    void $h2[0].offsetWidth; // Force le reflow, évite la saccade
+  } else {
+    $h2.removeClass("move");
   }
-  $h2.removeClass("move");
 
   slide.find("video").removeClass("flou");
   slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
