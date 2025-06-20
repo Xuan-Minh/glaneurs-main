@@ -221,7 +221,7 @@
   letter-spacing: 0.02em;
 }
 .dld-remerciements p {
-  text-align: left; /* Alignement du texte à gauche */
+  text-align: justify; /* Alignement du texte à gauche */
   font-size: clamp(1rem, 1.8vw, 1.1rem); /* Responsive font size */
   font-weight: 400;
   opacity: 0.85;

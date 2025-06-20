@@ -9,7 +9,7 @@
 }
 .page-intro h2 {
   font-size: clamp(1.8rem, 3vw, 2rem);
-  margin-bottom: 0.5em;
+  margin: 6vw 0 4vw 0;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
   text-align: center;
@@ -27,8 +27,9 @@
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
-  text-align: left;
+  text-align: justify;
 }
 section.mentions-legales-content {
 margin-top: 5 vh;
+
 }
