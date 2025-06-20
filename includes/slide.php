@@ -1,40 +1,5 @@
 <?php
-$slides = array(
-    array(
-        "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
-        "srcvideobg" => "video/chariot.mov",
-        "srcaudio" => "audio/chap1.mp3",
-        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => "",
-        "urlsuite" => ""
-    ),
-    array(
-        "chapitre" => getTranslation("index_chapitre1", $lang),
-        "srcvideobg" => "video/recyclerie.mov",
-        "srcaudio" => "audio/chap1.mp3",
-        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("index_chap1info", $lang),
-        "urlsuite" => ""
-    ),
-    array(
-        "chapitre" => getTranslation("index_chapitre2", $lang),
-        "srcvideobg" => "video/bache.mov",
-        "srcaudio" => "audio/chap2.mp3",
-        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("index_chap2info", $lang),
-        "urlsuite" => "",
-        "info_button_text" => getTranslation("archives_titre", $lang), // Utilise la clé de traduction existante
-        "info_button_link" => "tracesdupasse" // Le lien vers votre page
-    ),
-    array(
-        "chapitre" => getTranslation("index_chapitre3", $lang),
-        "srcvideobg" => "video/lee.mov",
-        "srcaudio" => "audio/chap3.mp3",
-        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
-        "info" => getTranslation("index_chap3info", $lang),
-        "urlsuite" => ""
-    )
-);
+
 $index = 1;
 $isFirst = true;
 foreach ($slides as $slide) {

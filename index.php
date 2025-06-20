@@ -1,6 +1,42 @@
 
 <?php
 include 'includes/lang.php';
+$slides = array(
+    array(
+        "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
+        "srcvideobg" => "video/chariot.mov",
+        "srcaudio" => "audio/chap1.mp3",
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "info" => "",
+        "urlsuite" => ""
+    ),
+    array(
+        "chapitre" => getTranslation("index_chapitre1", $lang),
+        "srcvideobg" => "video/recyclerie.mov",
+        "srcaudio" => "audio/chap1.mp3",
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "info" => getTranslation("index_chap1info", $lang),
+        "urlsuite" => ""
+    ),
+    array(
+        "chapitre" => getTranslation("index_chapitre2", $lang),
+        "srcvideobg" => "video/bache.mov",
+        "srcaudio" => "audio/chap2.mp3",
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "info" => getTranslation("index_chap2info", $lang),
+        "urlsuite" => "",
+        "info_button_text" => getTranslation("archives_titre", $lang), // Utilise la clé de traduction existante
+        "info_button_link" => "tracesdupasse" // Le lien vers votre page
+    ),
+    array(
+        "chapitre" => getTranslation("index_chapitre3", $lang),
+        "srcvideobg" => "video/lee.mov",
+        "srcaudio" => "audio/chap3.mp3",
+        "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "info" => getTranslation("index_chap3info", $lang),
+        "urlsuite" => ""
+    )
+);
 
 function isMobile() {
     // Expression régulière améliorée pour inclure plus d'appareils
@@ -43,6 +79,10 @@ if (!$isMobile) {
 <?php if ($isMobile): ?>
     
     <!------------------ VERSION MOBILE ------------------>
+      <?php
+        // On extrait l'ID Vimeo de la première slide (le documentaire complet)
+        $vimeoId_full_doc = substr($slides[0]["srcdocupart"], strrpos($slides[0]["srcdocupart"], '/') + 1);
+    ?>
     <div class="mobile-only">
         <div class="mobile-header">
             <div class="mobile-lang-selector">
@@ -50,7 +90,7 @@ if (!$isMobile) {
                 <span class="lang-sep">/</span>
                 <a href="?lang=en" class="lang-option<?php if ($lang == 'en') echo ' active'; ?>">EN</a>
                 <span class="lang-sep">/</span>
-                <a href="?lang=kr" class="lang-option<?php if ($lang == 'kr') echo ' active'; ?>">KR</a>
+                <a href="?lang=kr" class="lang-option<?php if ($lang == 'kr') echo ' active'; ?>">한국</a>
             </div>
         </div>
        <div class="mobile-content">
@@ -59,7 +99,8 @@ if (!$isMobile) {
             </video>
             <div class="mobile-slide">
                 <h1><?php echo getTranslation("index_titre", $lang); ?></h1>
-                <a class="visionner-trigger" href="https://vimeo.com/1082041088" target="_blank">
+                <!-- On utilise les variables maintenant disponibles -->
+                <a class="visionner-trigger" href="https://vimeo.com/<?php echo $vimeoId_full_doc; ?>?texttrack=<?php echo $lang; ?>" target="_blank">
                     <?php echo getTranslation("index_docufull", $lang); ?>
                 </a>
             </div>
