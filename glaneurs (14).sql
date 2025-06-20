@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 20 juin 2025 à 16:39
+-- Généré le : ven. 20 juin 2025 à 22:23
 -- Version du serveur : 5.7.24
--- Version de PHP : 8.3.1
+-- Version de PHP : 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -118,7 +118,6 @@ INSERT INTO `team_roles` (`id`, `member_id`, `key_name`) VALUES
 (5, 1, 'chef_op'),
 (7, 1, 'monteuse'),
 (8, 1, 'etalonnage'),
-(9, 1, 'reperage'),
 (10, 2, 'directeur_pj'),
 (11, 2, 'dev_wb'),
 (12, 2, 'contact_prise'),
@@ -208,7 +207,7 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (14, 'directrice_pj', 'Directrice de projet', 'Project Manager', '프로젝트 매니저'),
 (15, 'scenariste', 'Scénariste', 'Screenwriter', '시나리오 작가'),
 (16, 'photographe', 'Photographe', 'Photographer', '사진작가'),
-(17, 'chef_op', 'Chef opératrice', 'Director of Photography', '촬영 감독'),
+(17, 'chef_op', 'Cheffe opératrice', 'Director of Photography', '촬영 감독'),
 (18, 'cadreuse', 'Cadreuse', 'Camera Operator', '카메라 오퍼레이터'),
 (19, 'monteuse', 'Monteuse', 'Editor', '편집자'),
 (20, 'etalonnage', 'Étalonnage', 'Color grading', '색 보정'),
@@ -280,7 +279,8 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (87, 'index_chap2info', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 (88, 'index_chap3info', 'Chapitre 3 info', 'Chapter 3 info', ' info part 3 kr'),
 (89, 'portraits_arirang', 'Le glaneur chanteur', 'The Singing Gleaner', '노래하는 폐지 수집가'),
-(90, 'mobile_experience', 'Profitez de l\'expérience sur ordinateur', 'Enjoy the desktop experience', 'PC에서 경험을 즐기세요');
+(90, 'mobile_experience', 'Profitez de l\'expérience sur ordinateur', 'Enjoy the desktop experience', 'PC에서 경험을 즐기세요'),
+(91, 'meta_description', 'Là où les fragments oubliés racontent une histoire de résilience. Plongez dans les mémoires chuchotées des Glaneurs de Carton, un voyage poétique au cœur de l\'humanité.', 'Where forgotten fragments tell a story of resilience. Immerse yourself in the whispered memories of the Cardboard Gleaners, a poetic journey into the heart of humanity.', '잊혀진 조각들이 강인한 생명력의 이야기를 들려주는 곳. 판지 줍는 사람들의 속삭이는 기억 속으로 들어가, 인류의 심장을 향한 시적인 여정을 경험하세요.');
 
 --
 -- Index pour les tables déchargées
@@ -337,7 +337,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- Contraintes pour les tables déchargées

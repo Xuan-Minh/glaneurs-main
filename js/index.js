@@ -115,6 +115,7 @@ function fadeVisionnerTriggerH3($slide, fadeOut = true) {
     $trigger.removeClass('fade-out').addClass('fade-in');
   }
 }
+
 function slideIn(slide, info) {
   resetOtherSlides(slide);
   $("body").css("overflow", "auto"); // Note: si tu utilises .scalable-wrapper, ceci pourrait ne pas être nécessaire
