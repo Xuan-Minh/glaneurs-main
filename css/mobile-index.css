@@ -1,0 +1,113 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #050d1e;
+  font-family: "Figtree", sans-serif;
+}
+
+.mobile-only {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+}
+
+.mobile-bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6);
+}
+
+.mobile-header {
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.mobile-lang-selector {
+  font-size: 1.1em;
+}
+
+.mobile-lang-selector a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.6;
+  padding: 0 5px;
+  transition: opacity 0.3s;
+}
+
+.mobile-lang-selector a.active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.mobile-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.mobile-slide {
+  padding: 20px;
+}
+
+.mobile-slide h1 {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  margin-bottom: 1.5em;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.mobile-slide .visionner-trigger {
+  display: inline-block;
+  font-size: 1.1em;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  padding: 1em 1.8em;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s;
+}
+
+.mobile-slide .visionner-trigger:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 380px) {
+  .mobile-slide h1 {
+    font-size: 1.8rem; /* On réduit encore un peu le titre */
+  }
+  .mobile-slide .visionner-trigger {
+    padding: 0.8em 1.5em; /* Bouton un peu plus petit */
+    font-size: 1em;
+  }
+}
+
+/* Si le téléphone est en mode paysage et que la hauteur est faible */
+@media (orientation: landscape) and (max-height: 500px) {
+    .mobile-slide h1 {
+        margin-bottom: 0.5em; /* Moins de marge en hauteur */
+        font-size: 2rem;
+    }
+    .mobile-content {
+        /* On s'assure que le contenu ne soit pas écrasé */
+        padding-bottom: 20px; 
+    }
+}
