@@ -169,6 +169,7 @@
   height: 2px;
   background-color: #ddd;
   transition: width 0.5s ease;
+  border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 
 #enter-button:hover {

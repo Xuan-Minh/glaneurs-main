@@ -191,6 +191,7 @@ font-size: 3vw;
   height: 2px;
   background: #fff;
   transition: width 0.3s;
+  border-radius: 2px; /* Arrondi les bords du soulignement */
   margin: 0; /* retire le centrage */
 }
 

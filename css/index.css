@@ -86,10 +86,11 @@ div.visionner-trigger-h3::after {
   bottom: -5px;
   left: 0;
   width: 100%; /* Soulignement visible par défaut */
-  height: 4px;
+  height: 2px;
   background-color: #ddd;
   z-index: -1;
   transition: width 0.5s ease-in-out;
+  border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 .visionner-trigger-h3.fade-out {
   opacity: 0;

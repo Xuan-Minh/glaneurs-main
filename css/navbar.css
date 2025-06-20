@@ -78,6 +78,7 @@ header.hide-header {
   left: 0;
   width: 0; /* Initialise la largeur à 0 */
   height: 3px; /* Épaisseur du soulignement */
+  border-radius: 2px; /* Arrondi les bords du soulignement */
   background-color: #ddd; /* Couleur du soulignement */
   transition: width 0.5s ease; /* Animation de largeur */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
@@ -121,6 +122,7 @@ header.hide-header {
   height: 2px;
   background: #ddd;
   transition: width 0.3s;
+  border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 
 .lang-option:hover::after,
@@ -315,6 +317,7 @@ header.hide-header {
   left: 0;
   width: 0; /* Initialise la largeur à 0 */
   height: 2px; /* Épaisseur du soulignement */
+  border-radius: 2px; /* Arrondi les bords du soulignement */
   background-color: #ddd; /* Couleur du soulignement */
   transition: width 0.5s ease; /* Animation de largeur */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
@@ -349,6 +352,7 @@ header.hide-header {
   height: 2px; /* Épaisseur du soulignement */
   background-color: #ddd; /* Couleur du soulignement */
   transition: width 0.5s ease; /* Animation de largeur */
+  border-radius: 2px; /* Arrondi les bords du soulignement */
   z-index: -1; /* Pour que le soulignement passe sous le texte */
 }
 
