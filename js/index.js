@@ -107,7 +107,7 @@ $(document).ready(function() {
   }, TRANSFORM_ANIMATION_DURATION);
 }
 function fadeVisionnerTriggerH3($slide, fadeOut = true) {
-  const $trigger = $slide.find('.visionner-trigger-h3');
+  const $trigger = $slide.find('.visionner-trigger-h3').not('.always-visible');
   if (!$trigger.length) return;
   if (fadeOut) {
     $trigger.removeClass('fade-in').addClass('fade-out');

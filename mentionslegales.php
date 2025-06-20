@@ -12,7 +12,6 @@
 </head>
 
 <body>
-   <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
   <div class="page-intro mentions-legales content-anim">
     <h2><?php echo getTranslation("mentionslegales_titre", $lang) ?></h2>
    <section class="mentions-legales-content "> <h3><?php echo getTranslation("mentionslegales_editeur", $lang) ?><br></h3>
