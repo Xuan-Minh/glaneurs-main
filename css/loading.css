@@ -38,7 +38,6 @@
   z-index: 1; /* Place la vidéo derrière le contenu */
 }
 .loading-titre {
-  font-family: "Libre Baskerville", serif;
   font-size: 2em !important;
   font-weight: 400;
 }
@@ -56,7 +55,7 @@
   flex-direction: column;
   justify-content: center;   /* Centre verticalement */
   align-items: center;       /* Centre horizontalement */
-  font-size: 1.5em;
+  font-size: clamp(1.5em, 2vw, 2em);
   text-align: center;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -69,15 +68,17 @@
 /* Style pour l'écran de chargement */
 .loading-content {
   width: 70%;
-  height: 10%;
   text-align: center;
   margin-bottom: 20px; /* Ajoute une marge en bas du texte */
 }
-
+.def-texte{
+  text-indent: 5vw;
+  
+}
 .loading-item#loading-item1 .loading-content {
   text-align: left; /* Aligne le texte à gauche */
-  font-size: clamp(1em, 2vw, 2em);
-   margin-bottom: 0; /* Ajoute un espace en bas du texte */
+  font-size: clamp(1em, 1.5vw, 1.5em);
+  margin-bottom: 4vw;
 }
 
 .loading-item #loading-item1 .loading-text {
@@ -88,7 +89,7 @@
 
 .loading-item#loading-item1 {
   text-align: left; /* Aligne le texte à gauche */
-  font-size: 1.5em; /* Ajuste la taille de la police */
+  font-size: clamp(1.5em, 2vw, 2em); /* Ajuste la taille de la police */
   margin-bottom: 10px; /* Réduit l'espace en bas du texte */
   justify-content: center; /* Aligne le contenu en haut */
   align-items: center; /* Aligne le contenu à gauche */
@@ -140,33 +141,38 @@
 #enter-button { 
   background-color: rgba(0, 0, 0, 0);
   font-family: "Figtree", sans-serif;
-  font-size: clamp(1em, 2vw, 2em);
+  font-size: clamp(0.8em, 1vw, 2em);
   color: white;
-  margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
+  margin-top: 20px;
   padding: clamp(8px, 1.5vw, 12px) clamp(15px, 2.5vw, 25px); 
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  position: relative; /* Ajout de position relative */
-  transition: color 0.3s ease; /* Transition pour la couleur */
+  /* position: relative; <-- On retire ceci */
+  transition: color 0.3s ease;
 }
 
-#enter-button::after {
+/* On cible le span pour le positionnement de l'effet */
+#enter-button span {
+  position: relative;
+  display: inline-block;
+}
+
+#enter-button span::after { /* On cible le span */
   content: "";
   position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
+  bottom: -5px;
   left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 2px; /* Épaisseur du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  transition: width 0.5s ease; /* Animation de largeur */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
+  width: 0;
+  height: 2px;
+  background-color: #ddd;
+  transition: width 0.5s ease;
 }
 
 #enter-button:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
+  color: #ddd;
 }
 
-#enter-button:hover::after {
-  width: 100%; /* Soulignement complet au survol */
+#enter-button:hover span::after { /* On cible le span au survol */
+  width: 100%;
 }

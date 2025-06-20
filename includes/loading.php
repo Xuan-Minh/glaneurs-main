@@ -12,7 +12,7 @@
             <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", $lang) ?></div>
         </div>
         <div class="loading-item" id="loading-item3">
-            <div class="loading-content"><?php echo getTranslation("loading_production", $lang) ?>
+            <div class="loading-content loading-text"><?php echo getTranslation("loading_production", $lang) ?>
                 <div class="universites">
                     <img src="img/de_white.svg" alt="Dong Eui University">
                     <img src="img/uge_white.svg" alt="Université Gustave Eiffel">
@@ -24,11 +24,11 @@
             <div class="">
                 <img src="img/headphones-4-64.png" alt="Casque">
             </div>
-            <div class="loading-content">
+           <div class="loading-content">
 
                 <?php echo getTranslation("loading_casque_message", $lang) ?>
             </div>
-            <div class="loading-button"><button id="enter-button">Entrer</button></div>
+            <div class="loading-button"><button id="enter-button"><span>Entrer</span></button></div>
         </div>
     </div>
 </div>

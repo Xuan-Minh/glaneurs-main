@@ -275,6 +275,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
     max-width: 90%;  /* Sécurité pour ne pas qu'il soit trop large */
   }
 }
+
 /* -------------------------------- SLIDER BUTTON -------------------------------*/
 .point1,
 .point2 {
