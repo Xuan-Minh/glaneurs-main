@@ -32,7 +32,7 @@ function playArirangAudio() {
       if (playPromise !== undefined) {
         playPromise.then(_ => {
           if (audio.muted) audio.muted = false;
-          fadeAudio(audio, 0.3, 2000);
+          fadeAudio(audio, 0.6, 1000);
           $(document).off('click.autoplay keydown.autoplay');
         }).catch(error => {
           // Ajout d’un log plus détaillé
