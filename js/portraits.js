@@ -1,3 +1,26 @@
+window.startPortraitsAudio = function() {
+  if (typeof isGloballyMuted !== "undefined" && isGloballyMuted) return;
+  // Si les sources n'ont pas encore été démarrées, démarre-les maintenant
+  if (!window.portraitsAudioStarted && sources.length) {
+    const now = audioCtx.currentTime + 0.1;
+    sources.forEach(src => {
+      try { src.start(now); } catch(e) {}
+    });
+    if (gains.length) {
+      gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
+      gains[0].gain.linearRampToValueAtTime(masterVolume, audioCtx.currentTime + 1.2);
+    }
+    window.portraitsAudioStarted = true;
+  }
+  // Applique le mute si besoin
+  if (typeof window.setPortraitsMuteState === 'function') {
+    window.setPortraitsMuteState(typeof isGloballyMuted !== "undefined" ? isGloballyMuted : true);
+  }
+  if (gains.length && audioCtx.state !== "running") {
+    audioCtx.resume();
+  }
+};
+
 $(document).ready(function () {
   const container = $(".portraits-container");
 
@@ -126,7 +149,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0 : 0.6; // ambiance à 0.4, solos à 0
+    gain.gain.value = (i === 0) ? 0 : 0.6;
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -134,14 +157,10 @@ Promise.all(files.map(url =>
     sources.push(src);
     gains.push(gain);
   }
-  // Démarre toutes les pistes en même temps
-  const now = audioCtx.currentTime + 0.1;
-  sources.forEach(src => src.start(now));
-  if (gains.length) {
-  gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
-  gains[0].gain.linearRampToValueAtTime(masterVolume, audioCtx.currentTime + 1.2); // 1.2s de fade in
-}
+  // NE DEMARRE RIEN ICI !
+  window.portraitsAudioStarted = false;
 });
+
 
 
 // Hover sur un portrait
