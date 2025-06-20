@@ -1,6 +1,7 @@
 let fadeInterval = null;
 let isGloballyMuted = true; 
 let audioContextStarted = false;
+window.shouldPlayPortraitsAudio = false; 
 
 function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
@@ -404,7 +405,10 @@ if (localStorage.getItem('audioHasBeenInitialized') === 'true') {
             if (typeof playArirangAudio === 'function') {
                 playArirangAudio();
             }
+            // MODIFICATION ICI : On ne lance pas directement, on lève le drapeau
             if (typeof startPortraitsAudio === 'function') {
+                window.shouldPlayPortraitsAudio = true;
+                // On essaie quand même de le lancer, au cas où il serait déjà prêt
                 startPortraitsAudio();
             }
         }, 100);

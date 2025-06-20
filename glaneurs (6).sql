@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 20 juin 2025 à 01:59
+-- Généré le : ven. 20 juin 2025 à 16:39
 -- Version du serveur : 5.7.24
--- Version de PHP : 7.4.16
+-- Version de PHP : 8.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -197,7 +197,7 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (3, 'index_chapitre1', '« C\'est un travail pour les personnes âgées »', '« It\'s work for the elderly. »', '« 어르신들을 위한 일입니다. »'),
 (4, 'index_chapitre2', '« Une personne d\'un autre temps »', '« A person from another era »', ' « 옛날 사람 »'),
 (5, 'index_chapitre3', ' « Au jour le jour »', '« Hand to mouth »', '« 하루하루 »'),
-(6, 'portraits_titre', 'Portraits', 'Portraits', '인물 소개'),
+(6, 'portraits_titre', 'Au fil de nos rencontres', 'As our paths crossed', '우리의 만남들 속에서'),
 (7, 'archives_titre', 'Traces du passé', 'Echoes of the Past', '과거의 흔적'),
 (8, 'souvenirs_titre', 'Souvenirs', 'Memories', '추억'),
 (9, 'associations_titre', 'Associations', 'Associations', '단체'),
@@ -279,7 +279,8 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (86, 'index_chap1info', 'Au lendemain de la guerre de la Corée du Sud émerge dans une précarité extrême. Plus de 70% des infrastructures sont détruites, les ressources alimentaires sont rares, et la plupart des bâtiments de Séoul sont inhabités ou gravement endommagés. <br> <br>La population, encore majoritairement agricole à l’époque, est contrainte de se tourner vers des petits métiers de survie pour répondre à ses besoins quotidiens. Les chiffonniers, les vendeurs ambulants et d’autres travailleurs de rue deviennent alors des figures essentielles, bien que précaires, de la société sud-coréenne d’après-guerre. \n', 'In the aftermath of the Korean War, South Korea emerged in extreme precarity. Over 70% of its infrastructure was destroyed, food resources were scarce, and most of Seoul\'s buildings were uninhabited or severely damaged.<br><br> The population, still predominantly agricultural at the time, was forced to turn to small survival jobs to meet their daily needs. Ragpickers, street vendors, and other street workers then became essential, albeit precarious, figures in post-war South Korean society.', '한국 전쟁 직후, 한국은 극심한 빈곤 속에 놓였습니다. 기반 시설의 70% 이상이 파괴되었고, 식량 자원은 부족했으며, 서울의 대부분 건물은 비어 있거나 심하게 손상되었습니다.<br><br> 당시 여전히 농업 인구가 대부분이었던 사람들은 일상적인 필요를 충족하기 위해 생계를 위한 작은 일들에 의존할 수밖에 없었습니다. 이때 폐지 줍는 사람, 노점상, 그리고 다른 거리의 노동자들은 전후 한국 사회에서 필수적이지만 불안정한 존재가 되었습니다.'),
 (87, 'index_chap2info', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 (88, 'index_chap3info', 'Chapitre 3 info', 'Chapter 3 info', ' info part 3 kr'),
-(89, 'portraits_arirang', 'Le glaneur chanteur', 'The Singing Gleaner', '노래하는 폐지 수집가');
+(89, 'portraits_arirang', 'Le glaneur chanteur', 'The Singing Gleaner', '노래하는 폐지 수집가'),
+(90, 'mobile_experience', 'Profitez de l\'expérience sur ordinateur', 'Enjoy the desktop experience', 'PC에서 경험을 즐기세요');
 
 --
 -- Index pour les tables déchargées
@@ -336,7 +337,7 @@ ALTER TABLE `team_roles`
 -- AUTO_INCREMENT pour la table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Contraintes pour les tables déchargées

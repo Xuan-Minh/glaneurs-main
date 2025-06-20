@@ -149,7 +149,7 @@ Promise.all(files.map(url =>
   // Création des sources et gains
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0 : 0.6;
+    gain.gain.value = (i === 0) ? 0.6 : 0; // Ambiance à 0.6, instruments à 0
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -157,8 +157,12 @@ Promise.all(files.map(url =>
     sources.push(src);
     gains.push(gain);
   }
-  // NE DEMARRE RIEN ICI !
   window.portraitsAudioStarted = false;
+
+  // AJOUT : On vérifie si main.js a déjà demandé de lancer le son
+  if (window.shouldPlayPortraitsAudio) {
+    window.startPortraitsAudio();
+  }
 });
 
 
