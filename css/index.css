@@ -38,7 +38,7 @@ h1,
 h2,
 div.visionner-trigger-h3 {
   font-family: "Libre Baskerville", serif;
-  font-size: clamp(2rem, 4vw, 4em);
+  font-size: clamp(2rem, 3vw, 3em);
   position: absolute;
   color: white;
   top: 40%;
@@ -61,7 +61,7 @@ h2 {
 
 div.visionner-trigger-h3 {
   font-family: "Figtree";
-  font-size: clamp(1.3em, 2vw, 1.8em);
+  font-size: clamp(1.3em, 1.9vw, 1.4em);
   font-weight: 400;
   top: 60%;
   position: relative;
