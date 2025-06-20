@@ -36,7 +36,7 @@ body {
 }
 h1,
 h2,
-a.visionner-trigger-h3 {
+div.visionner-trigger-h3 {
   font-family: "Libre Baskerville", serif;
   font-size: clamp(2rem, 4vw, 4em);
   position: absolute;
@@ -59,7 +59,7 @@ h2 {
   display: inline-block; /* Nécessaire pour que le soulignement s'adapte au texte */
 }
 
-a.visionner-trigger-h3 {
+div.visionner-trigger-h3 {
   font-family: "Figtree";
   font-size: clamp(1.3em, 2vw, 1.8em);
   font-weight: 400;
@@ -71,13 +71,13 @@ a.visionner-trigger-h3 {
   visibility: visible;
   
 }
-a.visionner-trigger-h3:hover {
+div.visionner-trigger-h3:hover {
   color: #ddd; /* Légère modification de la couleur au survol */
   transition: color 0.3s ease; /* Transition pour la couleur */
   text-decoration: none; /* Pas de soulignement par défaut */
   cursor: pointer;
 }
-a.visionner-trigger-h3::after {
+div.visionner-trigger-h3::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -99,7 +99,7 @@ a.visionner-trigger-h3::after {
   pointer-events: auto;
 }
 h2:hover::after,
-a.visionner-trigger-h3:hover::after {
+div.visionner-trigger-h3:hover::after {
    width: 0; /* Disparaît au hover */
   
 }

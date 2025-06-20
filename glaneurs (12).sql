@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 20 juin 2025 à 00:45
+-- Généré le : ven. 20 juin 2025 à 01:24
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.16
 
@@ -276,10 +276,10 @@ INSERT INTO `translations` (`id`, `key_name`, `fr`, `en`, `kr`) VALUES
 (83, 'index_voirpartie1', 'Regarder la première partie', 'Watch Part 1', '1부 보기'),
 (84, 'index_voirpartie2', 'Regarder la deuxième partie', 'Watch Part 2', '2부 보기'),
 (85, 'index_voirpartie3', 'Regarder la troisième partie', 'Watch Part 3', '3부 보기'),
-(86, 'index_chap1info', 'Au lendemain de la guerre de la Corée du Sud émerge dans une précarité extrême. Plus de 70% des infrastructures sont détruites, les ressources alimentaires sont rares, et la plupart des bâtiments de Séoul sont inhabités ou gravement endommagés. <br> <br>La population, encore majoritairement agricole à l’époque, est contrainte de se tourner vers des petits métiers de survie pour répondre à ses besoins quotidiens. Les chiffonniers, les vendeurs ambulants et d’autres travailleurs de rue deviennent alors des figures essentielles, bien que précaires, de la société sud-coréenne d’après-guerre. \n', 'Cardboard Gleaners is a documentary film...', '폐지 줍는 노인들'),
+(86, 'index_chap1info', 'Au lendemain de la guerre de la Corée du Sud émerge dans une précarité extrême. Plus de 70% des infrastructures sont détruites, les ressources alimentaires sont rares, et la plupart des bâtiments de Séoul sont inhabités ou gravement endommagés. <br> <br>La population, encore majoritairement agricole à l’époque, est contrainte de se tourner vers des petits métiers de survie pour répondre à ses besoins quotidiens. Les chiffonniers, les vendeurs ambulants et d’autres travailleurs de rue deviennent alors des figures essentielles, bien que précaires, de la société sud-coréenne d’après-guerre. \n', 'In the aftermath of the Korean War, South Korea emerged in extreme precarity. Over 70% of its infrastructure was destroyed, food resources were scarce, and most of Seoul\'s buildings were uninhabited or severely damaged.<br><br> The population, still predominantly agricultural at the time, was forced to turn to small survival jobs to meet their daily needs. Ragpickers, street vendors, and other street workers then became essential, albeit precarious, figures in post-war South Korean society.', '한국 전쟁 직후, 한국은 극심한 빈곤 속에 놓였습니다. 기반 시설의 70% 이상이 파괴되었고, 식량 자원은 부족했으며, 서울의 대부분 건물은 비어 있거나 심하게 손상되었습니다.<br><br> 당시 여전히 농업 인구가 대부분이었던 사람들은 일상적인 필요를 충족하기 위해 생계를 위한 작은 일들에 의존할 수밖에 없었습니다. 이때 폐지 줍는 사람, 노점상, 그리고 다른 거리의 노동자들은 전후 한국 사회에서 필수적이지만 불안정한 존재가 되었습니다.'),
 (87, 'index_chap2info', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 (88, 'index_chap3info', 'Chapitre 3 info', 'Chapter 3 info', ' info part 3 kr'),
-(89, 'portraits_arirang', 'Le Glaneur chanteur', 'The Singing Gleaner', '노래하는 폐지 수집가');
+(89, 'portraits_arirang', 'Le glaneur chanteur', 'The Singing Gleaner', '노래하는 폐지 수집가');
 
 --
 -- Index pour les tables déchargées
