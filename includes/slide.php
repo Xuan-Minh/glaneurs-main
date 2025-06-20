@@ -38,7 +38,10 @@ $slides = array(
 $index = 1;
 $isFirst = true;
 foreach ($slides as $slide) {
-    echo '<div class="slides slide' . $index . '">';
+     $extraClass = '';
+    if ($index === 2) $extraClass = ' slide2';
+    if ($index === 3) $extraClass = ' slide3';
+    echo '<div class="slides slide' . $index . $extraClass . '">';
     echo '<video autoplay muted loop playsinline>';
     echo '<source src="' . $slide["srcvideobg"] . '" type="video/mp4" />';
     echo '</video>';
