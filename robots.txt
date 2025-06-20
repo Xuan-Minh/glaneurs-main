@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://glaneursdecarton.mastercmw.com/sitemap.xml
