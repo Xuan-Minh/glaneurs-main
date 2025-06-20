@@ -40,6 +40,8 @@
 .loading-titre {
   font-size: 2em !important;
   font-weight: 400;
+  font-family: "Libre Baskerville", serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 .loading-items {
   position: relative;
