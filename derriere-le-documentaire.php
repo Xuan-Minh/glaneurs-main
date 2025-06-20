@@ -46,28 +46,28 @@
     </div>
     <div class="team-grid content-anim">
         <?php foreach ($members as $i => $membre): ?>
-            <div class="team-member show-photo" data-index="<?php echo $i; ?>">
-                <div class="team-face team-photo" style="background-image: url('<?php echo htmlspecialchars($membre['image']); ?>');"></div>
-                <div class="team-face team-info">
-                    <div class="team-name">
-                        <?php
-                        $nom_col = 'nom_' . $lang;
-                        echo htmlspecialchars($membre[$nom_col] ?? $membre['nom_fr']);
-                        ?>
-                    </div>
-                    <div class="team-role">
-                        <?php foreach ($membre['roles'] as $roleKey): ?>
-                            <div><?php echo htmlspecialchars(getTranslation($roleKey, $lang)); ?></div>
-                        <?php endforeach; ?>
-                    </div>
-                    <?php if (!empty($membre['portfolio'])): ?>
-                        <a href="<?php echo htmlspecialchars($membre['portfolio']); ?>" class="team-portfolio" target="_blank">
-                            <?php echo getTranslation('portfolio', $lang); ?>
-                        </a>
-                    <?php endif; ?>
-                </div>
+    <div class="team-member show-photo" data-index="<?php echo $i; ?>">
+        <div class="team-face team-photo" style="background-image: url('<?php echo htmlspecialchars($membre['image']); ?>');"></div>
+        <div class="team-face team-info">
+            <div class="team-name">
+                <?php
+                $nom_col = 'nom_' . $lang;
+                echo htmlspecialchars($membre[$nom_col] ?? $membre['nom_fr']);
+                ?>
             </div>
-        <?php endforeach; ?>
+            <div class="team-role">
+                <?php foreach ($membre['roles'] as $roleKey): ?>
+                    <div><?php echo htmlspecialchars(getTranslation($roleKey, $lang)); ?></div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php if (!empty($membre['portfolio'])): ?>
+            <a href="<?php echo htmlspecialchars($membre['portfolio']); ?>" class="team-portfolio" target="_blank">
+                <?php echo getTranslation('portfolio', $lang); ?>
+            </a>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
     </div>
 
     <section class="dld-remerciements content-anim">
