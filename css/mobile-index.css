@@ -15,6 +15,8 @@ html, body {
   height: 100%;
   color: white;
   text-align: center;
+  position: relative; /* Ajouté pour le contexte z-index */
+  isolation: isolate; /* Crée un nouveau contexte de superposition propre */
 }
 
 .mobile-bg-video {
@@ -25,13 +27,20 @@ html, body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  filter: brightness(0.6);
 }
-
+.mobile-header,
+.mobile-content {
+    position: relative; /* S'assure que le contenu reste au-dessus de la vidéo */
+    z-index: 1;
+}
 .mobile-header {
+  position: absolute; /* Changez pour 'absolute' */
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 20px;
-  position: relative;
-  z-index: 10;
+  z-index: 10; /* S'assure qu'il est au-dessus de tout */
+  background: transparent; /* Fond transparent */
 }
 
 .mobile-lang-selector {
@@ -64,21 +73,31 @@ html, body {
 }
 
 .mobile-slide h1 {
-  font-family: "Libre Baskerville", serif;
+font-family: "Libre Baskerville", serif;
+ font-weight: normal ;
   font-size: clamp(2rem, 8vw, 3rem);
   margin-bottom: 1.5em;
   line-height: 1.3;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
+@keyframes nudge-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
 .mobile-slide .visionner-trigger {
-  display: inline-block;
+  display: inline-flex; /* Utilise Flexbox pour aligner le contenu interne */
+  align-items: center; /* Centre verticalement le texte et la flèche */
+  gap: 0.7em; /* Crée un espace fixe entre le texte et la flèche */
+  
   font-size: 1.1em;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 100px;
-  padding: 1em 1.8em;
+  padding: 1em 1.8em; /* Padding simple et symétrique */
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -86,8 +105,35 @@ html, body {
   transition: background-color 0.3s;
 }
 
+.mobile-slide .visionner-trigger::after {
+  content: '';
+  flex-shrink: 0; /* Empêche la flèche de rétrécir */
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url('../img/arrowright.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Applique l'animation permanente */
+  animation: nudge-right 1.5s ease-in-out infinite;
+}
+
 .mobile-slide .visionner-trigger:hover {
     background: rgba(255, 255, 255, 0.25);
+}
+
+.mobile-footer-prompt {
+  font-family: "Figtree", sans-serif;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  z-index: 10;
 }
 
 @media (max-width: 380px) {

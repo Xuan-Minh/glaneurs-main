@@ -53,7 +53,7 @@ if (!$isMobile) {
                 <a href="?lang=kr" class="lang-option<?php if ($lang == 'kr') echo ' active'; ?>">KR</a>
             </div>
         </div>
-        <div class="mobile-content">
+       <div class="mobile-content">
             <video autoplay muted loop playsinline class="mobile-bg-video">
                 <source src="video/chariot.mov" type="video/mp4">
             </video>
@@ -63,6 +63,9 @@ if (!$isMobile) {
                     <?php echo getTranslation("index_docufull", $lang); ?>
                 </a>
             </div>
+        </div>
+        <div class="mobile-footer-prompt">
+            <?php echo getTranslation("mobile_experience", $lang); ?>
         </div>
     </div>
 
