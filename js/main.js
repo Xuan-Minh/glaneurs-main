@@ -25,6 +25,7 @@ function fadeAudio(audio, to, duration = 1000) {
 // ... (le code au-dessus reste le même)
 
 function playArirangAudio() {
+  if (isGloballyMuted) return; 
   const audio = document.getElementById("audio-arirang");
   if (audio) {
     if (audio.paused) {
@@ -392,24 +393,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- NOUVELLE LOGIQUE DE PERSISTANCE ---
     // Au chargement de la page, on vérifie si l'utilisateur a déjà activé le son par le passé.
-    if (localStorage.getItem('audioHasBeenInitialized') === 'true') {
-        audioContextStarted = true;
-        // On récupère son dernier choix (activé ou coupé)
-        isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true';
+if (localStorage.getItem('audioHasBeenInitialized') === 'true') {
+    audioContextStarted = true;
+    // On récupère son dernier choix (activé ou coupé)
+    isGloballyMuted = localStorage.getItem('isSiteMuted') === 'true';
 
-        // Si le son doit être activé, on tente de le lancer
-        if (!isGloballyMuted) {
-            // On utilise un petit délai pour s'assurer que les scripts des autres pages (portraits.js) sont chargés
-            setTimeout(() => {
-                if (typeof playArirangAudio === 'function') {
-                    playArirangAudio();
-                }
-                if (typeof startPortraitsAudio === 'function') {
-                    startPortraitsAudio();
-                }
-            }, 100);
-        }
+    // Si le son doit être activé, on tente de le lancer
+    if (!isGloballyMuted) {
+        setTimeout(() => {
+            if (typeof playArirangAudio === 'function') {
+                playArirangAudio();
+            }
+            if (typeof startPortraitsAudio === 'function') {
+                startPortraitsAudio();
+            }
+        }, 100);
     }
+}
     // --- FIN DE LA NOUVELLE LOGIQUE ---
 
     function drawFlatLine() {
@@ -479,27 +479,28 @@ function updateAudioElements() {
         }
     }
 
-    function initAudio() {
-        if (audioContextStarted) return;
-        
-        isGloballyMuted = false;
-        audioContextStarted = true;
+function initAudio() {
+    if (audioContextStarted) return;
 
-        // --- MODIFICATION ---
-        // On sauvegarde que l'utilisateur a activé le son pour la première fois.
-        localStorage.setItem('audioHasBeenInitialized', 'true');
-        localStorage.setItem('isSiteMuted', 'false'); // On sauvegarde l'état "activé"
+    isGloballyMuted = false;
+    audioContextStarted = true;
 
+    localStorage.setItem('audioHasBeenInitialized', 'true');
+    localStorage.setItem('isSiteMuted', 'false');
+
+    // On ne lance le son que si isGloballyMuted est faux
+    if (!isGloballyMuted) {
         if (typeof playArirangAudio === 'function') {
             playArirangAudio();
         }
         if (typeof startPortraitsAudio === 'function') {
             startPortraitsAudio();
         }
-
-        updateAudioElements();
-        updateUI();
     }
+
+    updateAudioElements();
+    updateUI();
+}
 
     // ... (le code de initAudio() reste le même) ...
 
