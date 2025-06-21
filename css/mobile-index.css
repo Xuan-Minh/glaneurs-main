@@ -75,7 +75,7 @@ html, body {
 .mobile-slide h1 {
 font-family: "Libre Baskerville", serif;
  font-weight: normal ;
-  font-size: clamp(2rem, 8vw, 3rem);
+  font-size: clamp(2rem, 7vw, 3rem);
   margin-bottom: 1.5em;
   line-height: 1.3;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
