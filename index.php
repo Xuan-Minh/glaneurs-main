@@ -67,6 +67,7 @@ if (!$isMobile) {
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/index.php?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" href="css/font.css" />
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
