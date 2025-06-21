@@ -97,10 +97,11 @@
   align-items: center; /* Aligne le contenu à gauche */
 }
 
-.loading-item #loading-item3 .loading-text {
+.loading-item#loading-item3 .loading-text {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: clamp(0.8em, 1vw, 1em);
 }
 
 .universites {
