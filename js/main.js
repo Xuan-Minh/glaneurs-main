@@ -23,7 +23,20 @@ function fadeAudio(audio, to, duration = 1000) {
   }, 50);
 }
 
-// ... (le code au-dessus reste le même)
+function addHideHeaderOnScroll(scrollElement) {
+  const $header = $("header");
+  let lastScroll = 0;
+  $(scrollElement).on("scroll", function () {
+    const currentScroll = $(this).scrollTop();
+    if (currentScroll > lastScroll && currentScroll > 200) {
+      $header.addClass("hide-header");
+    } else if (currentScroll < lastScroll) {
+      $header.removeClass("hide-header");
+    }
+    if (currentScroll < 20) $header.removeClass("hide-header");
+    lastScroll = currentScroll;
+  });
+}
 
 function playArirangAudio() {
   if (isGloballyMuted) return; 

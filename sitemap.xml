@@ -1,37 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://glaneursdecarton.mastercmw.com/</loc>
-    <priority>1.00</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Page d'accueil -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/?lang=fr</loc>
-    <priority>1.00</priority>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
   </url>
+
+  <!-- Portraits -->
   <url>
-    <loc>https://glaneursdecarton.mastercmw.com/?lang=en</loc>
-    <priority>1.00</priority>
+    <loc>https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr" />
   </url>
+
+  <!-- Derrière le documentaire -->
   <url>
-    <loc>https://glaneursdecarton.mastercmw.com/?lang=kr</loc>
-    <priority>1.00</priority>
+    <loc>https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr" />
   </url>
+
+  <!-- Traces du passé -->
   <url>
-    <loc>https://glaneursdecarton.mastercmw.com/portraits</loc>
-    <priority>0.80</priority>
+    <loc>https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=fr</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=fr" />
   </url>
+
+  <!-- Souvenirs -->
   <url>
-    <loc>https://glaneursdecarton.mastercmw.com/portraits?lang=fr</loc>
-    <priority>0.80</priority>
+    <loc>https://glaneursdecarton.mastercmw.com/souvenirs.php?lang=fr</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/souvenirs.php?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/souvenirs.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/souvenirs.php?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/souvenirs.php?lang=fr" />
   </url>
+
+  <!-- Mentions Légales -->
   <url>
-    <loc>https://glaneursdecarton.mastercmw.com/portraits?lang=en</loc>
-    <priority>0.80</priority>
+    <loc>https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=kr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr" />
   </url>
-  <url>
-    <loc>https://glaneursdecarton.mastercmw.com/portraits?lang=kr</loc>
-    <priority>0.80</priority>
-  </url>
-  <!-- Répète pour chaque page importante -->
+
 </urlset>
