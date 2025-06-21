@@ -1,5 +1,6 @@
 
 <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
+<link rel="canonical" href="https://glaneursdecarton.mastercmw.com<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?lang=<?php echo $lang; ?>" />
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/font.css" type="text/css" />
 <link rel="stylesheet" href="css/navbar.css" type="text/css" />
