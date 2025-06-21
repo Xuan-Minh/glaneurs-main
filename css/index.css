@@ -89,7 +89,9 @@ div.visionner-trigger-h3::after {
   height: 2px;
   background-color: #ddd;
   z-index: -1;
-  transition: width 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(1);              /* Présent de base */
+  transform-origin: center;   
   border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 .visionner-trigger-h3.fade-out {
@@ -102,12 +104,10 @@ div.visionner-trigger-h3::after {
   visibility: visible;
   pointer-events: auto;
 }
-h2:hover::after,
-div.visionner-trigger-h3:hover::after {
-   width: 0; /* Disparaît au hover */
-  
-}
 
+div.visionner-trigger-h3:hover::after {
+  transform: scaleX(0);               /* Se réduit vers le centre au hover */
+}
 .visionner iframe {
   width: 90vw !important;
   max-width: 100vw;
@@ -232,7 +232,6 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   position: absolute;
   bottom: 25px;
   right: 25px;
-
   padding: 12px 24px;
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
@@ -242,6 +241,32 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   font-weight: 500;
   text-indent: 0;
   transition: background-color 0.3s, border-color 0.3s;
+}
+.info-button span {
+  position: relative;
+  display: inline-block;
+}
+
+/* NOUVEAU : On crée le soulignement (caché par défaut) */
+.info-button span::before {
+  content: '';
+  position: absolute;
+  bottom: -4px; /* Distance du soulignement par rapport au texte */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Épaisseur du soulignement */
+  background-color: rgba(255, 255, 255, 0.8);
+  
+  /* Animation depuis le centre */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* NOUVEAU : On affiche le soulignement au survol et au focus */
+.info-button:hover span::before,
+.info-button:focus span::before {
+  transform: scaleX(1);
 }
 
 .info-button::after {
@@ -255,7 +280,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   background-repeat: no-repeat;
   background-position: center;
   animation: nudge-right 1.2s infinite;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   vertical-align: middle;
 }
 .info-button:hover {

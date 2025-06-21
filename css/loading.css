@@ -172,10 +172,10 @@
   border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 
-#enter-button:hover {
+#enter-button:hover, #enter-button:focus {
   color: #ddd;
 }
 
-#enter-button:hover span::after { /* On cible le span au survol */
+#enter-button:hover span::after, #enter-button:focus span::after { /* On cible le span au survol */
   width: 100%;
 }

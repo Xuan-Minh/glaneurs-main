@@ -37,8 +37,9 @@ foreach ($slides as $slide) {
         echo '</div>';
           echo '<div class="info">' ;
     echo $slide["info"];
-      if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
-        echo '<a href="' . $slide["info_button_link"] . '" class="info-button transition-link">' . $slide["info_button_text"] . '</a>';
+        if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
+        // On ajoute un <span> autour du texte pour l'animation du soulignement
+        echo '<a href="' . $slide["info_button_link"] . '" class="info-button transition-link"><span>' . $slide["info_button_text"] . '</span></a>';
     }
 
     echo '</div>';
