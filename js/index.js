@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+     const definitionContainer = $('#definition-text');
+    if (definitionContainer.length) {
+        const definitionText = definitionContainer.data('definition');
+        definitionContainer.text(definitionText);
+    }
      if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);

@@ -6,7 +6,7 @@
     <div class="loading-items">
         <div class="loading-item" id="loading-item1">
             <div class="loading-content def"><?php echo getTranslation("loading_def_titre", $lang) ?></div>
-            <div class="loading-content def-texte"><?php echo getTranslation("loading_def_texte", $lang) ?></div>
+            <div id="definition-text" class="loading-content def-texte" data-definition="<?php echo htmlspecialchars(getTranslation("loading_def_texte", $lang)) ?>"></div>
         </div>
         <div class="loading-item" id="loading-item2">
             <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", $lang) ?></div>
