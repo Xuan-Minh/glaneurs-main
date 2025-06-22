@@ -58,12 +58,21 @@ function getTranslation($key, $lang = 'fr')
     static $translations = null;
     if ($translations === null) {
         $pdo = getPDO();
-        $stmt = $pdo->query("SELECT * FROM translations");
+        // Optimisation : ne sélectionner que les colonnes nécessaires
+        $stmt = $pdo->query("SELECT key_name, fr, en, kr FROM translations");
         $translations = [];
         foreach ($stmt as $row) {
             $translations[$row['key_name']] = $row;
         }
     }
-    return isset($translations[$key][$lang]) ? $translations[$key][$lang] : $key;
+
+    // Vérifier si la traduction existe
+    if (isset($translations[$key][$lang])) {
+        // Si oui, retourner la valeur SÉCURISÉE
+        return htmlspecialchars($translations[$key][$lang], ENT_QUOTES, 'UTF-8');
+    }
+
+    // Sinon, retourner un message d'erreur clair et SÉCURISÉ
+    return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars($key, ENT_QUOTES, 'UTF-8');
 }
 ?>
