@@ -469,7 +469,7 @@
 
 .archive-nav-container .nav-link.active {
     color: #E0DED8;
-    border-left-color: #c8a165;
+    border-left-color: #fff;
     font-weight: bold;
 }
 
