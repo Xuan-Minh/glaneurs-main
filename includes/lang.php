@@ -15,14 +15,14 @@ function getPDO()
 {
     static $pdo = null;
     if ($pdo === null) {
-    //    $servername = "localhost";
-    //    $database = "glaneurs";
-    //     $username = "root";
-    //    $password = "root";
-         $servername = "localhost:3306";
-         $database = "glaneursdecarton";
-         $username = "glaneurs_admin";
-         $password = "Wlm7nZGs!pz%d7s0";
+        // On essaie de lire les variables d'environnement (pour Plesk).
+        // Si elles n'existent pas, on utilise les valeurs par défaut (pour MAMP).
+        // L'opérateur '??' signifie "si la variable à gauche est nulle, utilise la valeur à droite".
+        $servername = $_ENV['DB_HOST'] ?? 'localhost';
+        $database   = $_ENV['DB_NAME'] ?? 'glaneurs';
+        $username   = $_ENV['DB_USER'] ?? 'root';
+        $password   = $_ENV['DB_PASS'] ?? 'root';
+
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -31,7 +31,10 @@ function getPDO()
         try {
             $pdo = new PDO($dsn, $username, $password, $options);
         } catch (PDOException $error) {
-            die('Connection error: ' . $error->getMessage());
+            // En cas d'erreur, on affiche un message générique pour la sécurité.
+            // En développement, vous pouvez décommenter la ligne détaillée.
+            die('Erreur de connexion à la base de données.');
+            // die('Connection error: ' . $error->getMessage());
         }
     }
     return $pdo;
