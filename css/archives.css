@@ -280,7 +280,48 @@ section.archives-intro {
 .archive-overlay[style*="display: flex"] .archive-overlay-arrow {
   display: flex !important;
 }
+.archives-narrative {
+    padding: 2rem 0;
+}
 
+.archive-chapter {
+    max-width: 75ch;
+    margin: 0 auto 5rem auto;
+    padding: 0 2rem;
+}
+
+.archive-chapter h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #E0DED8;
+    border-left: 3px solid #c8a165;
+    padding-left: 1rem;
+    font-family: "Libre Baskerville", serif;
+}
+
+.archive-chapter p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: pre-wrap; /* Respecte les sauts de ligne de votre texte */
+    text-align: justify;
+    text-indent: 2em; /* Ajoute une indentation de la taille de 2 caractères */
+    margin-bottom: 1em; /* Ajoute un espace entre les paragraphes pour la lisibilité */
+}
+
+.archives-gallery-section {
+    margin-top: 8rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color: #E0DED8;
+    font-family: "Libre Baskerville", serif;
+}
 @media (max-width: 900px) {
   .archive-overlay-content {
     flex-direction: column;
