@@ -136,7 +136,54 @@ window.addEventListener("visibilitychange", function () {
   }
 });
 
+ $('body').on('click', '.transition-link', function(event) {
+        // 1. Empêche la navigation immédiate
+        event.preventDefault();
 
+        // 2. Récupère l'URL de destination depuis l'attribut href du lien
+        const destinationUrl = $(this).attr('href');
+
+        // 3. Affiche l'overlay de transition en le rendant opaque
+        $('#transition-overlay').css('opacity', '1');
+
+        // 4. Attend la fin de l'animation (700ms) avant de changer de page.
+        // Cette durée doit correspondre à la durée de la transition dans votre main.css.
+        setTimeout(function() {
+            window.location.href = destinationUrl;
+        }, 700); 
+    });
+
+     window.addEventListener('pageshow', function(event) {
+        // On vérifie si la page a été chargée depuis le cache (bouton précédent/suivant)
+        if (event.persisted) {
+            // Si oui, on force une réinitialisation de l'interface pour
+            // simuler une nouvelle visite sans recharger la page.
+
+            // 1. Réinitialiser l'overlay de transition
+            const overlay = $('#transition-overlay');
+            // On le rend visible instantanément (sans animation)
+            overlay.css('transition', 'none');
+            overlay.css('opacity', '1');
+
+            // On utilise un petit délai pour que le navigateur applique le style ci-dessus
+            // avant de réactiver l'animation pour le fondu de sortie.
+            setTimeout(function() {
+                overlay.css('transition', 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)');
+                // On déclenche l'animation de disparition, comme au chargement normal.
+                overlay.removeClass("active").addClass("hide");
+            }, 50);
+
+            // 2. Réinitialiser l'état de la page
+            window.scrollTo(0, 0); // Remonte en haut de la page
+            $('body').css('overflow', 'auto'); // S'assure que le scroll est possible
+            
+            // 3. Fermer tous les lecteurs vidéo qui pourraient être ouverts
+            $('.visionner').fadeOut(0);
+
+            // 4. Couper le son pour éviter une lecture audio inattendue
+            stopArirangAudio();
+        }
+    });
   // ----------------------------------------------- Transition overlay ---------------------------------- //
   setTimeout(function () {
     $("#transition-overlay").removeClass("active").addClass("hide");
