@@ -8,16 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "includes/css.php"; ?>
     <link rel="stylesheet" href="css/derriereledocumentaire.css">
-    <?php $pdo = getPDO();
+   <?php $pdo = getPDO();
 
-    // Récupère tous les membres
-    $members = $pdo->query("SELECT * FROM team_members")->fetchAll(PDO::FETCH_ASSOC);
+    // NOUVELLE REQUÊTE OPTIMISÉE (1 seule requête au lieu de N+1)
+    $query = "
+        SELECT 
+            m.*, 
+            GROUP_CONCAT(tr.key_name SEPARATOR ',') AS roles_keys
+        FROM 
+            team_members m
+        LEFT JOIN 
+            team_roles tr ON m.id = tr.member_id
+        GROUP BY 
+            m.id
+        ORDER BY
+            m.display_order ASC
+    ";
+    
+    $stmt = $pdo->query($query);
+    $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Pour chaque membre, récupère ses rôles (clé de traduction)
+    // Pour chaque membre, on transforme la chaîne de rôles en tableau
     foreach ($members as &$member) {
-        $stmt = $pdo->prepare("SELECT key_name FROM team_roles WHERE member_id = ?");
-        $stmt->execute([$member['id']]);
-        $member['roles'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        if (!empty($member['roles_keys'])) {
+            $member['roles'] = explode(',', $member['roles_keys']);
+        } else {
+            $member['roles'] = [];
+        }
     }
     unset($member);
     ?>
@@ -81,11 +98,18 @@
             <?php echo getTranslation('derriereledocumentaire_collaboration', $lang); ?>
         </p>
     </section>
-    <section class="dld-remerciements content-anim preserve-lines">
+    <section class="dld-remerciements content-anim">
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
-        <p>
-            <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>Adélaïde PETRIER, Afi HOMAWOO, Alexis PAVARD, Alexis ZERBIB, Alfred MAJURAN, Alice PONCET, Anne-Laure LIBON, Antoine DOS SANTOS, Armelle MICHAU, Audrey HAROUX, Avotina ANDRIANAVELOMANANA, Bérangère BOISSEAU, Cécile MORVAN, Céline HENRARD, Chantal NGUYEN, Dylan BLANDEL, Edson GALINA FORTES, Emeline VINCENOT, Eric BLANDEL, Erwann GAUTHIER, Fatima GHALLAB, Gaëtan GERARD, Geoffrey MSIKA, Hafsa ALKAA, Jacqueline HENRARD, Jacques-François MARCHANDISE, Jean TUPIN, Joana DA SILVA, Laëtitia G., Lara BOUGHAMIL, Laura FARAUT, Lidia OUROUPOVA, Marie-Valentine GALLON, Martin LAPLAIZE, Mohamed SAÏDANI, Noémie CERNOCH, Peter, Philippe GAMBETTE, Pierre BOUREAU, Pierre-Adrien CARTON, Richard LEGRAND, Sakalaoudine MOUBINE, Salomé DOS SANTOS, Sandrine SOGADZI, Sarah TESSIER, Victor CABAL, Virginie PRIMAS
-        </p>
+         <p class="preserve-lines">
+            <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>
+         </p><p class="supporters-list">
+            <?php
+                // On récupère tous les soutiens depuis la BDD, triés par ordre alphabétique
+                $supporters = $pdo->query("SELECT name FROM supporters ORDER BY name ASC")->fetchAll(PDO::FETCH_COLUMN);
+                // On les affiche, séparés par une virgule et un espace
+                echo implode(', ', $supporters);
+            ?>
+         </p>
     </section>
     <?php include "includes/jsinclude.php"; ?>
     <script src="js/derriereledocumentaire.js"></script>
