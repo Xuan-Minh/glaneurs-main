@@ -1,0 +1,51 @@
+
+# Fichier généré par GitHub Copilot
+
+### Dépendances ###
+# Le dossier vendor contient les librairies installées par Composer.
+# Il ne doit JAMAIS être envoyé sur Git. Il est recréé avec `composer install`.
+/vendor/
+
+### Fichiers d'environnement ###
+# Le fichier .env contient vos identifiants secrets (base de données, etc.).
+# Il doit IMPÉRATIVEMENT être ignoré pour des raisons de sécurité.
+# Le fichier .env.example, qui sert de modèle, doit lui être versionné.
+.env
+
+### Fichiers de configuration IDE / Éditeur ###
+# Dossier de configuration de Visual Studio Code
+.vscode/
+# Dossier de configuration des IDE JetBrains (PhpStorm, etc.)
+.idea/
+
+### Fichiers générés par le système d'exploitation ###
+# Fichiers système de macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Fichiers système de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Fichiers de log ###
+# Ignorer tous les fichiers se terminant par .log
+*.log
+# Ignorer les répertoires de logs
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### Fichiers de base de données ###
+# Il est recommandé d'ignorer les dumps SQL pour ne pas versionner
+# de données sensibles ou de gros fichiers de sauvegarde.
+# Vous pouvez décommenter la ligne suivante si vous le souhaitez.
+# *.sql
+
+### Fichiers de vérification de services tiers ###
+# Ces fichiers ne sont utiles que sur le serveur de production et n'ont
+# pas besoin d'être dans le dépôt Git.
+google*.html
+naver*.html
