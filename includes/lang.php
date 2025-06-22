@@ -17,11 +17,11 @@ function getPDO()
     if ($pdo === null) {
        // $servername = "localhost";
        // $database = "glaneurs";
-      //  $username = "root";
+       //  $username = "root";
        // $password = "root";
          $servername = "localhost:3306";
          $database = "glaneursdecarton";
-        $username = "glaneurs_admin";
+         $username = "glaneurs_admin";
          $password = "Wlm7nZGs!pz%d7s0";
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
