@@ -13,21 +13,28 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'kr'])) {
 // Connexion PDO centralisée
 function getPDO()
 {
-       static $pdo = null;
+    static $pdo = null;
     if ($pdo === null) {
-        // --- AJOUTEZ CE BLOC DE DÉBOGAGE ---
-        $servername = $_ENV['DB_HOST'] ?? 'localhost';
-        $database   = $_ENV['DB_NAME'] ?? 'glaneurs';
-        $username   = $_ENV['DB_USER'] ?? 'root';
-        $password   = $_ENV['DB_PASS'] ?? 'root';
+        // --- MÉTHODE FINALE : FICHIER DE CONFIGURATION ---
 
-        echo "--- VALEURS DE CONNEXION UTILISÉES SUR LE SERVEUR ---<br>";
-        echo "Serveur (DB_HOST): " . htmlspecialchars($servername) . "<br>";
-        echo "Base de données (DB_NAME): " . htmlspecialchars($database) . "<br>";
-        echo "Utilisateur (DB_USER): " . htmlspecialchars($username) . "<br>";
-        echo "Mot de passe (DB_PASS) est-il défini ? : " . (empty($password) ? 'NON' : 'OUI') . "<br>";
-        die("--- FIN DU TEST DE DÉBOGAGE ---");
+        // 1. Définir les valeurs par défaut pour le développement local (MAMP)
+        $servername = 'localhost';
+        $database   = 'glaneurs';
+        $username   = 'root';
+        $password   = 'root';
 
+        // 2. Vérifier si un fichier de configuration de production existe
+        $configFile = __DIR__ . '/config.php';
+        if (file_exists($configFile)) {
+            // Si oui (on est sur le serveur de prod), on charge ses valeurs
+            require_once $configFile;
+            $servername = $db_config['host'];
+            $database   = $db_config['name'];
+            $username   = $db_config['user'];
+            $password   = $db_config['pass'];
+        }
+
+        // 3. Tenter la connexion avec les bonnes valeurs
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -36,14 +43,14 @@ function getPDO()
         try {
             $pdo = new PDO($dsn, $username, $password, $options);
         } catch (PDOException $error) {
-            // En cas d'erreur, on affiche un message générique pour la sécurité.
-            // En développement, vous pouvez décommenter la ligne détaillée.
-            die('Erreur de connexion à la base de données.');
-            // die('Connection error: ' . $error->getMessage());
+            // Affiche une erreur claire si la connexion échoue
+            // die('Erreur de connexion à la base de données.');
+            die('Erreur de connexion : ' . $error->getMessage()); // Gardez ceci pour le dernier test
         }
     }
     return $pdo;
 }
+
 
 // Fonction de traduction
 function getTranslation($key, $lang = 'fr')
