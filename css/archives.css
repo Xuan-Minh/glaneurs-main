@@ -535,8 +535,7 @@
   gap: 20px;
   justify-content: center;
 }
-
-.archive-gallery-item {
+.archive-thumb {
   width: 180px;
   margin: 10px;
   cursor: pointer;
@@ -545,62 +544,69 @@
   transition: transform 0.2s;
 }
 
-.archive-gallery-item img {
+.archive-thumb img {
   width: 100%;
   display: block;
   transition: transform 0.2s;
 }
 
-.archive-gallery-item:hover {
+/* Applique le zoom sur le conteneur ET l'image */
+.archive-thumb:hover {
   transform: scale(1.05);
 }
-
-.archive-gallery-item:hover img {
+.archive-thumb:hover img {
   transform: scale(1.05);
 }
-
 .archive-overlay {
   position: fixed;
   z-index: 2000;
   top: 0; left: 0; right: 0; bottom: 0;
-  display: none; /* Caché par défaut, géré par JS */
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .archive-overlay-bg {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.85);
 }
-
+/* Agrandir la photo */
 .archive-overlay-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  background: none;
   max-width: 95vw;
   width: 95vw;
   max-height: 90vh;
+  overflow: visible;
   position: relative;
-  gap: 70px;
+  box-shadow: none;
+  gap: 70px; /* Augmente l'écart ici (ex : 70px) */
 }
-
 .archive-overlay-photo {
   flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+/* Photo très grande, centrée */
 .archive-overlay-photo img {
   max-width: 50vw;
   max-height: 70vh;
   width: auto;
   height: auto;
+  display: block;
+  margin: 0;
   box-shadow: 0 4px 32px #000a;
 }
-
+/* Infos à droite, sans fond */
 .archive-overlay-info {
   flex: 0 0 320px;
   color: #fff;
   padding: 40px 40px 40px 0;
+  background: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -610,14 +616,13 @@
   max-width: 400px;
   word-break: break-word;
 }
-
-.archive-overlay-title {
+.archive-overlay-info h2 {
   font-size: clamp(1.5rem, 2.5vw, 2rem); 
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
+  letter-spacing: 0.02em;
 }
-
 .archive-overlay-close {
   position: absolute;
   top: 24px;
@@ -626,56 +631,93 @@
   font-size: 2.2em;
   cursor: pointer;
   z-index: 20;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0;
 }
-
 .archive-overlay-arrow {
-  display: none;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  background: none;
+  border: none;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s, transform 0.3s;
 }
 
-.archive-overlay-arrow.left { left: 2vw; }
-.archive-overlay-arrow.right { right: 2vw; }
+.archive-overlay-arrow.left {
+  left: 2vw;
+}
+.archive-overlay-arrow.right {
+  right: 2vw;
+}
 
+/* Pour la flèche gauche */
 .archive-overlay-arrow img {
-  width: 32px;
+  width: 40px;
+  animation: scroll-side-left 2s infinite;
   opacity: 0;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+  cursor: pointer;
 }
 
 .archive-overlay-arrow.left img {
+  width: 32px;
   transform: rotate(-90deg);
-  animation-name: scroll-side-left;
+  animation: scroll-side-left 2s infinite;
+  opacity: 0;
+  cursor: pointer;
 }
-
 .archive-overlay-arrow.right img {
+  width: 32px;
   transform: rotate(90deg);
-  animation-name: scroll-side-right;
+  animation: scroll-side-right 2s infinite;
+  opacity: 0;
+  cursor: pointer;
 }
 
+@keyframes scroll-side-right {
+  0% {
+    opacity: 0;
+    transform:translate(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10px); /* Décale vers la droite */
+  }
+  100% {
+    opacity: 0;
+    transform:translateX(20px); /* Décale encore plus vers la droite */
+  }
+}
+@keyframes scroll-side-left {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-10px); /* Décale vers la gauche */
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px); /* Décale encore plus vers la gauche */
+  }
+}
+
+/* Cache les flèches hors overlay */
+.archive-overlay-arrow {
+  display: none;
+}
 .archive-overlay[style*="display: block"] .archive-overlay-arrow,
 .archive-overlay[style*="display: flex"] .archive-overlay-arrow {
   display: flex !important;
 }
-
-@keyframes scroll-side-right {
-  0%, 100% { opacity: 0; transform: rotate(90deg) translateX(0); }
-  50% { opacity: 1; transform: rotate(90deg) translateX(10px); }
-}
-
-@keyframes scroll-side-left {
-  0%, 100% { opacity: 0; transform: rotate(-90deg) translateX(0); }
-  50% { opacity: 1; transform: rotate(-90deg) translateX(-10px); }
-}
-
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 1024px) {
     .archives-content {
