@@ -1,4 +1,21 @@
 /* --- GENERAL LAYOUT & SCROLL --- */
+.archives-intro p {
+    margin-bottom: 3rem; /* Ajoute de l'espace sous le texte d'intro */
+}
+
+/* NOUVEAU: Style pour la mini-galerie d'introduction */
+.intro-image-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.intro-image-gallery .archive-gallery-item {
+    width: clamp(200px, 22vw, 280px); /* Taille responsive */
+    height: auto;
+}
 .archives-scroll {
   height: 100vh;
   scrollbar-width: none; /* Firefox */
