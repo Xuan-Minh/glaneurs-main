@@ -8,7 +8,7 @@ Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneu
 
 ## Aperçu
 
-![Aperçu de la page d'accueil du site Les Glaneurs de Carton](img/readme/apercu.png)
+![Aperçu de la page d'accueil du site Les Glaneurs de Carton](img/readme/preview.png)
 
 ---
 
