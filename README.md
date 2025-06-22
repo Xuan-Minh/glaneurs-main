@@ -1,4 +1,4 @@
-# Les Glaneurs de Carton - Documentaire Web
+# Les Glaneurs de Carton - Documentaire Interactif
 
 Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneurs de Carton". Il a été conçu avec un fort accent sur l'expérience utilisateur, les animations fluides et une architecture web moderne.
 
@@ -20,7 +20,7 @@ Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneu
 
 ## À Propos du Projet
 
-Ce site sert de plateforme de présentation pour un documentaire explorant la vie et les histoires des personnes qui glanent en fin de marché. L'objectif était de créer une expérience numérique qui reflète l'ambiance poétique et humaine du film, en utilisant des animations riches et une navigation non conventionnelle.
+Ce site sert de plateforme de présentation pour un documentaire explorant la vie et les histoires de personnes agées qui glanent des cartons dans les rues de Busan, du matin au soir. L'objectif était de créer une expérience numérique qui reflète l'ambiance poétique et humaine du film, en utilisant des animations riches et une navigation non conventionnelle.
 
 ## Fonctionnalités Clés
 
@@ -96,22 +96,178 @@ Ce site sert de plateforme de présentation pour un documentaire explorant la vi
 
 ## Structure du Projet
 
+Absolument \! Voici l'arborescence de votre projet, avec le dossier `.git` et tout ce qu'il contient volontairement omis pour une meilleure clarté sur la structure de votre code et de vos ressources :
+
 ```
-.
-├── css/                # Fichiers CSS
-│   ├── index.css       # Styles pour la page d'accueil (desktop)
-│   ├── mobile-index.css# Styles pour la page d'accueil (mobile)
-│   └── ...
-├── img/                # Images, vidéos et assets visuels
-├── includes/           # Modules PHP réutilisables
-│   ├── header.php      # En-tête du site
-│   ├── lang.php        # Logique de traduction et connexion BDD
-│   ├── loading.php     # Écran de chargement
-│   └── ...
-├── js/                 # Fichiers JavaScript
-│   ├── index.js        # Logique pour la page d'accueil
-│   ├── main.js         # Scripts globaux
-│   └── ...
-├── index.php           # Page d'accueil
-├── portraits.php       # Page des portraits
-└── ...                 # Autres
+glaneurs-main
+┣ .vscode
+┃ ┗ settings.json
+┣ audio
+┃ ┣ ambiancedld.mp3
+┃ ┣ Arirang.wav
+┃ ┣ arirang_bass.mp3
+┃ ┣ arirang_full.mp3
+┃ ┣ arirang_harp.mp3
+┃ ┣ arirang_oboe.mp3
+┃ ┣ arirang_piano.mp3
+┃ ┣ Busansheart.mp3
+┃ ┣ homepage.mp3
+┃ ┣ SangmansTheme.mp3
+┃ ┣ slide2.mp3
+┃ ┣ slide3.mp3
+┃ ┣ Souvenirs diffus.mp3
+┃ ┗ 아리랑0.wav
+┣ css
+┃ ┣ archives.css
+┃ ┣ derriereledocumentaire.css
+┃ ┣ font.css
+┃ ┣ index.css
+┃ ┣ loading.css
+┃ ┣ main.css
+┃ ┣ mentionslegales.css
+┃ ┣ mobile-index.css
+┃ ┣ navbar.css
+┃ ┣ portraits.css
+┃ ┗ visionner.css
+┣ font
+┃ ┣ Figtree
+┃ ┃ ┣ static
+┃ ┃ ┃ ┣ Figtree-Black.ttf
+┃ ┃ ┃ ┣ Figtree-BlackItalic.ttf
+┃ ┃ ┃ ┣ Figtree-Bold.ttf
+┃ ┃ ┃ ┣ Figtree-BoldItalic.ttf
+┃ ┃ ┃ ┣ Figtree-ExtraBold.ttf
+┃ ┃ ┃ ┣ Figtree-ExtraBoldItalic.ttf
+┃ ┃ ┃ ┣ Figtree-Italic.ttf
+┃ ┃ ┃ ┣ Figtree-Light.ttf
+┃ ┃ ┃ ┣ Figtree-LightItalic.ttf
+┃ ┃ ┃ ┣ Figtree-Medium.ttf
+┃ ┃ ┃ ┣ Figtree-MediumItalic.ttf
+┃ ┃ ┃ ┣ Figtree-Regular.ttf
+┃ ┃ ┃ ┣ Figtree-SemiBold.ttf
+┃ ┃ ┃ ┗ Figtree-SemiBoldItalic.ttf
+┃ ┃ ┣ Figtree-Italic-VariableFont_wght.ttf
+┃ ┃ ┣ Figtree-VariableFont_wght.ttf
+┃ ┃ ┣ OFL.txt
+┃ ┃ ┗ README.txt
+┃ ┣ Libre_Baskerville
+┃ ┃ ┣ LibreBaskerville-Bold.ttf
+┃ ┃ ┣ LibreBaskerville-Italic.ttf
+┃ ┃ ┣ LibreBaskerville-Regular.ttf
+┃ ┃ ┗ OFL.txt
+┃ ┣ Noto sans KR
+┃ ┃ ┣ NotoSansKR-Black.ttf
+┃ ┃ ┣ NotoSansKR-Bold.ttf
+┃ ┃ ┣ NotoSansKR-ExtraBold.ttf
+┃ ┃ ┣ NotoSansKR-ExtraLight.ttf
+┃ ┃ ┣ NotoSansKR-Light.ttf
+┃ ┃ ┣ NotoSansKR-Medium.ttf
+┃ ┃ ┣ NotoSansKR-Regular.ttf
+┃ ┃ ┣ NotoSansKR-SemiBold.ttf
+┃ ┃ ┗ NotoSansKR-Thin.ttf
+┃ ┗ NewEdgeSoftPower4-LightRounded.otf
+┣ img
+┃ ┣ archives
+┃ ┃ ┣ 1960-Chiffonnier.jpg
+┃ ┃ ┣ 1960-chiffonniers.jpg
+┃ ┃ ┣ 1961-remise-etat-1.JPG
+┃ ┃ ┣ 1961-remise-etat-2.JPG
+┃ ┃ ┣ 1961-remise-etat-3.JPG
+┃ ┃ ┣ 1961-remise-etat-4.JPG
+┃ ┃ ┣ 1969-chiffonnier.png
+┃ ┃ ┣ 1973-bidonville-2.jpg
+┃ ┃ ┣ 1973-bidonville.jpg
+┃ ┃ ┣ 1973-chariot-chiffonnier.jpg
+┃ ┃ ┣ 1973-chiffonnier-cartons.jpg
+┃ ┃ ┣ 1973-chiffonnier.jpg
+┃ ┃ ┣ 1973-pere-jungilwoo.jpg
+┃ ┃ ┣ 1973-porteuse-bidonville.jpg
+┃ ┃ ┣ 1976-chiffonnier-cartons.jpeg
+┃ ┃ ┗ 1978-collecteur-dechets.jpg
+┃ ┣ equipe
+┃ ┃ ┣ .DS_Store
+┃ ┃ ┣ alyssia.jpg
+┃ ┃ ┣ dylan.jpg
+┃ ┃ ┣ gihoon.jpg
+┃ ┃ ┣ hugo.jpg
+┃ ┃ ┣ hyunbeom.jpg
+┃ ┃ ┣ ines.jpg
+┃ ┃ ┣ jaeden.jpg
+┃ ┃ ┣ jiwoo.jpg
+┃ ┃ ┣ jiyeong.jpg
+┃ ┃ ┣ junghyun.jpg
+┃ ┃ ┣ membre1.jpg
+┃ ┃ ┣ membre2.jpg
+┃ ┃ ┣ romane.jpg
+┃ ┃ ┣ saki.jpg
+┃ ┃ ┣ sakina.jpg
+┃ ┃ ┣ sarah.jpg
+┃ ┃ ┣ stephane.jpg
+┃ ┃ ┣ suyeon.jpg
+┃ ┃ ┗ xuan.jpg
+┃ ┣ .DS_Store
+┃ ┣ arrowdown.png
+┃ ┣ arrowleft.png
+┃ ┣ arrowright.png
+┃ ┣ bgopening.jpeg
+┃ ┣ de_white.svg
+┃ ┣ dongeui.svg
+┃ ┣ favicon.png
+┃ ┣ headphones-4-64.png
+┃ ┣ uge_white.svg
+┃ ┣ univeiffel.svg
+┃ ┣ volume-mute.svg
+┃ ┗ volume.svg
+┣ includes
+┃ ┣ archives-gallery.php
+┃ ┣ archives-overlay.php
+┃ ┣ autopusharchives.php
+┃ ┣ css.php
+┃ ┣ googleb278f9cb82635524.html
+┃ ┣ header.php
+┃ ┣ jsinclude.php
+┃ ┣ lang.php
+┃ ┣ loading.php
+┃ ┣ reset.php
+┃ ┣ scrolldown.php
+┃ ┣ setlang.php
+┃ ┣ slide.php
+┃ ┣ transition.php
+┃ ┗ visionner.php
+┣ js
+┃ ┣ archives.js
+┃ ┣ associations.js
+┃ ┣ derriereledocumentaire.js
+┃ ┣ index.js
+┃ ┣ jquery-3.1.0.min.js
+┃ ┣ main.js
+┃ ┗ portraits.js
+┣ video
+┃ ┣ .DS_Store
+┃ ┣ archives.mov
+┃ ┣ arirang-test.mov
+┃ ┣ bache.mov
+┃ ┣ cartons.mov
+┃ ┣ chariot.mov
+┃ ┣ eaulow.mp4
+┃ ┣ glaneuse-test.mov
+┃ ┣ lee-test.mov
+┃ ┣ lee.mov
+┃ ┣ recyclerie.mov
+┃ ┗ ville.mov
+┣ .DS_Store
+┣ .gitattributes
+┣ .htaccess
+┣ associations.php
+┣ derriere-le-documentaire.php
+┣ glaneurs (14).sql
+┣ index.php
+┣ mentionslegales.php
+┣ naverc5484d0d0937981e7e12f688527ddeb9.html
+┣ portraits.php
+┣ README.md
+┣ robots.txt
+┣ sitemap.xml
+┣ souvenirs.php
+┗ tracesdupasse.php
+```
