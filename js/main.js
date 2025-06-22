@@ -153,27 +153,32 @@ window.addEventListener("visibilitychange", function () {
         }, 700); 
     });
 
-     window.addEventListener('pageshow', function(event) {
+      window.addEventListener('pageshow', function(event) {
         // On vérifie si la page a été chargée depuis le cache (bouton précédent/suivant)
         if (event.persisted) {
             // Si oui, on force une réinitialisation de l'interface pour
             // simuler une nouvelle visite sans recharger la page.
 
-            // 1. Réinitialiser l'overlay de transition
+            // 1. Réinitialiser l'overlay de transition (LA PARTIE LA PLUS IMPORTANTE)
             const overlay = $('#transition-overlay');
-            // On le rend visible instantanément (sans animation)
+            
+            // Étape A : On supprime l'animation pour que les changements soient instantanés
             overlay.css('transition', 'none');
+            
+            // Étape B : On force l'overlay à son état de départ : visible et prêt à animer
+            overlay.removeClass('hide').addClass('active');
             overlay.css('opacity', '1');
 
-            // On utilise un petit délai pour que le navigateur applique le style ci-dessus
-            // avant de réactiver l'animation pour le fondu de sortie.
+            // Étape C : On utilise un minuscule délai pour que le navigateur applique les styles ci-dessus
+            // C'est une astuce classique pour forcer le "reflow" du navigateur.
             setTimeout(function() {
+                // Étape D : On réactive l'animation CSS
                 overlay.css('transition', 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)');
-                // On déclenche l'animation de disparition, comme au chargement normal.
-                overlay.removeClass("active").addClass("hide");
-            }, 50);
+                // Étape E : On déclenche l'animation de disparition
+                overlay.removeClass('active').addClass('hide');
+            }, 50); // 50ms est suffisant
 
-            // 2. Réinitialiser l'état de la page
+            // 2. Réinitialiser le reste de l'état de la page (votre code était déjà bon)
             window.scrollTo(0, 0); // Remonte en haut de la page
             $('body').css('overflow', 'auto'); // S'assure que le scroll est possible
             
@@ -181,7 +186,9 @@ window.addEventListener("visibilitychange", function () {
             $('.visionner').fadeOut(0);
 
             // 4. Couper le son pour éviter une lecture audio inattendue
-            stopArirangAudio();
+            if (typeof stopArirangAudio === 'function') {
+                stopArirangAudio();
+            }
         }
     });
   // ----------------------------------------------- Transition overlay ---------------------------------- //
