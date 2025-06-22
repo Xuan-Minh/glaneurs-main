@@ -136,22 +136,42 @@ window.addEventListener("visibilitychange", function () {
   }
 });
 
- $('body').on('click', '.transition-link', function(event) {
-        // 1. Empêche la navigation immédiate
-        event.preventDefault();
+ $(document).on("click", ".transition-link", function (e) {
+    e.preventDefault();
+    const href = $(this).attr("href");
 
-        // 2. Récupère l'URL de destination depuis l'attribut href du lien
-        const destinationUrl = $(this).attr('href');
+    // Si le lien est invalide, ne rien faire
+    if (!href || href === "#" || href.startsWith("javascript")) return;
 
-        // 3. Affiche l'overlay de transition en le rendant opaque
-        $('#transition-overlay').css('opacity', '1');
+    // Normalise les URLs pour vérifier si on est déjà sur la page
+    const currentPath = window.location.pathname.replace(/\/$/, "");
+    const targetPath = new URL(href, window.location.origin).pathname.replace(/\/$/, "");
 
-        // 4. Attend la fin de l'animation (700ms) avant de changer de page.
-        // Cette durée doit correspondre à la durée de la transition dans votre main.css.
-        setTimeout(function() {
-            window.location.href = destinationUrl;
-        }, 700); 
-    });
+    if (currentPath === targetPath) {
+        // Si on est déjà sur la page, on ferme juste le menu s'il est ouvert
+        $("#menuVolet").removeClass("open");
+        $("#menuBurger").removeClass("open");
+        return;
+    }
+
+    // Si on doit changer de page :
+    // 1. Gérer l'audio
+    if (typeof stopArirangAudio === "function") stopArirangAudio();
+
+    // 2. Fermer le menu-volet (ne fait rien s'il est déjà fermé)
+    $("#menuVolet").removeClass("open");
+    $("#menuBurger").removeClass("open");
+
+    // 3. Lancer l'animation de transition
+    // On attend un peu que le menu se ferme visuellement
+    setTimeout(function () {
+        $('#transition-overlay').removeClass('hide').addClass('active');
+        // On attend la fin de l'animation de l'overlay avant de changer de page
+        setTimeout(function () {
+            window.location.href = href;
+        }, 700); // Durée de la transition CSS
+    }, 200); // Délai pour la fermeture du menu
+});
 
  window.addEventListener('pageshow', function(event) {
         // On ne fait rien si la page n'est pas chargée depuis le cache
