@@ -153,49 +153,44 @@ window.addEventListener("visibilitychange", function () {
         }, 700); 
     });
 
-      window.addEventListener('pageshow', function(event) {
-        // On vérifie si la page a été chargée depuis le cache (bouton précédent/suivant)
-        if (event.persisted) {
-            // Si oui, on force une réinitialisation de l'interface pour
-            // simuler une nouvelle visite sans recharger la page.
+ window.addEventListener('pageshow', function(event) {
+        // On ne fait rien si la page n'est pas chargée depuis le cache
+        if (!event.persisted) {
+            return;
+        }
 
-            // 1. Réinitialiser l'overlay de transition (LA PARTIE LA PLUS IMPORTANTE)
-            const overlay = $('#transition-overlay');
-            
-            // Étape A : On supprime l'animation pour que les changements soient instantanés
-            overlay.css('transition', 'none');
-            
-            // Étape B : On force l'overlay à son état de départ : visible et prêt à animer
-            overlay.removeClass('hide').addClass('active');
-            overlay.css('opacity', '1');
+        // Si on vient du cache (bouton précédent)
+        const overlay = $('#transition-overlay');
 
-            // Étape C : On utilise un minuscule délai pour que le navigateur applique les styles ci-dessus
-            // C'est une astuce classique pour forcer le "reflow" du navigateur.
-            setTimeout(function() {
-                // Étape D : On réactive l'animation CSS
-                overlay.css('transition', 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)');
-                // Étape E : On déclenche l'animation de disparition
-                overlay.removeClass('active').addClass('hide');
-            }, 50); // 50ms est suffisant
+        // Étape A : On retire la classe 'hide' pour que l'élément redevienne visible dans le DOM.
+        // On désactive aussi la transition pour que ce soit instantané.
+        overlay.css('transition', 'none');
+        overlay.removeClass('hide');
 
-            // 2. Réinitialiser le reste de l'état de la page (votre code était déjà bon)
-            window.scrollTo(0, 0); // Remonte en haut de la page
-            $('body').css('overflow', 'auto'); // S'assure que le scroll est possible
-            
-            // 3. Fermer tous les lecteurs vidéo qui pourraient être ouverts
-            $('.visionner').fadeOut(0);
+        // Étape B (L'ASTUCE CLÉ) : On force le navigateur à recalculer le style de l'élément.
+        // En demandant son 'offsetHeight', on l'oblige à prendre en compte le changement de l'étape A.
+        // C'est une technique standard pour forcer le "reflow".
+        void overlay[0].offsetHeight; 
 
-            // 4. Couper le son pour éviter une lecture audio inattendue
-            if (typeof stopArirangAudio === 'function') {
-                stopArirangAudio();
-            }
+        // Étape C : Maintenant que le navigateur sait que l'élément est visible,
+        // on réactive l'animation et on rajoute la classe pour le faire disparaître.
+        overlay.css('transition', 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)');
+        overlay.addClass('hide');
+
+        // Étape D : On réinitialise le reste de la page
+        window.scrollTo(0, 0);
+        $('body').css('overflow', 'auto');
+        $('.visionner').fadeOut(0);
+        if (typeof stopArirangAudio === 'function') {
+            stopArirangAudio();
         }
     });
-  // ----------------------------------------------- Transition overlay ---------------------------------- //
-  setTimeout(function () {
-    $("#transition-overlay").removeClass("active").addClass("hide");
-  }, 50);
 
+    // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
+    // Ce code ne s'exécute que lors d'un chargement frais, pas lors d'un retour "précédent".
+    setTimeout(function() {
+        $('#transition-overlay').addClass('hide');
+    }, 50);
   // ----------------------------------------------- Menu Burger ---------------------------------- //
   // Sélectionne les éléments du menuBurger et du menuVolet
   const menuBurger = $("#menuBurger");
