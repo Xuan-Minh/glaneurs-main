@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+     let isAnimating = false;
      const definitionContainer = $('#definition-text');
     if (definitionContainer.length) {
         const definitionText = definitionContainer.data('definition');
@@ -104,14 +106,19 @@ $(document).ready(function() {
  * Ajoute temporairement la classe pour animer la transformation.
  * @param {jQuery} $element L'élément jQuery h2.
  */
-  function triggerH2TransformAnimation($element) {
-  if (!$element || !$element.length) return;
+ function triggerH2TransformAnimation($element) {
+        if (!$element || !$element.length) return;
+        $element.addClass('animate-transform');
+        // NOUVEAU : On écoute la fin de la transition pour libérer le verrou
+        $element.one('transitionend', function(e) {
+            if (e.originalEvent.propertyName === 'transform') {
+                $element.removeClass('animate-transform');
+                isAnimating = false; // On libère le verrou ici
+            }
+        });
+    }
 
-  $element.addClass('animate-transform');
-  setTimeout(() => {
-    $element.removeClass('animate-transform');
-  }, TRANSFORM_ANIMATION_DURATION);
-}
+
 function fadeVisionnerTriggerH3($slide, fadeOut = true) {
   const $trigger = $slide.find('.visionner-trigger-h3').not('.always-visible');
   if (!$trigger.length) return;
@@ -122,60 +129,70 @@ function fadeVisionnerTriggerH3($slide, fadeOut = true) {
   }
 }
 
-function slideIn(slide, info) {
-  resetOtherSlides(slide);
-  $("body").css("overflow", "auto"); // Note: si tu utilises .scalable-wrapper, ceci pourrait ne pas être nécessaire
-  info.fadeIn(2000);
-  fadeVisionnerTriggerH3(slide, true); 
+  function slideIn(slide, info) {
+        // MODIFIÉ : On active le verrou au début de l'animation
+        isAnimating = true; 
+        
+        resetOtherSlides(slide);
+        $("body").css("overflow", "auto");
+        info.fadeIn(2000);
+        fadeVisionnerTriggerH3(slide, true);
 
-  const $h2 = slide.find("h2");
-  if (!$h2.hasClass("move")) { // Appliquer l'animation seulement si .move va être ajouté
-    triggerH2TransformAnimation($h2);
-  }
-  $h2.addClass("move");
+        const $h2 = slide.find("h2");
+        if (!$h2.hasClass("move")) {
+            triggerH2TransformAnimation($h2);
+        }
+        $h2.addClass("move");
 
-  slide.find("video").addClass("flou");
-  slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-  slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-}
-function slideOut(slide, info) {
-  $("body").css("overflow", "auto");
-  info.fadeOut(200);
-  fadeVisionnerTriggerH3(slide, false);
+        slide.find("video").addClass("flou");
+        slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+        slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+    }
+    function slideOut(slide, info) {
+        // MODIFIÉ : On active le verrou au début de l'animation
+        isAnimating = true; 
 
-  const $h2 = slide.find("h2");
-  if ($h2.hasClass("move")) {
-    triggerH2TransformAnimation($h2);
-    // --- Correction ici : forcer un reflow avant de retirer la classe ---
-    $h2.removeClass("move");
-    void $h2[0].offsetWidth; // Force le reflow, évite la saccade
-  } else {
-    $h2.removeClass("move");
-  }
+        $("body").css("overflow", "auto");
+        info.fadeOut(200);
+        fadeVisionnerTriggerH3(slide, false);
 
-  slide.find("video").removeClass("flou");
-  slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-  slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-}
+        const $h2 = slide.find("h2");
+        if ($h2.hasClass("move")) {
+            triggerH2TransformAnimation($h2);
+            $h2.removeClass("move");
+            // NOUVEAU : On supprime le reflow forcé, il n'est plus nécessaire
+            // void $h2[0].offsetWidth; 
+        } else {
+            $h2.removeClass("move");
+            isAnimating = false; // Libère le verrou si aucune animation n'est lancée
+        }
 
+        slide.find("video").removeClass("flou");
+        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+    }
 
 // --------------------------------- slideTrigger changement de slide --------------------------------- //
 
-$(".sliderButton .point2").click(function (event) {
-event.stopPropagation();
-  const slide = $(this).closest(".slides");
-  const info = slide.find(".info");
-  slideIn(slide, info);
+    $(".sliderButton .point2").click(function (event) {
+        // MODIFIÉ : On vérifie le verrou avant de faire quoi que ce soit
+        if (isAnimating) return; 
 
-});
+        event.stopPropagation();
+        const slide = $(this).closest(".slides");
+        const info = slide.find(".info");
+        slideIn(slide, info);
+    });
 
-$(".sliderButton .point1").click(function (event) {
- event.stopPropagation();
-  const slide = $(this).closest(".slides");
-  const info = slide.find(".info");
-  slideOut(slide, info);
+    $(".sliderButton .point1").click(function (event) {
+        // MODIFIÉ : On vérifie le verrou avant de faire quoi que ce soit
+        if (isAnimating) return;
 
-});
+        event.stopPropagation();
+        const slide = $(this).closest(".slides");
+        const info = slide.find(".info");
+        slideOut(slide, info);
+    });
 
 // --------------------------------- Reset Slide --------------------------------- //
 
