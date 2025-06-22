@@ -85,10 +85,6 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
                 ?>
             </div>
 
-            <section class="archives-gallery-section">
-                <h3 class="gallery-title content-anim"><?php echo getTranslation("archives_galerie_titre", $lang); ?></h3>
-                <?php include "includes/archives-gallery.php"; ?>
-            </section>
            
             <?php include "includes/archives-overlay.php"; ?>
 
