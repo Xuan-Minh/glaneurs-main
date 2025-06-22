@@ -123,3 +123,6 @@ p {
     filter: blur(12px);
   }
 }
+.preserve-lines{
+  white-space: pre-wrap
+}

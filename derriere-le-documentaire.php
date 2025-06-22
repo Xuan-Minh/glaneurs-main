@@ -70,7 +70,7 @@
 <?php endforeach; ?>
     </div>
 
-    <section class="dld-remerciements content-anim">
+    <section class="dld-remerciements content-anim preserve-lines">
         <h2><?php echo getTranslation("remerciements_titre", $lang); ?></h2>
         <p>
             <?php echo getTranslation("derriereledocumentaire_messagemerci", $lang); ?></p>
@@ -81,11 +81,10 @@
             <?php echo getTranslation('derriereledocumentaire_collaboration', $lang); ?>
         </p>
     </section>
-    <section class="dld-remerciements content-anim">
+    <section class="dld-remerciements content-anim preserve-lines">
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
         <p>
-            <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>
-        Adélaïde PETRIER, Afi HOMAWOO, Alexis PAVARD, Alexis ZERBIB, Alfred MAJURAN, Alice PONCET, Anne-Laure LIBON, Antoine DOS SANTOS, Armelle MICHAU, Audrey HAROUX, Avotina ANDRIANAVELOMANANA, Bérangère BOISSEAU, Cécile MORVAN, Céline HENRARD, Chantal NGUYEN, Dylan BLANDEL, Edson GALINA FORTES, Emeline VINCENOT, Eric BLANDEL, Erwann GAUTHIER, Fatima GHALLAB, Gaëtan GERARD, Geoffrey MSIKA, Hafsa ALKAA, Jacqueline HENRARD, Jacques-François MARCHANDISE, Jean TUPIN, Joana DA SILVA, Laëtitia G., Lara BOUGHAMIL, Laura FARAUT, Lidia OUROUPOVA, Marie-Valentine GALLON, Martin LAPLAIZE, Mohamed SAÏDANI, Noémie CERNOCH, Peter, Philippe GAMBETTE, Pierre BOUREAU, Pierre-Adrien CARTON, Richard LEGRAND, Sakalaoudine MOUBINE, Salomé DOS SANTOS, Sandrine SOGADZI, Sarah TESSIER, Victor CABAL, Virginie PRIMAS
+            <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>Adélaïde PETRIER, Afi HOMAWOO, Alexis PAVARD, Alexis ZERBIB, Alfred MAJURAN, Alice PONCET, Anne-Laure LIBON, Antoine DOS SANTOS, Armelle MICHAU, Audrey HAROUX, Avotina ANDRIANAVELOMANANA, Bérangère BOISSEAU, Cécile MORVAN, Céline HENRARD, Chantal NGUYEN, Dylan BLANDEL, Edson GALINA FORTES, Emeline VINCENOT, Eric BLANDEL, Erwann GAUTHIER, Fatima GHALLAB, Gaëtan GERARD, Geoffrey MSIKA, Hafsa ALKAA, Jacqueline HENRARD, Jacques-François MARCHANDISE, Jean TUPIN, Joana DA SILVA, Laëtitia G., Lara BOUGHAMIL, Laura FARAUT, Lidia OUROUPOVA, Marie-Valentine GALLON, Martin LAPLAIZE, Mohamed SAÏDANI, Noémie CERNOCH, Peter, Philippe GAMBETTE, Pierre BOUREAU, Pierre-Adrien CARTON, Richard LEGRAND, Sakalaoudine MOUBINE, Salomé DOS SANTOS, Sandrine SOGADZI, Sarah TESSIER, Victor CABAL, Virginie PRIMAS
         </p>
     </section>
     <?php include "includes/jsinclude.php"; ?>

@@ -35,7 +35,7 @@ foreach ($slides as $slide) {
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
-          echo '<div class="info">' ;
+          echo '<div class="info preserve-lines">'; ;
     echo $slide["info"];
         if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
         // On ajoute un <span> autour du texte pour l'animation du soulignement

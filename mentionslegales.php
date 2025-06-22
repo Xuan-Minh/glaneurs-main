@@ -39,7 +39,7 @@
     </p>
 
     <h3><?php echo getTranslation("mentionslegales_propriete_intellectuelle_titre", $lang) ?><br></h3>
-    <p>
+    <p class="preserve-lines">
       <?php echo getTranslation("mentionslegales_propriete_intellectuelle_texte", $lang) ?>
     </p>
     <h3><?php echo getTranslation("mentionslegales_donnees_personnelles_titre", $lang) ?><br></h3>
