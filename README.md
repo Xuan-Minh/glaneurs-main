@@ -20,7 +20,7 @@ Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneu
 
 ## À Propos du Projet
 
-Ce site sert de plateforme de présentation pour un documentaire explorant la vie et les histoires des personnes qui glanent en fin de marché. L'objectif était de créer une expérience numérique qui reflète l'ambiance poétique et humaine du film, en utilisant des animations riches et une navigation non conventionnelle.
+Ce site sert de plateforme de présentation pour un documentaire explorant la vie et les histoires de personnes agées qui glanent des cartons dans les rues de Busan, du matin au soir. L'objectif était de créer une expérience numérique qui reflète l'ambiance poétique et humaine du film, en utilisant des animations riches et une navigation non conventionnelle.
 
 ## Fonctionnalités Clés
 
