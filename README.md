@@ -1,4 +1,4 @@
-# Les Glaneurs de Carton - Documentaire Web
+# Les Glaneurs de Carton - Documentaire Interactif
 
 Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneurs de Carton". Il a été conçu avec un fort accent sur l'expérience utilisateur, les animations fluides et une architecture web moderne.
 
