@@ -173,31 +173,31 @@ window.addEventListener("visibilitychange", function () {
     }, 200); // Délai pour la fermeture du menu
 });
 
- window.addEventListener('pageshow', function(event) {
+  window.addEventListener('pageshow', function(event) {
         // On ne fait rien si la page n'est pas chargée depuis le cache
         if (!event.persisted) {
             return;
         }
 
-        // Si on vient du cache (bouton précédent)
+        // Si on vient du cache (bouton précédent), on force la ré-animation
         const overlay = $('#transition-overlay');
 
-        // Étape A : On retire la classe 'hide' pour que l'élément redevienne visible dans le DOM.
-        // On désactive aussi la transition pour que ce soit instantané.
+        // Étape A : On retire la classe 'hide' et on désactive la transition
+        // pour que l'overlay redevienne visible instantanément, sans animation.
         overlay.css('transition', 'none');
         overlay.removeClass('hide');
 
-        // Étape B (L'ASTUCE CLÉ) : On force le navigateur à recalculer le style de l'élément.
+        // Étape B (L'ASTUCE CLÉ) : On force le navigateur à recalculer le style.
         // En demandant son 'offsetHeight', on l'oblige à prendre en compte le changement de l'étape A.
-        // C'est une technique standard pour forcer le "reflow".
+        // Sans cette ligne, le navigateur est "trop intelligent" et ne voit pas de changement à animer.
         void overlay[0].offsetHeight; 
 
-        // Étape C : Maintenant que le navigateur sait que l'élément est visible,
-        // on réactive l'animation et on rajoute la classe pour le faire disparaître.
+        // Étape C : Maintenant que le navigateur sait que l'overlay est visible,
+        // on réactive l'animation et on rajoute la classe pour le faire disparaître en fondu.
         overlay.css('transition', 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)');
         overlay.addClass('hide');
 
-        // Étape D : On réinitialise le reste de la page
+        // Étape D : On réinitialise le reste de la page pour un état propre
         window.scrollTo(0, 0);
         $('body').css('overflow', 'auto');
         $('.visionner').fadeOut(0);
@@ -207,10 +207,11 @@ window.addEventListener("visibilitychange", function () {
     });
 
     // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
-    // Ce code ne s'exécute que lors d'un chargement frais, pas lors d'un retour "précédent".
+    // Ce code est correct et nécessaire. Il gère la toute première visite de la page.
     setTimeout(function() {
         $('#transition-overlay').addClass('hide');
     }, 50);
+
   // ----------------------------------------------- Menu Burger ---------------------------------- //
   // Sélectionne les éléments du menuBurger et du menuVolet
   const menuBurger = $("#menuBurger");
@@ -292,50 +293,6 @@ window.addEventListener("visibilitychange", function () {
   }
 });
 // ----------------------------------------------- Fade transition ---------------------------------- //
-$(document).on("click", ".menu-links a", function (e) {
-  const href = $(this).attr("href");
-  if (!href || href === "#" || href.startsWith("javascript")) return;
-
-  // Normalise l'URL courante et la cible
-  const current = window.location.pathname.replace(/\/$/, "").replace(/^\/index\.php$/, "/");
-  let target = href.replace(/^\.\//, "/").replace(/\/$/, "");
-  if (target === "" || target === "/") target = "/index.php";
-  if (!target.startsWith("/")) target = "/" + target;
-
-  // Si on est déjà sur la page demandée, ne rien faire (juste fermer le menu)
-  if (
-    current === target ||
-    (current === "/index.php" && (target === "/" || target === "/index.php")) ||
-    (current === "/" && (target === "/" || target === "/index.php"))
-  ) {
-    e.preventDefault();
-    $("#menuVolet").removeClass("open");
-    $("#menuBurger").removeClass("open");
-    return;
-  }
-
-  // Sinon, navigation normale avec transition
-  e.preventDefault();
-
-  // Fade out audio si besoin
-  if (typeof gains !== "undefined" && gains.length) {
-    gains.forEach(g => fadeTo(g, 0, 0.8));
-  }
-  if (typeof stopArirangAudio === "function") stopArirangAudio();
-
-  // Ferme le menu-volet
-  $("#menuVolet").removeClass("open");
-  $("#menuBurger").removeClass("open");
-
-  // Lance la transition overlay après un court délai
-  setTimeout(function () {
-    $("#transition-overlay").removeClass("hide").addClass("active");
-    setTimeout(function () {
-      if (typeof stopArirangAudio === "function") stopArirangAudio();
-      window.location.href = href;
-    }, 800); // Correspond à la durée du fade
-  }, 300);
-});
 
 // --------------------------------- Auto scroll MENU  --------------------------------- //
 $(document).on("click", ".menu-video-item", function () {
