@@ -195,9 +195,10 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 
 .info {
   position: relative; /* IMPORTANT : Pour positionner le bouton à l'intérieur */
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    background: rgba(4,14,30,0.6);
+  /* backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); */
+  text-align: justify;
   border-radius: 10px;
   padding: 2vw 2.5vw;
   width: 40%;
