@@ -61,12 +61,12 @@
     </div>
     <div class="menu-links">
         <ul>
-            <li><a href="portraits"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
-            <li><a href="tracesdupasse"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
-            <li><a href="souvenirs"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
-            <li><a href="derriere-le-documentaire"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
+            <li><a href="portraits" title="<?php echo getTranslation("portraits_titre", $lang) ?>"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
+            <li><a href="tracesdupasse" title="<?php echo getTranslation("archives_titre", $lang) ?>"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
+            <li><a href="souvenirs" title="<?php echo getTranslation("souvenirs_titre", $lang) ?>"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
+            <li><a href="derriere-le-documentaire" title="<?php echo getTranslation("derriereledocumentaire_titre", $lang) ?>"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
             <li id="menu-accueil"><a href="./"><?php echo getTranslation("accueil", $lang) ?></a></li>
-            <li class="mentionslegales-right"><a href="mentionslegales"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
+            <li class="mentionslegales-right"><a href="mentionslegales" title="<?php echo getTranslation("mentionslegales_titre", $lang) ?>"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
 
         </ul>
     </div>
