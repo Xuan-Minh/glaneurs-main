@@ -217,11 +217,47 @@ function resetOtherSlides(activeSlide) {
 }
 
 // --------------------------------- Player video --------------------------------- //
+let lastFocusedElement; // Variable pour se souvenir du dernier élément focus
+
+function focusTrap(container) {
+    const focusableElements = container.find('a[href], button, iframe, [tabindex]:not([tabindex="-1"])').filter(':visible');
+    const firstFocusableElement = focusableElements.first();
+    const lastFocusableElement = focusableElements.last();
+
+    // Déplace le focus sur le premier élément (l'iframe)
+    firstFocusableElement.focus();
+
+    container.on('keydown.focusTrap', function(e) {
+        if (e.key === 'Tab' || e.keyCode === 9) {
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstFocusableElement[0]) {
+                    lastFocusableElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === lastFocusableElement[0]) {
+                    firstFocusableElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+}
+
+function removeFocusTrap(container) {
+    container.off('keydown.focusTrap');
+    if (lastFocusedElement) {
+        lastFocusedElement.focus(); // Rend le focus à l'élément qui a ouvert la modale
+    }
+}
+
+
 $(".close-visionner").click(function (event) {
   event.stopPropagation();
   const slide = $(this).closest(".slides");
   const info = slide.find(".info");
   const visionner = slide.find(".visionner");
+  removeFocusTrap(visionner);
   visionner.find("iframe").remove();
 
   // Correction ici : un seul fadeOut avec le callback
@@ -249,6 +285,8 @@ let vimeoPlayer = null;
 
 $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   event.stopPropagation();
+
+  lastFocusedElement = $(this); 
   stopArirangAudio();
   const slide = $(this).closest(".slides");
   const visionner = slide.find(".visionner");
@@ -287,6 +325,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   visionner.fadeIn(400, function () {
     $("body").css("overflow", "hidden");
     slide.find(".info").fadeOut(0);
+    focusTrap(visionner);
   }).css("display", "flex");
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //

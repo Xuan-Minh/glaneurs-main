@@ -19,7 +19,7 @@ foreach ($slides as $slide) {
         echo '<div class="close-visionner"></div>';
         echo '</div>';
         echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . $slide["chapitre"] . '</h1>';
-        echo '<div class="visionner-trigger visionner-trigger-h3 always-visible" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</div>';
+        echo '<button type="button" class="visionner-trigger visionner-trigger-h3 always-visible" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</button>';
     }
 
     // Slides 2, 3, 4 : bouton "voir la partie X"
@@ -30,7 +30,7 @@ foreach ($slides as $slide) {
         echo '</div>';
         echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . $slide["chapitre"] . '</h2>';
         // Bouton "voir la partie X" sous le titre
-        echo '<div class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '" style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</div>';
+        echo '<button type="button" class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '" style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</button>';
         echo '<div class="sliderButton">';
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
