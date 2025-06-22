@@ -26,8 +26,10 @@ function getPDO()
         // 2. Vérifier si un fichier de configuration de production existe
         $configFile = __DIR__ . '/config.php';
         if (file_exists($configFile)) {
-            // Si oui (on est sur le serveur de prod), on charge ses valeurs
+ echo "Le fichier config.php a été trouvé. Utilisation des valeurs de production :";
             require_once $configFile;
+            var_dump($db_config); // Affiche le contenu du tableau
+            die(); // Arrête le script pour voir le résultat
             $servername = $db_config['host'];
             $database   = $db_config['name'];
             $username   = $db_config['user'];
