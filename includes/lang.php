@@ -13,15 +13,20 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'kr'])) {
 // Connexion PDO centralisée
 function getPDO()
 {
-    static $pdo = null;
+       static $pdo = null;
     if ($pdo === null) {
-        // On essaie de lire les variables d'environnement (pour Plesk).
-        // Si elles n'existent pas, on utilise les valeurs par défaut (pour MAMP).
-        // L'opérateur '??' signifie "si la variable à gauche est nulle, utilise la valeur à droite".
+        // --- AJOUTEZ CE BLOC DE DÉBOGAGE ---
         $servername = $_ENV['DB_HOST'] ?? 'localhost';
         $database   = $_ENV['DB_NAME'] ?? 'glaneurs';
         $username   = $_ENV['DB_USER'] ?? 'root';
         $password   = $_ENV['DB_PASS'] ?? 'root';
+
+        echo "--- VALEURS DE CONNEXION UTILISÉES SUR LE SERVEUR ---<br>";
+        echo "Serveur (DB_HOST): " . htmlspecialchars($servername) . "<br>";
+        echo "Base de données (DB_NAME): " . htmlspecialchars($database) . "<br>";
+        echo "Utilisateur (DB_USER): " . htmlspecialchars($username) . "<br>";
+        echo "Mot de passe (DB_PASS) est-il défini ? : " . (empty($password) ? 'NON' : 'OUI') . "<br>";
+        die("--- FIN DU TEST DE DÉBOGAGE ---");
 
         $options = [
             PDO::MYSQL_ATTR_LOCAL_INFILE => true,
