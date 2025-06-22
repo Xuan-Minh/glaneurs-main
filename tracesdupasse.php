@@ -52,13 +52,13 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 
                     <!-- NOUVEAU: Mini-galerie d'introduction -->
                     <div class="intro-image-gallery">
-                        <a class="archive-gallery-item" data-src="img/intro_agri1.jpg.jpg" data-titre="Agriculture 1" data-date="Date 1" data-auteur="Auteur 1">
+                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri1.jpg" data-titre="Agriculture 1" data-date="Date 1" data-auteur="Auteur 1">
                             <img src="img/archives/1951-intro-agri1.jpg" alt="Agriculture">
                         </a>
-                        <a class="archive-gallery-item" data-src="img/intro_agri2.jpg" data-titre="Agriculture 2" data-date="Date 2" data-auteur="Auteur 2">
+                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri2.jpg" data-titre="Agriculture 2" data-date="Date 2" data-auteur="Auteur 2">
                             <img src="img/archives/1951-intro-agri2.jpg" alt="Agriculture">
                         </a>
-                        <a class="archive-gallery-item" data-src="img/intro_agri3.jpg" data-titre="Agriculture 3" data-date="Date 3" data-auteur="Auteur 3">
+                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri3.jpg" data-titre="Agriculture 3" data-date="Date 3" data-auteur="Auteur 3">
                             <img src="img/archives/1951-intro-agri3.jpg" alt="Agriculture">
                         </a>
                     </div>
