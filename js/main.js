@@ -324,7 +324,7 @@ function scrollToAndTrigger(slideNumber) {
 
   // Simule un clic sur le H2 pour ouvrir le visionneur
   setTimeout(function () {
-   $slide.find("div.visionner-trigger-h3").trigger("click");
+   $slide.find("button.visionner-trigger-h3").trigger("click");
   }, 600);
 }
 // ----------------------------------------------- HOVER VIDEO ---------------------------------- //
