@@ -54,7 +54,7 @@ div.visionner-trigger-h3 {
 
 .slide2 h2,
 .slide3 h2 {
-  font-size: clamp(1.2rem, 3vw, 3em);
+  /* font-size: clamp(1.2rem, 3vw, 3em); */
 }
 
 h2 {
