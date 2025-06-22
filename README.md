@@ -271,3 +271,12 @@ glaneurs-main
 ┣ souvenirs.php
 ┗ tracesdupasse.php
 ```
+## Auteur
+
+- **Xuan-Minh TRAN** - *Développement et Intégration du site web*
+
+---
+
+## Licence
+
+Ce projet utilise plusieurs licences pour ses différents composants (code, musique, images). Pour une description détaillée des droits et des conditions applicables à chaque type de contenu, veuillez consulter le fichier [LICENSE.md](LICENSE.md).
