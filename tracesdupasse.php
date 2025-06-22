@@ -29,27 +29,34 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
                 <?php echo getTranslation("archives_titre", $lang); ?>
             </h2>
         </section>
-            <section class="archives-content">
+         <section class="archives-content">
+            <!-- NOUVEAU: Menu de navigation des chapitres -->
+            <nav class="archive-nav-container">
+                <ul>
+                    <?php
+                    // La structure doit être définie ici pour être utilisée par la nav et le contenu
+                    $chapters_structure = array(
+                        1 => 3, 2 => 5, 3 => 2, 4 => 5, 5 => 6, 6 => 3
+                    );
+
+                    foreach ($chapters_structure as $chap_num => $text_count) {
+                        echo '<li><a href="#chapter-' . $chap_num . '" class="nav-link" data-scroll-to="chapter-' . $chap_num . '">' . getTranslation("chapitre{$chap_num}_titre", $lang) . '</a></li>';
+                    }
+                    ?>
+                </ul>
+            </nav>
+
             <div class="archives-narrative">
                  <section class="archives-intro content-anim preserve-lines">
                     <p><?php echo getTranslation("archives_intro_texte", $lang); ?></p>
                 </section>
 
                 <?php
-                // Définit la structure des chapitres et le nombre de paragraphes pour chacun
-                $chapters_structure = array(
-                    1 => 3, // Chapitre 1 a 3 paragraphes
-                    2 => 5, // Chapitre 2 a 5 paragraphes
-                    3 => 2, // Chapitre 3 a 2 paragraphes
-                    4 => 5, // Chapitre 4 a 5 paragraphes
-                    5 => 6, // Chapitre 5 a 6 paragraphes
-                    6 => 3  // Chapitre 6 a 3 paragraphes
-                );
-
                 // Boucle sur la structure pour afficher chaque chapitre et ses paragraphes
                 foreach ($chapters_structure as $chap_num => $text_count) {
                 ?>
-                    <section class="archive-chapter content-anim">
+                    <!-- AJOUT: un id unique pour chaque chapitre -->
+                    <section id="chapter-<?php echo $chap_num; ?>" class="archive-chapter content-anim">
                         <h3><?php echo getTranslation("chapitre{$chap_num}_titre", $lang); ?></h3>
                         <?php
                         // Boucle intérieure pour afficher chaque paragraphe du chapitre
@@ -64,8 +71,6 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
                 }
                 ?>
             </div>
-
-            <section class="archives-gallery-section">
 
             <section class="archives-gallery-section">
                 <h3 class="gallery-title content-anim"><?php echo getTranslation("archives_galerie_titre", $lang); ?></h3>

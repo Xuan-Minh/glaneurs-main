@@ -294,7 +294,7 @@ section.archives-intro {
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
     color: #E0DED8;
-    border-left: 3px solid #c8a165;
+    border-left: 3px solid #fff;
     padding-left: 1rem;
     font-family: "Libre Baskerville", serif;
 }
@@ -340,4 +340,89 @@ section.archives-intro {
     min-width: 0;
     max-width: 100vw;
   }
+}
+
+.archives-content {
+    display: flex;
+    position: relative;
+}
+
+.archive-nav-container {
+    width: 250px; /* Largeur du menu */
+    flex-shrink: 0;
+    padding-right: 2rem;
+    /* NOUVEAU: Cacher par défaut et animer l'apparition */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* NOUVEAU: Classe pour rendre le menu visible */
+.archive-nav-container.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.archive-nav-container ul {
+    position: sticky;
+    /* MODIFIÉ: Remplacer top: 120px par un centrage vertical parfait */
+    top: 50%;
+    transform: translateY(-50%);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.archive-nav-container .nav-link {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.archive-nav-container .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Style pour le lien actif */
+.archive-nav-container .nav-link.active {
+    color: #E0DED8;
+    border-left-color: #fff;
+    font-weight: bold;
+}
+
+.archives-narrative {
+    flex-grow: 1;
+}
+
+/* --- Responsive pour mobile --- */
+@media (max-width: 1024px) {
+    .archives-content {
+        flex-direction: column;
+    }
+    .archive-nav-container {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+    .archive-nav-container ul {
+        position: static; /* Le menu ne colle plus */
+        display: flex;
+        flex-wrap: wrap; /* Les liens vont à la ligne si pas de place */
+        justify-content: center;
+        gap: 10px;
+    }
+    .archive-nav-container .nav-link {
+        border-radius: 20px;
+        border-left: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .archive-nav-container .nav-link.active {
+        border-color: #fff;
+        background-color: rgba(200, 161, 101, 0.1);
+    }
 }

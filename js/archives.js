@@ -85,3 +85,66 @@ $(function () {
 });
 // 
 
+$(function () {
+    // --- Logique pour la navigation des chapitres ---
+    const navContainer = document.querySelector('.archive-nav-container');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const chapters = document.querySelectorAll('.archive-chapter');
+
+    if (navContainer && navLinks.length > 0 && chapters.length > 0) {
+        // 1. Défilement fluide au clic (code existant, inchangé)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 2. Mise à jour de l'état actif au scroll (code existant, inchangé)
+        const activeLinkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const chapterId = entry.target.id;
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.nav-link[data-scroll-to='${chapterId}']`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, { 
+            rootMargin: '0px 0px -80% 0px'
+        });
+
+        chapters.forEach(chapter => {
+            activeLinkObserver.observe(chapter);
+        });
+
+        // 3. NOUVEAU: Affichage/Masquage du menu de navigation
+        const firstChapter = chapters[0];
+        const navVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Si le premier chapitre est à l'écran, on affiche le menu
+                if (entry.isIntersecting) {
+                    navContainer.classList.add('is-visible');
+                } else {
+                    // Sinon, on le cache SEULEMENT si on remonte (le chapitre est sous l'écran)
+                    if (entry.boundingClientRect.top > 0) {
+                        navContainer.classList.remove('is-visible');
+                    }
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -50% 0px' // Se déclenche quand le chapitre atteint le milieu de l'écran
+        });
+
+        navVisibilityObserver.observe(firstChapter);
+    }
+});
