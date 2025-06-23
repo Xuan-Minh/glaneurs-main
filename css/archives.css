@@ -182,7 +182,7 @@
 
 .archive-gallery {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
   justify-content: center;
 }
