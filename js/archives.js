@@ -15,7 +15,19 @@ $(function () {
       lastScroll = currentScroll;
     });
   }
+  // --- NOUVEAU: LOGIQUE POUR LES IMAGES FLOTTANTES (PARALLAXE) ---
+  const $floatingImages = $(".floating-image");
+  if ($archivesScroll.length && $floatingImages.length) {
+    $archivesScroll.on("scroll", function () {
+      const scrollTop = $archivesScroll.scrollTop();
 
+      $floatingImages.each(function () {
+        const speed = $(this).data("parallax-speed") || 0.1;
+        const translateY = scrollTop * speed;
+        $(this).css("transform", `translateY(${translateY}px)`);
+      });
+    });
+  }
   // --- LOGIQUE POUR LA NAVIGATION DES CHAPITRES ---
   const navContainer = document.querySelector('.archive-nav-container');
   const navLinks = document.querySelectorAll('.nav-link');

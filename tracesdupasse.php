@@ -30,6 +30,14 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
             </h2>
         </section>
          <section class="archives-content">
+             <!-- NOUVEAU: Conteneur pour les images flottantes -->
+            <div class="floating-images-container">
+                <img src="img/archives/1951-intro-agri1.jpg" alt="" class="floating-image" id="float-img-1" data-parallax-speed="-0.15">
+                <img src="img/archives/1960-pauvrete.jpg" alt="" class="floating-image" id="float-img-2" data-parallax-speed="0.1">
+                <img src="img/archives/1970-industrie.jpg" alt="" class="floating-image" id="float-img-3" data-parallax-speed="-0.1">
+                <img src="img/archives/1988-jo.jpg" alt="" class="floating-image" id="float-img-4" data-parallax-speed="0.12">
+                <img src="img/archives/2000-dechets.jpg" alt="" class="floating-image" id="float-img-5" data-parallax-speed="-0.08">
+            </div>
             <!-- NOUVEAU: Menu de navigation des chapitres -->
             <nav class="archive-nav-container">
                 <ul>

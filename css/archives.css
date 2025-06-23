@@ -788,3 +788,96 @@
     font-size: 1rem;
   }
 }
+/* --- NOUVEAU: IMAGES FLOTTANTES EN ARRIÈRE-PLAN --- */
+
+.archives-content {
+  /* Cette propriété est cruciale pour que le positionnement absolu des enfants fonctionne */
+  position: relative; 
+}
+
+.floating-images-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Placé sous le texte */
+  /* pointer-events: none; A RETIRER pour que les images soient cliquables */
+  overflow: hidden; /* Empêche les images de déborder si elles sont trop grandes */
+}
+
+.floating-image {
+  position: absolute;
+  display: block; /* Important pour que le <a> se comporte comme un bloc */
+  opacity: 0.1; /* Opacité encore plus faible */
+  filter: grayscale(80%) blur(1px); /* Effet "archive" et léger flou */
+  z-index: 1; /* z-index de base */
+  transform: translateY(var(--translate-y, 0px)); /* Utilise une variable CSS pour la parallaxe */
+  /* Transition plus douce pour le survol */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              opacity 0.4s ease, 
+              filter 0.4s ease;
+}
+
+/* NOUVEAU: Style pour l'image à l'intérieur du lien */
+.floating-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* NOUVEAU: Effet au survol */
+.floating-image:hover {
+  opacity: 1; /* Opacité d'origine */
+  filter: grayscale(0%) blur(0); /* Filtre retiré */
+  z-index: 3; /* Passe au-dessus du texte et des autres images */
+  /* Combine la parallaxe (via la variable) et le zoom */
+  transform: translateY(var(--translate-y, 0px)) scale(1.1);
+  cursor: pointer;
+}
+
+/* Positionnement individuel de chaque image */
+#float-img-1 {
+  top: 20vh;
+  left: 5vw;
+  width: 20vw;
+  max-width: 250px;
+}
+#float-img-2 {
+  top: 120vh;
+  right: 8vw;
+  width: 18vw;
+  max-width: 220px;
+}
+#float-img-3 {
+  top: 250vh;
+  left: 10vw;
+  width: 15vw;
+  max-width: 180px;
+}
+#float-img-4 {
+  top: 350vh;
+  right: 5vw;
+  width: 22vw;
+  max-width: 280px;
+}
+#float-img-5 {
+  top: 480vh;
+  left: 8vw;
+  width: 17vw;
+  max-width: 200px;
+}
+
+/* S'assurer que le texte et la navigation sont bien au-dessus */
+.archives-narrative, .archive-nav-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Cacher les images sur les petits écrans pour ne pas surcharger */
+@media (max-width: 768px) {
+  .floating-images-container {
+    display: none;
+  }
+}
