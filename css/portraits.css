@@ -374,3 +374,93 @@
     object-fit: contain; /* Modifié: assure que l'image est entièrement visible */
     display: block;
 }
+
+.portrait-break-video {
+  position: relative;
+  /* Astuce pour forcer la pleine largeur, même dans un conteneur plus étroit */
+  width: 100vw; 
+  /* left: 50%;
+  transform: translateX(-50%); */
+  /* --- */
+  height: 100vh; 
+  max-height: 1000px; 
+  margin: 5rem 0; 
+  overflow: hidden;
+  pointer-events: none; 
+}
+
+.portrait-break-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* La vidéo couvre tout l'espace sans se déformer */
+  z-index: 1;
+
+  /* NOUVEAU : On teinte la vidéo avec la couleur de fond */
+  mix-blend-mode: luminosity; /* Utilise la luminosité de la vidéo mais la couleur du fond */
+  opacity: 0.8; /* On ajuste l'opacité pour un effet plus subtil */
+}
+
+/* Fondu en haut */
+.portrait-break-video::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20%; /* MODIFIÉ : Dégradé plus subtil, empiète moins sur la vidéo */
+  background: linear-gradient(to bottom, #050d1e 0%, transparent 100%);
+  z-index: 2;
+}
+
+/* Fondu en bas */
+.portrait-break-video::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%; /* MODIFIÉ : Dégradé plus subtil, empiète moins sur la vidéo */
+  background: linear-gradient(to top, #050d1e 0%, transparent 100%);
+  z-index: 2;
+}
+/* NOUVEAU : Style pour le bloc de texte en superposition */
+.video-text-overlay {
+  position: absolute;
+  top: 0; /* Aligné en haut */
+  height: 100%; /* Prend toute la hauteur de la vidéo */
+  z-index: 3; 
+
+  color: #e0e0e0;
+  max-width: 50%; /* La colonne de texte prend 50% de la largeur */
+  
+  /* On utilise flexbox pour centrer le contenu verticalement */
+  display: flex;
+  align-items: center;
+  /* justify-content: center; <-- SUPPRIMÉ : On gère l'alignement horizontal dans les classes de position */
+  padding: 2rem 4rem; /* On ajoute plus de padding horizontal pour l'esthétique */
+  box-sizing: border-box;
+}
+.video-text-overlay p {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  max-width: 100%; /* Le paragraphe peut prendre toute la largeur de la colonne */
+}
+
+/* MODIFIÉ : Classes de positionnement de la COLONNE */
+.video-text-overlay.position-left {
+  left: 0; /* Collé à gauche */
+  justify-content: flex-start; /* AJOUTÉ : Aligne le texte au début (à gauche) */
+  /* On remplace le fond uni par un dégradé qui va de gauche à droite */
+  background: linear-gradient(to right, #050d1e 70%, transparent 100%);
+}
+
+.video-text-overlay.position-right {
+  right: 0; /* Collé à droite */
+  justify-content: flex-end; /* AJOUTÉ : Aligne le texte à la fin (à droite) */
+  /* On remplace le fond uni par un dégradé qui va de droite à gauche */
+  background: linear-gradient(to left, #050d1e 70%, transparent 100%);
+}

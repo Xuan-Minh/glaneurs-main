@@ -21,7 +21,29 @@ function display_portrait_content($portrait_id, $lang) {
             case 'paragraph':
                 $other_content .= '<p class="preserve-lines">' . nl2br(htmlspecialchars($content)) . '</p>';
                 break;
-            
+                 // NOUVEAU : Cas pour la vidéo de séparation
+           case 'break_video':
+                $video_html = '<video src="' . htmlspecialchars($content) . '" autoplay muted loop playsinline></video>';
+                
+                // On vérifie si du texte doit être affiché par-dessus
+                $text_overlay_html = '';
+                if (isset($data_extra['text_' . $lang]) && !empty($data_extra['text_' . $lang])) {
+                    $text_content = $data_extra['text_' . $lang];
+                    $position_class = isset($data_extra['position']) && $data_extra['position'] === 'right' ? 'position-right' : 'position-left';
+                    
+                    $text_overlay_html = '
+                        <div class="video-text-overlay ' . $position_class . '">
+                            <p>' . nl2br(htmlspecialchars($text_content)) . '</p>
+                        </div>';
+                }
+
+                $other_content .= '
+                    <div class="portrait-break-video">
+                        ' . $video_html . '
+                        ' . $text_overlay_html . '
+                    </div>';
+                break;
+
             case 'gallery_image':
                 $titre = isset($data_extra['titre_' . $lang]) ? $data_extra['titre_' . $lang] : (isset($data_extra['titre_fr']) ? $data_extra['titre_fr'] : '');
                 
