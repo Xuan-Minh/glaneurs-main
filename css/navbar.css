@@ -295,9 +295,7 @@ header.hide-header {
 .menu-links li {
   margin-bottom: 10px; /* Ajoute un espace en bas de chaque élément de la liste */
 }
-#menu-accueil{
-  margin-top: 10%;
-}
+
 
 .menu-links a {
   color: white;
@@ -369,6 +367,14 @@ li.mentionslegales-right{
 }
 li.mentionslegales-right a{
   font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
+}
+
+#menu-accueil{
+  margin-top: 10%;
+}
+#menu-accueil-style{
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  font-family: "Libre Baskerville", serif !important;
 }
 /* ----------------------------- LOGO ------------------------ */
 .logo-link {

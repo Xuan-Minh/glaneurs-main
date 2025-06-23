@@ -176,7 +176,7 @@
 }
 .back-to-portraits {
   margin-top: 40px;
-  padding: clamp(10px, 1.5vw, 14px) clamp(25px, 3vw, 35px);
+  /* padding: clamp(10px, 1.5vw, 14px) clamp(25px, 3vw, 35px); */
   font-size: clamp(0.9rem, 1.6vw, 1.1rem);
   font-family: "Figtree", sans-serif;
   background: #222;
@@ -185,11 +185,47 @@
   border-radius: 25px;
   cursor: pointer;
   transition: background 0.3s;
-}
-.back-to-portraits:hover {
-  background: #444;
+  padding: 12px 24px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 500;
+  text-indent: 0;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
+.back-to-portraits:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* NOUVEAU : On ajoute un contexte de positionnement au span */
+.back-to-portraits span {
+  position: relative;
+  display: inline-block; /* Assure que le span a des dimensions propres */
+}
+/* NOUVEAU : On crée le soulignement (caché par défaut) */
+.back-to-portraits span::before {
+  content: '';
+  position: absolute;
+  bottom: -4px; /* Distance du soulignement par rapport au texte */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Épaisseur du soulignement */
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* NOUVEAU : On affiche le soulignement au survol et au focus */
+.back-to-portraits:hover span::before,
+.back-to-portraits:focus span::before {
+  transform: scaleX(1);
+}
 .volume-control {
   position: absolute;
   top: 20px;

@@ -100,7 +100,7 @@ function display_portrait_content($portrait_id, $lang) {
         <div class="detail-content">
             <h2><?php echo getTranslation("portraits_master", $lang); ?></h2>
             <?php display_portrait_content(1, $lang); ?>
-            <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
+            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . '</span>' ?></button>
         </div>
     </section>
 
@@ -108,7 +108,7 @@ function display_portrait_content($portrait_id, $lang) {
         <div class="detail-content">
             <h2><?php echo getTranslation("portraits_lee", $lang); ?></h2>
             <?php display_portrait_content(2, $lang); ?>
-            <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
+            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
         </div>
     </section>
 
@@ -116,7 +116,7 @@ function display_portrait_content($portrait_id, $lang) {
         <div class="detail-content">
             <h2><?php echo getTranslation("portraits_arirang", $lang); ?></h2>
             <?php display_portrait_content(3, $lang); ?>
-            <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
+            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
         </div>
     </section>
 
@@ -124,7 +124,7 @@ function display_portrait_content($portrait_id, $lang) {
         <div class="detail-content">
             <h2><?php echo getTranslation("portraits_jo", $lang); ?></h2>
             <?php display_portrait_content(4, $lang); ?>
-            <button class="back-to-portraits"><?php echo getTranslation("portraits_voirlesautres", $lang); ?></button>
+            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
         </div>
      </section>
 
