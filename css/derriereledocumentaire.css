@@ -230,7 +230,7 @@ font-size: 3vw;
   margin: 0;
   line-height: 1.6; /* Améliore la lisibilité */
 }
-.last-paragraph {
+#last-paragraph {
   margin-bottom: 5vh;
 }
 /* Media Query pour tablettes et écrans plus petits */
