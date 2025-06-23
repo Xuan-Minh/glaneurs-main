@@ -111,7 +111,7 @@ $(function () {
         }
       });
     }, { 
-      rootMargin: '0px 0px -80% 0px'
+      rootMargin: '0px 0px -40% 0px'
     });
 
     chapters.forEach(chapter => {
