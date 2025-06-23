@@ -164,7 +164,27 @@ button.visionner-trigger-h3:hover::after {
   /* On prévient le navigateur qu'on va animer cette propriété */
   will-change: transform;
 }
+.slides h2::after {
+  content: attr(data-author);
+  display: block;
+  text-align: right;
+  font-family: "Figtree", sans-serif;
+  font-size: 0.8em; 
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 0.75em;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: none;
+  
+  opacity: 0; 
+  /* MODIFIÉ : On retire le délai, la transition est maintenant directe */
+  transition: opacity 0.5s ease-in-out;
+}
 
+/* MODIFIÉ : On utilise une nouvelle classe pour afficher l'auteur */
+.slides h2.author-visible::after {
+  opacity: 1;
+}
 /* NOUVELLE CLASSE pour activer l'animation de transform */
 .slides h2.animate-transform {
  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -216,6 +236,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   /* NOUVEAU : On ajoute du padding en bas pour que le texte ne passe pas sous le bouton */
   padding-bottom: 80px; 
   text-indent: 40px;
+  font-weight: 200;
 }
 @keyframes nudge-right {
   0%, 100% {

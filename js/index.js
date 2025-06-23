@@ -101,7 +101,82 @@ $(document).ready(function() {
   });
   // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
   const TRANSFORM_ANIMATION_DURATION = 1500; // Durée en ms, doit correspondre à la transition CSS (1.5s)
+/**
+* @param {jQuery} $slide L'élément jQuery du slide concerné.
+*/
+function showInfoPanel($slide) {
+    if (!$slide || !$slide.length) return;
 
+    const $h2 = $slide.find('h2');
+    const $info = $slide.find('.info');
+    const $point2 = $slide.find('.point2');
+
+    // Si l'info est déjà visible, on ne fait rien.
+    if ($point2.hasClass('full')) return;
+
+    // Cache le bouton "Visionner"
+    fadeVisionnerTriggerH3($slide, true);
+
+    $h2.addClass('animate-transform');
+    requestAnimationFrame(() => {
+        $h2.addClass('move');
+    });
+
+    $h2.one('transitionend', function(e) {
+        if (e.originalEvent.propertyName === 'transform') {
+            $(this).addClass('author-visible');
+        }
+    });
+
+    $info.fadeIn(500);
+    $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+    $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+}
+
+/**
+ * Cache le panneau d'information pour un slide donné.
+ * @param {jQuery} $slide L'élément jQuery du slide concerné.
+ */
+function hideInfoPanel($slide) {
+    if (!$slide || !$slide.length) return;
+
+    const $h2 = $slide.find('h2');
+    const $info = $slide.find('.info');
+    const $point1 = $slide.find('.point1');
+
+    // Si l'info est déjà cachée, on ne fait rien.
+    if ($point1.hasClass('full')) return;
+
+    // Fait réapparaître le bouton "Visionner"
+    fadeVisionnerTriggerH3($slide, false);
+
+    $h2.removeClass('author-visible');
+    
+    setTimeout(() => {
+        $h2.removeClass('move');
+        $info.fadeOut(300);
+
+        $h2.one('transitionend', function() {
+            $(this).removeClass('animate-transform');
+        });
+    }, 50);
+
+    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+}
+
+
+// --------------------------------- EVENT HANDLERS --------------------------------- //
+
+// Clic sur le point 2 (pour afficher les infos)
+$('.point2').on('click', function() {
+    showInfoPanel($(this).closest('.slides'));
+});
+
+// Clic sur le point 1 (pour cacher les infos)
+$('.point1').on('click', function() {
+    hideInfoPanel($(this).closest('.slides'));
+});
 /**
  * Ajoute temporairement la classe pour animer la transformation.
  * @param {jQuery} $element L'élément jQuery h2.
@@ -129,71 +204,6 @@ function fadeVisionnerTriggerH3($slide, fadeOut = true) {
   }
 }
 
-  function slideIn(slide, info) {
-        // MODIFIÉ : On active le verrou au début de l'animation
-        isAnimating = true; 
-        
-        resetOtherSlides(slide);
-        $("body").css("overflow", "auto");
-        info.fadeIn(2000);
-        fadeVisionnerTriggerH3(slide, true);
-
-        const $h2 = slide.find("h2");
-        if (!$h2.hasClass("move")) {
-            triggerH2TransformAnimation($h2);
-        }
-        $h2.addClass("move");
-
-        slide.find("video").addClass("flou");
-        slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-        slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-    }
-    function slideOut(slide, info) {
-        // MODIFIÉ : On active le verrou au début de l'animation
-        isAnimating = true; 
-
-        $("body").css("overflow", "auto");
-        info.fadeOut(200);
-        fadeVisionnerTriggerH3(slide, false);
-
-        const $h2 = slide.find("h2");
-        if ($h2.hasClass("move")) {
-            triggerH2TransformAnimation($h2);
-            $h2.removeClass("move");
-            // NOUVEAU : On supprime le reflow forcé, il n'est plus nécessaire
-            // void $h2[0].offsetWidth; 
-        } else {
-            $h2.removeClass("move");
-            isAnimating = false; // Libère le verrou si aucune animation n'est lancée
-        }
-
-        slide.find("video").removeClass("flou");
-        slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-        slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    }
-
-// --------------------------------- slideTrigger changement de slide --------------------------------- //
-
-    $(".sliderButton .point2").click(function (event) {
-        // MODIFIÉ : On vérifie le verrou avant de faire quoi que ce soit
-        if (isAnimating) return; 
-
-        event.stopPropagation();
-        const slide = $(this).closest(".slides");
-        const info = slide.find(".info");
-        slideIn(slide, info);
-    });
-
-    $(".sliderButton .point1").click(function (event) {
-        // MODIFIÉ : On vérifie le verrou avant de faire quoi que ce soit
-        if (isAnimating) return;
-
-        event.stopPropagation();
-        const slide = $(this).closest(".slides");
-        const info = slide.find(".info");
-        slideOut(slide, info);
-    });
-
 // --------------------------------- Reset Slide --------------------------------- //
 
 function resetOtherSlides(activeSlide) {
@@ -204,10 +214,12 @@ function resetOtherSlides(activeSlide) {
       slide.find(".info").fadeOut(0);
 
       const $h2 = slide.find("h2");
-      if ($h2.hasClass("move")) { // Appliquer l'animation seulement si .move est retiré
+      if ($h2.hasClass("move")) {
         triggerH2TransformAnimation($h2);
       }
       $h2.removeClass("move");
+      // NOUVEAU : On s'assure de cacher l'auteur aussi lors du reset
+      $h2.removeClass("author-visible");
 
       slide.find("video").removeClass("flou");
       fadeVisionnerTriggerH3(slide, false);
@@ -337,12 +349,7 @@ $(function () {
     entries.forEach(entry => {
       if (!entry.isIntersecting) {
         // Si la slide sort du viewport, ferme son info
-        const $slide = $(entry.target);
-        const $info = $slide.find('.info');
-        if ($info.is(':visible')) {
-          slideOut($slide, $info);
-          fadeVisionnerTriggerH3(slide, false);
-        }
+        hideInfoPanel($(entry.target)); // MODIFIÉ : On appelle la nouvelle fonction unifiée
       }
     });
   }, { threshold: 0.2 }); // 20% visible
