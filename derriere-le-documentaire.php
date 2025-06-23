@@ -100,7 +100,7 @@
     </section>
     <section class="dld-remerciements content-anim">
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
-         <p class="preserve-lines">
+         <p class="preserve-lines last-paragraph">
             <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>
          </p><p class="supporters-list">
             <?php
