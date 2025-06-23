@@ -236,7 +236,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   padding: 12px 24px;
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
   border-radius: 100px;
   text-decoration: none;
   font-weight: 500;
