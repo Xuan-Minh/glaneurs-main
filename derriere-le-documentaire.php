@@ -102,7 +102,7 @@
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
          <p class="preserve-lines last-paragraph">
             <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>
-         </p><p class="supporters-list">
+         </p><p class="supporters-list last-paragraph">
             <?php
                 // On récupère tous les soutiens depuis la BDD, triés par ordre alphabétique
                 $supporters = $pdo->query("SELECT name FROM supporters ORDER BY name ASC")->fetchAll(PDO::FETCH_COLUMN);
