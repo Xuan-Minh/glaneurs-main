@@ -24,8 +24,17 @@ function display_portrait_content($portrait_id, $lang) {
             
             case 'gallery_image':
                 $titre = isset($data_extra['titre_' . $lang]) ? $data_extra['titre_' . $lang] : (isset($data_extra['titre_fr']) ? $data_extra['titre_fr'] : '');
+                
+                // NOUVEAU: Extraire l'auteur et la date
+                $auteur = isset($data_extra['auteur']) ? $data_extra['auteur'] : '';
+                $date = isset($data_extra['date']) ? $data_extra['date'] : '';
+
                 $gallery_items[] = '
-                    <a class="archive-gallery-item" data-src="' . htmlspecialchars($content) . '" data-titre="' . htmlspecialchars($titre) . '" data-date="" data-auteur="">
+                    <a class="archive-gallery-item" 
+                       data-src="' . htmlspecialchars($content) . '" 
+                       data-titre="' . htmlspecialchars($titre) . '" 
+                       data-date="' . htmlspecialchars($date) . '" 
+                       data-auteur="' . htmlspecialchars($auteur) . '">
                         <img src="' . htmlspecialchars($content) . '" alt="' . htmlspecialchars($titre) . '">
                     </a>';
                 break;
