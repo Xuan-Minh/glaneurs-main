@@ -17,7 +17,8 @@ $slides = array(
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
-        "urlsuite" => ""
+        "urlsuite" => "",
+        "quote_author" => "WON Yong-chul"
     ),
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
@@ -26,6 +27,7 @@ $slides = array(
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info_archives", $lang),
         "urlsuite" => "",
+        "quote_author" => "LEE Sangman",
         "info_button_text" => getTranslation("archives_titre", $lang), // Utilise la clé de traduction existante
         "info_button_link" => "tracesdupasse" // Le lien vers votre page
     ),
@@ -35,7 +37,8 @@ $slides = array(
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
-        "urlsuite" => ""
+        "urlsuite" => "",
+        "quote_author" => "LEE Sangman" // Utilise la clé de traduction existante
     )
 );
 

@@ -28,7 +28,13 @@ foreach ($slides as $slide) {
         echo '<div class="close-visionner"></div>';
         echo '<iframe src="https://player.vimeo.com/video/' . $vimeoId . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
-        echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . $slide["chapitre"] . '</h2>';
+            // NOUVEAU : On prépare l'attribut data-author
+      $author_attr = '';
+        if (isset($slide["quote_author"])) {
+            $author_attr = ' data-author="— ' . htmlspecialchars($slide["quote_author"]) . '"';
+        }
+        // MODIFIÉ : On ajoute la variable $author_attr ici
+        echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '"' . $author_attr . '>' . $slide["chapitre"] . '</h2>';
         // Bouton "voir la partie X" sous le titre
         echo '<button type="button" class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '" style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</button>';
         echo '<div class="sliderButton">';
