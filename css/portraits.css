@@ -145,6 +145,7 @@
 /* -------------------------- Portraits perso --------------------------  */
 .portrait-detail {
   display: none;
+   position: relative;
   min-height: 100vh;
   scroll-snap-align: start;
   flex-direction: column;
@@ -294,4 +295,46 @@
     width: clamp(60px, 12vw, 100px);
     height: clamp(25px, 6vw, 35px);
   }
+}
+
+.detail-content {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-content p {
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.portrait-image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem 0;
+}
+
+.portrait-image-gallery .archive-gallery-item {
+    width: clamp(150px, 18vw, 220px);
+    height: auto;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portrait-image-gallery .archive-gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.portrait-image-gallery .archive-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
