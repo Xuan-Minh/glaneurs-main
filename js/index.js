@@ -164,8 +164,25 @@ function hideInfoPanel($slide) {
     $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
     $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
-
-
+// NOUVELLE FONCTION : Réinitialisation forcée d'un slide
+/**
+ * Réinitialise l'état d'un slide à sa position par défaut, sans animation.
+ * C'est la solution pour corriger les états incohérents lors d'un scroll rapide.
+ * @param {jQuery} $slide L'élément jQuery du slide à réinitialiser.
+ */
+function resetSlideState($slide) {
+    if (!$slide || !$slide.length) return;
+    const $h2 = $slide.find('h2');
+    
+    // On retire toutes les classes d'animation et d'état
+    $h2.removeClass('move author-visible animate-transform');
+    
+    // On cache l'info et on remet les boutons dans leur état initial
+    $slide.find('.info').hide();
+    fadeVisionnerTriggerH3($slide, false);
+    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+}
 // --------------------------------- EVENT HANDLERS --------------------------------- //
 
 // Clic sur le point 2 (pour afficher les infos)
@@ -343,16 +360,34 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
 
 $(function () {
-  // Observer pour fermer l'info quand la slide sort du viewport
   const slides = document.querySelectorAll('.slides');
+  if (slides.length === 0) return;
+
   const observer = new IntersectionObserver((entries) => {
+    let activeSlide = null;
+    let maxRatio = 0;
+
+    // 1. On détermine quelle slide est la plus visible à l'écran
     entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        // Si la slide sort du viewport, ferme son info
-        hideInfoPanel($(entry.target)); // MODIFIÉ : On appelle la nouvelle fonction unifiée
+      if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+        maxRatio = entry.intersectionRatio;
+        activeSlide = entry.target;
       }
     });
-  }, { threshold: 0.2 }); // 20% visible
+
+    // 2. On boucle sur TOUTES les slides
+    if (activeSlide) {
+      slides.forEach(slide => {
+        // Si la slide n'est PAS la slide active, on la force à se réinitialiser.
+        if (slide !== activeSlide) {
+          resetSlideState($(slide));
+        }
+      });
+    }
+  }, { 
+    // On observe à plusieurs seuils pour une détection plus fiable
+    threshold: [0.2, 0.5, 0.8] 
+  });
 
   slides.forEach(slide => observer.observe(slide));
 });

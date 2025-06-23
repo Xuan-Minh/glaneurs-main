@@ -18,7 +18,7 @@ $slides = array(
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
         "urlsuite" => "",
-        "quote_author" => "WON Yong-chul"
+        "quote_author" => getTranslation("portraits_arirang", $lang)
     ),
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
