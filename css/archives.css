@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .intro-image-gallery .archive-gallery-item {
@@ -182,7 +182,7 @@
 
 .archive-gallery {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
