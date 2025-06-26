@@ -1,4 +1,7 @@
-/* -------------------------- Portraits --------------------------  */
+/* ==========================================================================
+   1. VUE PRINCIPALE DES PORTRAITS (ÉCRAN DE SÉLECTION)
+   ========================================================================== */
+
 .portraits-container {
   display: flex;
   flex-direction: row;
@@ -7,7 +10,6 @@
   overflow: hidden;
 }
 
-/* Sections individuelles */
 .portrait-section {
   flex: 1;
   height: 100%;
@@ -19,26 +21,18 @@
   justify-content: center;
   cursor: pointer;
 }
+
+/* Dégradé en bas de chaque section */
 .portrait-section::after {
   content: "";
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 18vh; /* Ajuste selon l'effet désiré */
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0%,
-    #050d1e 100%
-  );
+  height: 18vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
   z-index: 2;
   pointer-events: none;
 }
-.portrait-video {
-  z-index: 1;
-}
-.portrait-name, .volume-control {
-  z-index: 3;
-}
-/* Vidéo centrée, occupe tout le conteneur parent */
+
 .portrait-video {
   position: absolute;
   top: 50%;
@@ -51,67 +45,30 @@
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
-   transform-origin: center center; /* Assure que le scale se fait depuis le centre */
-}
-.section1-video {
-  transform: translate(-45%, -50%);
-}
-.section2-video {
-  transform: translate(-40%, -50%);
-}
-.section3-video {
-  transform: translate(-70%, -45%);
-}
-.section4-video {
-  transform: translate(-45%, -55%);
+  transform-origin: center center;
 }
 
+/* Ajustements spécifiques des vidéos */
+.section1-video { transform: translate(-45%, -50%); }
+.section2-video { transform: translate(-40%, -50%); }
+.section3-video { transform: translate(-70%, -45%); }
+.section4-video { transform: translate(-45%, -55%); }
 
-@media (max-width: 992px) {
- 
-
-  /* "Scale down" les vidéos pour voir plus de contenu */
-  /* Note: Elles ne couvriront plus entièrement la section */
-  .section1-video {
-    transform: translate(-45%, -50%) scale(0.9); /* Exemple: réduit à 90% */
-  }
-  .section2-video {
-    transform: translate(-40%, -50%) scale(0.9);
-  }
-  .section3-video {
-    /* Les valeurs de translate pourraient aussi nécessiter un ajustement car elles s'appliquent à un objet scalé différemment */
-    transform: translate(-65%, -45%) scale(0.9); 
-  }
-  .section4-video {
-    transform: translate(-45%, -55%) scale(0.9);
-  }
-}
-
-@media (max-width: 768px) {
-  
-
-  /* "Scale down" encore plus si nécessaire */
-  .section1-video {
-    transform: translate(-45%, -50%) scale(0.8); /* Exemple: réduit à 80% */
-  }
-  .section2-video {
-    transform: translate(-42.5%, -50%) scale(0.8);
-  }
-  .section3-video {
-    transform: translate(-65%, -46%) scale(0.8);
-  }
-  .section4-video {
-    transform: translate(-45%, -55%) scale(0.8);
-  }
-}
-/* Effet rideau : agrandit la section au hover ou active */
+/* États : survol et section active */
 .portrait-section.active,
 .portrait-section:hover {
   flex: 2.5;
   filter: none;
 }
 
-/* Nom sous chaque section : visible si hover ou active */
+.portraits-container:not(.no-hover) .portrait-section:not(.active):not(:hover) {
+  filter: blur(0.3rem);
+}
+
+.portraits-container.no-hover .portrait-section {
+  filter: none;
+}
+
 .portrait-name {
   position: absolute;
   left: 50%;
@@ -121,31 +78,25 @@
   text-align: center;
   color: white;
   font-family: "Libre Baskerville", serif;
-    font-size: clamp(1.2rem, 2.5vw, 2.2rem); /* Responsive font size */
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
+
 .portrait-section.active .portrait-name,
 .portrait-section:hover .portrait-name {
   opacity: 1;
 }
 
-/* Floute les autres sections si une est hover OU active, sauf si .no-hover */
-.portraits-container:not(.no-hover) .portrait-section:not(.active):not(:hover) {
-  filter: blur(0.3rem);
-}
+/* ==========================================================================
+   2. VUE DÉTAILLÉE D'UN PORTRAIT
+   ========================================================================== */
 
-/* Quand aucune section n'est hover ni active, tout est net */
-.portraits-container.no-hover .portrait-section {
-  filter: none;
-}
-
-/* -------------------------- Portraits perso --------------------------  */
 .portrait-detail {
   display: none;
-   position: relative;
+  position: relative;
   min-height: 100vh;
   scroll-snap-align: start;
   flex-direction: column;
@@ -157,63 +108,177 @@
   padding: 40px 10vw;
   box-sizing: border-box;
 }
+
 .portrait-detail.active {
   display: flex;
 }
-.portrait-detail h2 {
+
+.detail-content {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-content h2 {
   font-family: "Libre Baskerville", serif;
-  font-size: clamp(1.8rem, 4vw, 3rem); /* Responsive title */
+  font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 0.7em;
 }
 
-.portrait-detail p {
-  font-size: clamp(0.9rem, 1.8vw, 1.15rem); /* Responsive paragraph */
+.detail-content p {
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
   line-height: 1.6;
-  max-width: 65ch; /* Limite la largeur des lignes pour la lisibilité */
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.5em;
+  max-width: 65ch;
+  margin: 0 auto 1.5em auto;
+  text-align: justify;
+  text-indent: 2em;
 }
+
+/* --- 2.1 Galerie d'images dans la vue détaillée --- */
+
+.portrait-image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 2rem 0;
+}
+
+.portrait-image-gallery .archive-gallery-item {
+  width: clamp(150px, 18vw, 220px);
+  height: auto;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portrait-image-gallery .archive-gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.portrait-image-gallery .archive-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- 2.2 Vidéo de séparation --- */
+
+.portrait-break-video {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-height: 1000px;
+  margin: 5rem 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.portrait-break-video video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  mix-blend-mode: luminosity;
+  opacity: 0.8;
+}
+
+.portrait-break-video::before,
+.portrait-break-video::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  z-index: 2;
+}
+
+.portrait-break-video::before {
+  top: 0;
+  background: linear-gradient(to bottom, #050d1e 0%, transparent 100%);
+}
+
+.portrait-break-video::after {
+  bottom: 0;
+  background: linear-gradient(to top, #050d1e 0%, transparent 100%);
+}
+
+/* --- 2.3 Superposition de texte sur la vidéo --- */
+
+.video-text-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+  color: #e0e0e0;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 2rem 4rem;
+  box-sizing: border-box;
+}
+
+.video-text-overlay p {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+.video-text-overlay.position-left {
+  left: 0;
+  justify-content: flex-start;
+  background: linear-gradient(to right, #050d1e 70%, transparent 100%);
+}
+
+.video-text-overlay.position-right {
+  right: 0;
+  justify-content: flex-end;
+  background: linear-gradient(to left, #050d1e 70%, transparent 100%);
+}
+
+/* ==========================================================================
+   3. COMPOSANTS D'INTERFACE (BOUTONS, CONTRÔLES)
+   ========================================================================== */
+
 .back-to-portraits {
   margin-top: 40px;
-  /* padding: clamp(10px, 1.5vw, 14px) clamp(25px, 3vw, 35px); */
+  padding: 12px 24px;
   font-size: clamp(0.9rem, 1.6vw, 1.1rem);
   font-family: "Figtree", sans-serif;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background 0.3s;
-  padding: 12px 24px;
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
-  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  border: none;
   border-radius: 100px;
   text-decoration: none;
   font-weight: 500;
-  text-indent: 0;
+  cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
 .back-to-portraits:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* NOUVEAU : On ajoute un contexte de positionnement au span */
 .back-to-portraits span {
   position: relative;
-  display: inline-block; /* Assure que le span a des dimensions propres */
+  display: inline-block;
 }
-/* NOUVEAU : On crée le soulignement (caché par défaut) */
+
 .back-to-portraits span::before {
   content: '';
   position: absolute;
-  bottom: -4px; /* Distance du soulignement par rapport au texte */
+  bottom: -4px;
   left: 0;
   width: 100%;
-  height: 2px; /* Épaisseur du soulignement */
+  height: 2px;
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.8);
   transform: scaleX(0);
@@ -221,11 +286,11 @@
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* NOUVEAU : On affiche le soulignement au survol et au focus */
 .back-to-portraits:hover span::before,
 .back-to-portraits:focus span::before {
   transform: scaleX(1);
 }
+
 .volume-control {
   position: absolute;
   top: 20px;
@@ -233,6 +298,7 @@
   color: #fff;
   z-index: 100;
 }
+
 #volumeRange {
   vertical-align: middle;
 }
@@ -246,38 +312,45 @@
   height: 40px;
   pointer-events: none;
 }
+
 .sound-wave-svg {
   width: 100%;
   height: 100%;
   display: block;
 }
+
 .sound-wave-cloud {
   fill: #fff;
   opacity: 0.18;
   filter: url(#blur);
   transition: 0.1s;
 }
+
 .sound-wave-line {
   stroke: #fff;
   stroke-width: 3;
   transition: 0.1s;
 }
-.portrait-detail {
-  position: relative; /* pour le positionnement absolu du container */
-}
 
+/* ==========================================================================
+   4. RESPONSIVE DESIGN
+   ========================================================================== */
 
-
-/* Media Query pour tablettes et écrans plus petits */
+/* --- Tablettes --- */
 @media (max-width: 992px) {
-  .portrait-name {
-    font-size: clamp(1.1rem, 2.2vw, 1.8rem);
-    bottom: 12%; /* Ajuster si besoin */
-  }
+  .section1-video { transform: translate(-45%, -50%) scale(0.9); }
+  .section2-video { transform: translate(-40%, -50%) scale(0.9); }
+  .section3-video { transform: translate(-65%, -45%) scale(0.9); }
+  .section4-video { transform: translate(-45%, -55%) scale(0.9); }
 
   .portrait-section.active,
   .portrait-section:hover {
-    flex: 2.2; /* Peut-être réduire légèrement l'expansion si c'est trop */
+    flex: 2.2;
+  }
+
+  .portrait-name {
+    font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+    bottom: 12%;
   }
 
   .portrait-detail {
@@ -293,174 +366,50 @@
   }
 }
 
+/* --- Mobiles --- */
 @media (max-width: 768px) {
-  .portrait-name {
-    font-size: clamp(1rem, 2.5vw, 1.6rem); /* Encore un peu plus petit sur mobile si besoin */
-    bottom: 10%;
-  }
+  .section1-video { transform: translate(-45%, -50%) scale(0.8); }
+  .section2-video { transform: translate(-42.5%, -50%) scale(0.8); }
+  .section3-video { transform: translate(-65%, -46%) scale(0.8); }
+  .section4-video { transform: translate(-45%, -55%) scale(0.8); }
 
   .portrait-section.active,
   .portrait-section:hover {
-    flex: 2; /* Réduire encore l'expansion */
+    flex: 2;
   }
-  
-  /* Optionnel: Si 4 sections sont trop nombreuses, vous pourriez envisager de les faire défiler horizontalement */
-  /* ou de passer à une grille 2x2, mais cela demanderait une refonte HTML/JS plus importante. */
-  /* Pour l'instant, on garde les 4 sections flex. */
+
+  .portrait-name {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    bottom: 10%;
+  }
 
   .portrait-detail {
     padding: 25px 5vw;
   }
+
   .portrait-detail h2 {
     font-size: clamp(1.5rem, 4vw, 2.2rem);
   }
+
   .portrait-detail p {
     font-size: clamp(0.8rem, 2vw, 1rem);
   }
+
   .back-to-portraits {
     padding: clamp(8px, 1.2vw, 12px) clamp(20px, 2.5vw, 30px);
     font-size: clamp(0.8rem, 1.8vw, 1rem);
   }
+
   .volume-control {
     font-size: clamp(0.75rem, 1.8vw, 0.9rem);
   }
+
   #volumeRange {
     width: clamp(70px, 12vw, 100px);
   }
+
   .sound-wave-container {
     width: clamp(60px, 12vw, 100px);
     height: clamp(25px, 6vw, 35px);
   }
-}
-
-.detail-content {
-    max-width: 900px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.detail-content p {
-    text-align: justify;
-    text-indent: 2em;
-}
-
-.portrait-image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin: 2rem 0;
-}
-
-.portrait-image-gallery .archive-gallery-item {
-    width: clamp(150px, 18vw, 220px);
-    height: auto;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.portrait-image-gallery .archive-gallery-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.portrait-image-gallery .archive-gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Modifié: assure que l'image est entièrement visible */
-    display: block;
-}
-
-.portrait-break-video {
-  position: relative;
-  /* Astuce pour forcer la pleine largeur, même dans un conteneur plus étroit */
-  width: 100vw; 
-  /* left: 50%;
-  transform: translateX(-50%); */
-  /* --- */
-  height: 100vh; 
-  max-height: 1000px; 
-  margin: 5rem 0; 
-  overflow: hidden;
-  pointer-events: none; 
-}
-
-.portrait-break-video video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* La vidéo couvre tout l'espace sans se déformer */
-  z-index: 1;
-
-  /* NOUVEAU : On teinte la vidéo avec la couleur de fond */
-  mix-blend-mode: luminosity; /* Utilise la luminosité de la vidéo mais la couleur du fond */
-  opacity: 0.8; /* On ajuste l'opacité pour un effet plus subtil */
-}
-
-/* Fondu en haut */
-.portrait-break-video::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 20%; /* MODIFIÉ : Dégradé plus subtil, empiète moins sur la vidéo */
-  background: linear-gradient(to bottom, #050d1e 0%, transparent 100%);
-  z-index: 2;
-}
-
-/* Fondu en bas */
-.portrait-break-video::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 20%; /* MODIFIÉ : Dégradé plus subtil, empiète moins sur la vidéo */
-  background: linear-gradient(to top, #050d1e 0%, transparent 100%);
-  z-index: 2;
-}
-/* NOUVEAU : Style pour le bloc de texte en superposition */
-.video-text-overlay {
-  position: absolute;
-  top: 0; /* Aligné en haut */
-  height: 100%; /* Prend toute la hauteur de la vidéo */
-  z-index: 3; 
-
-  color: #e0e0e0;
-  max-width: 50%; /* La colonne de texte prend 50% de la largeur */
-  
-  /* On utilise flexbox pour centrer le contenu verticalement */
-  display: flex;
-  align-items: center;
-  /* justify-content: center; <-- SUPPRIMÉ : On gère l'alignement horizontal dans les classes de position */
-  padding: 2rem 4rem; /* On ajoute plus de padding horizontal pour l'esthétique */
-  box-sizing: border-box;
-}
-.video-text-overlay p {
-  margin: 0;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  line-height: 1.6;
-  max-width: 100%; /* Le paragraphe peut prendre toute la largeur de la colonne */
-}
-
-/* MODIFIÉ : Classes de positionnement de la COLONNE */
-.video-text-overlay.position-left {
-  left: 0; /* Collé à gauche */
-  justify-content: flex-start; /* AJOUTÉ : Aligne le texte au début (à gauche) */
-  /* On remplace le fond uni par un dégradé qui va de gauche à droite */
-  background: linear-gradient(to right, #050d1e 70%, transparent 100%);
-}
-
-.video-text-overlay.position-right {
-  right: 0; /* Collé à droite */
-  justify-content: flex-end; /* AJOUTÉ : Aligne le texte à la fin (à droite) */
-  /* On remplace le fond uni par un dégradé qui va de droite à gauche */
-  background: linear-gradient(to left, #050d1e 70%, transparent 100%);
 }
