@@ -1,3 +1,7 @@
+/* ==========================================================================
+   1. HERO SECTION
+   ========================================================================== */
+
 .dld-hero {
   position: relative;
   height: 100vh;
@@ -6,22 +10,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 2560px; /* Empêche le débordement horizontal */
+  max-width: 2560px;
 }
 
-.dld-hero::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 18vh;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0%,
-    #050d1e 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
 .dld-hero video {
   position: absolute;
   top: 0; left: 0;
@@ -29,17 +20,18 @@
   height: 100vh;
   object-fit: cover;
   z-index: 1;
-  /*position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: 0;
-  transform: translateX(-50%) translateY(-50%);
-  object-fit: cover;*/
 }
+
+.dld-hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
 .dld-title {
   position: relative;
   z-index: 3;
@@ -52,23 +44,63 @@
   justify-content: center;
   height: 100vh;
 }
+
 .dld-title h2 {
-/*  font-size: clamp(2rem, 4.5vw, 3.8rem); */
-font-size: 3vw;
+  font-size: 3vw;
   margin: 0;
-  padding: 0 3vw; /* Empêche le texte de toucher les bords sur petits écrans */
+  padding: 0 3vw;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
-.dld-presentation{
+
+/* ==========================================================================
+   2. CONTENT SECTIONS (PRESENTATION & REMERCIEMENTS)
+   ========================================================================== */
+
+.dld-presentation {
   max-width: 1500px;
   padding: 5vw;
 }
-.dld-presentation h2{
+
+.dld-presentation h2 {
  padding: 0 0 0.9vw 0;
  font-size: clamp(1.8rem, 2.5vw, 2.5rem); 
 }
-/* -------------------------- Membre de l'équipe --------------------------  */
+
+.dld-remerciements {
+  width: 90vw;
+  max-width: 1100px;
+  margin: 5vh auto 0vh auto;
+  color: #fff;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+}
+
+.dld-remerciements h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+.dld-remerciements p {
+  text-align: justify;
+  font-size: clamp(1rem, 1.8vw, 1.1rem);
+  font-weight: 400;
+  opacity: 0.85;
+  margin: 0;
+  line-height: 1.6;
+}
+
+#last-paragraph {
+  margin-bottom: 5vh;
+}
+
+/* ==========================================================================
+   3. TEAM GRID
+   ========================================================================== */
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -82,18 +114,16 @@ font-size: 3vw;
 .team-member {
   position: relative;
   aspect-ratio: 1/1;
-  perspective: 600px;
   overflow: hidden;
   background: #050d1e;
   border: 1px solid #fff;
   cursor: pointer;
   transition: box-shadow 0.3s;
 }
+
 .team-face {
   position: absolute;
   inset: 0;
- /* width: 100%;
-  height: 100%;*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -104,6 +134,7 @@ font-size: 3vw;
   font-size: 1.2em;
   padding: 10%;
 }
+
 .team-photo {
   background-size: cover;
   background-position: center;
@@ -113,9 +144,10 @@ font-size: 3vw;
   transition: opacity 0.5s;
   background-color: #fff;
 }
+
 .team-info {
   position: relative;
-  background: none; /* Pas d'overlay noir */
+  background: none;
   color: #fff;
   z-index: 2;
   opacity: 0;
@@ -124,130 +156,88 @@ font-size: 3vw;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 10%;
-  box-sizing: border-box; /* S'assurer que le padding est inclus */
+  box-sizing: border-box;
 }
+
+/* --- Team Member States --- */
+
+.team-member.show-photo .team-photo,
+.team-member.show-info .team-info,
+.team-member.show-photo:hover .team-info,
+.team-member.show-info:hover .team-info {
+  opacity: 1;
+}
+
+.team-member.show-photo .team-info,
+.team-member.show-info .team-photo,
+.team-member.show-photo:hover .team-photo,
+.team-member.show-info:hover .team-photo {
+  opacity: 0;
+}
+
+/* --- Team Member Content --- */
+
 .team-name {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: bold;
   margin-bottom: 0.5em;
   letter-spacing: 0.02em;
 }
+
 .team-role {
   font-size: clamp(0.85rem, 1.5vw, 1.05rem);
   opacity: 0.85;
   line-height: 1.3;
 }
 
-.team-member.show-photo .team-photo {
-  opacity: 1;
-}
-.team-member.show-photo .team-info {
-  opacity: 0;
-}
-.team-member.show-info .team-photo {
-  opacity: 0;
-}
-.team-member.show-info .team-info {
-  opacity: 1;
-}
-
-.team-member.show-photo:hover .team-photo {
-  opacity: 0;
-}
-.team-member.show-photo:hover .team-info {
-  opacity: 1;
-}
-.team-member.show-info:hover .team-photo {
-  opacity: 0;
-}
-.team-member.show-info:hover .team-info {
-  opacity: 1;
-}
-
 .team-portfolio {
   position: absolute;
-  right: 10%; /* Ajusté pour correspondre au padding */
-  bottom: 10%;/* Ajusté pour correspondre au padding */
+  right: 10%;
+  bottom: 10%;
   display: inline-block;
-    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
   opacity: 0.85;
-  text-align: center;
-  /* font-size: 1em; */ /* Déjà défini plus haut avec clamp */
   color: #fff;
   text-decoration: none;
   transition: color 0.3s;
-  /* opacity: 0.85; */ /* Déjà défini plus haut */
-  text-align: right;
-  /* margin: 1em auto; */ /* Retiré pour un positionnement plus précis */
-  left: auto;
-  transform: none;
 }
 
 .team-portfolio::after {
   content: "";
   display: block;
-  margin: 0 auto;
   width: 0;
   height: 2px;
   background: #fff;
   transition: width 0.3s;
-  border-radius: 2px; /* Arrondi les bords du soulignement */
-  margin: 0; /* retire le centrage */
+  border-radius: 2px;
 }
 
 .team-member:hover .team-portfolio::after {
-  width: 100%; /* underline juste sous le texte */
+  width: 100%;
 }
 
 .team-member:hover .team-portfolio {
   color: #ddd;
 }
-/* ---------------------------------- */
 
-.dld-remerciements {
-  height: auto; /* Changé de 100vh à auto pour s'adapter au contenu */
-  width: 90vw;
-  max-width: 1100px;
-  margin: 5vh auto 0vh auto; /* Augmenté la marge en bas */
-  color: #fff;
-  text-align: center;
-  font-family: "Figtree", sans-serif;
-}
-.dld-remerciements h2 {
-  /* font-size: 2.2em; */
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Responsive font size */
-  margin-bottom: 0.5em;
-  font-family: "Libre Baskerville", serif;
-  font-weight: normal;
-  letter-spacing: 0.02em;
-/*  color:#F5EFD0;*/
-}
-.dld-remerciements p {
-  text-align: justify; /* Alignement du texte à gauche */
-  font-size: clamp(1rem, 1.8vw, 1.1rem); /* Responsive font size */
-  font-weight: 400;
-  opacity: 0.85;
-  margin: 0;
-  line-height: 1.6; /* Améliore la lisibilité */
-}
-#last-paragraph {
-  margin-bottom: 5vh;
-}
-/* Media Query pour tablettes et écrans plus petits */
+/* ==========================================================================
+   4. RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* --- Tablets --- */
 @media (max-width: 992px) {
   .team-grid {
-    grid-template-columns: repeat(2, 1fr); /* Passage à 2 colonnes */
-    gap: 2.5vw; /* Peut-être augmenter légèrement le gap relatif */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5vw;
   }
   .team-member {
-    min-width: 160px; /* Peut être légèrement réduit si nécessaire */
+    min-width: 160px;
   }
   .team-face, .team-info {
-    padding: 8%; /* Réduire légèrement le padding interne */
-     
+    padding: 8%;
   }
   .team-role {
-    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Ajuster la taille de police pour les écrans plus petits */
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
   }
   .team-portfolio {
     right: 8%;
@@ -255,16 +245,27 @@ font-size: 3vw;
   }
 }
 
-@media (max-width: 576px) { /* Pour les écrans encore plus petits, si besoin d'ajustements fins */
+/* --- Mobile Phones --- */
+@media (max-width: 576px) {
+  .dld-title h2 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+  }
+  .dld-remerciements h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  .dld-remerciements p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  }
+  
   .team-grid {
-    gap: 20px; /* Passage à un gap fixe pour plus de contrôle */
+    gap: 20px;
   }
   .team-member {
     min-width: 150px;
   }
   .team-face, .team-info {
-    padding: 15px; /* Padding fixe */
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Ajuster la base de police pour les petits écrans */
+    padding: 15px;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
   .team-name {
     font-size: clamp(1rem, 2.8vw, 1.3rem);
@@ -276,14 +277,5 @@ font-size: 3vw;
     font-size: clamp(0.8rem, 2.2vw, 1rem);
     right: 15px;
     bottom: 15px;
-  }
-  .dld-title h2 {
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-  }
-  .dld-remerciements h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-  }
-  .dld-remerciements p {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
 }
