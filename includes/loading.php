@@ -16,6 +16,7 @@
                 <div class="universites">
                     <img src="img/de_white.svg" alt="Dong Eui University">
                     <img src="img/uge_white.svg" alt="Université Gustave Eiffel">
+                    <img src="img/cmw.png" alt="CMW">
                 </div>
             </div>
         </div>
