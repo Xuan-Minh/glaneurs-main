@@ -22,11 +22,11 @@ $mysqli->set_charset('utf8mb4');
 echo "<h1>Mise à jour des guillemets (EN & KR uniquement)</h1>";
 
 // 1. Sélectionner toutes les lignes qui contiennent des guillemets en anglais ou coréen
-$sql_select = "SELECT `{$id_column}`, `en`, `kr` FROM `{$table_name}` WHERE `en` LIKE '%\"%' OR `kr` LIKE '%\"%'";
+$sql_select = "SELECT `{$id_column}`, `en`, `ko` FROM `{$table_name}` WHERE `en` LIKE '%\"%' OR `ko` LIKE '%\"%'";
 $result = $mysqli->query($sql_select);
 
 if ($result->num_rows === 0) {
-    echo "<p>Aucun texte contenant des guillemets à mettre à jour dans les colonnes 'en' ou 'kr'.</p>";
+    echo "<p>Aucun texte contenant des guillemets à mettre à jour dans les colonnes 'en' ou 'ko'.</p>";
     $mysqli->close();
     exit;
 }
@@ -34,7 +34,7 @@ if ($result->num_rows === 0) {
 echo "<p>Trouvé " . $result->num_rows . " textes à traiter...</p>";
 
 // 2. Préparer la requête de mise à jour pour les colonnes EN et KR
-$sql_update = "UPDATE `{$table_name}` SET `en` = ?, `kr` = ? WHERE `{$id_column}` = ?";
+$sql_update = "UPDATE `{$table_name}` SET `en` = ?, `ko` = ? WHERE `{$id_column}` = ?";
 $stmt = $mysqli->prepare($sql_update);
 if (!$stmt) {
     die("Erreur de préparation de la requête : " . $mysqli->error);
@@ -45,7 +45,7 @@ $count = 0;
 while ($row = $result->fetch_assoc()) {
     $id = $row[$id_column];
     $original_en = $row['en'];
-    $original_kr = $row['kr'];
+    $original_ko = $row['ko'];
 
     // Fonction de remplacement réutilisable
     $replace_quotes = function ($text) {
@@ -63,11 +63,11 @@ while ($row = $result->fetch_assoc()) {
     };
 
     $updated_en = $replace_quotes($original_en);
-    $updated_kr = $replace_quotes($original_kr);
+    $updated_ko = $replace_quotes($original_ko);
 
     // 4. Exécuter la mise à jour si au moins un texte a changé
-    if ($original_en !== $updated_en || $original_kr !== $updated_kr) {
-        $stmt->bind_param('ssi', $updated_en, $updated_kr, $id);
+    if ($original_en !== $updated_en || $original_ko !== $updated_ko) {
+        $stmt->bind_param('ssi', $updated_en, $updated_ko, $id);
         $stmt->execute();
         echo "ID #{$id} mis à jour.<br>";
         $count++;

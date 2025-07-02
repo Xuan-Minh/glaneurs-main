@@ -59,7 +59,9 @@ if (!$isMobile) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $lang; ?>" <?php if ($lang == 'kr') echo ' class="kr-lang"'; ?>>
+<html lang="<?php echo $lang; ?>" <?php if ($lang == '
+
+') echo ' class="ko-lang"'; ?>>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -80,7 +82,7 @@ if (!$isMobile) {
 
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
     <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />
-    <link rel="alternate" hreflang="kr" href="https://glaneursdecarton.mastercmw.com/?lang=kr" />
+    <link rel="alternate" hreflang="ko" href="https://glaneursdecarton.mastercmw.com/?lang=ko" />
 </head>
 <body>
 
@@ -98,7 +100,7 @@ if (!$isMobile) {
                 <span class="lang-sep">/</span>
                 <a href="?lang=en" class="lang-option<?php if ($lang == 'en') echo ' active'; ?>">EN</a>
                 <span class="lang-sep">/</span>
-                <a href="?lang=kr" class="lang-option<?php if ($lang == 'kr') echo ' active'; ?>">한국</a>
+                <a href="?lang=ko" class="lang-option<?php if ($lang == 'ko') echo ' active'; ?>">한국</a>
             </div>
         </div>
        <div class="mobile-content">

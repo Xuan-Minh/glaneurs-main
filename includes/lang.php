@@ -3,7 +3,7 @@
 session_start();
 
 // Si ?lang=... dans l'URL, on l'utilise et on met à jour la session
-if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'kr'])) {
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'ko'])) {
     $lang = $_GET['lang'];
     $_SESSION['lang'] = $lang;
 } else {
@@ -59,7 +59,7 @@ function getTranslation($key, $lang = 'fr')
     if ($translations === null) {
         $pdo = getPDO();
         // Optimisation : ne sélectionner que les colonnes nécessaires
-        $stmt = $pdo->query("SELECT key_name, fr, en, kr FROM translations");
+        $stmt = $pdo->query("SELECT key_name, fr, en, ko FROM translations");
         $translations = [];
         foreach ($stmt as $row) {
             $translations[$row['key_name']] = $row;

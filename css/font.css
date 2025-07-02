@@ -62,19 +62,19 @@
 }
 
 /* Pour tous les titres en coréen, remplace Libre Baskerville par Noto Sans KR */
-.kr-lang h1,
-.kr-lang h2,
-.kr-lang h3,
-.kr-lang h4,
-.kr-lang h5,
-.kr-lang h6,
-.kr-lang div {
+.ko-lang h1,
+.ko-lang h2,
+.ko-lang h3,
+.ko-lang h4,
+.ko-lang h5,
+.ko-lang h6,
+.ko-lang div {
   /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
   font-weight: 500 !important; 
   font-display: swap;  */
 }
-.kr-lang .archive-title,
-.kr-lang .page-intro h2 {
+.ko-lang .archive-title,
+.ko-lang .page-intro h2 {
   /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
   font-display: swap; Ajoutez cette ligne */
 }
