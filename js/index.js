@@ -131,6 +131,8 @@ function showInfoPanel($slide) {
     $info.fadeIn(500);
     $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
     $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+
+    $slide.find("video").addClass("flou");
 }
 
 /**
@@ -163,6 +165,9 @@ function hideInfoPanel($slide) {
 
     $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
     $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+
+
+    $slide.find("video").removeClass("flou");
 }
 // NOUVELLE FONCTION : Réinitialisation forcée d'un slide
 /**
