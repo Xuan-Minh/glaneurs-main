@@ -28,7 +28,7 @@
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--main-bg-color) 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -102,7 +102,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #050d1e;
+  background: var(--main-bg-color);
   color: white;
   font-family: "Figtree", sans-serif;
   padding: 40px 10vw;
@@ -202,12 +202,12 @@
 
 .portrait-break-video::before {
   top: 0;
-  background: linear-gradient(to bottom, #050d1e 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--main-bg-color) 0%, transparent 100%);
 }
 
 .portrait-break-video::after {
   bottom: 0;
-  background: linear-gradient(to top, #050d1e 0%, transparent 100%);
+  background: linear-gradient(to top, var(--main-bg-color) 0%, transparent 100%);
 }
 
 /* --- 2.3 Superposition de texte sur la vidéo --- */
@@ -235,13 +235,13 @@
 .video-text-overlay.position-left {
   left: 0;
   justify-content: flex-start;
-  background: linear-gradient(to right, #050d1e 70%, transparent 100%);
+  background: linear-gradient(to right, var(--main-bg-color) 70%, transparent 100%);
 }
 
 .video-text-overlay.position-right {
   right: 0;
   justify-content: flex-end;
-  background: linear-gradient(to left, #050d1e 70%, transparent 100%);
+  background: linear-gradient(to left, var(--main-bg-color) 70%, transparent 100%);
 }
 
 /* ==========================================================================

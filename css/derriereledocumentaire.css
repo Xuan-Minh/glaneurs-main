@@ -27,7 +27,7 @@
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--main-bg-color) 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -115,7 +115,7 @@
   position: relative;
   aspect-ratio: 1/1;
   overflow: hidden;
-  background: #050d1e;
+  background: var(--main-bg-color);
   border: 1px solid #fff;
   cursor: pointer;
   transition: box-shadow 0.3s;

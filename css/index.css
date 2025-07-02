@@ -14,7 +14,7 @@ body {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
-  background-color: #050d1e; /* Fond noir */
+  background-color: var(--main-bg-color); /* Fond noir */
 }
 
 .container {
@@ -434,7 +434,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
     display: flex !important;
     position: fixed;
     z-index: 999999;
-    background: #050d1e;
+    background: var(--main-bg-color);
     color: #fff;
     width: 100vw;
     height: 100vh;

@@ -5,7 +5,7 @@
   left: 0;
   width: 100vw;
   height: 100vh; /* Utiliser vh pour la hauteur */
-  background-color: #050d1e; /* Ajoute un fond noir semi-transparent pour assombrir */
+  background-color: var(--main-bg-color); /* Ajoute un fond noir semi-transparent pour assombrir */
   z-index: 9999;
   display: flex;
   justify-content: center;

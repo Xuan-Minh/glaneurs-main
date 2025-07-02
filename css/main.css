@@ -1,3 +1,10 @@
+:root {
+  --main-bg-color: var(--main-bg-color);
+  --main-text-color: #ffffff;
+  --highlight-color: #ddd;
+  --transition-fast: 0.3s;
+  --transition-slow: 0.7s;
+}
 /* ------------------------ GENERAL ------------------------------------------- */
 html,
 body {
@@ -9,7 +16,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #050d1e;
+  background-color: var(--main-bg-color);
   scroll-behavior: smooth;
   scrollbar-width: none;
   overflow-x: hidden;
@@ -19,7 +26,7 @@ body {
 body {
   width: 100%;
   overflow-x: hidden;
-  /* scrollbar-color: #050d1e #050d1e; */
+  /* scrollbar-color: var(--main-bg-color) var(--main-bg-color); */
 }
 button{
   background-color: transparent;
@@ -38,7 +45,7 @@ button{
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #050d1e;
+  background: var(--main-bg-color);
   opacity: 1; /* Commence visible */
   pointer-events: all;
   z-index: 99999;

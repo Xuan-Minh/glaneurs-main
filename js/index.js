@@ -104,6 +104,7 @@ $(document).ready(function() {
 /**
 * @param {jQuery} $slide L'élément jQuery du slide concerné.
 */
+let authorFadeInTimer = null;
 function showInfoPanel($slide) {
     if (!$slide || !$slide.length) return;
 
@@ -111,10 +112,11 @@ function showInfoPanel($slide) {
     const $info = $slide.find('.info');
     const $point2 = $slide.find('.point2');
 
-    // Si l'info est déjà visible, on ne fait rien.
     if ($point2.hasClass('full')) return;
+    
+    // C'est parfait, on annule tout timer précédent.
+    clearTimeout(authorFadeInTimer);
 
-    // Cache le bouton "Visionner"
     fadeVisionnerTriggerH3($slide, true);
 
     $h2.addClass('animate-transform');
@@ -122,22 +124,21 @@ function showInfoPanel($slide) {
         $h2.addClass('move');
     });
 
-    $h2.one('transitionend', function(e) {
-        if (e.originalEvent.propertyName === 'transform') {
-            $(this).addClass('author-visible');
-        }
-    });
+    // C'est la bonne méthode : on utilise un timer fiable.
+    authorFadeInTimer = setTimeout(() => {
+        $h2.addClass('author-visible');
+    }, 1500); // 1.5s, comme la transition CSS
+
 
     $info.fadeIn(500);
     $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
     $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-
     $slide.find("video").addClass("flou");
 }
 
 /**
  * Cache le panneau d'information pour un slide donné.
- * @param {jQuery} $slide L'élément jQuery du slide concerné.
+* @param {jQuery} $slide L'élément jQuery du slide concerné.
  */
 function hideInfoPanel($slide) {
     if (!$slide || !$slide.length) return;
@@ -146,27 +147,29 @@ function hideInfoPanel($slide) {
     const $info = $slide.find('.info');
     const $point1 = $slide.find('.point1');
 
-    // Si l'info est déjà cachée, on ne fait rien.
     if ($point1.hasClass('full')) return;
 
-    // Fait réapparaître le bouton "Visionner"
+    // Parfait : on annule le timer et on cache l'auteur immédiatement.
+    clearTimeout(authorFadeInTimer);
+    $h2.removeClass('author-visible');
+
     fadeVisionnerTriggerH3($slide, false);
 
-    $h2.removeClass('author-visible');
-    
-    setTimeout(() => {
+    $h2.addClass('animate-transform');
+    requestAnimationFrame(() => {
         $h2.removeClass('move');
-        $info.fadeOut(300);
-
-        $h2.one('transitionend', function() {
+    });
+    
+    // Ce bloc est OK, il sert à nettoyer la classe d'animation, ce qui est une bonne pratique.
+    $h2.one('transitionend', function(e) {
+        if (e.originalEvent.propertyName === 'transform') {
             $(this).removeClass('animate-transform');
-        });
-    }, 50);
+        }
+    });
 
+    $info.fadeOut(300);
     $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
     $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-
-
     $slide.find("video").removeClass("flou");
 }
 // NOUVELLE FONCTION : Réinitialisation forcée d'un slide
@@ -178,7 +181,7 @@ function hideInfoPanel($slide) {
 function resetSlideState($slide) {
     if (!$slide || !$slide.length) return;
     const $h2 = $slide.find('h2');
-    
+    clearTimeout(authorFadeInTimer);
     // On retire toutes les classes d'animation et d'état
     $h2.removeClass('move author-visible animate-transform');
     
