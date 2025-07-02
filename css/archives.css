@@ -1,7 +1,21 @@
-/* ==========================================================================
-   1. GENERAL & PAGE LAYOUT
-   ========================================================================== */
+/* --- GENERAL LAYOUT & SCROLL --- */
+.archives-intro p {
+    margin-bottom: 3rem; /* Ajoute de l'espace sous le texte d'intro */
+}
 
+/* NOUVEAU: Style pour la mini-galerie d'introduction */
+.intro-image-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.intro-image-gallery .archive-gallery-item {
+    width: clamp(200px, 22vw, 280px); /* Taille responsive */
+    height: auto;
+}
 .archives-scroll {
   height: 100vh;
   scrollbar-width: none; /* Firefox */
@@ -12,10 +26,19 @@
   display: none; /* Chrome, Safari, Opera */
 }
 
-/* ==========================================================================
-   2. HERO SECTION
-   ========================================================================== */
+.archives-content {
+  min-height: 100vh;
+  background: #050d1e;
+  padding: 5vh 0 0 0;
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 1;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
 
+/* --- HERO SECTION --- */
 .archive-hero {
   position: relative;
   width: 100vw;
@@ -26,6 +49,16 @@
   justify-content: center;
   max-width: 2560px;
   margin: 0 auto;
+}
+
+.archive-hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .archive-hero video {
@@ -46,34 +79,7 @@
   text-align: center;
 }
 
-.archive-hero::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* ==========================================================================
-   3. MAIN CONTENT LAYOUT
-   ========================================================================== */
-
-.archives-content {
-  min-height: 100vh;
-  background: #050d1e;
-  padding: 5vh 0 0 0;
-  font-size: 1.2em;
-  font-weight: 400;
-  margin: 0;
-  display: flex;
-  position: relative;
-  z-index: 2; /* Pour être au-dessus des images flottantes */
-}
-
-/* --- 3.1 Side Navigation --- */
-
+/* --- NAVIGATION MENU --- */
 .archive-nav-container {
     width: 250px;
     flex-shrink: 0;
@@ -81,8 +87,6 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
-    position: relative;
-    z-index: 2;
 }
 
 .archive-nav-container.is-visible {
@@ -120,13 +124,10 @@
     font-weight: bold;
 }
 
-/* --- 3.2 Narrative Content --- */
-
+/* --- NARRATIVE CONTENT --- */
 .archives-narrative {
     flex-grow: 1;
     padding: 2rem 0;
-    position: relative;
-    z-index: 2;
 }
 
 .archives-intro {
@@ -137,10 +138,6 @@
   color: #fff;
   text-align: center;
   font-family: "Figtree", sans-serif;
-}
-
-.archives-intro p {
-    margin-bottom: 3rem;
 }
 
 .archive-chapter {
@@ -168,59 +165,7 @@
     margin-bottom: 1em;
 }
 
-/* ==========================================================================
-   4. FLOATING BACKGROUND IMAGES
-   ========================================================================== */
-
-.floating-images-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Placé sous le texte */
-  overflow: hidden;
-}
-
-.floating-image {
-  position: absolute;
-  display: block;
-  opacity: 0.1;
-  filter: grayscale(80%) blur(1px);
-  z-index: 1;
-  transform: translateY(var(--translate-y, 0px));
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              opacity 0.4s ease, 
-              filter 0.4s ease;
-}
-
-.floating-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.floating-image:hover {
-  opacity: 1;
-  filter: grayscale(0%) blur(0);
-  z-index: 3;
-  transform: translateY(var(--translate-y, 0px)) scale(1.1);
-  cursor: pointer;
-}
-
-/* --- Individual positions --- */
-#float-img-1 { top: 20vh; left: 5vw; width: 20vw; max-width: 250px; }
-#float-img-2 { top: 120vh; right: 8vw; width: 18vw; max-width: 220px; }
-#float-img-3 { top: 250vh; left: 10vw; width: 15vw; max-width: 180px; }
-#float-img-4 { top: 350vh; right: 5vw; width: 22vw; max-width: 280px; }
-#float-img-5 { top: 480vh; left: 8vw; width: 17vw; max-width: 200px; }
-
-
-/* ==========================================================================
-   5. GALLERIES
-   ========================================================================== */
-
+/* --- ARCHIVES GALLERY (GRID & OVERLAY) --- */
 .archives-gallery-section {
     margin-top: 8rem;
     padding-top: 4rem;
@@ -265,29 +210,11 @@
   transform: scale(1.05);
 }
 
-/* --- 5.1 Intro Mini-Gallery --- */
-.intro-image-gallery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: nowrap;
-}
-
-.intro-image-gallery .archive-gallery-item {
-    width: clamp(200px, 22vw, 280px);
-    height: auto;
-}
-
-/* ==========================================================================
-   6. IMAGE OVERLAY (MODAL)
-   ========================================================================== */
-
 .archive-overlay {
   position: fixed;
   z-index: 2000;
   top: 0; left: 0; right: 0; bottom: 0;
-  display: none; /* Managed by JS */
+  display: none; /* Caché par défaut, géré par JS */
   align-items: center;
   justify-content: center;
 }
@@ -295,7 +222,7 @@
 .archive-overlay-bg {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(4,14,30,0.8);
+  background: rgba(0,0,0,0.85);
 }
 
 .archive-overlay-content {
@@ -352,10 +279,8 @@
   z-index: 20;
 }
 
-/* --- 6.1 Overlay Arrows --- */
-
 .archive-overlay-arrow {
-  display: none; /* Hidden by default, shown when overlay is active */
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -365,11 +290,6 @@
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s, transform 0.3s;
-}
-
-.archive-overlay[style*="display: block"] .archive-overlay-arrow,
-.archive-overlay[style*="display: flex"] .archive-overlay-arrow {
-  display: flex !important;
 }
 
 .archive-overlay-arrow.left { left: 2vw; }
@@ -392,9 +312,10 @@
   animation-name: scroll-side-right;
 }
 
-/* ==========================================================================
-   7. KEYFRAME ANIMATIONS
-   ========================================================================== */
+.archive-overlay[style*="display: block"] .archive-overlay-arrow,
+.archive-overlay[style*="display: flex"] .archive-overlay-arrow {
+  display: flex !important;
+}
 
 @keyframes scroll-side-right {
   0%, 100% { opacity: 0; transform: rotate(90deg) translateX(0); }
@@ -406,10 +327,7 @@
   50% { opacity: 1; transform: rotate(-90deg) translateX(-10px); }
 }
 
-/* ==========================================================================
-   8. RESPONSIVE DESIGN
-   ========================================================================== */
-
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 1024px) {
     .archives-content {
         flex-direction: column;
@@ -432,7 +350,7 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
     .archive-nav-container .nav-link.active {
-        border-color: #fff;
+        border-color: #c8a165;
         background-color: rgba(200, 161, 101, 0.1);
     }
 }
@@ -462,17 +380,8 @@
     font-size: 1rem;
   }
 }
-
-@media (max-width: 768px) {
-  .floating-images-container {
-    display: none;
-  }
-}
-```/* filepath: c:\MAMP\htdocs\glaneurs-main\css\archives.css */
-/* ==========================================================================
-   1. GENERAL & PAGE LAYOUT
-   ========================================================================== */
-
+/* filepath: c:\MAMP\htdocs\glaneurs-main\css\archives.css */
+/* --- GENERAL LAYOUT & SCROLL --- */
 .archives-scroll {
   height: 100vh;
   scrollbar-width: none; /* Firefox */
@@ -483,10 +392,19 @@
   display: none; /* Chrome, Safari, Opera */
 }
 
-/* ==========================================================================
-   2. HERO SECTION
-   ========================================================================== */
+.archives-content {
+  min-height: 100vh;
+  background: #050d1e;
+  padding: 5vh 0 0 0;
+  font-size: 1.2em;
+  font-weight: 400;
+  opacity: 1;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
 
+/* --- HERO SECTION --- */
 .archive-hero {
   position: relative;
   width: 100vw;
@@ -497,6 +415,16 @@
   justify-content: center;
   max-width: 2560px;
   margin: 0 auto;
+}
+
+.archive-hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .archive-hero video {
@@ -517,34 +445,7 @@
   text-align: center;
 }
 
-.archive-hero::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #050d1e 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* ==========================================================================
-   3. MAIN CONTENT LAYOUT
-   ========================================================================== */
-
-.archives-content {
-  min-height: 100vh;
-  background: #050d1e;
-  padding: 5vh 0 0 0;
-  font-size: 1.2em;
-  font-weight: 400;
-  margin: 0;
-  display: flex;
-  position: relative;
-  z-index: 2; /* Pour être au-dessus des images flottantes */
-}
-
-/* --- 3.1 Side Navigation --- */
-
+/* --- NAVIGATION MENU --- */
 .archive-nav-container {
     width: 250px;
     flex-shrink: 0;
@@ -552,8 +453,6 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
-    position: relative;
-    z-index: 2;
 }
 
 .archive-nav-container.is-visible {
@@ -591,13 +490,10 @@
     font-weight: bold;
 }
 
-/* --- 3.2 Narrative Content --- */
-
+/* --- NARRATIVE CONTENT --- */
 .archives-narrative {
     flex-grow: 1;
     padding: 2rem 0;
-    position: relative;
-    z-index: 2;
 }
 
 .archives-intro {
@@ -610,10 +506,6 @@
   font-family: "Figtree", sans-serif;
 }
 
-.archives-intro p {
-    margin-bottom: 3rem;
-}
-
 .archive-chapter {
     max-width: 75ch;
     margin: 0 auto 5rem auto;
@@ -624,7 +516,7 @@
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
     color: #E0DED8;
-    border-left: 3px solid #fff;
+    border-left: 3px solid #FFF;
     padding-left: 1rem;
     font-family: "Libre Baskerville", serif;
 }
@@ -639,59 +531,7 @@
     margin-bottom: 1em;
 }
 
-/* ==========================================================================
-   4. FLOATING BACKGROUND IMAGES
-   ========================================================================== */
-
-.floating-images-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Placé sous le texte */
-  overflow: hidden;
-}
-
-.floating-image {
-  position: absolute;
-  display: block;
-  opacity: 0.1;
-  filter: grayscale(80%) blur(1px);
-  z-index: 1;
-  transform: translateY(var(--translate-y, 0px));
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              opacity 0.4s ease, 
-              filter 0.4s ease;
-}
-
-.floating-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.floating-image:hover {
-  opacity: 1;
-  filter: grayscale(0%) blur(0);
-  z-index: 3;
-  transform: translateY(var(--translate-y, 0px)) scale(1.1);
-  cursor: pointer;
-}
-
-/* --- Individual positions --- */
-#float-img-1 { top: 20vh; left: 5vw; width: 20vw; max-width: 250px; }
-#float-img-2 { top: 120vh; right: 8vw; width: 18vw; max-width: 220px; }
-#float-img-3 { top: 250vh; left: 10vw; width: 15vw; max-width: 180px; }
-#float-img-4 { top: 350vh; right: 5vw; width: 22vw; max-width: 280px; }
-#float-img-5 { top: 480vh; left: 8vw; width: 17vw; max-width: 200px; }
-
-
-/* ==========================================================================
-   5. GALLERIES
-   ========================================================================== */
-
+/* --- ARCHIVES GALLERY (GRID & OVERLAY) --- */
 .archives-gallery-section {
     margin-top: 8rem;
     padding-top: 4rem;
@@ -712,8 +552,7 @@
   gap: 20px;
   justify-content: center;
 }
-
-.archive-gallery-item {
+.archive-thumb {
   width: 180px;
   margin: 10px;
   cursor: pointer;
@@ -722,80 +561,68 @@
   transition: transform 0.2s;
 }
 
-.archive-gallery-item img {
+.archive-thumb img {
   width: 100%;
   display: block;
   transition: transform 0.2s;
 }
 
-.archive-gallery-item:hover {
+/* Applique le zoom sur le conteneur ET l'image */
+.archive-thumb:hover {
   transform: scale(1.05);
 }
-
-.archive-gallery-item:hover img {
+.archive-thumb:hover img {
   transform: scale(1.05);
 }
-
-/* --- 5.1 Intro Mini-Gallery --- */
-.intro-image-gallery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: nowrap;
-}
-
-.intro-image-gallery .archive-gallery-item {
-    width: clamp(200px, 22vw, 280px);
-    height: auto;
-}
-
-/* ==========================================================================
-   6. IMAGE OVERLAY (MODAL)
-   ========================================================================== */
-
 .archive-overlay {
   position: fixed;
   z-index: 2000;
   top: 0; left: 0; right: 0; bottom: 0;
-  display: none; /* Managed by JS */
-  align-items: center;
-  justify-content: center;
-}
-
-.archive-overlay-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(4,14,30,0.8);
-}
-
-.archive-overlay-content {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.archive-overlay-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:rgba(4,14,30,0.8);}
+/* Agrandir la photo */
+.archive-overlay-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: none;
   max-width: 95vw;
   width: 95vw;
   max-height: 90vh;
+  overflow: visible;
   position: relative;
-  gap: 70px;
+  box-shadow: none;
+  gap: 70px; /* Augmente l'écart ici (ex : 70px) */
 }
-
 .archive-overlay-photo {
   flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+/* Photo très grande, centrée */
 .archive-overlay-photo img {
   max-width: 50vw;
   max-height: 70vh;
   width: auto;
   height: auto;
+  display: block;
+  margin: 0;
   box-shadow: 0 4px 32px #000a;
 }
-
+/* Infos à droite, sans fond */
 .archive-overlay-info {
   flex: 0 0 320px;
   color: #fff;
   padding: 40px 40px 40px 0;
+  background: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -805,14 +632,13 @@
   max-width: 400px;
   word-break: break-word;
 }
-
-.archive-overlay-title {
+.archive-overlay-info h2 {
   font-size: clamp(1.5rem, 2.5vw, 2rem); 
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
+  letter-spacing: 0.02em;
 }
-
 .archive-overlay-close {
   position: absolute;
   top: 24px;
@@ -821,66 +647,94 @@
   font-size: 2.2em;
   cursor: pointer;
   z-index: 20;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0;
 }
-
-/* --- 6.1 Overlay Arrows --- */
-
 .archive-overlay-arrow {
-  display: none; /* Hidden by default, shown when overlay is active */
+  display: flex !important;
   align-items: center;
   justify-content: center;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  background: none;
+  border: none;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s, transform 0.3s;
 }
 
+.archive-overlay-arrow.left {
+  left: 2vw;
+}
+.archive-overlay-arrow.right {
+  right: 2vw;
+}
+
+/* Pour la flèche gauche */
+.archive-overlay-arrow img {
+  width: 40px;
+  animation: scroll-side-left 2s infinite;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.archive-overlay-arrow.left img {
+  width: 32px;
+  transform: rotate(-90deg);
+  animation: scroll-side-left 2s infinite;
+  opacity: 0;
+  cursor: pointer;
+}
+.archive-overlay-arrow.right img {
+  width: 32px;
+  transform: rotate(90deg);
+  animation: scroll-side-right 2s infinite;
+  opacity: 0;
+  cursor: pointer;
+}
+
+@keyframes scroll-side-right {
+  0% {
+    opacity: 0;
+    transform:translate(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10px); /* Décale vers la droite */
+  }
+  100% {
+    opacity: 0;
+    transform:translateX(20px); /* Décale encore plus vers la droite */
+  }
+}
+@keyframes scroll-side-left {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-10px); /* Décale vers la gauche */
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px); /* Décale encore plus vers la gauche */
+  }
+}
+
+/* Cache les flèches hors overlay */
+.archive-overlay-arrow {
+  display: none;
+}
 .archive-overlay[style*="display: block"] .archive-overlay-arrow,
 .archive-overlay[style*="display: flex"] .archive-overlay-arrow {
   display: flex !important;
 }
-
-.archive-overlay-arrow.left { left: 2vw; }
-.archive-overlay-arrow.right { right: 2vw; }
-
-.archive-overlay-arrow img {
-  width: 32px;
-  opacity: 0;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-.archive-overlay-arrow.left img {
-  transform: rotate(-90deg);
-  animation-name: scroll-side-left;
-}
-
-.archive-overlay-arrow.right img {
-  transform: rotate(90deg);
-  animation-name: scroll-side-right;
-}
-
-/* ==========================================================================
-   7. KEYFRAME ANIMATIONS
-   ========================================================================== */
-
-@keyframes scroll-side-right {
-  0%, 100% { opacity: 0; transform: rotate(90deg) translateX(0); }
-  50% { opacity: 1; transform: rotate(90deg) translateX(10px); }
-}
-
-@keyframes scroll-side-left {
-  0%, 100% { opacity: 0; transform: rotate(-90deg) translateX(0); }
-  50% { opacity: 1; transform: rotate(-90deg) translateX(-10px); }
-}
-
-/* ==========================================================================
-   8. RESPONSIVE DESIGN
-   ========================================================================== */
-
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 1024px) {
     .archives-content {
         flex-direction: column;
@@ -933,7 +787,94 @@
     font-size: 1rem;
   }
 }
+/* --- NOUVEAU: IMAGES FLOTTANTES EN ARRIÈRE-PLAN --- */
 
+.archives-content {
+  /* Cette propriété est cruciale pour que le positionnement absolu des enfants fonctionne */
+  position: relative; 
+}
+
+.floating-images-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Placé sous le texte */
+  /* pointer-events: none; A RETIRER pour que les images soient cliquables */
+  overflow: hidden; /* Empêche les images de déborder si elles sont trop grandes */
+}
+
+.floating-image {
+  position: absolute;
+  display: block; /* Important pour que le <a> se comporte comme un bloc */
+  opacity: 0.1; /* Opacité encore plus faible */
+  filter: grayscale(80%) blur(1px); /* Effet "archive" et léger flou */
+  z-index: 1; /* z-index de base */
+  transform: translateY(var(--translate-y, 0px)); /* Utilise une variable CSS pour la parallaxe */
+  /* Transition plus douce pour le survol */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              opacity 0.4s ease, 
+              filter 0.4s ease;
+}
+
+/* NOUVEAU: Style pour l'image à l'intérieur du lien */
+.floating-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* NOUVEAU: Effet au survol */
+.floating-image:hover {
+  opacity: 1; /* Opacité d'origine */
+  filter: grayscale(0%) blur(0); /* Filtre retiré */
+  z-index: 3; /* Passe au-dessus du texte et des autres images */
+  /* Combine la parallaxe (via la variable) et le zoom */
+  transform: translateY(var(--translate-y, 0px)) scale(1.1);
+  cursor: pointer;
+}
+
+/* Positionnement individuel de chaque image */
+#float-img-1 {
+  top: 20vh;
+  left: 5vw;
+  width: 20vw;
+  max-width: 250px;
+}
+#float-img-2 {
+  top: 120vh;
+  right: 8vw;
+  width: 18vw;
+  max-width: 220px;
+}
+#float-img-3 {
+  top: 250vh;
+  left: 10vw;
+  width: 15vw;
+  max-width: 180px;
+}
+#float-img-4 {
+  top: 350vh;
+  right: 5vw;
+  width: 22vw;
+  max-width: 280px;
+}
+#float-img-5 {
+  top: 480vh;
+  left: 8vw;
+  width: 17vw;
+  max-width: 200px;
+}
+
+/* S'assurer que le texte et la navigation sont bien au-dessus */
+.archives-narrative, .archive-nav-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Cacher les images sur les petits écrans pour ne pas surcharger */
 @media (max-width: 768px) {
   .floating-images-container {
     display: none;
