@@ -585,3 +585,53 @@ function initAudio() {
     updateUI();
     updateAudioElements();
 });
+
+/**
+ * Affiche une notification en bas de l'écran.
+ * @param {string} message Le message à afficher.
+ * @param {number} duration La durée d'affichage en millisecondes (par défaut 3000).
+ */
+function showNotification(message, duration = 3000) {
+  // Crée l'élément de notification s'il n'existe pas déjà
+  let notification = document.getElementById('notification-popup');
+  if (!notification) {
+    notification = document.createElement('div');
+    notification.id = 'notification-popup';
+    document.body.appendChild(notification);
+  }
+
+  // Définit le message et affiche la notification
+  notification.textContent = message;
+  notification.classList.add('show');
+
+  // Cache la notification après la durée spécifiée
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, duration);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackButton = document.querySelector('.feedback-button');
+
+    if (feedbackButton) {
+        feedbackButton.addEventListener('click', function() {
+            const email = this.dataset.email;
+            
+            // Utilise l'API du presse-papiers (moderne et sécurisée)
+            navigator.clipboard.writeText(email).then(() => {
+                // Succès de la copie
+                const successMessage = this.dataset.lang === 'ko' ? '이메일이 복사되었습니다!' : 
+                                       this.dataset.lang === 'en' ? 'Email copied to clipboard!' : 
+                                       'Email copié dans le presse-papiers !';
+                showNotification(successMessage);
+            }).catch(err => {
+                // Erreur lors de la copie
+                console.error('Erreur lors de la copie de l\'email : ', err);
+                const errorMessage = this.dataset.lang === 'ko' ? '복사 실패' : 
+                                     this.dataset.lang === 'en' ? 'Copy failed' : 
+                                     'La copie a échoué';
+                showNotification(errorMessage);
+            });
+        });
+    }
+});

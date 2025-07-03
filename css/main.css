@@ -133,3 +133,33 @@ p {
 .preserve-lines{
   white-space: pre-wrap
 }
+
+#notification-popup {
+  position: fixed;
+  /* MODIFIÉ : Positionné en haut */
+  top: 20px; 
+  left: 50%;
+  /* MODIFIÉ : Commence au-dessus de l'écran */
+  transform: translate(-50%, -150%); 
+  /* MODIFIÉ : Couleurs assorties aux boutons */
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px); /* Effet de verre pour la lisibilité */
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  font-family: 'Figtree', sans-serif;
+  font-size: 0.9rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s, visibility 0.5s;
+}
+
+#notification-popup.show {
+  opacity: 1;
+  visibility: visible;
+  /* MODIFIÉ : Glisse vers le bas pour apparaître */
+  transform: translate(-50%, 0); 
+}
