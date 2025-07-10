@@ -19,8 +19,19 @@ function display_portrait_content($portrait_id, $lang) {
 
         switch ($row['element_type']) {
             case 'paragraph':
-                $other_content .= '<p class="preserve-lines">' . nl2br(htmlspecialchars($content)) . '</p>';
+               $base_classes = 'preserve-lines content-anim';
+                $custom_classes = '';
+
+                // On vérifie si des classes personnalisées sont définies dans data_extra
+                if (isset($data_extra['class']) && !empty($data_extra['class'])) {
+                    // On s'assure que les classes sont bien formatées pour l'attribut HTML
+                    $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
+                }
+
+                // On combine les classes de base et les classes personnalisées
+                $other_content .= '<p class="' . $base_classes . $custom_classes . '">' . nl2br(htmlspecialchars($content)) . '</p>';
                 break;
+
                  // NOUVEAU : Cas pour la vidéo de séparation
            case 'break_video':
                 $video_html = '<video src="' . htmlspecialchars($content) . '" autoplay muted loop playsinline></video>';
