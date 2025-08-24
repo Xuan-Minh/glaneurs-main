@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="img/logo.png" alt="Les Glaneurs de Carton" width="120"/>
-</p>
+
 
 <h1 align="center">🎬 Les Glaneurs de Carton</h1>
 <p align="center">
