@@ -35,7 +35,6 @@ foreach ($slides as $slide) {
     if ($index === 2 || $index === 3 || $index === 4) {
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
-        echo '<iframe src="https://player.vimeo.com/video/' . $vimeoId . '?texttrack=' . $lang . '" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
         echo '</div>';
         $author_attr = '';
         if (isset($slide["quote_author"])) {
