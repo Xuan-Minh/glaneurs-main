@@ -75,6 +75,10 @@ if (!$isMobile) {
 <link rel="stylesheet" type="text/css" href="css/font.css" />
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
+        <!-- NOUVEAU : Préchargement des ressources critiques du loading screen -->
+        <link rel="preload" href="video/eaulow.mp4" as="video" type="video/mp4">
+        <link rel="preload" href="img/eaulow_poster.png" as="image">
+        
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <?php include "includes/css.php"; ?>

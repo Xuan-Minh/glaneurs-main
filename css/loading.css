@@ -186,3 +186,5 @@
 #enter-button:hover span::after, #enter-button:focus span::after { /* On cible le span au survol */
   width: 100%;
 }
+
+
