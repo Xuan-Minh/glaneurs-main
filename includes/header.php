@@ -63,7 +63,6 @@
         <ul>
            <li><a href="portraits" class="transition-link" title="<?php echo getTranslation("portraits_titre", $lang) ?>"><?php echo getTranslation("portraits_titre", $lang) ?></a></li>
             <li><a href="tracesdupasse" class="transition-link" title="<?php echo getTranslation("archives_titre", $lang) ?>"><?php echo getTranslation("archives_titre", $lang) ?></a></li>
-            <li><a href="souvenirs" class="transition-link" title="<?php echo getTranslation("souvenirs_titre", $lang) ?>"><?php echo getTranslation("souvenirs_titre", $lang) ?></a></li>
             <li><a href="derriere-le-documentaire" class="transition-link" title="<?php echo getTranslation("derriereledocumentaire_titre", $lang) ?>"><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?></a></li>
             <li id="menu-accueil"><a href="./" class="transition-link" id="menu-accueil-style"><?php echo getTranslation("index_titre", $lang) ?></a></li>
             <li class="mentionslegales-right"><a href="mentionslegales" class="transition-link" title="<?php echo getTranslation("mentionslegales_titre", $lang) ?>"><?php echo getTranslation("mentionslegales_titre", $lang) ?></a></li>
