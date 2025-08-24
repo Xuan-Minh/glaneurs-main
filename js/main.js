@@ -208,10 +208,6 @@ window.addEventListener("visibilitychange", function () {
 
     // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
     // Ce code est correct et nécessaire. Il gère la toute première visite de la page.
-    setTimeout(function() {
-        $('#transition-overlay').addClass('hide');
-    }, 50);
-
   // ----------------------------------------------- Menu Burger ---------------------------------- //
   // Sélectionne les éléments du menuBurger et du menuVolet
   const menuBurger = $("#menuBurger");
@@ -412,6 +408,13 @@ document.addEventListener('click', function(e) {
   setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+   setTimeout(function () {
+    if (!$('.loading-screen').length) {
+      $('#transition-overlay').addClass('hide'); // .hide déclenche la transition CSS
+    }
+  }, 50);
+});
 document.addEventListener('DOMContentLoaded', () => {
     const audioContainer = document.getElementById('global-audio-control-container');
     const waveCanvas = document.getElementById('wave');
@@ -610,7 +613,7 @@ function showNotification(message, duration = 3000) {
   }, duration);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+
     const feedbackButton = document.querySelector('.feedback-button');
 
     if (feedbackButton) {

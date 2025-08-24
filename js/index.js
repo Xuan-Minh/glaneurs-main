@@ -78,27 +78,31 @@ $(document).ready(function() {
     showNextItem();
   });
 // ----------------------------------------------- ENTRER---------------------------------- //
-   // Gestion du clic sur le bouton "Entrer"
-  $("#enter-button").click(function () {
-    clearInterval(intervalId); // Arrête l'animation du loading
+$("#enter-button").click(function () {
+  clearInterval(intervalId);
 
-    // 1. Fade out du loading
-    $(".loading-screen").fadeOut(1000, function () {
-      // 2. Juste après, on affiche l'overlay noir (reset les classes)
-      $("#transition-overlay").removeClass("hide").addClass("active");
+  const $overlay = $("#transition-overlay");
 
-      // 3. Puis fade-out de l'overlay pour révéler l'index
-      setTimeout(function () {
-        $(".container").removeClass("hidden").fadeIn(1000);
-        $("#transition-overlay").removeClass("active").addClass("hide");
-      }, 100); // Laisse l'overlay apparaître avant de le faire disparaître
+  // 1) Faire apparaître le rideau noir en fondu (0 -> 1)
+  $overlay.removeClass("hide").addClass("active");
+
+  // 2) Quand il est opaque, basculer du loading à la home
+  setTimeout(function () {
+    $(".loading-screen").remove(); // retire le loading (plus de flash)
+    $(".container").removeClass("hidden").show();
+
+    // 3) Puis faire disparaître le rideau noir (1 -> 0)
+    requestAnimationFrame(() => {
+      $overlay.addClass("hide");
     });
+  }, 750); // = durée transition CSS de l’overlay (0.7s) + petite marge
 
-    window.addEventListener("pageshow", function () {
-      $("#transition-overlay").removeClass("active").addClass("hide");
-    });
-     
+  // Sécurité retour bfcache
+  window.addEventListener("pageshow", function () {
+    $("#transition-overlay").addClass("hide").removeClass("active");
   });
+});
+
   // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
   const TRANSFORM_ANIMATION_DURATION = 1500; // Durée en ms, doit correspondre à la transition CSS (1.5s)
 /**
