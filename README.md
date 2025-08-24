@@ -1,45 +1,53 @@
 
+---
+
+<p align="center">
+  <img src="img/logo.png" alt="Les Glaneurs de Carton" width="120"/>
+</p>
 
 <h1 align="center">🎬 Les Glaneurs de Carton</h1>
+
 <p align="center">
-  Site web immersif pour le documentaire <b>Les Glaneurs de Carton</b> <br>
+  <a href="https://glaneursdecarton.mastercmw.com/"><img src="https://img.shields.io/badge/Site%20en%20ligne-mastercmw.com-000?logo=google-chrome&logoColor=white" alt="Site en ligne"></a>
+  <img src="https://img.shields.io/github/package-json/v/Xuan-Minh/glaneurs-main?color=blue&label=version" alt="Version">
+  <img src="https://img.shields.io/github/license/Xuan-Minh/glaneurs-main?color=green" alt="License">
+  <img src="https://img.shields.io/github/last-commit/Xuan-Minh/glaneurs-main?color=orange" alt="Last commit">
+</p>
+
+<p align="center">
+  Site web immersif pour le documentaire <b>Les Glaneurs de Carton</b>.<br>
   <a href="https://glaneursdecarton.mastercmw.com/">🌐 Voir le site en ligne</a>
 </p>
 
-<p align="center">
-  <img src="img/readme/preview.png" alt="Aperçu du site" width="60%"/>
-</p>
----
 ---
 
-## ✨ Technologies
+## 🛠️ Stack technique
 
-- <b>Frontend</b> : HTML5, CSS3 (Flexbox, Grid, Animations, <code>clamp()</code>), JavaScript (ES6+), jQuery 3.1.0
-- <b>Backend</b> : PHP 8+
-- <b>Base de données</b> : MySQL / MariaDB (via PDO)
-- <b>Environnement</b> : MAMP / WAMP / LAMP
+| Frontend         | Backend  | Base de données | Animation | Déploiement      |
+|------------------|----------|-----------------|-----------|------------------|
+| HTML5, CSS3, JS  | PHP 8+   | MySQL/MariaDB   | jQuery    | Serveur mutualisé|
 
 ---
 
 ## 🚀 Installation & Lancement
 
-### <img src="https://img.icons8.com/emoji/18/000000/check-mark-emoji.png"/> Prérequis
+### Prérequis
 
-- Serveur local (MAMP, WAMP, XAMPP…)
+- Un serveur local (MAMP, WAMP, XAMPP…)
 - Client base de données (phpMyAdmin, Sequel Pro…)
-- Fichier de base de données <code>.sql</code>
+- Fichier de base de données `.sql`
 
-### <img src="https://img.icons8.com/emoji/18/000000/rocket.png"/> Étapes
+### Étapes
 
-1. **Cloner le dépôt**  
+1. **Cloner le dépôt**
    ```bash
    git clone https://github.com/Xuan-Minh/glaneurs-main.git
    ```
-2. **Créer la base de données**  
-   - Créez une BDD nommée <code>glaneurs</code>
-   - Importez le fichier <code>.sql</code> fourni
-3. **Configurer la connexion**  
-   - Ouvrir <code>includes/lang.php</code>
+2. **Créer la base de données**
+   - Créez une BDD nommée `glaneurs`
+   - Importez le fichier `.sql` fourni (ex : `glaneurs (14).sql`)
+3. **Configurer la connexion**
+   - Ouvrir `includes/lang.php`
    - Adapter les identifiants :
      ```php
      $servername = "localhost";
@@ -47,7 +55,7 @@
      $username = "root";
      $password = "root"; // généralement "root" sous MAMP
      ```
-4. **Lancer le site**  
+4. **Lancer le site**
    - Accédez à [http://localhost/glaneurs-main](http://localhost/glaneurs-main) depuis votre navigateur
 
 ---
@@ -57,17 +65,14 @@
 ```
 glaneurs-main/
 │
-├── .vscode/               # Paramétrage VS Code
-├── audio/                 # Fichiers audio
-├── css/                   # Feuilles de style
-├── font/                  # Polices
-├── img/                   # Images
-├── includes/              # Fichiers PHP inclus
-├── js/                    # Scripts JS
-├── video/                 # Vidéos
+├── audio/               # Fichiers audio
+├── css/                 # Feuilles de style
+├── font/                # Polices
+├── img/                 # Images
+├── includes/            # Fichiers PHP inclus (connexion, utils, etc.)
+├── js/                  # Scripts JS (jQuery, etc.)
+├── video/               # Vidéos
 │
-├── .gitattributes
-├── .htaccess
 ├── associations.php
 ├── derriere-le-documentaire.php
 ├── glaneurs (14).sql
@@ -97,9 +102,15 @@ Pour plus d’informations, voir [LICENSE.md](LICENSE.md).
 
 ---
 
+<p align="center">
+  <img src="img/readme/preview.png" alt="Aperçu du site" width="60%"/>
+</p>
 
+---
 
-N’hésite pas à cloner, à tester localement ou à contribuer !  
+N’hésite pas à contribuer, signaler un bug ou proposer des idées d’amélioration !  
 Pour toute question, contacte-moi sur GitHub.
 
 ---
+
+Si tu veux une version anglaise, d’autres badges, ou une section équipe/partenaires, dis-le-moi !
