@@ -208,6 +208,10 @@ window.addEventListener("visibilitychange", function () {
 
     // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
     // Ce code est correct et nécessaire. Il gère la toute première visite de la page.
+     setTimeout(function() {
+        $('#transition-overlay').addClass('hide');
+    }, 50);
+
   // ----------------------------------------------- Menu Burger ---------------------------------- //
   // Sélectionne les éléments du menuBurger et du menuVolet
   const menuBurger = $("#menuBurger");
@@ -547,8 +551,6 @@ function initAudio() {
     updateAudioElements();
     updateUI();
 }
-
-    // ... (le code de initAudio() reste le même) ...
 
     function handleSoundIconClick() {
         // Si le contexte audio n'a pas encore été initié par l'utilisateur (via le bouton "Entrer"),
