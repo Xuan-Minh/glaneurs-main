@@ -417,8 +417,10 @@ $(document).on(
     if ($arrow.hasClass("up")) {
       // Flèche vers le haut : remonte tout en haut
       window.scrollTo({ top: 0, behavior: "smooth" });
+      resetOtherSlides(null); // Réinitialise toutes les slides
     } else {
       // Flèche vers le bas : va à la prochaine slide
+      resetOtherSlides(null); // Réinitialise toutes les slides
       const $slides = $(".slides");
       let nextSlide = null;
       $slides.each(function (i, slide) {
