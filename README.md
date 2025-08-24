@@ -94,9 +94,8 @@ Pour plus d’informations, voir [LICENSE.md](LICENSE.md).
 ---
 
 <p align="center">
-  <img src="img/screenshot.png" alt="Aperçu du site" width="60%"/>
+  <img src="img/readme/previe.png" alt="Aperçu du site" width="60%"/>
 </p>
-
 ---
 
 N’hésite pas à cloner, à tester localement ou à contribuer !  
