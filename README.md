@@ -1,150 +1,107 @@
-# Les Glaneurs de Carton - Documentaire Interactif
+<p align="center">
+  <img src="img/logo.png" alt="Les Glaneurs de Carton" width="120"/>
+</p>
 
-Ce projet est le site web d'un documentaire immersif et multilingue, "Les Glaneurs de Carton". Il a été conçu avec un fort accent sur l'expérience utilisateur, les animations fluides et une architecture web moderne.
-
-**[Voir le site en ligne](https://glaneursdecarton.mastercmw.com/)**
-
----
-
-## Aperçu
-
-![Aperçu de la page d'accueil du site Les Glaneurs de Carton](img/readme/preview.png)
+<h1 align="center">🎬 Les Glaneurs de Carton</h1>
+<p align="center">
+  Site web immersif pour le documentaire <b>Les Glaneurs de Carton</b> <br>
+  <a href="https://glaneursdecarton.mastercmw.com/">🌐 Voir le site en ligne</a>
+</p>
 
 ---
 
-## Table des Matières
+## ✨ Technologies
 
-- [À Propos du Projet](#à-propos-du-projet)
-- [Fonctionnalités Clés](#fonctionnalités-clés)
-- [Technologies Utilisées](#technologies-utilisées)
-- [Installation et Lancement](#installation-et-lancement)
-  - [Prérequis](#prérequis)
-  - [Étapes d'installation](#étapes-dinstallation)
-- [Structure du Projet](#structure-du-projet)
-- [Auteur](#auteur)
-- [Licence](#licence)
+- <b>Frontend</b> : HTML5, CSS3 (Flexbox, Grid, Animations, <code>clamp()</code>), JavaScript (ES6+), jQuery 3.1.0
+- <b>Backend</b> : PHP 8+
+- <b>Base de données</b> : MySQL / MariaDB (via PDO)
+- <b>Environnement</b> : MAMP / WAMP / LAMP
 
 ---
 
-## À Propos du Projet
+## 🚀 Installation & Lancement
 
-Ce site sert de plateforme de présentation pour un documentaire explorant la vie et les histoires de personnes agées qui glanent des cartons dans les rues de Busan, du matin au soir. L'objectif était de créer une expérience numérique qui reflète l'ambiance poétique et humaine du film, en utilisant des animations riches et une navigation non conventionnelle.
+### <img src="https://img.icons8.com/emoji/18/000000/check-mark-emoji.png"/> Prérequis
 
-## Fonctionnalités Clés
+- Serveur local (MAMP, WAMP, XAMPP…)
+- Client base de données (phpMyAdmin, Sequel Pro…)
+- Fichier de base de données <code>.sql</code>
 
-- **Architecture Hybride Performante** : Le site utilise une structure HTML unifiée pour la maintenance, tout en chargeant des ressources CSS et JS spécifiques pour les mobiles afin de garantir des performances optimales.
-- **Multilingue** : Support complet pour le Français, l'Anglais et le Coréen, avec des traductions gérées via une base de données.
-- **Animations CSS Modernes** : Utilisation intensive de `transform` et `opacity` pour des animations fluides, de `clamp()` pour une typographie responsive, et de `scroll-snap` pour la navigation sur la page d'accueil.
-- **Gestion d'État en JavaScript** : Les animations complexes sont contrôlées par un système de verrou (`isAnimating`) pour éviter les conflits et garantir une expérience utilisateur sans bugs visuels.
-- **Optimisation SEO Avancée** : Mise en place de balises `canonical` dynamiques, d'un `sitemap.xml` avec `hreflang` pour le multilingue, et de techniques pour guider les robots d'indexation (Google, Naver).
-- **Interactivité Riche** : Intégration d'un lecteur vidéo Vimeo, gestion de pistes audio, et un écran de chargement immersif pour la première visite.
+### <img src="https://img.icons8.com/emoji/18/000000/rocket.png"/> Étapes
 
----
-
-## Technologies Utilisées
-
-- **Frontend** :
-  - HTML5
-  - CSS3 (Flexbox, Grid, Animations, `clamp()`)
-  - JavaScript (ES6+)
-  - jQuery 3.1.0
-- **Backend** :
-  - PHP 8+
-- **Base de données** :
-  - MySQL / MariaDB (via PDO)
-- **Environnement de développement** :
-  - MAMP / WAMP / LAMP
-
----
-
-## Installation et Lancement
-
-### Prérequis
-
-- Un environnement de développement local (MAMP, WAMP, XAMPP, etc.)
-- Un client de base de données (phpMyAdmin, Sequel Pro, etc.)
-- Le fichier de la base de données (`.sql`)
-
-### Étapes d'installation
-
-1.  **Cloner le dépôt** dans le répertoire de votre serveur local (ex: `htdocs`).
-    ```bash
-    git clone [URL_DU_DEPOT]
-    ```
-2.  **Créer la base de données** :
-    -   Lancez votre client de base de données.
-    -   Créez une nouvelle base de données nommée `glaneurs`.
-    -   Importez le fichier `.sql` fourni dans cette nouvelle base de données.
-
-3.  **Configurer la connexion à la base de données** :
-    -   Ouvrez le fichier `includes/lang.php`.
-    -   Modifiez les informations de connexion pour qu'elles correspondent à votre configuration locale.
-
-    ```php
-    // filepath: includes/lang.php
-
-    function getPDO()
-    {
-        static $pdo = null;
-        if ($pdo === null) {
-           // --- MODIFIEZ CES LIGNES ---
-           $servername = "localhost";
-           $database = "glaneurs";
-           $username = "root";
-           $password = "root"; // Le mot de passe est souvent "root" sur MAMP
-           // -------------------------
-        }
-        return $pdo;
-    }
-    ```
-
-4.  **Lancer le site** : Ouvrez votre navigateur et accédez à l'URL de votre projet local (ex: `http://localhost/glaneurs-main`).
+1. **Cloner le dépôt**  
+   ```bash
+   git clone https://github.com/Xuan-Minh/glaneurs-main.git
+   ```
+2. **Créer la base de données**  
+   - Créez une BDD nommée <code>glaneurs</code>
+   - Importez le fichier <code>.sql</code> fourni
+3. **Configurer la connexion**  
+   - Ouvrir <code>includes/lang.php</code>
+   - Adapter les identifiants :
+     ```php
+     $servername = "localhost";
+     $database = "glaneurs";
+     $username = "root";
+     $password = "root"; // généralement "root" sous MAMP
+     ```
+4. **Lancer le site**  
+   - Accédez à [http://localhost/glaneurs-main](http://localhost/glaneurs-main) depuis votre navigateur
 
 ---
 
-## Structure du Projet
+## 🗂️ Structure du projet
 
 ```
-glaneurs-main
-┣ .vscode
-┃ ┗ settings.json
-┣ audio
-┃ ┣ ...
-┣ css
-┃ ┣ ...
-┣ font
-┃ ┣ ...
-┣ img
-┃ ┣ ...
-┣ includes
-┃ ┣ ...
-┣ js
-┃ ┣ ...
-┣ video
-┃ ┣ ...
-┣ .gitattributes
-┣ .htaccess
-┣ associations.php
-┣ derriere-le-documentaire.php
-┣ glaneurs (14).sql
-┣ index.php
-┣ mentionslegales.php
-┣ naverc5484d0d0937981e7e12f688527ddeb9.html
-┣ portraits.php
-┣ README.md
-┣ robots.txt
-┣ sitemap.xml
-┣ souvenirs.php
-┗ tracesdupasse.php
+glaneurs-main/
+│
+├── .vscode/               # Paramétrage VS Code
+├── audio/                 # Fichiers audio
+├── css/                   # Feuilles de style
+├── font/                  # Polices
+├── img/                   # Images
+├── includes/              # Fichiers PHP inclus
+├── js/                    # Scripts JS
+├── video/                 # Vidéos
+│
+├── .gitattributes
+├── .htaccess
+├── associations.php
+├── derriere-le-documentaire.php
+├── glaneurs (14).sql
+├── index.php
+├── mentionslegales.php
+├── naverc5484d0d0937981e7e12f688527ddeb9.html
+├── portraits.php
+├── README.md
+├── robots.txt
+├── sitemap.xml
+├── souvenirs.php
+└── tracesdupasse.php
 ```
----
-
-## Auteur
-
-- **Xuan-Minh TRAN** - *Développement et Intégration du site web*
 
 ---
 
-## Licence
+## 👤 Auteur
 
-Ce projet utilise plusieurs licences pour ses différents composants (code, musique, images). Pour une description détaillée des droits et des conditions applicables à chaque type de contenu, veuillez consulter le fichier [LICENSE.md](LICENSE.md).
+- **Xuan-Minh TRAN** — Développement & intégration du site web
+
+---
+
+## ⚖️ Licence
+
+Ce projet utilise plusieurs licences selon les composants (code, musique, images).  
+Pour plus d’informations, voir [LICENSE.md](LICENSE.md).
+
+---
+
+<p align="center">
+  <img src="img/screenshot.png" alt="Aperçu du site" width="60%"/>
+</p>
+
+---
+
+N’hésite pas à cloner, à tester localement ou à contribuer !  
+Pour toute question, contacte-moi sur GitHub.
+
+---
