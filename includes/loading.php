@@ -1,6 +1,6 @@
 <div class="loading-screen">
     <!-- MODIFIÉ : Ajout de id, poster, preload et playsinline pour une compatibilité maximale -->
-    <video id="loading-bg-video" preload="auto" autoplay muted loop playsinline webkit-playsinline poster="img/eaulow_poster.jpg">
+    <video id="loading-bg-video" preload="auto" autoplay muted loop playsinline webkit-playsinline poster="img/posters/eaulow_poster.png">
         <source src="video/web/eaulow.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
@@ -30,7 +30,7 @@
 
                 <?php echo getTranslation("loading_casque_message", $lang) ?>
             </div>
-            <div class="loading-button"><button id="enter-button"><span>Entrer</span></button></div>
+            <div class="loading-button"><button id="enter-button"><span><?php echo getTranslation("loading_enter_button", $lang); ?></span></button></div>
         </div>
     </div>
 </div>
