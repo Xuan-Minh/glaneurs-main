@@ -1,53 +1,67 @@
-/* ---------------------------------- LOADING ----------------------------------------------*/
+/* ==========================================================================
+   1. CONTENEUR PRINCIPAL
+   ========================================================================== */
+
 .loading-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh; /* Utiliser vh pour la hauteur */
-  background-color: var(--main-bg-color); /* Ajoute un fond noir semi-transparent pour assombrir */
+  inset: 0; /* Raccourci pour top/left/right/bottom: 0 */
+  background: #000;
   z-index: 9999;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  color: white; /* Pour que le texte soit visible */
-  overflow: hidden; /* Important pour masquer le défilement horizontal */
+  color: white;
 }
-.loading-screen::before {
-  content: "";
+
+/* ==========================================================================
+   2. ÉLÉMENTS DE FOND (POSTER & VIDÉO) AVEC FONDU ENCHAÎNÉ
+   ========================================================================== */
+
+.loading-poster {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place le pseudo-élément derrière le contenu */
+  background-size: cover;
+  background-position: center center;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
 }
-.loading-screen .loading-items {
-  position: relative; /* Ajout de position relative */
-  width: 100%;
-  height: 100%;
-}
-.loading-screen video {
+
+.loading-screen > video {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1; /* Place la vidéo derrière le contenu */
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
-.loading-titre {
-  font-size: 2em !important;
-  font-weight: 400;
-  font-family: "Libre Baskerville", serif;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+
+/* Déclenchement du fondu enchaîné */
+.loading-screen.loaded .loading-poster {
+  opacity: 0;
 }
+.loading-screen.loaded > video {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   3. CONTENU SUPERPOSÉ (TEXTES, LOGOS, BOUTONS)
+   ========================================================================== */
+
 .loading-items {
   position: relative;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;  
+  z-index: 3; /* Placé au-dessus du fond */
+  width: 100%;
+  height: 100%;
+  display: flex; /* Utiliser flex pour gérer les items à l'intérieur */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .loading-item {
@@ -55,119 +69,97 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* Centre verticalement */
-  align-items: center;       /* Centre horizontalement */
+  justify-content: center;
+  align-items: center;
   font-size: clamp(1.5em, 2vw, 2em);
   text-align: center;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
 }
+
 .loading-item.active {
-  opacity: 1; /* Visible lorsqu'il est actif */
+  opacity: 1;
 }
-/* Style pour l'écran de chargement */
+
 .loading-content {
   width: 70%;
-  text-align: center;
-  margin-bottom: 20px; /* Ajoute une marge en bas du texte */
+  margin-bottom: 20px;
 }
-.def-texte{
-  text-indent: 5vw;
-  
-}
+
+/* Styles spécifiques pour chaque item */
 .loading-item#loading-item1 .loading-content {
-  text-align: left; /* Aligne le texte à gauche */
+  text-align: left;
   font-size: clamp(1em, 1.5vw, 1.5em);
   margin-bottom: 4vw;
 }
 
-.loading-item #loading-item1 .loading-text {
-  text-align: left;
-  font-size: 2em; /* Ajuste la taille de la police */
-  margin-bottom: 20px; /* Ajoute un espace en bas du texte */
+.loading-titre {
+  font-size: 2em !important;
+  font-weight: 400;
+  font-family: "Libre Baskerville", serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
-.loading-item#loading-item1 {
-  text-align: left; /* Aligne le texte à gauche */
-  font-size: clamp(1.5em, 2vw, 2em); /* Ajuste la taille de la police */
-  margin-bottom: 10px; /* Réduit l'espace en bas du texte */
-  justify-content: center; /* Aligne le contenu en haut */
-  align-items: center; /* Aligne le contenu à gauche */
+.def-texte {
+  text-indent: 5vw;
 }
 
 .loading-item#loading-item3 .loading-text {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: clamp(0.8em, 1 vw, 1em);
+  font-size: clamp(0.8em, 1vw, 1em);
 }
 
 .universites {
- display: flex;
-  /* justify-content: space-evenly; */ /* Modifié ci-dessous */
-  justify-content: center; /* Pour centrer les logos à l'intérieur */
-  width: 80%; 
-  max-width: 600px; 
-  /* margin-top: 20px; */ /* Combiné dans la ligne margin ci-dessous */
-  /* align-self: center; */ /* Retiré car .loading-content n'est pas flex, remplacé par margin: auto */
-  margin: 20px auto 0 auto; /* Centre la div .universites horizontalement et conserve la marge haute */
-  align-items: center; /* Garde l'alignement vertical des logos */
-  gap: 30px; /* Ajoute un espace de 30px entre les logos. Ajustez cette valeur selon vos besoins. */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+  gap: 30px;
 }
 
 .universites img {
-  /* Taille responsive avec min, valeur préférée (basée sur vw), et max */
   height: clamp(60px, 10vw, 120px);
-  width: auto; /* Garde les proportions */
-  margin: 0 20px; /* Ajuste l'espace entre les images */
-  object-fit: contain; /* S'assure que l'image entière est visible */
+  width: auto;
+  object-fit: contain;
 }
 
-.universites > img:nth-child(2) {
-  /* Le deuxième logo peut être un peu plus petit, en gardant la proportion */
-  height: clamp(40px, 8vw, 100px);
-  width: auto; /* Garde les proportions */
-}
-.universites > img:nth-child(3) {
-  /* Style pour le troisième logo (CMW) */
-  height: clamp(50px, 9vw, 100px);
-  width: auto; /* Garde les proportions */
-}
+/* ==========================================================================
+   4. BOUTON "ENTRER"
+   ========================================================================== */
 
-.loading-item#loading-item4{
-  font-size: clamp(1.5em, 2vw, 2em);
-}
-
-/* -------------------- ENTER ---------------------------------------- */
 .loading-button {
   width: 100%;
-  font-size: clamp(1em, 2vw, 1.5em); /* Note: font-size ici aussi */
+  font-size: clamp(1em, 2vw, 1.5em);
   display: flex;
   justify-content: center;
-} 
-#enter-button { 
-  background-color: rgba(0, 0, 0, 0);
+}
+
+#enter-button {
+  background-color: transparent;
   font-family: "Figtree", sans-serif;
   font-size: clamp(0.8em, 1vw, 2em);
   color: white;
   margin-top: 20px;
-  padding: clamp(8px, 1.5vw, 12px) clamp(15px, 2.5vw, 25px); 
+  padding: clamp(8px, 1.5vw, 12px) clamp(15px, 2.5vw, 25px);
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  /* position: relative; <-- On retire ceci */
   transition: color 0.3s ease;
 }
 
-/* On cible le span pour le positionnement de l'effet */
 #enter-button span {
   position: relative;
   display: inline-block;
 }
 
-#enter-button span::after { /* On cible le span */
+#enter-button span::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -176,15 +168,15 @@
   height: 2px;
   background-color: #ddd;
   transition: width 0.5s ease;
-  border-radius: 2px; /* Arrondi les bords du soulignement */
+  border-radius: 2px;
 }
 
-#enter-button:hover, #enter-button:focus {
+#enter-button:hover,
+#enter-button:focus {
   color: #ddd;
 }
 
-#enter-button:hover span::after, #enter-button:focus span::after { /* On cible le span au survol */
+#enter-button:hover span::after,
+#enter-button:focus span::after {
   width: 100%;
 }
-
-

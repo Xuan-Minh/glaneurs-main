@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    const loadingScreen = document.querySelector('.loading-screen');
+    const loadingVideo = document.getElementById('loading-bg-video');
+
+    if (loadingScreen && loadingVideo) {
+        // On attend que la vidéo soit prête à être lue fluidement
+        loadingVideo.addEventListener('canplaythrough', function() {
+            // On ajoute la classe au conteneur parent pour déclencher les deux fondus
+            loadingScreen.classList.add('loaded');
+        }, { once: true }); // L'événement ne se déclenche qu'une fois
+    }
 
      let isAnimating = false;
      const definitionContainer = $('#definition-text');
