@@ -33,27 +33,32 @@
 <div class="menu-volet" id="menuVolet">
     <div class="menu-volet-content">
         <?php
+        // MODIFIÉ : Ajout de la clé "poster" à chaque élément du tableau
         $videoSources = array(
             array(
                 "src" => "video/web/recyclerie.mp4",
+                "poster" => "img/posters/recyclerie_poster.png", // NOUVEAU
                 "title" => getTranslation("menu_voletchap1", $lang),
                 "slide" => 1 // Numéro de la slide (commence à 1)
             ),
             array(
                 "src" => "video/web/bache.mp4",
+                "poster" => "img/posters/bache_poster.png", // NOUVEAU
                 "title" => getTranslation("menu_voletchap2", $lang),
                 "slide" => 2
             ),
             array(
                 "src" => "video/web/lee.mp4",
+                "poster" => "img/posters/lee_poster.png", // NOUVEAU
                 "title" => getTranslation("menu_voletchap3", $lang),
                 "slide" => 3
             )
         );
        foreach ($videoSources as $video) {
             echo '<div class="menu-video-item" data-slide="' . $video["slide"] . '">';
-            // Retire autoplay d'ici :
-            echo '<video src="' . $video["src"] . '" muted loop class="menu-video"></video>';
+            echo '<video class="menu-video" muted loop playsinline preload="metadata" poster="' . htmlspecialchars($video["poster"]) . '">';
+            echo '<source src="' . htmlspecialchars($video["src"]) . '" type="video/mp4">';
+            echo '</video>';
             echo '<h4>' . $video["title"] . '</h4>';
             echo '</div>';
         }
