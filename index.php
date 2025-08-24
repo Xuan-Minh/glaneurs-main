@@ -5,7 +5,7 @@ include 'includes/lang.php';
 $slides = array(
     array(
         "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
-        "srcvideobg" => "video/chariot.mov",
+        "srcvideobg" => "video/web/chariot.mp4",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "",
@@ -13,7 +13,7 @@ $slides = array(
     ),
     array(
         "chapitre" => getTranslation("index_chapitre1", $lang),
-        "srcvideobg" => "video/recyclerie.mov",
+        "srcvideobg" => "video/web/recyclerie.mp4",
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
@@ -22,7 +22,7 @@ $slides = array(
     ),
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
-        "srcvideobg" => "video/bache.mov",
+        "srcvideobg" => "video/web/bache.mp4",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info_archives", $lang),
@@ -33,7 +33,7 @@ $slides = array(
     ),
     array(
         "chapitre" => getTranslation("index_chapitre3", $lang),
-        "srcvideobg" => "video/lee.mov",
+        "srcvideobg" => "video/web/lee.mp4",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
@@ -76,7 +76,7 @@ if (!$isMobile) {
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
         <!-- NOUVEAU : Préchargement des ressources critiques du loading screen -->
-        <link rel="preload" href="video/eaulow.mp4" as="video" type="video/mp4">
+        <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
         <link rel="preload" href="img/eaulow_poster.png" as="image">
         
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
@@ -109,7 +109,7 @@ if (!$isMobile) {
         </div>
        <div class="mobile-content">
             <video autoplay muted loop playsinline class="mobile-bg-video">
-                <source src="video/chariot.mov" type="video/mp4">
+                <source src="video/web/chariot.mp4" type="video/mp4">
             </video>
             <div class="mobile-slide">
                 <h1><?php echo getTranslation("index_titre", $lang); ?></h1>

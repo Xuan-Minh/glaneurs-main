@@ -48,7 +48,7 @@
 
     <section class="dld-hero">
         <video autoplay muted loop>
-            <source src="video/ville.mov" type="video/mp4">
+            <source src="video/web/ville.mp4" type="video/mp4">
         </video>
         <div class="dld-title content-anim">
             <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>

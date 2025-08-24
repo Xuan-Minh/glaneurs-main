@@ -1,7 +1,7 @@
 <div class="loading-screen">
     <!-- MODIFIÉ : Ajout de id, poster, preload et playsinline pour une compatibilité maximale -->
     <video id="loading-bg-video" preload="auto" autoplay muted loop playsinline webkit-playsinline poster="img/eaulow_poster.jpg">
-        <source src="video/eaulow.mp4" type="video/mp4">
+        <source src="video/web/eaulow.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
     <div class="loading-items">

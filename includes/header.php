@@ -35,17 +35,17 @@
         <?php
         $videoSources = array(
             array(
-                "src" => "video/recyclerie.mov",
+                "src" => "video/web/recyclerie.mp4",
                 "title" => getTranslation("menu_voletchap1", $lang),
                 "slide" => 1 // Numéro de la slide (commence à 1)
             ),
             array(
-                "src" => "video/bache.mov",
+                "src" => "video/web/bache.mp4",
                 "title" => getTranslation("menu_voletchap2", $lang),
                 "slide" => 2
             ),
             array(
-                "src" => "video/lee.mov",
+                "src" => "video/web/lee.mp4",
                 "title" => getTranslation("menu_voletchap3", $lang),
                 "slide" => 3
             )

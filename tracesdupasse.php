@@ -23,7 +23,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
     <div class="archives-scroll">
         <section class="archive-hero">
             <video autoplay muted loop>
-                <source src="video/archives.mov" type="video/mp4">
+                <source src="video/web/archives.mp4" type="video/mp4">
             </video>
             <h2 class="archive-title content-anim">
                 <?php echo getTranslation("archives_titre", $lang); ?>
