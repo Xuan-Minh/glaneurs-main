@@ -1,10 +1,5 @@
 
 ---
-
-<p align="center">
-  <img src="img/logo.png" alt="Les Glaneurs de Carton" width="120"/>
-</p>
-
 <h1 align="center">🎬 Les Glaneurs de Carton</h1>
 
 <p align="center">
@@ -17,6 +12,10 @@
 <p align="center">
   Site web immersif pour le documentaire <b>Les Glaneurs de Carton</b>.<br>
   <a href="https://glaneursdecarton.mastercmw.com/">🌐 Voir le site en ligne</a>
+</p>
+
+<p align="center">
+  <img src="img/readme/preview.png" alt="Aperçu du site" width="60%"/>
 </p>
 
 ---
