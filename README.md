@@ -6,6 +6,10 @@
   <a href="https://glaneursdecarton.mastercmw.com/">🌐 Voir le site en ligne</a>
 </p>
 
+<p align="center">
+  <img src="img/readme/preview.png" alt="Aperçu du site" width="60%"/>
+</p>
+---
 ---
 
 ## ✨ Technologies
@@ -93,10 +97,7 @@ Pour plus d’informations, voir [LICENSE.md](LICENSE.md).
 
 ---
 
-<p align="center">
-  <img src="img/readme/previe.png" alt="Aperçu du site" width="60%"/>
-</p>
----
+
 
 N’hésite pas à cloner, à tester localement ou à contribuer !  
 Pour toute question, contacte-moi sur GitHub.
