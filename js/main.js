@@ -637,4 +637,3 @@ function showNotification(message, duration = 3000) {
             });
         });
     }
-});
