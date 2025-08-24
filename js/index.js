@@ -245,26 +245,27 @@ function fadeVisionnerTriggerH3($slide, fadeOut = true) {
 
 // --------------------------------- Reset Slide --------------------------------- //
 
-function resetOtherSlides(activeSlide) {
-  $(".slides")
-    .not(activeSlide)
-    .each(function () {
-      const slide = $(this);
-      slide.find(".info").fadeOut(0);
-
-      const $h2 = slide.find("h2");
-      if ($h2.hasClass("move")) {
-        triggerH2TransformAnimation($h2);
-      }
-      $h2.removeClass("move");
-      // NOUVEAU : On s'assure de cacher l'auteur aussi lors du reset
-      $h2.removeClass("author-visible");
-
-      slide.find("video").removeClass("flou");
-      fadeVisionnerTriggerH3(slide, false);
-      slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-      slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    });
+function resetSlideState($slide) {
+    if (!$slide || !$slide.length) return;
+    
+    // --- DÉBUT DE LA CORRECTION ---
+    // On remplace l'ancien contenu par une logique plus complète et correcte.
+    const $h2 = $slide.find('h2');
+    
+    clearTimeout(authorFadeInTimer);
+    
+    // On retire toutes les classes d'état et d'animation
+    $h2.removeClass('move author-visible animate-transform');
+    
+    // On cache l'info et on remet les boutons dans leur état initial
+    $slide.find('.info').hide();
+    fadeVisionnerTriggerH3($slide, false);
+    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+    
+    // La ligne la plus importante : on retire le flou !
+    $slide.find("video").removeClass("flou");
+    // --- FIN DE LA CORRECTION ---
 }
 
 // --------------------------------- Player video --------------------------------- //
