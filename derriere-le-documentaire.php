@@ -47,7 +47,7 @@
     <?php include "includes/header.php"; ?>
 
     <section class="dld-hero">
-        <video autoplay muted loop>
+        <video autoplay muted loop poster="img/posters/ville_poster.png">
             <source src="video/web/ville.mp4" type="video/mp4">
         </video>
         <div class="dld-title content-anim">

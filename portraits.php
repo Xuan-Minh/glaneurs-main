@@ -102,27 +102,27 @@ function display_portrait_content($portrait_id, $lang) {
         <input type="range" id="volumeRange" min="0" max="1" step="0.01" value="0.4">
     </div> -->
 
-    <div class="portraits-container">
+     <div class="portraits-container">
         <div class="portrait-section section1" data-target="#detail1" data-audio="audio/arirang_bass.mp3">
-            <video autoplay muted loop class="portrait-video section1-video">
+            <video autoplay muted loop class="portrait-video section1-video" poster="img/posters/glaneuse-test_poster.png">
                 <source src="video/web/glaneuse-test.mp4" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></div>
         </div>
         <div class="portrait-section section2" data-target="#detail2" data-audio="audio/arirang_harp.mp3">
-            <video autoplay muted loop class="portrait-video section2-video">
+            <video autoplay muted loop class="portrait-video section2-video" poster="img/posters/lee-test_poster.png">
                 <source src="video/web/lee-test.mp4" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_lee", $lang); ?></div>
         </div>
         <div class="portrait-section section3" data-target="#detail3" data-audio="audio/arirang_piano.mp3">
-            <video autoplay muted loop class="portrait-video section3-video">
+            <video autoplay muted loop class="portrait-video section3-video" poster="img/posters/arirang-test_poster.png">
                 <source src="video/web/arirang-test.mp4" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_arirang", $lang); ?></div>
         </div>
         <div class="portrait-section section4" data-target="#detail4" data-audio="audio/arirang_oboe.mp3">
-            <video autoplay muted loop class="portrait-video section4-video">
+            <video autoplay muted loop class="portrait-video section4-video" poster="img/posters/glaneuse-test_poster.png">
                 <source src="video/web/glaneuse-test.mp4" type="video/mp4">
             </video>
             <div class="portrait-name"><?php echo getTranslation("portraits_jo", $lang); ?></div>

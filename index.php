@@ -6,6 +6,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
         "srcvideobg" => "video/web/chariot.mp4",
+        "poster" => "img/posters/chariot_poster.png", 
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => "",
@@ -14,6 +15,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre1", $lang),
         "srcvideobg" => "video/web/recyclerie.mp4",
+        "poster" => "img/posters/recyclerie_poster.png", 
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
@@ -23,6 +25,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
         "srcvideobg" => "video/web/bache.mp4",
+        "poster" => "img/posters/bache_poster.png",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info_archives", $lang),
@@ -34,6 +37,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre3", $lang),
         "srcvideobg" => "video/web/lee.mp4",
+        "poster" => "img/posters/lee_poster.png",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1082041088", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
@@ -59,9 +63,7 @@ if (!$isMobile) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $lang; ?>" <?php if ($lang == '
-
-') echo ' class="ko-lang"'; ?>>
+<html lang="<?php echo $lang; ?>" <?php if ($lang == 'ko') echo ' class="ko-lang"'; ?>>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -75,10 +77,11 @@ if (!$isMobile) {
 <link rel="stylesheet" type="text/css" href="css/font.css" />
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
-        <!-- NOUVEAU : Préchargement des ressources critiques du loading screen -->
+
         <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
-        <link rel="preload" href="img/eaulow_poster.png" as="image">
-        
+        <link rel="preload" href="img/posters/eaulow_poster.png" as="image">
+        <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4">
+
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <?php include "includes/css.php"; ?>

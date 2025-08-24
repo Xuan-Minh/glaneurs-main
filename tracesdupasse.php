@@ -22,7 +22,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
     <div class="archives-scroll">
         <section class="archive-hero">
-            <video autoplay muted loop>
+            <video autoplay muted loop poster="img/posters/archives_poster.png">
                 <source src="video/web/archives.mp4" type="video/mp4">
             </video>
             <h2 class="archive-title content-anim">
