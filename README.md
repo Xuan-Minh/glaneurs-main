@@ -91,6 +91,7 @@ glaneurs-main/
 ## 👤 Auteur
 
 - **Xuan-Minh TRAN** — Développement & intégration du site web
+- **Sakina DOUIOU** — Conception
 
 ---
 
