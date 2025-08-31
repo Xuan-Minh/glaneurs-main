@@ -102,6 +102,6 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
     <?php include "includes/jsinclude.php"; ?>
     <script src="js/archives.js" defer></script>
     <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
-    <?php include "includes/visionner.php"; ?>
+    <?php include "includes/components/visionner.php"; ?>
 </body>
 </html>
