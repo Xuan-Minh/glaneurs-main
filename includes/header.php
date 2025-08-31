@@ -12,13 +12,13 @@
         <?php endif; ?>
 
         <!-- Sélecteur de langue -->
-        <div class="language-selector">
-            <span class="lang-option<?php if ($lang == 'fr') echo ' active'; ?>" data-lang="fr">FR</span>
+        <nav class="language-selector" aria-label="Sélecteur de langue">
+            <a href="?lang=fr" class="lang-option<?php if ($lang == 'fr') echo ' active'; ?>" aria-label="Français" lang="fr">FR</a>
             <span class="lang-sep">/</span>
-            <span class="lang-option<?php if ($lang == 'en') echo ' active'; ?>" data-lang="en">EN</span>
+            <a href="?lang=en" class="lang-option<?php if ($lang == 'en') echo ' active'; ?>" aria-label="English" lang="en">EN</a>
             <span class="lang-sep">/</span>
-            <span class="lang-option<?php if ($lang == 'ko') echo ' active'; ?>" data-lang="ko">한국</span>
-        </div>
+            <a href="?lang=ko" class="lang-option<?php if ($lang == 'ko') echo ' active'; ?>" aria-label="한국어" lang="ko">한국</a>
+        </nav>
 
         <!-- Menu burger pour navigation mobile -->
         <div class="menu-burger" id="menuBurger">

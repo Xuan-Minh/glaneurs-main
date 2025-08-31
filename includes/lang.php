@@ -72,12 +72,18 @@ function getTranslation($key, $lang = 'fr')
         }
     }
 
-    // Vérifier si la traduction existe
-    if (isset($translations[$key][$lang])) {
-        // Si oui, retourner la valeur SÉCURISÉE
+    // Vérifier si la traduction existe dans la langue demandée
+    if (isset($translations[$key][$lang]) && $translations[$key][$lang] !== '') {
         return htmlspecialchars($translations[$key][$lang], ENT_QUOTES, 'UTF-8');
     }
-
+    // Fallback sur le français
+    if (isset($translations[$key]['fr']) && $translations[$key]['fr'] !== '') {
+        return htmlspecialchars($translations[$key]['fr'], ENT_QUOTES, 'UTF-8');
+    }
+    // Fallback sur l'anglais
+    if (isset($translations[$key]['en']) && $translations[$key]['en'] !== '') {
+        return htmlspecialchars($translations[$key]['en'], ENT_QUOTES, 'UTF-8');
+    }
     // Sinon, retourner un message d'erreur clair et SÉCURISÉ
     return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars($key, ENT_QUOTES, 'UTF-8');
 }

@@ -1,4 +1,3 @@
-
 header {
   position: fixed;
   top: 0;
@@ -20,13 +19,13 @@ header.hide-header {
 
   display: flex;
   align-items: center;
-  gap: 30px; 
+  gap: 30px;
   z-index: 1000;
 }
 @media (max-width: 768px) {
   .header-controls {
     right: 20px; /* Réduit la marge à droite */
-    gap: 15px;   /* Réduit l'espacement entre les éléments */
+    gap: 15px; /* Réduit l'espacement entre les éléments */
   }
 
   #languageToggle {
@@ -49,7 +48,7 @@ header.hide-header {
     font-size: 16px;
     padding: 3px 8px;
   }
-   .lang-option {
+  .lang-option {
     padding: 2px 4px;
   }
   .menu-burger {
@@ -92,7 +91,7 @@ header.hide-header {
 }
 /* Language selector */
 .language-selector {
- display: flex;
+  display: flex;
   align-items: center;
   gap: 8px;
 
@@ -111,6 +110,7 @@ header.hide-header {
   padding: 2px 6px;
   transition: color 0.3s;
   color: #fff;
+  text-decoration: none;
 }
 
 .lang-option::after {
@@ -197,7 +197,6 @@ header.hide-header {
   background-color: #ddd;
 }
 
-
 /* --------------------- MENU VOLET ------------------------------------------- */
 /* Dans css/navbar.css */
 
@@ -224,10 +223,10 @@ header.hide-header {
 }
 
 .menu-volet-content {
- /* margin-top: 10%; */ /* Remplacé par padding-top pour plus de contrôle */
+  /* margin-top: 10%; */ /* Remplacé par padding-top pour plus de contrôle */
   padding-top: 10vh; /* Espace en haut relatif à la hauteur de la fenêtre */
-                     /* Vous pouvez aussi utiliser une valeur en px, ex: 40px */
-   padding-bottom: 3vh; /* Espace en bas pour le contenu */
+  /* Vous pouvez aussi utiliser une valeur en px, ex: 40px */
+  padding-bottom: 3vh; /* Espace en bas pour le contenu */
   width: 80%;
   max-width: 1200px;
   display: flex;
@@ -276,7 +275,6 @@ header.hide-header {
   text-align: left;
   margin-top: 20px;
   justify-content: flex-start;
-
 }
 .menu-links h4 {
   font-size: 1.2em;
@@ -295,7 +293,6 @@ header.hide-header {
 .menu-links li {
   margin-bottom: 10px; /* Ajoute un espace en bas de chaque élément de la liste */
 }
-
 
 .menu-links a {
   color: white;
@@ -362,18 +359,18 @@ header.hide-header {
   width: 100%; /* Soulignement complet au survol */
 }
 
-li.mentionslegales-right{
+li.mentionslegales-right {
   text-align: right; /* Taille de police plus petite */
 }
-li.mentionslegales-right a{
+li.mentionslegales-right a {
   font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
 }
 
-#menu-accueil{
+#menu-accueil {
   margin-top: 10%;
 }
-#menu-accueil-style{
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+#menu-accueil-style {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-size: clamp(1.2rem, 2vw, 2rem);
   font-family: "Libre Baskerville", serif !important;
 }
@@ -413,7 +410,8 @@ li.mentionslegales-right a{
   height: 20px;
   fill: white;
   margin-right: 8px;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.3s ease-in-out, margin-right 0.3s ease-in-out; /* Transitions ajoutées/modifiées */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    width 0.3s ease-in-out, margin-right 0.3s ease-in-out; /* Transitions ajoutées/modifiées */
   /* display: inline-block; est le comportement par défaut dans un flex container */
 }
 #global-audio-control-container svg.icon-hidden {
@@ -423,7 +421,6 @@ li.mentionslegales-right a{
   width: 0; /* Fait disparaître l'icône de la mise en page */
   margin-right: 0; /* Retire la marge quand l'icône est cachée */
 }
-
 
 #wave {
   /* Le canvas est petit, pas besoin de beaucoup de style ici */
