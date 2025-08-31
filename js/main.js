@@ -228,10 +228,19 @@ $(document).ready(function () {
   const menuBurger = $("#menuBurger");
   const menuVolet = $("#menuVolet");
 
-  // Ouvre/ferme le menu volet au clic sur le burger
-  menuBurger.click(function () {
-    $(this).toggleClass("open");
-    menuVolet.toggleClass("open");
+  // Ouvre/ferme le menu volet au clic sur le burger (supporte <button> ou <div>)
+  menuBurger.on("click keydown", function (e) {
+    if (
+      e.type === "click" ||
+      (e.type === "keydown" && (e.key === "Enter" || e.key === " "))
+    ) {
+      $(this).toggleClass("open");
+      menuVolet.toggleClass("open");
+      // Met à jour aria-expanded pour l’accessibilité
+      const expanded = $(this).hasClass("open");
+      $(this).attr("aria-expanded", expanded ? "true" : "false");
+      e.preventDefault();
+    }
   });
 
   // Ferme le menu volet si clic en dehors du menu ou du burger
