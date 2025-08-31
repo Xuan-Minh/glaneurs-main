@@ -86,7 +86,7 @@ function stopArirangAudio() {
 $(document).on("keydown", function (e) {
   // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
   if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
-    window.location.href = "includes/reset.php";
+    window.location.href = "tools/reset.php";
   }
   if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
     // Ferme tous les visionneurs ouverts
