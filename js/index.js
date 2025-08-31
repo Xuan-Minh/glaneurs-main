@@ -1,92 +1,94 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  const loadingScreen = document.querySelector(".loading-screen");
+  const loadingVideo = document.getElementById("loading-bg-video");
 
-    const loadingScreen = document.querySelector('.loading-screen');
-    const loadingVideo = document.getElementById('loading-bg-video');
+  if (loadingScreen && loadingVideo) {
+    // On attend que la vidéo soit prête à être lue fluidement
+    loadingVideo.addEventListener(
+      "canplaythrough",
+      function () {
+        // On ajoute la classe au conteneur parent pour déclencher les deux fondus
+        loadingScreen.classList.add("loaded");
+      },
+      { once: true }
+    ); // L'événement ne se déclenche qu'une fois
+  }
 
-    if (loadingScreen && loadingVideo) {
-        // On attend que la vidéo soit prête à être lue fluidement
-        loadingVideo.addEventListener('canplaythrough', function() {
-            // On ajoute la classe au conteneur parent pour déclencher les deux fondus
-            loadingScreen.classList.add('loaded');
-        }, { once: true }); // L'événement ne se déclenche qu'une fois
-    }
-
-     let isAnimating = false;
-     const definitionContainer = $('#definition-text');
-    if (definitionContainer.length) {
-        const definitionText = definitionContainer.data('definition');
-        definitionContainer.text(definitionText);
-    }
-     if ($(".loading-screen").length === 0) {
+  let isAnimating = false;
+  const definitionContainer = $("#definition-text");
+  if (definitionContainer.length) {
+    const definitionText = definitionContainer.data("definition");
+    definitionContainer.text(definitionText);
+  }
+  if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);
     // Ne pas appeler playArirangAudio() directement.
     // Attendre la première interaction de l'utilisateur.
-    $(document).one('click.startAudio keydown.startAudio', function() {
-        const audio = document.getElementById("audio-arirang");
-        // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
-        // et qu'il n'y a pas de modale vidéo active
-        if (audio && audio.paused && $('.visionner:visible').length === 0) {
-            playArirangAudio();
-        }
+    $(document).one("click.startAudio keydown.startAudio", function () {
+      const audio = document.getElementById("audio-arirang");
+      // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
+      // et qu'il n'y a pas de modale vidéo active
+      if (audio && audio.paused && $(".visionner:visible").length === 0) {
+        playArirangAudio();
+      }
     });
   }
 });
 
 // ----------------------------------------------- LOADING SCREEN ANIMATION ---------------------------------- //
-  const loadingItems = $(".loading-item");
-  let currentItem = 0;
-  const totalItems = loadingItems.length;
-  const fadeDuration = 500; // Durée du fondu en millisecondes
-  const displayDuration = 4000; // Durée d'affichage de chaque item en millisecondes
-  let intervalId; // Variable pour stocker l'ID de l'intervalle
-  let isAnimating = false; // Variable pour éviter les clics multiples
+const loadingItems = $(".loading-item");
+let currentItem = 0;
+const totalItems = loadingItems.length;
+const fadeDuration = 500; // Durée du fondu en millisecondes
+const displayDuration = 4000; // Durée d'affichage de chaque item en millisecondes
+let intervalId; // Variable pour stocker l'ID de l'intervalle
+let isAnimating = false; // Variable pour éviter les clics multiples
 
-  // Affiche le premier item
-  loadingItems.eq(0).addClass("active");
+// Affiche le premier item
+loadingItems.eq(0).addClass("active");
 
-  // Fonction pour afficher l'item suivant
-  function showNextItem() {
-    if (isAnimating) return; // Empêche les clics multiples
-    isAnimating = true;
+// Fonction pour afficher l'item suivant
+function showNextItem() {
+  if (isAnimating) return; // Empêche les clics multiples
+  isAnimating = true;
 
-    // Fait disparaître l'item actuel si ce n'est pas le dernier
-    if (currentItem < totalItems - 1) {
-      loadingItems.eq(currentItem).removeClass("active");
-    }
-
-    // Incrémente l'index
-    currentItem++;
-
-    // Vérifie si on est arrivé à l'avant-dernier item
-    if (currentItem < totalItems - 1) {
-      // Affiche l'item suivant
-      setTimeout(function () {
-        loadingItems.eq(currentItem).addClass("active");
-        isAnimating = false;
-      }, fadeDuration); // Délai pour que le fondu sortant soit terminé
-    } else if (currentItem === totalItems - 1) {
-      // Affiche le dernier item sans le faire disparaître
-      setTimeout(function () {
-        loadingItems.eq(currentItem).addClass("active");
-        isAnimating = false;
-      }, fadeDuration);
-      clearInterval(intervalId); // Arrête l'intervalle
-    } else {
-      // On est arrivé au dernier item, on arrête l'intervalle
-      clearInterval(intervalId);
-      isAnimating = false;
-    }
+  // Fait disparaître l'item actuel si ce n'est pas le dernier
+  if (currentItem < totalItems - 1) {
+    loadingItems.eq(currentItem).removeClass("active");
   }
 
-  // Défilement automatique des loading-item
-  intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
+  // Incrémente l'index
+  currentItem++;
 
+  // Vérifie si on est arrivé à l'avant-dernier item
+  if (currentItem < totalItems - 1) {
+    // Affiche l'item suivant
+    setTimeout(function () {
+      loadingItems.eq(currentItem).addClass("active");
+      isAnimating = false;
+    }, fadeDuration); // Délai pour que le fondu sortant soit terminé
+  } else if (currentItem === totalItems - 1) {
+    // Affiche le dernier item sans le faire disparaître
+    setTimeout(function () {
+      loadingItems.eq(currentItem).addClass("active");
+      isAnimating = false;
+    }, fadeDuration);
+    clearInterval(intervalId); // Arrête l'intervalle
+  } else {
+    // On est arrivé au dernier item, on arrête l'intervalle
+    clearInterval(intervalId);
+    isAnimating = false;
+  }
+}
 
-  // Gestion du clic sur l'écran de chargement pour passer à l'item suivant
-  $(".loading-screen").click(function () {
-    showNextItem();
-  });
+// Défilement automatique des loading-item
+intervalId = setInterval(showNextItem, displayDuration + fadeDuration);
+
+// Gestion du clic sur l'écran de chargement pour passer à l'item suivant
+$(".loading-screen").click(function () {
+  showNextItem();
+});
 // ----------------------------------------------- ENTRER---------------------------------- //
 $("#enter-button").click(function () {
   clearInterval(intervalId);
@@ -113,78 +115,77 @@ $("#enter-button").click(function () {
   });
 });
 
-  // ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
-  const TRANSFORM_ANIMATION_DURATION = 1500; // Durée en ms, doit correspondre à la transition CSS (1.5s)
+// ------------------------------------ INFO SLIDE IN&OUT ------------------------------------------------ //
+const TRANSFORM_ANIMATION_DURATION = 1500; // Durée en ms, doit correspondre à la transition CSS (1.5s)
 /**
-* @param {jQuery} $slide L'élément jQuery du slide concerné.
-*/
+ * @param {jQuery} $slide L'élément jQuery du slide concerné.
+ */
 let authorFadeInTimer = null;
 function showInfoPanel($slide) {
-    if (!$slide || !$slide.length) return;
+  if (!$slide || !$slide.length) return;
 
-    const $h2 = $slide.find('h2');
-    const $info = $slide.find('.info');
-    const $point2 = $slide.find('.point2');
+  const $h2 = $slide.find("h2");
+  const $info = $slide.find(".info");
+  const $point2 = $slide.find(".point2");
 
-    if ($point2.hasClass('full')) return;
-    
-    // C'est parfait, on annule tout timer précédent.
-    clearTimeout(authorFadeInTimer);
+  if ($point2.hasClass("full")) return;
 
-    fadeVisionnerTriggerH3($slide, true);
+  // C'est parfait, on annule tout timer précédent.
+  clearTimeout(authorFadeInTimer);
 
-    $h2.addClass('animate-transform');
-    requestAnimationFrame(() => {
-        $h2.addClass('move');
-    });
+  fadeVisionnerTriggerH3($slide, true);
 
-    // C'est la bonne méthode : on utilise un timer fiable.
-    authorFadeInTimer = setTimeout(() => {
-        $h2.addClass('author-visible');
-    }, 1500); // 1.5s, comme la transition CSS
+  $h2.addClass("animate-transform");
+  requestAnimationFrame(() => {
+    $h2.addClass("move");
+  });
 
+  // C'est la bonne méthode : on utilise un timer fiable.
+  authorFadeInTimer = setTimeout(() => {
+    $h2.addClass("author-visible");
+  }, 1500); // 1.5s, comme la transition CSS
 
-    $info.fadeIn(500);
-    $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-    $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-    $slide.find("video").addClass("flou");
+  $info.fadeIn(500);
+  $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+  $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+  $slide.find("video").addClass("flou");
 }
 
 /**
  * Cache le panneau d'information pour un slide donné.
-* @param {jQuery} $slide L'élément jQuery du slide concerné.
+ * @param {jQuery} $slide L'élément jQuery du slide concerné.
  */
 function hideInfoPanel($slide) {
-    if (!$slide || !$slide.length) return;
+  if (!$slide || !$slide.length) return;
 
-    const $h2 = $slide.find('h2');
-    const $info = $slide.find('.info');
-    const $point1 = $slide.find('.point1');
+  const $h2 = $slide.find("h2");
+  const $info = $slide.find(".info");
+  const $point1 = $slide.find(".point1");
 
-    if ($point1.hasClass('full')) return;
+  if ($point1.hasClass("full")) return;
 
-    // Parfait : on annule le timer et on cache l'auteur immédiatement.
-    clearTimeout(authorFadeInTimer);
-    $h2.removeClass('author-visible');
+  // Parfait : on annule le timer et on cache l'auteur immédiatement.
+  clearTimeout(authorFadeInTimer);
+  $h2.removeClass("author-visible");
 
-    fadeVisionnerTriggerH3($slide, false);
+  fadeVisionnerTriggerH3($slide, false);
 
-    $h2.addClass('animate-transform');
-    requestAnimationFrame(() => {
-        $h2.removeClass('move');
-    });
-    
-    // Ce bloc est OK, il sert à nettoyer la classe d'animation, ce qui est une bonne pratique.
-    $h2.one('transitionend', function(e) {
-        if (e.originalEvent.propertyName === 'transform') {
-            $(this).removeClass('animate-transform');
-        }
-    });
+  $h2.addClass("animate-transform");
+  requestAnimationFrame(() => {
+    $h2.removeClass("move");
+  });
 
-    $info.fadeOut(300);
-    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    $slide.find("video").removeClass("flou");
+  // Ce bloc est OK, il sert à nettoyer la classe d'animation, ce qui est une bonne pratique.
+  $h2.one("transitionend", function (e) {
+    if (e.originalEvent.propertyName === "transform") {
+      $(this).removeClass("animate-transform");
+    }
+  });
+
+  $info.fadeOut(300);
+  $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+  $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+  $slide.find("video").removeClass("flou");
 }
 // NOUVELLE FONCTION : Réinitialisation forcée d'un slide
 /**
@@ -193,116 +194,118 @@ function hideInfoPanel($slide) {
  * @param {jQuery} $slide L'élément jQuery du slide à réinitialiser.
  */
 function resetSlideState($slide) {
-    if (!$slide || !$slide.length) return;
-    const $h2 = $slide.find('h2');
-    clearTimeout(authorFadeInTimer);
-    // On retire toutes les classes d'animation et d'état
-    $h2.removeClass('move author-visible animate-transform');
-    
-    // On cache l'info et on remet les boutons dans leur état initial
-    $slide.find('.info').hide();
-    fadeVisionnerTriggerH3($slide, false);
-    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+  if (!$slide || !$slide.length) return;
+  const $h2 = $slide.find("h2");
+  clearTimeout(authorFadeInTimer);
+  // On retire toutes les classes d'animation et d'état
+  $h2.removeClass("move author-visible animate-transform");
+
+  // On cache l'info et on remet les boutons dans leur état initial
+  $slide.find(".info").hide();
+  fadeVisionnerTriggerH3($slide, false);
+  $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+  $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
 }
 // --------------------------------- EVENT HANDLERS --------------------------------- //
 
 // Clic sur le point 2 (pour afficher les infos)
-$('.point2').on('click', function() {
-    showInfoPanel($(this).closest('.slides'));
+$(".point2").on("click", function () {
+  showInfoPanel($(this).closest(".slides"));
 });
 
 // Clic sur le point 1 (pour cacher les infos)
-$('.point1').on('click', function() {
-    hideInfoPanel($(this).closest('.slides'));
+$(".point1").on("click", function () {
+  hideInfoPanel($(this).closest(".slides"));
 });
 /**
  * Ajoute temporairement la classe pour animer la transformation.
  * @param {jQuery} $element L'élément jQuery h2.
  */
- function triggerH2TransformAnimation($element) {
-        if (!$element || !$element.length) return;
-        $element.addClass('animate-transform');
-        // NOUVEAU : On écoute la fin de la transition pour libérer le verrou
-        $element.one('transitionend', function(e) {
-            if (e.originalEvent.propertyName === 'transform') {
-                $element.removeClass('animate-transform');
-                isAnimating = false; // On libère le verrou ici
-            }
-        });
+function triggerH2TransformAnimation($element) {
+  if (!$element || !$element.length) return;
+  $element.addClass("animate-transform");
+  // NOUVEAU : On écoute la fin de la transition pour libérer le verrou
+  $element.one("transitionend", function (e) {
+    if (e.originalEvent.propertyName === "transform") {
+      $element.removeClass("animate-transform");
+      isAnimating = false; // On libère le verrou ici
     }
-
+  });
+}
 
 function fadeVisionnerTriggerH3($slide, fadeOut = true) {
-  const $trigger = $slide.find('.visionner-trigger-h3').not('.always-visible');
+  const $trigger = $slide.find(".visionner-trigger-h3").not(".always-visible");
   if (!$trigger.length) return;
   if (fadeOut) {
-    $trigger.removeClass('fade-in').addClass('fade-out');
+    $trigger.removeClass("fade-in").addClass("fade-out");
   } else {
-    $trigger.removeClass('fade-out').addClass('fade-in');
+    $trigger.removeClass("fade-out").addClass("fade-in");
   }
 }
 
 // --------------------------------- Reset Slide --------------------------------- //
 
 function resetSlideState($slide) {
-    if (!$slide || !$slide.length) return;
-    
-    // --- DÉBUT DE LA CORRECTION ---
-    // On remplace l'ancien contenu par une logique plus complète et correcte.
-    const $h2 = $slide.find('h2');
-    
-    clearTimeout(authorFadeInTimer);
-    
-    // On retire toutes les classes d'état et d'animation
-    $h2.removeClass('move author-visible animate-transform');
-    
-    // On cache l'info et on remet les boutons dans leur état initial
-    $slide.find('.info').hide();
-    fadeVisionnerTriggerH3($slide, false);
-    $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-    $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-    
-    // La ligne la plus importante : on retire le flou !
-    $slide.find("video").removeClass("flou");
-    // --- FIN DE LA CORRECTION ---
+  if (!$slide || !$slide.length) return;
+
+  // --- DÉBUT DE LA CORRECTION ---
+  // On remplace l'ancien contenu par une logique plus complète et correcte.
+  const $h2 = $slide.find("h2");
+
+  clearTimeout(authorFadeInTimer);
+
+  // On retire toutes les classes d'état et d'animation
+  $h2.removeClass("move author-visible animate-transform");
+
+  // On cache l'info et on remet les boutons dans leur état initial
+  $slide.find(".info").hide();
+  fadeVisionnerTriggerH3($slide, false);
+  $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
+  $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
+
+  // La ligne la plus importante : on retire le flou !
+  $slide.find("video").removeClass("flou");
+  // --- FIN DE LA CORRECTION ---
 }
 
 // --------------------------------- Player video --------------------------------- //
 let lastFocusedElement; // Variable pour se souvenir du dernier élément focus
 
 function focusTrap(container) {
-    const focusableElements = container.find('a[href], button, iframe, [tabindex]:not([tabindex="-1"])').filter(':visible');
-    const firstFocusableElement = focusableElements.first();
-    const lastFocusableElement = focusableElements.last();
+  const focusableElements = container
+    .find('a[href], button, iframe, [tabindex]:not([tabindex="-1"])')
+    .filter(":visible");
+  const firstFocusableElement = focusableElements.first();
+  const lastFocusableElement = focusableElements.last();
 
-    // Déplace le focus sur le premier élément (l'iframe)
-    firstFocusableElement.focus();
+  // Déplace le focus sur le premier élément (l'iframe)
+  firstFocusableElement.focus();
 
-    container.on('keydown.focusTrap', function(e) {
-        if (e.key === 'Tab' || e.keyCode === 9) {
-            if (e.shiftKey) { // Shift + Tab
-                if (document.activeElement === firstFocusableElement[0]) {
-                    lastFocusableElement.focus();
-                    e.preventDefault();
-                }
-            } else { // Tab
-                if (document.activeElement === lastFocusableElement[0]) {
-                    firstFocusableElement.focus();
-                    e.preventDefault();
-                }
-            }
+  container.on("keydown.focusTrap", function (e) {
+    if (e.key === "Tab" || e.keyCode === 9) {
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstFocusableElement[0]) {
+          lastFocusableElement.focus();
+          e.preventDefault();
         }
-    });
+      } else {
+        // Tab
+        if (document.activeElement === lastFocusableElement[0]) {
+          firstFocusableElement.focus();
+          e.preventDefault();
+        }
+      }
+    }
+  });
 }
 
 function removeFocusTrap(container) {
-    container.off('keydown.focusTrap');
-    if (lastFocusedElement) {
-        lastFocusedElement.focus(); // Rend le focus à l'élément qui a ouvert la modale
-    }
+  container.off("keydown.focusTrap");
+  if (lastFocusedElement) {
+    lastFocusedElement.focus(); // Rend le focus à l'élément qui a ouvert la modale
+  }
 }
-
 
 $(".close-visionner").click(function (event) {
   event.stopPropagation();
@@ -338,7 +341,7 @@ let vimeoPlayer = null;
 $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   event.stopPropagation();
 
-  lastFocusedElement = $(this); 
+  lastFocusedElement = $(this);
   stopArirangAudio();
   const slide = $(this).closest(".slides");
   const visionner = slide.find(".visionner");
@@ -350,21 +353,23 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   visionner.find("iframe").remove();
 
   // Crée et injecte le nouvel iframe
-  const iframe = $(`<iframe src="${vimeoUrl}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`);
+  const iframe = $(
+    `<iframe src="${vimeoUrl}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+  );
   visionner.append(iframe);
 
   // Détruit l'ancien player Vimeo s'il existe
   if (vimeoPlayer) {
-    vimeoPlayer.unload().catch(()=>{});
+    vimeoPlayer.unload().catch(() => {});
     vimeoPlayer = null;
   }
 
   // Crée un nouveau player Vimeo et attache l'event 'ended'
   vimeoPlayer = new Vimeo.Player(iframe[0]);
-  vimeoPlayer.on('ended', function () {
+  vimeoPlayer.on("ended", function () {
     visionner.fadeOut(400, function () {
       $("body").css("overflow", "auto");
-      const info = slide.find('.info');
+      const info = slide.find(".info");
       info.fadeIn(2000);
       slide.find("h2").addClass("move");
       fadeVisionnerTriggerH3(slide, true);
@@ -374,45 +379,50 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
     });
   });
 
-  visionner.fadeIn(400, function () {
-    $("body").css("overflow", "hidden");
-    slide.find(".info").fadeOut(0);
-    focusTrap(visionner);
-  }).css("display", "flex");
+  visionner
+    .fadeIn(400, function () {
+      $("body").css("overflow", "hidden");
+      slide.find(".info").fadeOut(0);
+      focusTrap(visionner);
+    })
+    .css("display", "flex");
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
 
 $(function () {
-  const slides = document.querySelectorAll('.slides');
+  const slides = document.querySelectorAll(".slides");
   if (slides.length === 0) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    let activeSlide = null;
-    let maxRatio = 0;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let activeSlide = null;
+      let maxRatio = 0;
 
-    // 1. On détermine quelle slide est la plus visible à l'écran
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-        maxRatio = entry.intersectionRatio;
-        activeSlide = entry.target;
-      }
-    });
-
-    // 2. On boucle sur TOUTES les slides
-    if (activeSlide) {
-      slides.forEach(slide => {
-        // Si la slide n'est PAS la slide active, on la force à se réinitialiser.
-        if (slide !== activeSlide) {
-          resetSlideState($(slide));
+      // 1. On détermine quelle slide est la plus visible à l'écran
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio;
+          activeSlide = entry.target;
         }
       });
-    }
-  }, { 
-    // On observe à plusieurs seuils pour une détection plus fiable
-    threshold: [0.2, 0.5, 0.8] 
-  });
 
-  slides.forEach(slide => observer.observe(slide));
+      // 2. On boucle sur TOUTES les slides
+      if (activeSlide) {
+        slides.forEach((slide) => {
+          // Si la slide n'est PAS la slide active, on la force à se réinitialiser.
+          if (slide !== activeSlide) {
+            resetSlideState($(slide));
+          }
+        });
+      }
+    },
+    {
+      // On observe à plusieurs seuils pour une détection plus fiable
+      threshold: [0.2, 0.5, 0.8],
+    }
+  );
+
+  slides.forEach((slide) => observer.observe(slide));
 });
 // --------------------------------- Scroll Down Arrow --------------------------------- //
 gsap.to(".scroll-down-arrow div", {
@@ -429,13 +439,19 @@ $(document).on(
   ".scroll-down-arrow, .scroll-down-arrow img",
   function () {
     const $arrow = $(this).closest(".scroll-down-arrow");
+    console.log(
+      "[DEBUG] Flèche cliquée. $arrow:",
+      $arrow.get(0),
+      "hasClass up:",
+      $arrow.hasClass("up")
+    );
     if ($arrow.hasClass("up")) {
-      // Flèche vers le haut : remonte tout en haut
+      console.log("[DEBUG] Action : scroll to top");
       window.scrollTo({ top: 0, behavior: "smooth" });
-      resetOtherSlides(null); // Réinitialise toutes les slides
+      resetSlideState(null); // Réinitialise toutes les slides
     } else {
-      // Flèche vers le bas : va à la prochaine slide
-      resetOtherSlides(null); // Réinitialise toutes les slides
+      console.log("[DEBUG] Action : scroll to next slide");
+      resetSlideState(null); // Réinitialise toutes les slides
       const $slides = $(".slides");
       let nextSlide = null;
       $slides.each(function (i, slide) {
@@ -446,7 +462,10 @@ $(document).on(
         }
       });
       if (nextSlide) {
+        console.log("[DEBUG] Scroll vers la slide suivante", nextSlide);
         nextSlide.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.log("[DEBUG] Aucune slide suivante trouvée");
       }
     }
   }
