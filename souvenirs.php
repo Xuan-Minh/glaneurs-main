@@ -14,7 +14,7 @@
 
 <body>
     <?php include "includes/components/header.php"; ?>
-    <?php include "includes/jsinclude.php"; ?>
+    <?php include "includes/components/jsinclude.php"; ?>
 </body>
 
 </html>

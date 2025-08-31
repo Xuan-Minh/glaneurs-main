@@ -141,7 +141,7 @@ if (!$isMobile) {
     include 'includes/components/slide.php'; 
         ?>
     </div>
-    <?php include 'includes/jsinclude.php'; ?>
+    <?php include 'includes/components/jsinclude.php'; ?>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="js/index.js"></script>
 

@@ -126,7 +126,7 @@
             ?>
          </p>
     </section>
-    <?php include "includes/jsinclude.php"; ?>
+    <?php include "includes/components/jsinclude.php"; ?>
     <script src="js/derriereledocumentaire.js"></script>
 </body>
 

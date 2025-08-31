@@ -165,7 +165,7 @@ function display_portrait_content($portrait_id, $lang) {
     include "includes/components/archives-overlay.php"; 
     ?>
 
-    <?php include "includes/jsinclude.php"; ?>
+    <?php include "includes/components/jsinclude.php"; ?>
     <script src="js/portraits.js" defer></script>
     <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
     <?php include "includes/components/visionner.php"; ?>
