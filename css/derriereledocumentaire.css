@@ -15,7 +15,8 @@
 
 .dld-hero video {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
@@ -25,9 +26,15 @@
 .dld-hero::after {
   content: "";
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--main-bg-color) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--main-bg-color) 100%
+  );
   z-index: 2;
   pointer-events: none;
 }
@@ -35,8 +42,6 @@
 .dld-title {
   position: relative;
   z-index: 3;
-  color: #fff;
-  font-family: "Libre Baskerville", serif;
   text-align: center;
   width: 100vw;
   display: flex;
@@ -47,10 +52,8 @@
 
 .dld-title h2 {
   font-size: 3vw;
-  margin: 0;
   padding: 0 3vw;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================================================================
@@ -63,23 +66,20 @@
 }
 
 .dld-presentation h2 {
- padding: 0 0 0.9vw 0;
- font-size: clamp(1.8rem, 2.5vw, 2.5rem); 
+  padding: 0 0 0.9vw 0;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
 }
 
 .dld-remerciements {
   width: 90vw;
   max-width: 1100px;
   margin: 5vh auto 0vh auto;
-  color: #fff;
   text-align: center;
-  font-family: "Figtree", sans-serif;
 }
 
 .dld-remerciements h2 {
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
   margin-bottom: 0.5em;
-  font-family: "Libre Baskerville", serif;
   font-weight: normal;
   letter-spacing: 0.02em;
 }
@@ -89,7 +89,6 @@
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 400;
   opacity: 0.85;
-  margin: 0;
   line-height: 1.6;
 }
 
@@ -130,7 +129,6 @@
   align-items: flex-start;
   backface-visibility: hidden;
   transition: opacity 0.5s;
-  font-family: "Figtree", sans-serif;
   font-size: 1.2em;
   padding: 10%;
 }
@@ -233,7 +231,8 @@
   .team-member {
     min-width: 160px;
   }
-  .team-face, .team-info {
+  .team-face,
+  .team-info {
     padding: 8%;
   }
   .team-role {
@@ -256,14 +255,15 @@
   .dld-remerciements p {
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
-  
+
   .team-grid {
     gap: 20px;
   }
   .team-member {
     min-width: 150px;
   }
-  .team-face, .team-info {
+  .team-face,
+  .team-info {
     padding: 15px;
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
