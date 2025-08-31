@@ -18,7 +18,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <?php include "includes/header.php"; ?>
+    <?php include "includes/components/header.php"; ?>
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
     <div class="archives-scroll">
         <section class="archive-hero">

@@ -58,7 +58,7 @@
   </div>
   </div>
 </section >
-  <?php include "includes/header.php"; ?>
+  <?php include "includes/components/header.php"; ?>
   <?php include "includes/jsinclude.php"; ?>
 </body>
 
