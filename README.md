@@ -83,7 +83,7 @@ glaneurs-main/
 ## 👤 Auteur
 
 - **Xuan-Minh TRAN** — Développement & intégration
-- **Sakina DOUIOU** — Conception
+- **Sakina DOUIOU** — Conception / Réalisatrice 
 
 ---
 
