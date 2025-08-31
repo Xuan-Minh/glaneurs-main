@@ -162,7 +162,7 @@ function display_portrait_content($portrait_id, $lang) {
      </section>
 
     <?php 
-    include "includes/archives-overlay.php"; 
+    include "includes/components/archives-overlay.php"; 
     ?>
 
     <?php include "includes/jsinclude.php"; ?>

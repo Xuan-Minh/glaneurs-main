@@ -137,7 +137,7 @@ if (!$isMobile) {
     <?php include 'includes/header.php'; ?>
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
         <?php
-        include 'includes/scrolldown.php';
+    include 'includes/components/scrolldown.php';
         include 'includes/slide.php'; 
         ?>
     </div>

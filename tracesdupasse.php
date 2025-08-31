@@ -94,7 +94,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
            
-            <?php include "includes/archives-overlay.php"; ?>
+            <?php include "includes/components/archives-overlay.php"; ?>
 
         </section>
     </div>
