@@ -403,6 +403,9 @@ li.mentionslegales-right a {
   align-items: center;
   padding: 8px;
   border-radius: 5px;
+  width: 90px; /* Largeur fixe pour éviter le saut lors du switch d'icône */
+  min-width: 90px;
+  box-sizing: border-box;
 }
 
 #global-audio-control-container svg {
@@ -410,16 +413,14 @@ li.mentionslegales-right a {
   height: 20px;
   fill: white;
   margin-right: 8px;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
-    width 0.3s ease-in-out, margin-right 0.3s ease-in-out; /* Transitions ajoutées/modifiées */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* On retire width/margin-right */
   /* display: inline-block; est le comportement par défaut dans un flex container */
 }
 #global-audio-control-container svg.icon-hidden {
   opacity: 0;
   transform: scale(0.7); /* Léger effet de rétrécissement */
   pointer-events: none; /* Empêche l'interaction avec l'icône cachée */
-  width: 0; /* Fait disparaître l'icône de la mise en page */
-  margin-right: 0; /* Retire la marge quand l'icône est cachée */
+  position: absolute;
 }
 
 #wave {

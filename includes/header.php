@@ -22,9 +22,11 @@
 
         <!-- Menu burger pour navigation mobile -->
         <div class="menu-burger" id="menuBurger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <button type="button" class="menu-burger" id="menuBurger" aria-label="Ouvrir le menu de navigation" aria-controls="menuVolet" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 
