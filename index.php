@@ -138,7 +138,7 @@ if (!$isMobile) {
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
         <?php
     include 'includes/components/scrolldown.php';
-        include 'includes/slide.php'; 
+    include 'includes/components/slide.php'; 
         ?>
     </div>
     <?php include 'includes/jsinclude.php'; ?>
