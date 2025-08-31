@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "includes/components/css.php"; ?>
+    <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/derriereledocumentaire.css">
    <?php $pdo = getPDO();
 
@@ -44,7 +44,7 @@
 
 <body>
     <audio id="audio-arirang" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
-    <?php include "includes/components/header.php"; ?>
+    <?php include "includes/layout/header.php"; ?>
 
     <section class="dld-hero">
         <video autoplay muted loop poster="img/posters/ville_poster.png">
@@ -126,7 +126,7 @@
             ?>
          </p>
     </section>
-    <?php include "includes/components/jsinclude.php"; ?>
+    <?php include "includes/layout/jsinclude.php"; ?>
     <script src="js/derriereledocumentaire.js"></script>
 </body>
 

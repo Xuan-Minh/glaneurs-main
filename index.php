@@ -84,7 +84,7 @@ if (!$isMobile) {
 
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <?php include "includes/components/css.php"; ?>
+    <?php include "includes/layout/css.php"; ?>
     <?php endif; ?>
 
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
@@ -131,17 +131,17 @@ if (!$isMobile) {
 
     <!------------------ VERSION DESKTOP ------------------>
     <?php if ($showLoading): ?>
-    <?php include 'includes/components/loading.php'; ?>
+    <?php include 'includes/layout/loading.php'; ?>
     <?php endif; ?>
     <audio id="audio-arirang" src="audio/homepage.mp3" loop preload="auto"></audio>
-    <?php include 'includes/components/header.php'; ?>
+    <?php include 'includes/layout/header.php'; ?>
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
         <?php
     include 'includes/components/scrolldown.php';
     include 'includes/components/slide.php'; 
         ?>
     </div>
-    <?php include 'includes/components/jsinclude.php'; ?>
+    <?php include 'includes/layout/jsinclude.php'; ?>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="js/index.js"></script>
 

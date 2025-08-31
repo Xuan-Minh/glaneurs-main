@@ -42,6 +42,8 @@
 .dld-title {
   position: relative;
   z-index: 3;
+  color: #fff;
+  font-family: "Libre Baskerville", serif;
   text-align: center;
   width: 100vw;
   display: flex;
@@ -52,7 +54,9 @@
 
 .dld-title h2 {
   font-size: 3vw;
+  margin: 0;
   padding: 0 3vw;
+  color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -74,12 +78,15 @@
   width: 90vw;
   max-width: 1100px;
   margin: 5vh auto 0vh auto;
+  color: #fff;
   text-align: center;
+  font-family: "Figtree", sans-serif;
 }
 
 .dld-remerciements h2 {
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
   margin-bottom: 0.5em;
+  font-family: "Libre Baskerville", serif;
   font-weight: normal;
   letter-spacing: 0.02em;
 }
@@ -89,6 +96,7 @@
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 400;
   opacity: 0.85;
+  margin: 0;
   line-height: 1.6;
 }
 
@@ -129,6 +137,7 @@
   align-items: flex-start;
   backface-visibility: hidden;
   transition: opacity 0.5s;
+  font-family: "Figtree", sans-serif;
   font-size: 1.2em;
   padding: 10%;
 }

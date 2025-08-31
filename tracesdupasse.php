@@ -12,13 +12,13 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "includes/components/css.php"; ?>
+    <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/archives.css">
     <title><?php echo getTranslation("archives_titre", $lang) ?></title>
 </head>
 
 <body>
-    <?php include "includes/components/header.php"; ?>
+    <?php include "includes/layout/header.php"; ?>
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
     <div class="archives-scroll">
         <section class="archive-hero">
@@ -99,7 +99,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
         </section>
     </div>
 
-    <?php include "includes/components/jsinclude.php"; ?>
+    <?php include "includes/layout/jsinclude.php"; ?>
     <script src="js/archives.js" defer></script>
     <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
     <?php include "includes/components/visionner.php"; ?>

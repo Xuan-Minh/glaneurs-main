@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <?php include "includes/components/css.php"; ?>
+    <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/souvenirs.css">
     <title><?php echo getTranslation("souvenirs_titre", $lang) ?></title>
 </head>
 
 <body>
-    <?php include "includes/components/header.php"; ?>
-    <?php include "includes/components/jsinclude.php"; ?>
+    <?php include "includes/layout/header.php"; ?>
+    <?php include "includes/layout/jsinclude.php"; ?>
 </body>
 
 </html>

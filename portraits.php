@@ -88,7 +88,7 @@ function display_portrait_content($portrait_id, $lang) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "includes/components/css.php"; ?>
+    <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
     <title><?php echo getTranslation("portraits_titre", $lang) ?></title>
@@ -96,7 +96,7 @@ function display_portrait_content($portrait_id, $lang) {
 
 <body>
 
-    <?php include "includes/components/header.php"; ?>
+    <?php include "includes/layout/header.php"; ?>
     <!-- <div class="volume-control">
         <label for="volumeRange">Volume&nbsp;:</label>
         <input type="range" id="volumeRange" min="0" max="1" step="0.01" value="0.4">
@@ -165,7 +165,7 @@ function display_portrait_content($portrait_id, $lang) {
     include "includes/components/archives-overlay.php"; 
     ?>
 
-    <?php include "includes/components/jsinclude.php"; ?>
+    <?php include "includes/layout/jsinclude.php"; ?>
     <script src="js/portraits.js" defer></script>
     <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
     <?php include "includes/components/visionner.php"; ?>

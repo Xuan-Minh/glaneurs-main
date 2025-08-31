@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include "includes/components/css.php"; ?>
+  <?php include "includes/layout/css.php"; ?>
   <link rel="stylesheet" href="css/mentionslegales.css">
   <title><?php echo getTranslation("mentionslegales_titre", $lang) ?></title>
 </head>
@@ -58,8 +58,8 @@
   </div>
   </div>
 </section >
-  <?php include "includes/components/header.php"; ?>
-  <?php include "includes/components/jsinclude.php"; ?>
+  <?php include "includes/layout/header.php"; ?>
+  <?php include "includes/layout/jsinclude.php"; ?>
 </body>
 
 </html>
