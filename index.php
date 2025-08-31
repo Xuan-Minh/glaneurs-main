@@ -84,7 +84,7 @@ if (!$isMobile) {
 
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <?php include "includes/css.php"; ?>
+    <?php include "includes/components/css.php"; ?>
     <?php endif; ?>
 
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />

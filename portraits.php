@@ -88,7 +88,7 @@ function display_portrait_content($portrait_id, $lang) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "includes/css.php"; ?>
+    <?php include "includes/components/css.php"; ?>
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
     <title><?php echo getTranslation("portraits_titre", $lang) ?></title>
