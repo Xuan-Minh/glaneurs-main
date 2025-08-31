@@ -1,14 +1,20 @@
 
+
 <?php
 session_start();
 
-// Si ?lang=... dans l'URL, on l'utilise et on met à jour la session
-if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'ko'])) {
+// --- GESTION SÉCURISÉE DE LA LANGUE ---
+$allowedLangs = ['fr', 'en', 'ko'];
+if (isset($_GET['lang']) && in_array($_GET['lang'], $allowedLangs, true)) {
     $lang = $_GET['lang'];
     $_SESSION['lang'] = $lang;
+} elseif (isset($_SESSION['lang']) && in_array($_SESSION['lang'], $allowedLangs, true)) {
+    $lang = $_SESSION['lang'];
 } else {
-    $lang = $_SESSION['lang'] ?? 'fr';
+    $lang = 'fr'; // fallback par défaut
+    $_SESSION['lang'] = $lang;
 }
+// $lang est maintenant toujours 'fr', 'en' ou 'ko'.
 
 // Connexion PDO centralisée
 function getPDO()
