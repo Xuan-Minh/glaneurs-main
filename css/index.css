@@ -48,8 +48,8 @@ button.visionner-trigger-h3 {
   z-index: 10;
   max-width: 90%; /* Important pour que l'ellipsis fonctionne */
   /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  font-weight:400;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  font-weight: 400;
 }
 
 .slide2 h2,
@@ -70,9 +70,8 @@ button.visionner-trigger-h3 {
   position: relative;
   display: inline-block;
   opacity: 1;
-  transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), visibility 0.5s;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s;
   visibility: visible;
-  
 }
 button.visionner-trigger-h3:hover {
   color: #ddd; /* Légère modification de la couleur au survol */
@@ -90,8 +89,8 @@ button.visionner-trigger-h3::after {
   background-color: #ddd;
   z-index: -1;
   transition: transform 0.5s ease-in-out;
-  transform: scaleX(1);              /* Présent de base */
-  transform-origin: center;   
+  transform: scaleX(1); /* Présent de base */
+  transform-origin: center;
   border-radius: 2px; /* Arrondi les bords du soulignement */
 }
 .visionner-trigger-h3.fade-out {
@@ -106,7 +105,7 @@ button.visionner-trigger-h3::after {
 }
 
 button.visionner-trigger-h3:hover::after {
-  transform: scaleX(0);               /* Se réduit vers le centre au hover */
+  transform: scaleX(0); /* Se réduit vers le centre au hover */
 }
 .visionner iframe {
   width: 90vw !important;
@@ -169,14 +168,14 @@ button.visionner-trigger-h3:hover::after {
   display: block;
   text-align: right;
   font-family: "Figtree", sans-serif;
-  font-size: 0.8em; 
+  font-size: 0.8em;
   font-weight: 400;
   line-height: 1.5;
   margin-top: 0.75em;
   color: rgba(255, 255, 255, 0.85);
   text-shadow: none;
-  
-  opacity: 0; 
+
+  opacity: 0;
   /* MODIFIÉ : On retire le délai, la transition est maintenant directe */
   transition: opacity 0.5s ease-in-out;
 }
@@ -187,24 +186,28 @@ button.visionner-trigger-h3:hover::after {
 }
 /* NOUVELLE CLASSE pour activer l'animation de transform */
 .slides h2.animate-transform {
- transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .slides h2.move {
- /* ON NE TOUCHE PLUS À 'left' OU 'top' */
+  /* ON NE TOUCHE PLUS À 'left' OU 'top' */
   /* ON NE TOUCHE PLUS À 'font-size' pour l'animation */
-  font-size: clamp(1.5rem, 2vw, 2.9rem); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
+  font-size: clamp(
+    1.5rem,
+    2vw,
+    2.9rem
+  ); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
   text-align: left;
   white-space: normal;
 
   /* NOUVELLE STRATÉGIE DE TRANSFORM : */
   /* On combine le scale et le translate pour tout faire en une seule propriété */
-transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
+  transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   /* Explication du calcul ci-dessous */
 }
 
 .slides:first-child {
   scroll-snap-align: start;
-   line-height: 1.5;
+  line-height: 1.5;
 }
 
 .sliderButton {
@@ -215,7 +218,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 
 .info {
   position: relative; /* IMPORTANT : Pour positionner le bouton à l'intérieur */
-    background: rgba(4,14,30,0.6);
+  background: rgba(4, 14, 30, 0.6);
   /* backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); */
   text-align: justify;
@@ -234,12 +237,13 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   /* NOUVEAU : On s'assure qu'il y a assez de place en hauteur */
   min-height: 30vh;
   /* NOUVEAU : On ajoute du padding en bas pour que le texte ne passe pas sous le bouton */
-  padding-bottom: 80px; 
+  padding-bottom: 80px;
   text-indent: 40px;
   font-weight: 200;
 }
 @keyframes nudge-right {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   50% {
@@ -249,7 +253,7 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 /* NOUVEAU STYLE POUR LE BOUTON DANS LE BLOC INFO */
 .info-button {
   /* On retire la marge et on change le positionnement */
-   display: inline-flex;
+  display: inline-flex;
   align-items: center;
   position: absolute;
   bottom: 25px;
@@ -271,14 +275,14 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 
 /* NOUVEAU : On crée le soulignement (caché par défaut) */
 .info-button span::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px; /* Distance du soulignement par rapport au texte */
   left: 0;
   width: 100%;
   height: 2px; /* Épaisseur du soulignement */
   background-color: rgba(255, 255, 255, 0.8);
-  
+
   /* Animation depuis le centre */
   transform: scaleX(0);
   transform-origin: left;
@@ -292,12 +296,12 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
 }
 
 .info-button::after {
-  content: '';
+  content: "";
   display: inline-block;
   width: 22px;
   height: 22px;
   margin-left: 8px;
-  background-image: url('../img/arrowright.png');
+  background-image: url("../img/arrowright.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -318,10 +322,10 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   }
 
   .info {
-    left: 52vw;      /* Le bloc commence toujours à 52% de la gauche */
-    right: 20px;     /* MAIS il doit s'arrêter à 20px du bord droit */
-    width: auto;     /* On laisse le navigateur calculer la largeur */
-    max-width: 90%;  /* Sécurité pour ne pas qu'il soit trop large */
+    left: 52vw; /* Le bloc commence toujours à 52% de la gauche */
+    right: 20px; /* MAIS il doit s'arrêter à 20px du bord droit */
+    width: auto; /* On laisse le navigateur calculer la largeur */
+    max-width: 90%; /* Sécurité pour ne pas qu'il soit trop large */
   }
 }
 
@@ -363,24 +367,30 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   z-index: 10000; /* Plus haut que .loading-screen */
 }
 
-/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
+/* ----------------------------- FLECHE SCROLL (scroll-down-arrow) ----------------------------- */
 .scroll-down-arrow {
-  position: fixed; /* Fixe la flèche par rapport à la fenêtre */
-  bottom: 40px; /* Positionne la flèche à 20px du bas */
-  left: 50%; /* Centre horizontalement */
-  transform: translateX(-50%); /* Centre la flèche */
-  z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
-  width: 40px; /* Ajuste la largeur de l'image */
-  height: auto; /* Garde les proportions de l'image */
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 40px;
+  height: auto;
   text-align: center;
-  pointer-events: auto; /* Empêche les interactions avec la flèche */
+  pointer-events: auto;
 }
 
 .scroll-down-arrow img {
-  width: 40px; /* Taille de l'image */
-  animation: scroll-down 2s infinite; /* Applique l'animation */
+  width: 40px;
+  animation: scroll-down 2s infinite;
   opacity: 0;
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  cursor: pointer;
+  /* Accessibilité : focus visible */
+  outline: none;
+}
+.scroll-down-arrow img:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 @keyframes scroll-down {
@@ -390,18 +400,19 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
   }
   50% {
     opacity: 1;
-    transform: translateY(10px); /* Déplace légèrement vers le bas */
+    transform: translateY(10px);
   }
   100% {
     opacity: 0;
-    transform: translateY(20px); /* Déplace encore plus vers le bas */
+    transform: translateY(20px);
   }
 }
 
+/* Flèche up : rotation + animation inverse */
 .scroll-down-arrow.up img {
   transform: rotate(180deg);
   animation: scroll-up 2s infinite;
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  cursor: pointer;
 }
 
 @keyframes scroll-up {
@@ -418,9 +429,14 @@ transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
     transform: rotate(180deg) translateY(0px);
   }
 }
+
+/* Responsive : réduit la taille sur mobile */
+@media (max-width: 600px) {
+  .scroll-down-arrow {
+    display: none !important;
+  }
+}
 /* Loading  */
-
-
 
 /* @media (max-width: 1400px) {
   html { font-size: 16px; }

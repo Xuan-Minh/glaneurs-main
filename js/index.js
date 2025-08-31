@@ -425,48 +425,4 @@ $(function () {
   slides.forEach((slide) => observer.observe(slide));
 });
 // --------------------------------- Scroll Down Arrow --------------------------------- //
-gsap.to(".scroll-down-arrow div", {
-  y: 20,
-  opacity: 0,
-  repeat: -1,
-  yoyo: true,
-  duration: 1,
-  ease: "power2.inOut",
-});
-
-$(document).on(
-  "click",
-  ".scroll-down-arrow, .scroll-down-arrow img",
-  function () {
-    const $arrow = $(this).closest(".scroll-down-arrow");
-    console.log(
-      "[DEBUG] Flèche cliquée. $arrow:",
-      $arrow.get(0),
-      "hasClass up:",
-      $arrow.hasClass("up")
-    );
-    if ($arrow.hasClass("up")) {
-      console.log("[DEBUG] Action : scroll to top");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      resetSlideState(null); // Réinitialise toutes les slides
-    } else {
-      console.log("[DEBUG] Action : scroll to next slide");
-      resetSlideState(null); // Réinitialise toutes les slides
-      const $slides = $(".slides");
-      let nextSlide = null;
-      $slides.each(function (i, slide) {
-        const rect = slide.getBoundingClientRect();
-        if (rect.top > 10) {
-          nextSlide = slide;
-          return false;
-        }
-      });
-      if (nextSlide) {
-        console.log("[DEBUG] Scroll vers la slide suivante", nextSlide);
-        nextSlide.scrollIntoView({ behavior: "smooth" });
-      } else {
-        console.log("[DEBUG] Aucune slide suivante trouvée");
-      }
-    }
-  }
-);
+// La logique de la flèche scroll est désormais centralisée dans main.js pour éviter toute duplication et garantir la cohérence sur toutes les pages.
