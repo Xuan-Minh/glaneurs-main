@@ -68,8 +68,23 @@
         <div class="team-face team-info">
             <div class="team-name">
                 <?php
+                // Détermine dynamiquement la colonne du nom selon la langue, avec fallback
                 $nom_col = 'nom_' . $lang;
-                echo htmlspecialchars($membre[$nom_col] ?? $membre['nom_fr']);
+                if (!empty($membre[$nom_col])) {
+                    echo htmlspecialchars($membre[$nom_col]);
+                } elseif (!empty($membre['nom_fr'])) {
+                    echo htmlspecialchars($membre['nom_fr']);
+                } elseif (!empty($membre['nom_en'])) {
+                    echo htmlspecialchars($membre['nom_en']);
+                } else {
+                    // Dernier recours : affiche n'importe quelle colonne nom existante
+                    foreach ($membre as $key => $val) {
+                        if (strpos($key, 'nom_') === 0 && !empty($val)) {
+                            echo htmlspecialchars($val);
+                            break;
+                        }
+                    }
+                }
                 ?>
             </div>
             <div class="team-role">
