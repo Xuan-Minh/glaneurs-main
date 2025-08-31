@@ -131,7 +131,7 @@ if (!$isMobile) {
 
     <!------------------ VERSION DESKTOP ------------------>
     <?php if ($showLoading): ?>
-        <?php include 'includes/loading.php'; ?>
+    <?php include 'includes/components/loading.php'; ?>
     <?php endif; ?>
     <audio id="audio-arirang" src="audio/homepage.mp3" loop preload="auto"></audio>
     <?php include 'includes/header.php'; ?>
