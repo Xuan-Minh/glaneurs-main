@@ -148,7 +148,6 @@ header.hide-header {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 3px;
   transition: transform 0.3s ease; /* Ajoute une transition pour l'ensemble du conteneur */
 }
 

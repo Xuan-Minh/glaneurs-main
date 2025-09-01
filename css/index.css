@@ -412,30 +412,3 @@ button.visionner-trigger-h3:hover::after {
     display: none !important;
   }
 }
-/* Loading  */
-
-/* @media (max-width: 1400px) {
-  html { font-size: 16px; }
-}
-@media (max-width: 900px) {
-  html { font-size: 12px; }
-}
-@media (max-width: 700px), (max-height: 500px) {
-  body > *:not(.mobile-warning) { display: none !important; }
-  .mobile-warning {
-    display: flex !important;
-    position: fixed;
-    z-index: 999999;
-    background: var(--main-bg-color);
-    color: #fff;
-    width: 100vw;
-    height: 100vh;
-    top: 0; left: 0;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.3em;
-    padding: 5vw;
-  }
-}
-.mobile-warning { display: none; } */

@@ -78,9 +78,9 @@ if (!$isMobile) {
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
 
-        <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
-        <link rel="preload" href="img/posters/eaulow_poster.png" as="image">
-        <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="img/posters/eaulow_poster.png" as="image" type="image/png">
+    <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4">
 
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -95,9 +95,8 @@ if (!$isMobile) {
 
 <?php if ($isMobile): ?>
     
-    <!------------------ VERSION MOBILE ------------------>
       <?php
-        // On extrait l'ID Vimeo de la première slide (le documentaire complet)
+    // Extraction de l'ID Vimeo depuis l'URL
         $vimeoId_full_doc = substr($slides[0]["srcdocupart"], strrpos($slides[0]["srcdocupart"], '/') + 1);
     ?>
     <div class="mobile-only">
@@ -129,7 +128,7 @@ if (!$isMobile) {
 
 <?php else: ?>
 
-    <!------------------ VERSION DESKTOP ------------------>
+    <!------------------ WEBDEV BY XUAN-MINH TRAN ------------------>
     <?php if ($showLoading): ?>
     <?php include 'includes/layout/loading.php'; ?>
     <?php endif; ?>

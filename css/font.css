@@ -2,7 +2,7 @@
 @font-face {
   font-family: "Figtree";
   src: url("../font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
-   font-display: swap; /* Ajoutez cette ligne */
+  font-display: swap; /* Ajoutez cette ligne */
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     format("truetype");
   font-weight: normal;
   font-style: normal;
-   font-display: swap; /* Ajoutez cette ligne */
+  font-display: swap; /* Ajoutez cette ligne */
 }
 @font-face {
   font-family: "Libre Baskerville";
@@ -38,7 +38,6 @@
 }
 /* Noto Sans KR : import de toutes les graisses */
 
-
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Light.ttf") format("truetype");
@@ -59,22 +58,4 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap; /* Ajoutez cette ligne */
-}
-
-/* Pour tous les titres en coréen, remplace Libre Baskerville par Noto Sans KR */
-.ko-lang h1,
-.ko-lang h2,
-.ko-lang h3,
-.ko-lang h4,
-.ko-lang h5,
-.ko-lang h6,
-.ko-lang div {
-  /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
-  font-weight: 500 !important; 
-  font-display: swap;  */
-}
-.ko-lang .archive-title,
-.ko-lang .page-intro h2 {
-  /* font-family: "Noto Sans KR", "Nanum Gothic", Arial, sans-serif !important;
-  font-display: swap; Ajoutez cette ligne */
 }
