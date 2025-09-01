@@ -2,8 +2,8 @@ const parcours = [
   {
     name: "Départ",
     url: "https://maps.app.goo.gl/u1R9US5hK9gfwUajN9",
-    lat: 35.12915419555454, // à compléter
-    lng: 129.08841790649618, // à compléter
+    lat: 35.12915419555454,
+    lng: 129.08841790649618,
   },
   {
     name: "Recyclerie",
