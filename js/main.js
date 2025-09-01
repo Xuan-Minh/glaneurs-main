@@ -375,14 +375,15 @@ $(document).on("click", ".lang-option", function () {
   $("#menuVolet").removeClass("open");
 
   // Lance l'animation overlay
-  $("#transition-overlay").removeClass("hide").addClass("active");
+  const $overlay = $("#transition-overlay");
+  $overlay.removeClass("hide").addClass("active");
 
-  // Après la transition, change la langue via l'URL
-  setTimeout(function () {
+  // Attend la fin réelle de la transition CSS avant de changer la langue
+  $overlay.one("transitionend", function () {
     let url = new URL(window.location.href);
     url.searchParams.set("lang", lang);
     window.location.href = url.toString();
-  }, 700); // 700ms = durée de la transition CSS
+  });
 });
 
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
