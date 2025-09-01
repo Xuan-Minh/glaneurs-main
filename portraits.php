@@ -101,10 +101,6 @@ function display_portrait_content($portrait_id, $lang) {
 <body>
 
     <?php include "includes/layout/header.php"; ?>
-    <!-- <div class="volume-control">
-        <label for="volumeRange">Volume&nbsp;:</label>
-        <input type="range" id="volumeRange" min="0" max="1" step="0.01" value="0.4">
-    </div> -->
 
      <div class="portraits-container">
         <div class="portrait-section section1" data-target="#detail1" data-audio="audio/arirang_bass.mp3">
