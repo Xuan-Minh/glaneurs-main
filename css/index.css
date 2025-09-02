@@ -24,9 +24,6 @@ body {
   overflow-x: hidden;
   /* Utiliser 'proximity' rend le snap moins strict et améliore le ressenti au wheel/touchpad */
   scroll-snap-type: y mandatory;
-  /* Améliorations pour touchpad/mobile et header */
-  touch-action: pan-y;
-  scroll-padding-top: var(--header-height, 70px);
   margin: 0;
   padding: 0;
   scrollbar-width: none; /* Cacher la barre de défilement dans Firefox */
