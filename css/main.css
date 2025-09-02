@@ -13,8 +13,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: var(--main-bg-color);
-  /* Désactivé pour éviter que le lissage global rende la molette non réactive */
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   overflow-x: hidden;
   max-width: 100vw;
@@ -25,7 +24,7 @@ body {
   overflow-x: hidden;
   /* scrollbar-color: var(--main-bg-color) var(--main-bg-color); */
 }
-button {
+button{
   background-color: transparent;
   border: none;
   padding: 0; /* Réinitialise l'espacement interne */
@@ -71,13 +70,13 @@ h2 {
   font-family: "Libre Baskerville", serif;
   font-weight: normal;
   letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 .page-intro h2 {
   /* font-size: 2.2em; */
   font-size: clamp(1.8rem, 3vw, 2.5rem); /* Exemple avec clamp */
-  margin-bottom: 0.5em;
-}
+  margin-bottom: 0.5em;}
+
 
 p {
   font-size: clamp(0.9rem, 1.6vw, 1.1rem);
@@ -127,17 +126,17 @@ p {
     filter: blur(12px);
   }
 }
-.preserve-lines {
-  white-space: pre-wrap;
+.preserve-lines{
+  white-space: pre-wrap
 }
 
 #notification-popup {
   position: fixed;
   /* MODIFIÉ : Positionné en haut */
-  top: 20px;
+  top: 20px; 
   left: 50%;
   /* MODIFIÉ : Commence au-dessus de l'écran */
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -150%); 
   /* MODIFIÉ : Couleurs assorties aux boutons */
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px); /* Effet de verre pour la lisibilité */
@@ -147,17 +146,16 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 9999;
-  font-family: "Figtree", sans-serif;
+  font-family: 'Figtree', sans-serif;
   font-size: 0.9rem;
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s,
-    visibility 0.5s;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s, visibility 0.5s;
 }
 
 #notification-popup.show {
   opacity: 1;
   visibility: visible;
   /* MODIFIÉ : Glisse vers le bas pour apparaître */
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0); 
 }
