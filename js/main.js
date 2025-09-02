@@ -257,6 +257,60 @@ $(document).ready(function () {
   });
   const slides = document.querySelectorAll(".slides");
   const scrollArrow = document.querySelector(".scroll-down-arrow");
+  // Amélioration : rendre le scroll à la molette plus réactif sur la page d'accueil
+  // On transforme un unique 'wheel' significatif en saut vers la slide suivante/précédente.
+  // Débounce pour éviter les sauts multiples lors du même mouvement de molette.
+  if (slides.length) {
+    const container = document.querySelector(".container");
+    if (container) {
+      let wheelDebounce = false;
+      container.addEventListener(
+        "wheel",
+        (ev) => {
+          // Si un saut est déjà en cours, ignorer
+          if (wheelDebounce) return;
+          const delta = ev.deltaY;
+          // Seuil pour ignorer petits mouvements (touchpads, légers scrolls)
+          if (Math.abs(delta) < 40) return;
+          wheelDebounce = true;
+          // Empêche le scroll par défaut pendant le jump pour éviter double animation
+          ev.preventDefault();
+          if (delta > 0) {
+            // vers le bas : prochaine slide
+            const $slides = $(slides);
+            let nextSlide = null;
+            $slides.each(function (i, slide) {
+              const rect = slide.getBoundingClientRect();
+              if (rect.top > 10) {
+                nextSlide = slide;
+                return false;
+              }
+            });
+            if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
+          } else {
+            // vers le haut : slide précédente
+            const viewportMiddle = window.innerHeight / 2;
+            let currentIndex = 0;
+            let minDist = Infinity;
+            slides.forEach((slide, i) => {
+              const rect = slide.getBoundingClientRect();
+              const slideMiddle = rect.top + rect.height / 2;
+              const dist = Math.abs(slideMiddle - viewportMiddle);
+              if (dist < minDist) {
+                minDist = dist;
+                currentIndex = i;
+              }
+            });
+            if (currentIndex > 0)
+              slides[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
+          }
+          // Débounce : on réautorise après 600ms (suffisant pour l'animation smooth)
+          setTimeout(() => (wheelDebounce = false), 600);
+        },
+        { passive: false }
+      );
+    }
+  }
   if (slides.length && scrollArrow) {
     const observer = new IntersectionObserver(
       (entries) => {
