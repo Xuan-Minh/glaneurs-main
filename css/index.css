@@ -22,7 +22,11 @@ body {
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  /* Utiliser 'proximity' rend le snap moins strict et améliore le ressenti au wheel/touchpad */
   scroll-snap-type: y mandatory;
+  /* Améliorations pour touchpad/mobile et header */
+  touch-action: pan-y;
+  scroll-padding-top: var(--header-height, 70px);
   margin: 0;
   padding: 0;
   scrollbar-width: none; /* Cacher la barre de défilement dans Firefox */
@@ -52,10 +56,7 @@ button.visionner-trigger-h3 {
   font-weight: 400;
 }
 
-.slide2 h2,
-.slide3 h2 {
-  /* font-size: clamp(1.2rem, 3vw, 3em); */
-}
+/* Styles spécifiques pour slide2/slide3 sont gérés plus bas si nécessaire. */
 
 h2 {
   position: relative;

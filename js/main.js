@@ -286,7 +286,7 @@ $(document).ready(function () {
                 return false;
               }
             });
-            if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
+            if (nextSlide) nextSlide.scrollIntoView({ behavior: "auto" });
           } else {
             // vers le haut : slide précédente
             const viewportMiddle = window.innerHeight / 2;
@@ -302,7 +302,7 @@ $(document).ready(function () {
               }
             });
             if (currentIndex > 0)
-              slides[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
+              slides[currentIndex - 1].scrollIntoView({ behavior: "auto" });
           }
           // Débounce : on réautorise après 600ms (suffisant pour l'animation smooth)
           setTimeout(() => (wheelDebounce = false), 600);
