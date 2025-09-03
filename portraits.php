@@ -141,7 +141,7 @@ function display_portrait_content($portrait_id, $lang) {
         <div class="detail-content">
             <h2><?php echo getTranslation("portraits_lee", $lang); ?></h2>
             <?php display_portrait_content(2, $lang); ?>
-            <div id="map-parcours" style="width:100%;height:400px;margin:2em 0;"></div>
+            <div id="map-parcours" style="width:100%;height:400px;margin:20px 0;"></div>
             <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
         </div>
     </section>

@@ -15,7 +15,7 @@
 
 /* NOUVEAU : Classe pour révéler le conteneur */
 .portraits-container.loaded {
-    opacity: 1;
+  opacity: 1;
 }
 
 .portrait-section {
@@ -34,9 +34,15 @@
 .portrait-section::after {
   content: "";
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 18vh;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--main-bg-color) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--main-bg-color) 100%
+  );
   z-index: 2;
   pointer-events: none;
 }
@@ -57,10 +63,18 @@
 }
 
 /* Ajustements spécifiques des vidéos */
-.section1-video { transform: translate(-45%, -50%); }
-.section2-video { transform: translate(-40%, -50%); }
-.section3-video { transform: translate(-70%, -45%); }
-.section4-video { transform: translate(-45%, -55%); }
+.section1-video {
+  transform: translate(-45%, -50%);
+}
+.section2-video {
+  transform: translate(-40%, -50%);
+}
+.section3-video {
+  transform: translate(-70%, -45%);
+}
+.section4-video {
+  transform: translate(-45%, -55%);
+}
 
 /* États : survol et section active */
 .portrait-section.active,
@@ -89,6 +103,8 @@
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
+
+  /* Styles pour la carte Leaflet (fond transparent, points et tracé visibles) */
   pointer-events: none;
   z-index: 3;
 }
@@ -159,13 +175,13 @@
   height: auto;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .portrait-image-gallery .archive-gallery-item:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .portrait-image-gallery .archive-gallery-item img {
@@ -189,7 +205,8 @@
 
 .portrait-break-video video {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -200,7 +217,7 @@
 
 .portrait-break-video::before,
 .portrait-break-video::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   width: 100%;
@@ -210,12 +227,20 @@
 
 .portrait-break-video::before {
   top: 0;
-  background: linear-gradient(to bottom, var(--main-bg-color) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--main-bg-color) 0%,
+    transparent 100%
+  );
 }
 
 .portrait-break-video::after {
   bottom: 0;
-  background: linear-gradient(to top, var(--main-bg-color) 0%, transparent 100%);
+  background: linear-gradient(
+    to top,
+    var(--main-bg-color) 0%,
+    transparent 100%
+  );
 }
 
 /* --- 2.3 Superposition de texte sur la vidéo --- */
@@ -243,13 +268,21 @@
 .video-text-overlay.position-left {
   left: 0;
   justify-content: flex-start;
-  background: linear-gradient(to right, var(--main-bg-color) 70%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    var(--main-bg-color) 70%,
+    transparent 100%
+  );
 }
 
 .video-text-overlay.position-right {
   right: 0;
   justify-content: flex-end;
-  background: linear-gradient(to left, var(--main-bg-color) 70%, transparent 100%);
+  background: linear-gradient(
+    to left,
+    var(--main-bg-color) 70%,
+    transparent 100%
+  );
 }
 
 /* ==========================================================================
@@ -281,7 +314,7 @@
 }
 
 .back-to-portraits span::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -346,10 +379,18 @@
 
 /* --- Tablettes --- */
 @media (max-width: 992px) {
-  .section1-video { transform: translate(-45%, -50%) scale(0.9); }
-  .section2-video { transform: translate(-40%, -50%) scale(0.9); }
-  .section3-video { transform: translate(-65%, -45%) scale(0.9); }
-  .section4-video { transform: translate(-45%, -55%) scale(0.9); }
+  .section1-video {
+    transform: translate(-45%, -50%) scale(0.9);
+  }
+  .section2-video {
+    transform: translate(-40%, -50%) scale(0.9);
+  }
+  .section3-video {
+    transform: translate(-65%, -45%) scale(0.9);
+  }
+  .section4-video {
+    transform: translate(-45%, -55%) scale(0.9);
+  }
 
   .portrait-section.active,
   .portrait-section:hover {
@@ -376,10 +417,18 @@
 
 /* --- Mobiles --- */
 @media (max-width: 768px) {
-  .section1-video { transform: translate(-45%, -50%) scale(0.8); }
-  .section2-video { transform: translate(-42.5%, -50%) scale(0.8); }
-  .section3-video { transform: translate(-65%, -46%) scale(0.8); }
-  .section4-video { transform: translate(-45%, -55%) scale(0.8); }
+  .section1-video {
+    transform: translate(-45%, -50%) scale(0.8);
+  }
+  .section2-video {
+    transform: translate(-42.5%, -50%) scale(0.8);
+  }
+  .section3-video {
+    transform: translate(-65%, -46%) scale(0.8);
+  }
+  .section4-video {
+    transform: translate(-45%, -55%) scale(0.8);
+  }
 
   .portrait-section.active,
   .portrait-section:hover {
@@ -420,4 +469,41 @@
     width: clamp(60px, 12vw, 100px);
     height: clamp(25px, 6vw, 35px);
   }
+}
+
+/* Leaflet: fond transparent et masquage des tuiles */
+#map-parcours,
+.leaflet-container {
+  background: transparent !important;
+}
+.leaflet-pane .leaflet-tile-pane {
+  display: none;
+}
+.leaflet-container .leaflet-control-container {
+  display: none;
+}
+.leaflet-overlay-pane svg {
+  overflow: visible;
+}
+
+#map-parcours {
+  width: 100%;
+  height: 400px;
+  background: transparent;
+  position: relative;
+}
+.parcours-line {
+  stroke: #ffffff;
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+}
+.svg-point {
+  cursor: pointer;
+}
+.svg-popup {
+  transform: translate(-50%, -100%);
+  white-space: nowrap;
+  font-size: 13px;
+  z-index: 10;
 }
