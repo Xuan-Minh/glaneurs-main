@@ -51,7 +51,20 @@ button.visionner-trigger-h3 {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-weight: 400;
 }
-
+.index-soustitre {
+  font-size: clamp(1.5rem, 2vw, 2.5em);
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
+  /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  font-weight: 300;
+}
 .slide2 h2,
 .slide3 h2 {
   /* font-size: clamp(1.2rem, 3vw, 3em); */
@@ -435,4 +448,18 @@ button.visionner-trigger-h3:hover::after {
   .scroll-down-arrow {
     display: none !important;
   }
+}
+.index-soustitre {
+  font-size: clamp(1.5rem, 2vw, 2.5em);
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
+  /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  font-weight: 300;
 }

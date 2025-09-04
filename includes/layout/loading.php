@@ -12,7 +12,7 @@
         </div>
         <div class="loading-item" id="loading-item2">
             <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", "fr") ?></div>
-            <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", "ko") ?></div>
+            <div class="loading-content loading-soustitre"><?php echo getTranslation("index_titre", "ko") ?></div>
         </div>
         <div class="loading-item" id="loading-item3">
             <div class="loading-content loading-text"><?php echo getTranslation("loading_production", $lang) ?>

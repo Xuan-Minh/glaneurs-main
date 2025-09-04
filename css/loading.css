@@ -100,7 +100,13 @@
   font-size: 2em !important;
   font-weight: 400;
   font-family: "Libre Baskerville", serif;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.loading-soustitre {
+  font-size: 1.5em !important;
+  font-weight: 400;
+  font-family: "Libre Baskerville", serif;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .def-texte {
@@ -119,13 +125,13 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-  max-width: 600px;
+  max-width: 400px;
   margin: 20px auto 0 auto;
   gap: 30px;
 }
 
 .universites img {
-  height: clamp(60px, 10vw, 120px);
+  height: clamp(60px, 6vw, 80px);
   width: auto;
   object-fit: contain;
 }
