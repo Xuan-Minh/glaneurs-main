@@ -119,7 +119,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: clamp(1em, 1.2vw, 1.2em);
+  font-size: clamp(1em, 1.2vw, 1.2 em);
 }
 
 .universites {
@@ -133,9 +133,42 @@
 }
 
 .universites img {
-  height: clamp(60px, 6vw, 80px);
+  display: block; /* évite les décalages basés sur la baseline */
+  height: clamp(50px, 6vw, 80px);
+  max-height: 80px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
+  margin: 0; /* réinitialise tout décalage */
+}
+
+/* S'assurer que les logos se centrent aussi quand ils passent sur plusieurs lignes */
+.universites {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sur écrans moyens et larges : forcer côte-à-côte et espacement symétrique */
+@media (min-width: 520px) {
+  .universites {
+    flex-wrap: nowrap; /* rester sur une ligne */
+    justify-content: space-evenly; /* espacement symétrique */
+    gap: clamp(24px, 4vw, 48px);
+    width: 60%;
+    max-width: 560px; /* zone centrée où les logos se répartissent */
+  }
+  .universites img {
+    height: clamp(56px, 5vw, 80px);
+    max-height: 80px;
+  }
+}
+
+/* Ajustement spécifique pour le logo UGE (plus petit que DE) */
+.universites img[src$="uge_white.svg"] {
+  height: clamp(36px, 5vw, 64px);
+  max-height: 64px;
+  width: auto;
 }
 
 /* ==========================================================================
