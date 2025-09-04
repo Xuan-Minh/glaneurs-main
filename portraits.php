@@ -18,6 +18,17 @@ function display_portrait_content($portrait_id, $lang) {
         $data_extra = json_decode($row['data_extra'], true);
 
         switch ($row['element_type']) {
+            case 'subtitle':
+            // classe visuelle déjà ajoutée : .portrait-subtitle
+            $base_classes = 'portrait-subtitle content-anim';
+            $custom_classes = '';
+            if (isset($data_extra['class']) && !empty($data_extra['class'])) {
+                $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
+            }
+            // $content contient déjà la version dans la bonne langue (voir le début de la fonction)
+            $other_content .= '<h3 class="' . $base_classes . $custom_classes . '">' . htmlspecialchars($content) . '</h3>';
+            break;
+
             case 'paragraph':
                $base_classes = 'preserve-lines content-anim';
                 $custom_classes = '';
@@ -33,7 +44,7 @@ function display_portrait_content($portrait_id, $lang) {
                 break;
 
                  // NOUVEAU : Cas pour la vidéo de séparation
-           case 'break_video':
+                  case 'break_video':
                 $video_html = '<video src="' . htmlspecialchars($content) . '" autoplay muted loop playsinline></video>';
                 
                 // On vérifie si du texte doit être affiché par-dessus

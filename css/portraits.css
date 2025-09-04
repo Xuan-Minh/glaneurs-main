@@ -151,6 +151,20 @@
   margin-bottom: 0.7em;
 }
 
+/* Subtitle style for portrait-detail (new element_type: subtitle) */
+.portrait-subtitle {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.8rem 0;
+  max-width: 85ch;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 400;
+  transition: opacity 0.36s ease, transform 0.36s ease;
+}
+
 .detail-content p {
   font-size: clamp(0.9rem, 1.8vw, 1.15rem);
   line-height: 1.6;
