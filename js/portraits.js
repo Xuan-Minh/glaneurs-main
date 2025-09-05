@@ -1,26 +1,32 @@
 // --- GESTION DE L'AUDIO (Web Audio API) ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const files = [
-  'audio/arirang_full.mp3',    // Ambiance globale
-  'audio/arirang_bass.mp3',   // Portrait 1
-  'audio/arirang_harp.mp3',   // Portrait 2
-  'audio/arirang_piano.mp3',  // Portrait 3
-  'audio/arirang_oboe.mp3'    // Portrait 4
+  "audio/arirang_full.mp3", // Ambiance globale
+  "audio/arirang_bass.mp3", // Portrait 1
+  "audio/arirang_harp.mp3", // Portrait 2
+  "audio/arirang_piano.mp3", // Portrait 3
+  "audio/arirang_oboe.mp3", // Portrait 4
 ];
 
-let buffers = [], sources = [], gains = [];
+let buffers = [],
+  sources = [],
+  gains = [];
 let keepFocus = false;
 let currentIndex = null;
 let masterVolume = 0.6;
 
 // Chargement de tous les fichiers audio
-Promise.all(files.map(url =>
-  fetch(url).then(r => r.arrayBuffer()).then(data => audioCtx.decodeAudioData(data))
-)).then(loadedBuffers => {
+Promise.all(
+  files.map((url) =>
+    fetch(url)
+      .then((r) => r.arrayBuffer())
+      .then((data) => audioCtx.decodeAudioData(data))
+  )
+).then((loadedBuffers) => {
   buffers = loadedBuffers;
   for (let i = 0; i < buffers.length; i++) {
     const gain = audioCtx.createGain();
-    gain.gain.value = (i === 0) ? 0.6 : 0;
+    gain.gain.value = i === 0 ? 0.6 : 0;
     const src = audioCtx.createBufferSource();
     src.buffer = buffers[i];
     src.loop = true;
@@ -42,26 +48,35 @@ function fadeTo(gainNode, to, duration = 1.2) {
   gainNode.gain.linearRampToValueAtTime(to * masterVolume, now + duration);
 }
 
-window.startPortraitsAudio = function() {
+window.startPortraitsAudio = function () {
   if (typeof isGloballyMuted !== "undefined" && isGloballyMuted) return;
   if (!window.portraitsAudioStarted && sources.length) {
     const now = audioCtx.currentTime + 0.1;
-    sources.forEach(src => { try { src.start(now); } catch(e) {} });
+    sources.forEach((src) => {
+      try {
+        src.start(now);
+      } catch (e) {}
+    });
     if (gains.length) {
       gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
-      gains[0].gain.linearRampToValueAtTime(masterVolume, audioCtx.currentTime + 1.2);
+      gains[0].gain.linearRampToValueAtTime(
+        masterVolume,
+        audioCtx.currentTime + 1.2
+      );
     }
     window.portraitsAudioStarted = true;
   }
-  if (typeof window.setPortraitsMuteState === 'function') {
-    window.setPortraitsMuteState(typeof isGloballyMuted !== "undefined" ? isGloballyMuted : true);
+  if (typeof window.setPortraitsMuteState === "function") {
+    window.setPortraitsMuteState(
+      typeof isGloballyMuted !== "undefined" ? isGloballyMuted : true
+    );
   }
   if (gains.length && audioCtx.state !== "running") {
     audioCtx.resume();
   }
 };
 
-window.setPortraitsMuteState = function(isMuted) {
+window.setPortraitsMuteState = function (isMuted) {
   const newMasterVolume = isMuted ? 0 : 0.6;
   if (masterVolume === newMasterVolume) return;
   masterVolume = newMasterVolume;
@@ -70,30 +85,49 @@ window.setPortraitsMuteState = function(isMuted) {
     gains.forEach((g, i) => fadeTo(g, i === currentIndex ? 1 : 0, duration));
   } else {
     fadeTo(gains[0], 1, duration);
-    gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, duration); });
+    gains.forEach((g, i) => {
+      if (i > 0) fadeTo(g, 0, duration);
+    });
   }
 };
 
+// Expose a promise-based API to request a fade out that callers can await.
+// duration is in milliseconds and corresponds to the maximum time we should wait
+// for the fades scheduled by setPortraitsMuteState to complete.
+window.requestPortraitsFadeOut = function (duration = 500) {
+  return new Promise((resolve) => {
+    try {
+      if (typeof window.setPortraitsMuteState === "function") {
+        // demand mute (portraits.js will schedule WebAudio ramps)
+        window.setPortraitsMuteState(true);
+      }
+    } catch (e) {
+      // ignore
+    }
+    // resolve after duration (allowing fades to complete). We keep a minimum guard.
+    const wait = Math.max(200, duration);
+    setTimeout(() => resolve(), wait);
+  });
+};
 
 // --- GESTION DES INTERACTIONS (jQuery) ---
 $(document).ready(function () {
-
   const container = $(".portraits-container");
 
   // 1. Fondu d'apparition synchronisé des vidéos
   if (container.length) {
-    const videos = container.find('.portrait-video');
-    const videoPromises = Array.from(videos).map(video => {
+    const videos = container.find(".portrait-video");
+    const videoPromises = Array.from(videos).map((video) => {
       return new Promise((resolve) => {
         if (video.readyState >= 3) {
           resolve();
         } else {
-          video.addEventListener('canplaythrough', resolve, { once: true });
+          video.addEventListener("canplaythrough", resolve, { once: true });
         }
       });
     });
     Promise.all(videoPromises).then(() => {
-      container.addClass('loaded');
+      container.addClass("loaded");
     });
   }
 
@@ -116,7 +150,9 @@ $(document).ready(function () {
     if (keepFocus || !gains.length) return;
     currentIndex = null;
     fadeTo(gains[0], 1, 1.2);
-    gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+    gains.forEach((g, i) => {
+      if (i > 0) fadeTo(g, 0, 0.6);
+    });
   });
 
   // 3. Clic sur un portrait
@@ -146,9 +182,10 @@ $(document).ready(function () {
     keepFocus = false;
     currentIndex = null;
     fadeTo(gains[0], 1, 1.2);
-    gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+    gains.forEach((g, i) => {
+      if (i > 0) fadeTo(g, 0, 0.6);
+    });
   });
-
 });
 
 // --- GESTIONNAIRES GLOBAUX (window) ---
@@ -158,22 +195,26 @@ window.addEventListener("scroll", function () {
     $(".portraits-container").removeClass("has-active");
     // Si on est revenu en haut manuellement, on réinitialise le son
     if (keepFocus) {
-        keepFocus = false;
-        currentIndex = null;
-        fadeTo(gains[0], 1, 1.2);
-        gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+      keepFocus = false;
+      currentIndex = null;
+      fadeTo(gains[0], 1, 1.2);
+      gains.forEach((g, i) => {
+        if (i > 0) fadeTo(g, 0, 0.6);
+      });
     }
   }
 });
 
 window.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "hidden") {
-    if (gains && gains.length) gains.forEach(g => fadeTo(g, 0, 2));
+    if (gains && gains.length) gains.forEach((g) => fadeTo(g, 0, 2));
   }
   if (document.visibilityState === "visible") {
     if (gains && gains.length && !keepFocus) {
       fadeTo(gains[0], 1, 1.2);
-      gains.forEach((g, i) => { if (i > 0) fadeTo(g, 0, 0.6); });
+      gains.forEach((g, i) => {
+        if (i > 0) fadeTo(g, 0, 0.6);
+      });
     }
     if (gains && gains.length && keepFocus && currentIndex !== null) {
       fadeTo(gains[0], 0, 1.2);
@@ -183,5 +224,5 @@ window.addEventListener("visibilitychange", function () {
 });
 
 window.addEventListener("beforeunload", function () {
-  if (gains && gains.length) gains.forEach(g => fadeTo(g, 0, 0.8));
+  if (gains && gains.length) gains.forEach((g) => fadeTo(g, 0, 0.8));
 });

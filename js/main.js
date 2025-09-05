@@ -1,16 +1,21 @@
-let fadeInterval = null;
+// Map pour stocker les intervals de fade par élément audio (évite la concurrence)
+const fadeIntervals = new WeakMap();
 let isGloballyMuted = true;
 let audioContextStarted = false;
 window.shouldPlayPortraitsAudio = false;
 
 function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
-  if (fadeInterval) clearInterval(fadeInterval); // Annule tout fade en cours
-  const start = audio.volume;
+  // Annule l'interval existant pour CE audio
+  const prev = fadeIntervals.get(audio);
+  if (prev) clearInterval(prev);
+
+  const start = Number(audio.volume) || 0;
   const step = (to - start) / (duration / 50);
   let current = start;
   let count = 0;
-  fadeInterval = setInterval(() => {
+
+  const id = setInterval(() => {
     current += step;
     count += 1;
     audio.volume = Math.max(0, Math.min(1, current));
@@ -20,11 +25,16 @@ function fadeAudio(audio, to, duration = 1000) {
       count > duration / 50
     ) {
       audio.volume = to;
-      clearInterval(fadeInterval);
-      fadeInterval = null;
-      if (to === 0) audio.pause();
+      clearInterval(id);
+      fadeIntervals.delete(audio);
+      if (to === 0)
+        try {
+          audio.pause();
+        } catch (e) {}
     }
   }, 50);
+
+  fadeIntervals.set(audio, id);
 }
 
 function addHideHeaderOnScroll(scrollElement) {
@@ -63,6 +73,12 @@ function playArirangAudio() {
             );
             if (audio.error) {
               console.error("Audio error code:", audio.error.code);
+            }
+            // Indiquer à l'utilisateur qu'il doit interagir pour autoriser le son
+            if (typeof showNotification === "function") {
+              showNotification(
+                "Le son est bloqué par votre navigateur. Cliquez pour l'activer."
+              );
             }
             $(document).one("click.autoplay keydown.autoplay", function () {
               if (!isGloballyMuted) playArirangAudio();
@@ -131,6 +147,8 @@ $(document).ready(function () {
   // ----------------------------------------------- LOADING ---------------------------------- //
 
   window.addEventListener("beforeunload", stopArirangAudio);
+  // Symétrie : arrêter l'audio quand la page est cachée/chargée via bfcache
+  window.addEventListener("pagehide", stopArirangAudio);
   window.addEventListener("visibilitychange", function () {
     // Ne fait rien si l'utilisateur n'a jamais activé le son
     if (!audioContextStarted) return;
@@ -144,7 +162,7 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on("click", ".transition-link", function (e) {
+  $(document).on("click", ".transition-link", async function (e) {
     e.preventDefault();
     const href = $(this).attr("href");
 
@@ -166,15 +184,28 @@ $(document).ready(function () {
     }
 
     // Si on doit changer de page :
-    // 1. Gérer l'audio
+    // 1. Gérer l'audio (fade global + portraits)
     if (typeof stopArirangAudio === "function") stopArirangAudio();
+    // Si la page portraits expose une API promise-based, on attend son fade pour éviter
+    // une coupure franche. Sinon on attend un court délai pour laisser le fade local
+    // se produire.
+    const portraitsFadePromise =
+      typeof window.requestPortraitsFadeOut === "function"
+        ? window.requestPortraitsFadeOut(600)
+        : new Promise((res) => setTimeout(res, 300));
 
     // 2. Fermer le menu-volet (ne fait rien s'il est déjà fermé)
     $("#menuVolet").removeClass("open");
     $("#menuBurger").removeClass("open");
 
-    // 3. Lancer l'animation de transition
-    // On attend un peu que le menu se ferme visuellement
+    // 3. Attendre la fin du fade, puis lancer l'animation de transition
+    try {
+      await portraitsFadePromise;
+    } catch (e) {
+      // noop
+    }
+
+    // On attend un court délai pour la fermeture visuelle du menu
     setTimeout(function () {
       $("#transition-overlay").removeClass("hide").addClass("active");
       // On attend la fin de l'animation de l'overlay avant de changer de page
@@ -212,9 +243,17 @@ $(document).ready(function () {
     window.scrollTo(0, 0);
     $("body").css("overflow", "auto");
     $(".visionner").fadeOut(0);
-    if (typeof stopArirangAudio === "function") {
-      stopArirangAudio();
-    }
+    // Demande au module portraits de se fondre si présent, puis stop l'audio principal.
+    (async function () {
+      if (typeof window.requestPortraitsFadeOut === "function") {
+        try {
+          await window.requestPortraitsFadeOut(500);
+        } catch (e) {}
+      }
+      if (typeof stopArirangAudio === "function") {
+        stopArirangAudio();
+      }
+    })();
   });
 
   // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
@@ -574,7 +613,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const mediaElements = document.querySelectorAll("audio, video");
     mediaElements.forEach((media) => {
       if (media.tagName === "AUDIO") {
-        if (media.closest(".loading-screen")) {
+        // Ne pas forcer le muted immédiatement pour le player principal
+        if (media.id === "audio-arirang") {
+          // Laisser le contrôle de ce player à playArirangAudio/stopArirangAudio (fade)
+        } else if (media.closest(".loading-screen")) {
           media.muted = true;
         } else {
           media.muted = isGloballyMuted;
@@ -642,17 +684,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // L'icône peut maintenant gérer le changement d'état (muet/non muet).
     isGloballyMuted = !isGloballyMuted; // On inverse l'état
 
-    // Si on vient de réactiver le son, on s'assure que la lecture est bien lancée.
-    if (!isGloballyMuted) {
-      if (typeof playArirangAudio === "function") {
-        playArirangAudio();
-      }
-      if (typeof startPortraitsAudio === "function") {
-        startPortraitsAudio();
-      }
+    // Utiliser le fade plutôt que le mute instantané pour audio-arirang
+    if (isGloballyMuted) {
+      if (typeof stopArirangAudio === "function") stopArirangAudio();
+    } else {
+      if (typeof playArirangAudio === "function") playArirangAudio();
+      if (typeof startPortraitsAudio === "function") startPortraitsAudio();
     }
 
-    // On met à jour les éléments audio et l'icône.
+    // Mettre à jour les autres éléments audio et l'UI
     updateAudioElements();
     updateUI();
   }
