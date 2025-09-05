@@ -166,9 +166,13 @@
 
 /* Ajustement spécifique pour le logo UGE (plus petit que DE) */
 .universites img[src$="uge_white.svg"] {
-  height: clamp(36px, 5vw, 64px);
-  max-height: 64px;
+  /* Rendre UGE sensiblement plus petit que Dong-Eui */
+  height: clamp(28px, 4vw, 48px);
+  max-height: 48px;
   width: auto;
+  opacity: 0.98; /* léger ajustement visuel possible */
+  transform: translateY(0.5px); /* ajuste l'alignement optique si nécessaire */
+  display: block;
 }
 
 /* ==========================================================================
