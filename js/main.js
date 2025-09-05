@@ -4,6 +4,32 @@ let isGloballyMuted = true;
 let audioContextStarted = false;
 window.shouldPlayPortraitsAudio = false;
 
+// Petit helper de localisation pour messages UI (fr / ko / en)
+function getLocalizedMessage(key) {
+  const langAttr =
+    (document && document.documentElement && document.documentElement.lang) ||
+    "";
+  const nav = (navigator && navigator.language) || "";
+  const lang = (langAttr || nav).toLowerCase();
+  const locale = lang.startsWith("ko")
+    ? "ko"
+    : lang.startsWith("en")
+    ? "en"
+    : "fr";
+  const messages = {
+    autoplayBlocked: {
+      fr: "Le son est bloqué par votre navigateur. Cliquez pour l'activer.",
+      ko: "브라우저에서 소리가 차단되었습니다. 클릭하여 활성화하세요.",
+      en: "Audio is blocked by your browser. Click to enable it.",
+    },
+  };
+  return (
+    (messages[key] && messages[key][locale]) ||
+    (messages[key] && messages[key].fr) ||
+    ""
+  );
+}
+
 function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
   // Annule l'interval existant pour CE audio
@@ -76,9 +102,7 @@ function playArirangAudio() {
             }
             // Indiquer à l'utilisateur qu'il doit interagir pour autoriser le son
             if (typeof showNotification === "function") {
-              showNotification(
-                "Le son est bloqué par votre navigateur. Cliquez pour l'activer."
-              );
+              showNotification(getLocalizedMessage("autoplayBlocked"));
             }
             $(document).one("click.autoplay keydown.autoplay", function () {
               if (!isGloballyMuted) playArirangAudio();
@@ -97,6 +121,14 @@ function stopArirangAudio() {
   const audio = document.getElementById("audio-arirang");
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
+  // Assure l'arrêt de la waveform visuelle si elle tourne
+  try {
+    if (typeof window.animateWaveAmplitude === "function") {
+      window.animateWaveAmplitude(0, 300).catch(() => {});
+    }
+  } catch (e) {
+    // noop
+  }
 }
 
 $(document).on("keydown", function (e) {
@@ -606,9 +638,19 @@ document.addEventListener("DOMContentLoaded", () => {
     waveXOffset += 0.3;
     if (waveXOffset > Math.PI * 100) waveXOffset = 0;
 
-    // Continue la boucle d'animation tant que l'amplitude est non nulle
-    if (waveAmplitude > 0) {
-      animationFrameId = requestAnimationFrame(drawMovingWave);
+    // Continue la boucle d'animation tant que l'amplitude est suffisamment élevée.
+    // Utilise un seuil pour éviter les boucles infinies dues aux petites valeurs flottantes.
+    const RUN_THRESHOLD = 0.001;
+    if (waveAmplitude > RUN_THRESHOLD) {
+      // Ne crée qu'un seul RAF en même temps
+      if (!animationFrameId)
+        animationFrameId = requestAnimationFrame(drawMovingWave);
+      else animationFrameId = requestAnimationFrame(drawMovingWave);
+    } else {
+      // Arrête la boucle proprement
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+      drawFlatLine();
     }
   }
 
@@ -637,8 +679,10 @@ document.addEventListener("DOMContentLoaded", () => {
           _amplitudeAnim = null;
           // If amplitude reached 0, cancel draw loop and show flat line
           if (waveAmplitude <= 0) {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
+            if (animationFrameId) {
+              cancelAnimationFrame(animationFrameId);
+              animationFrameId = null;
+            }
             drawFlatLine();
           }
           resolve();
@@ -647,6 +691,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
       _amplitudeAnim = requestAnimationFrame(step);
     });
+  };
+
+  // Helper debug pour observer l'état de la waveform depuis la console
+  window.getWaveState = function () {
+    return {
+      waveAmplitude: typeof waveAmplitude === "number" ? waveAmplitude : null,
+      animationFrameRunning: !!animationFrameId,
+      amplitudeAnimRunning: !!_amplitudeAnim,
+      waveXOffset: waveXOffset,
+    };
+  };
+
+  // Helper pour forcer l'arrêt de toute animation de wave (utile pour debug)
+  window.stopWaveAnimation = function () {
+    try {
+      if (_amplitudeAnim) cancelAnimationFrame(_amplitudeAnim);
+    } catch (e) {}
+    _amplitudeAnim = null;
+    try {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    } catch (e) {}
+    animationFrameId = null;
+    try {
+      waveAmplitude = 0;
+    } catch (e) {}
+    try {
+      drawFlatLine();
+    } catch (e) {}
+    return window.getWaveState();
   };
 
   function updateAudioElements() {
@@ -707,6 +780,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Hint visuel : pulse temporairement la waveform même si le son est coupé.
+  // Utilisé pour tester la proposition #3 (wave hint).
+  function hintWave(duration = 600) {
+    // Si la waveform n'existe pas, rien
+    if (typeof window.animateWaveAmplitude !== "function")
+      return Promise.resolve();
+    // Montre l'amplitude brièvement puis retourne à l'état précédent
+    const from = waveAmplitude;
+    return window
+      .animateWaveAmplitude(1, Math.min(300, duration / 2))
+      .then(() => {
+        return window.animateWaveAmplitude(from, Math.max(300, duration / 2));
+      });
+  }
+
+  // Raccourci clavier utile pour tests locaux : 'w' déclenche le hint
+  document.addEventListener("keydown", function (e) {
+    if (e.key && e.key.toLowerCase() === "w") {
+      hintWave(800).catch(() => {});
+    }
+  });
+
   function initAudio() {
     if (audioContextStarted) return;
 
@@ -728,6 +823,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateAudioElements();
     updateUI();
+    // Met à jour le CTA flottant si présent
+    try {
+      if (typeof updateSoundCTA === "function") updateSoundCTA();
+    } catch (e) {}
   }
 
   function handleSoundIconClick() {
@@ -752,6 +851,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mettre à jour les autres éléments audio et l'UI
     updateAudioElements();
     updateUI();
+    // Met à jour le CTA flottant
+    try {
+      if (typeof updateSoundCTA === "function") updateSoundCTA();
+    } catch (e) {}
   }
 
   audioContainer.addEventListener("click", handleSoundIconClick);
@@ -760,10 +863,49 @@ document.addEventListener("DOMContentLoaded", () => {
   if (enterButton) {
     enterButton.addEventListener("click", initAudio);
   }
-
   // État initial au chargement (prend en compte le localStorage)
+  // Création du bouton flottant sound CTA (IIFE)
+  (function createSoundCTA() {
+    if (document.getElementById("sound-cta")) return;
+    const cta = document.createElement("button");
+    cta.id = "sound-cta";
+    cta.setAttribute("aria-label", "Activer le son");
+    cta.setAttribute("title", "Activer le son");
+    // Inline styles garantis
+    cta.style.cssText =
+      "position:fixed;right:18px;bottom:18px;z-index:9999;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.94);display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);cursor:pointer;border:none;";
+    cta.innerHTML =
+      '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M4 9v6h4l5 4V5L8 9H4z"/></svg>';
+    cta.addEventListener("click", function () {
+      if (typeof initAudio === "function") initAudio();
+      cta.classList.remove("pulse");
+      cta.style.display = "none";
+    });
+    document.body.appendChild(cta);
+  })();
+
+  // Met à jour l'affichage du CTA selon l'état global
+  function updateSoundCTA() {
+    const cta = document.getElementById("sound-cta");
+    if (!cta) return;
+    // Montrer le CTA si l'audio n'a pas encore été initialisé (invite à activer)
+    if (!audioContextStarted) {
+      cta.classList.add("pulse");
+      cta.style.display = "flex";
+      cta.setAttribute("aria-hidden", "false");
+    } else {
+      cta.classList.remove("pulse");
+      cta.style.display = "none";
+      cta.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  // Initial UI sync
   updateUI();
   updateAudioElements();
+  try {
+    updateSoundCTA();
+  } catch (e) {}
 });
 
 /**
@@ -783,6 +925,24 @@ function showNotification(message, duration = 3000) {
   // Définit le message et affiche la notification
   notification.textContent = message;
   notification.classList.add("show");
+
+  // Si la waveform visuelle est disponible, lui demander un petit fade-out (atténuation) pour attirer l'attention
+  try {
+    const from =
+      typeof window.waveAmplitude === "number" ? window.waveAmplitude : 1;
+    if (typeof window.animateWaveAmplitude === "function") {
+      // Anime vers 0 puis restaure l'amplitude précédente
+      window
+        .animateWaveAmplitude(0, Math.min(300, 800 / 2))
+        .then(() => window.animateWaveAmplitude(from, Math.max(300, 800 / 2)))
+        .catch(() => {});
+    } else if (typeof window.hintWave === "function") {
+      // Si hintWave existe mais animateWaveAmplitude non, on l'utilise en fallback
+      window.hintWave(800).catch(() => {});
+    }
+  } catch (e) {
+    // noop
+  }
 
   // Cache la notification après la durée spécifiée
   setTimeout(() => {
