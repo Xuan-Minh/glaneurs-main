@@ -550,9 +550,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = waveCanvas.getContext("2d");
   const canvasWidth = waveCanvas.width;
   const canvasHeight = waveCanvas.height;
-
   let animationFrameId;
   let waveXOffset = 0;
+  // Amplitude factor 0..1 for the visual wave; we animate this value for smooth fallback
+  let waveAmplitude = isGloballyMuted ? 0 : 1;
+  let _amplitudeAnim = null; // RAF id for amplitude animation
 
   // --- NOUVELLE LOGIQUE DE PERSISTANCE ---
   // Au chargement de la page, on vérifie si l'utilisateur a déjà activé le son par le passé.
@@ -592,10 +594,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.beginPath();
     ctx.moveTo(0, canvasHeight / 2);
+    const amplitude = waveAmplitude * (canvasHeight / 3.5);
     for (let x = 0; x < canvasWidth; x++) {
       const y =
-        canvasHeight / 2 +
-        Math.sin((x + waveXOffset) * 0.4) * (canvasHeight / 3.5);
+        canvasHeight / 2 + Math.sin((x + waveXOffset) * 0.4) * amplitude;
       ctx.lineTo(x, y);
     }
     ctx.strokeStyle = "white";
@@ -604,10 +606,48 @@ document.addEventListener("DOMContentLoaded", () => {
     waveXOffset += 0.3;
     if (waveXOffset > Math.PI * 100) waveXOffset = 0;
 
-    if (!isGloballyMuted) {
+    // Continue la boucle d'animation tant que l'amplitude est non nulle
+    if (waveAmplitude > 0) {
       animationFrameId = requestAnimationFrame(drawMovingWave);
     }
   }
+
+  // Animate the visual wave amplitude from current value to `to` (0..1) over duration ms.
+  // Returns a Promise that resolves when animation completes.
+  window.animateWaveAmplitude = function (to, duration = 500) {
+    if (_amplitudeAnim) cancelAnimationFrame(_amplitudeAnim);
+    const start = performance.now();
+    const from = waveAmplitude;
+    const diff = to - from;
+
+    return new Promise((resolve) => {
+      function step(now) {
+        const t = Math.min(1, (now - start) / Math.max(1, duration));
+        // ease-out
+        const eased = 1 - Math.pow(1 - t, 3);
+        waveAmplitude = from + diff * eased;
+        // If we are animating towards non-zero amplitude, ensure the draw loop runs
+        if (waveAmplitude > 0 && !animationFrameId) {
+          animationFrameId = requestAnimationFrame(drawMovingWave);
+        }
+        if (t < 1) {
+          _amplitudeAnim = requestAnimationFrame(step);
+        } else {
+          waveAmplitude = to;
+          _amplitudeAnim = null;
+          // If amplitude reached 0, cancel draw loop and show flat line
+          if (waveAmplitude <= 0) {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+            drawFlatLine();
+          }
+          resolve();
+        }
+      }
+
+      _amplitudeAnim = requestAnimationFrame(step);
+    });
+  };
 
   function updateAudioElements() {
     const mediaElements = document.querySelectorAll("audio, video");
@@ -635,14 +675,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isGloballyMuted) {
       iconSoundOn.classList.add("icon-hidden");
       iconSoundOff.classList.remove("icon-hidden");
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
+      // Smoothly animate the visible waveform to a flat line
+      if (typeof window.animateWaveAmplitude === "function") {
+        window.animateWaveAmplitude(0, 600).catch(() => {});
+      } else {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        drawFlatLine();
       }
-      drawFlatLine();
     } else {
       iconSoundOn.classList.remove("icon-hidden");
       iconSoundOff.classList.add("icon-hidden");
-      drawMovingWave();
+      // Animate amplitude back to full and start moving wave
+      if (typeof window.animateWaveAmplitude === "function") {
+        window
+          .animateWaveAmplitude(1, 600)
+          .then(() => {
+            if (!animationFrameId)
+              animationFrameId = requestAnimationFrame(drawMovingWave);
+          })
+          .catch(() => {
+            if (!animationFrameId)
+              animationFrameId = requestAnimationFrame(drawMovingWave);
+          });
+      } else {
+        drawMovingWave();
+      }
     }
     // On sauvegarde l'état uniquement après la première interaction
     if (audioContextStarted) {
