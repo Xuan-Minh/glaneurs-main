@@ -124,6 +124,8 @@ let authorFadeInTimer = null;
 function showInfoPanel($slide) {
   if (!$slide || !$slide.length) return;
 
+  const isFirst = $slide.hasClass("slide1");
+
   const $h2 = $slide.find("h2");
   const $info = $slide.find(".info");
   const $point2 = $slide.find(".point2");
@@ -135,20 +137,29 @@ function showInfoPanel($slide) {
 
   fadeVisionnerTriggerH3($slide, true);
 
-  $h2.addClass("animate-transform");
-  requestAnimationFrame(() => {
-    $h2.addClass("move");
-  });
+  // Si c'est la première slide, on évite d'appliquer le zoom / flou pour conserver la mise en page
+  if (!isFirst) {
+    $h2.addClass("animate-transform");
+    requestAnimationFrame(() => {
+      $h2.addClass("move");
+    });
 
-  // C'est la bonne méthode : on utilise un timer fiable.
-  authorFadeInTimer = setTimeout(() => {
-    $h2.addClass("author-visible");
-  }, 1500); // 1.5s, comme la transition CSS
+    // C'est la bonne méthode : on utilise un timer fiable.
+    authorFadeInTimer = setTimeout(() => {
+      $h2.addClass("author-visible");
+    }, 1500); // 1.5s, comme la transition CSS
+  } else {
+    console.debug(
+      "showInfoPanel: première slide détectée, saut des classes move/author-visible/flou"
+    );
+  }
 
   $info.fadeIn(500);
   $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
   $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-  $slide.find("video").addClass("flou");
+  if (!isFirst) {
+    $slide.find("video").addClass("flou");
+  }
 }
 
 /**
@@ -307,6 +318,32 @@ function removeFocusTrap(container) {
   }
 }
 
+// Debug: observer pour détecter l'ajout de la classe 'flou' sur les vidéos des slides
+try {
+  const _mutObserver = new MutationObserver((mutations) => {
+    mutations.forEach((m) => {
+      if (m.type === "attributes" && m.attributeName === "class") {
+        const t = m.target;
+        if (t && t.matches && t.matches(".slides > video")) {
+          if (t.classList.contains("flou")) {
+            console.debug(
+              "MutationObserver: flou ajouté à",
+              t.closest(".slides") ? t.closest(".slides").className : t
+            );
+          }
+        }
+      }
+    });
+  });
+  document
+    .querySelectorAll(".slides > video")
+    .forEach((v) =>
+      _mutObserver.observe(v, { attributes: true, attributeFilter: ["class"] })
+    );
+} catch (e) {
+  // ignore si le navigateur ne supporte pas MutationObserver
+}
+
 $(".close-visionner").click(function (event) {
   event.stopPropagation();
   const slide = $(this).closest(".slides");
@@ -326,17 +363,27 @@ $(".close-visionner").click(function (event) {
   info.fadeIn(2000);
 
   const $h2 = slide.find("h2");
-  if (!$h2.hasClass("move")) {
-    triggerH2TransformAnimation($h2);
+  const isFirst = slide.hasClass("slide1");
+  if (!isFirst) {
+    if (!$h2.hasClass("move")) {
+      triggerH2TransformAnimation($h2);
+    }
+    $h2.addClass("move");
+
+    // C'est la bonne méthode : on utilise un timer fiable.
+    authorFadeInTimer = setTimeout(() => {
+      $h2.addClass("author-visible");
+    }, 1500); // 1.5s, comme la transition CSS
+
+    slide.find("video").addClass("flou");
+  } else {
+    console.debug(
+      ".close-visionner: première slide — pas de flou/zoom appliqué"
+    );
+    // S'assurer qu'aucune classe indésirable ne reste
+    $h2.removeClass("move author-visible animate-transform");
+    slide.find("video").removeClass("flou");
   }
-  $h2.addClass("move");
-
-  // C'est la bonne méthode : on utilise un timer fiable.
-  authorFadeInTimer = setTimeout(() => {
-    $h2.addClass("author-visible");
-  }, 1500); // 1.5s, comme la transition CSS
-
-  slide.find("video").addClass("flou");
   slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
 });
@@ -349,6 +396,12 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   lastFocusedElement = $(this);
   stopArirangAudio();
   const slide = $(this).closest(".slides");
+  const isFirstSlide = slide.hasClass("slide1");
+  // Prévenir tout flicker : retirer immédiatement les classes flou/move si première slide
+  if (isFirstSlide) {
+    slide.find("video").removeClass("flou");
+    slide.find("h2").removeClass("move author-visible animate-transform");
+  }
   const visionner = slide.find(".visionner");
   const vimeoId = $(this).data("vimeo");
   const lang = $(this).data("lang") || "fr";
@@ -376,9 +429,17 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       $("body").css("overflow", "auto");
       const info = slide.find(".info");
       info.fadeIn(2000);
-      slide.find("h2").addClass("move");
-      fadeVisionnerTriggerH3(slide, true);
-      slide.find("video").addClass("flou");
+      // Pour la première slide, ne pas appliquer le zoom ni le flou pour garder la cohérence visuelle
+      if (!isFirstSlide) {
+        slide.find("h2").addClass("move");
+        fadeVisionnerTriggerH3(slide, true);
+        slide.find("video").addClass("flou");
+      } else {
+        // S'assurer que la première slide ne garde pas de classes d'animation indésirables
+        slide.find("h2").removeClass("move author-visible animate-transform");
+        fadeVisionnerTriggerH3(slide, false);
+        slide.find("video").removeClass("flou");
+      }
       slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
       slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
     });
@@ -389,6 +450,12 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       $("body").css("overflow", "hidden");
       slide.find(".info").fadeOut(0);
       focusTrap(visionner);
+      // Si c'est la première slide, veille à ne pas appliquer le flou/zoom
+      if (isFirstSlide) {
+        slide.find("video").removeClass("flou");
+        slide.find("h2").removeClass("move author-visible animate-transform");
+        fadeVisionnerTriggerH3(slide, false);
+      }
     })
     .css("display", "flex");
 });
