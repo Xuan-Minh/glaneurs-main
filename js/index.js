@@ -331,6 +331,11 @@ $(".close-visionner").click(function (event) {
   }
   $h2.addClass("move");
 
+  // C'est la bonne méthode : on utilise un timer fiable.
+  authorFadeInTimer = setTimeout(() => {
+    $h2.addClass("author-visible");
+  }, 1500); // 1.5s, comme la transition CSS
+
   slide.find("video").addClass("flou");
   slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
   slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
