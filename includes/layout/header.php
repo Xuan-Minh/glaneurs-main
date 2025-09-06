@@ -31,7 +31,20 @@
     </div>
 
     <!-- Contrôle audio global -->
-    <div id="global-audio-control-container" title="<?php echo getTranslation('Audio ON/OFF', $lang); ?>">
+    <?php
+    // Lecture sécurisée du titre du contrôle audio : si la traduction manque,
+    // on fournit un fallback localisé pour éviter d'afficher le placeholder.
+    $audioTitle = getTranslation('Audio ON/OFF', $lang);
+    if (strpos($audioTitle, 'TRADUCTION_MANQUANTE:') === 0) {
+        $fallbacks = [
+            'fr' => 'Activer / désactiver le son',
+            'en' => 'Toggle audio',
+            'ko' => '오디오 켜기/끄기'
+        ];
+        $audioTitle = isset($fallbacks[$lang]) ? $fallbacks[$lang] : $fallbacks['fr'];
+    }
+    ?>
+    <div id="global-audio-control-container" title="<?php echo htmlspecialchars($audioTitle, ENT_QUOTES, 'UTF-8'); ?>">
         <svg id="icon-sound-on" viewBox="0 0 24 24">
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
         </svg>
@@ -42,6 +55,16 @@
     </div>
 </header>
 
+<!-- Expose minimal translations pour JS -->
+<script>
+    window.I18N = window.I18N || {};
+    <?php $__t = getTranslation('autoplayBlocked', $lang); if (strpos($__t, 'TRADUCTION_MANQUANTE:') === false) { ?>
+    window.I18N.autoplayBlocked = <?php echo json_encode($__t); ?>;
+    <?php } ?>
+    <?php $__t2 = getTranslation('portraits_enable_sound', $lang); if (strpos($__t2, 'TRADUCTION_MANQUANTE:') === false) { ?>
+    window.I18N.portraitsEnableSound = <?php echo json_encode($__t2); ?>;
+    <?php } ?>
+</script>
 <!-- Menu volet latéral (navigation principale) -->
 <div class="menu-volet" id="menuVolet">
     <div class="menu-volet-content">
