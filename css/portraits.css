@@ -216,7 +216,17 @@
   overflow: hidden;
   pointer-events: none;
 }
+/* Accessibility helpers for overlays and focusable informational regions */
+.accessible-focusable:focus {
+  outline: 3px solid #ffd54f; /* high-contrast focus ring */
+  outline-offset: 4px;
+}
 
+.portraits-sound-overlay__content[role="status"] {
+  /* ensure contrast and readable font for assistive tech */
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
+}
 .portrait-break-video video {
   position: absolute;
   top: 0;

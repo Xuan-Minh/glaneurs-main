@@ -30,6 +30,15 @@ function getLocalizedMessage(key) {
   );
 }
 
+// Helper qui lit les messages exposés côté serveur (window.I18N) si disponible
+function getI18nMessage(key) {
+  try {
+    if (window && window.I18N && typeof window.I18N[key] === "string")
+      return window.I18N[key];
+  } catch (e) {}
+  return getLocalizedMessage(key);
+}
+
 function fadeAudio(audio, to, duration = 1000) {
   if (!audio) return;
   // Annule l'interval existant pour CE audio
@@ -119,7 +128,7 @@ function playArirangAudio() {
                 // double-check: ne pas montrer si audio s'est mis à jouer
                 const mainAudio = document.getElementById("audio-arirang");
                 if (!(mainAudio && !mainAudio.paused)) {
-                  showNotification(getLocalizedMessage("autoplayBlocked"));
+                  showNotification(getI18nMessage("autoplayBlocked"));
                 }
               }
             } catch (e) {
@@ -143,7 +152,7 @@ function playArirangAudio() {
                   if (typeof showNotification === "function") {
                     // double-check: ne pas montrer si audio s'est mis à jouer juste avant
                     if (!(a && !a.paused && a.currentTime > 0)) {
-                      showNotification(getLocalizedMessage("autoplayBlocked"));
+                      showNotification(getI18nMessage("autoplayBlocked"));
                     }
                   }
                 } catch (e) {}
@@ -654,6 +663,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!audioContainer || !waveCanvas || !iconSoundOn || !iconSoundOff) {
     return;
   }
+
+  // Accessible overlay support: si un overlay informatif est injecté côté JS/HTML,
+  // s'assurer qu'il est lisible par les lecteurs d'écran et focusable.
+  try {
+    const overlayContent = document.querySelector(
+      ".portraits-sound-overlay__content"
+    );
+    if (overlayContent) {
+      // role=status permet aux lecteurs d'écran d'annoncer le contenu non interactif
+      // si l'overlay nécessite interaction, role=dialog serait plus approprié.
+      if (!overlayContent.hasAttribute("role"))
+        overlayContent.setAttribute("role", "status");
+      if (!overlayContent.hasAttribute("aria-live"))
+        overlayContent.setAttribute("aria-live", "polite");
+      // Rendre focusable pour tab-order et permettre aux lecteurs d'écran d'y aller
+      if (!overlayContent.hasAttribute("tabindex"))
+        overlayContent.setAttribute("tabindex", "-1");
+      // Assurer une visibilité de focus
+      overlayContent.classList.add("accessible-focusable");
+    }
+  } catch (e) {}
 
   const ctx = waveCanvas.getContext("2d");
   const canvasWidth = waveCanvas.width;
