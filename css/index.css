@@ -51,20 +51,7 @@ button.visionner-trigger-h3 {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-weight: 400;
 }
-.index-soustitre {
-  font-size: clamp(1.5rem, 2vw, 2.5em);
-  position: absolute;
-  color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
-  /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  font-weight: 300;
-}
+
 .slide2 h2,
 .slide3 h2 {
   /* font-size: clamp(1.2rem, 3vw, 3em); */
@@ -380,30 +367,24 @@ button.visionner-trigger-h3:hover::after {
   z-index: 10000; /* Plus haut que .loading-screen */
 }
 
-/* ----------------------------- FLECHE SCROLL (scroll-down-arrow) ----------------------------- */
+/* ----------------------------- FLECHE DE MERDE -------------------------------------- */
 .scroll-down-arrow {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  width: 40px;
-  height: auto;
+  position: fixed; /* Fixe la flèche par rapport à la fenêtre */
+  bottom: 40px; /* Positionne la flèche à 20px du bas */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%); /* Centre la flèche */
+  z-index: 10; /* Assure que la flèche est au-dessus des autres éléments */
+  width: 40px; /* Ajuste la largeur de l'image */
+  height: auto; /* Garde les proportions de l'image */
   text-align: center;
-  pointer-events: auto;
+  pointer-events: auto; /* Empêche les interactions avec la flèche */
 }
 
 .scroll-down-arrow img {
-  width: 40px;
-  animation: scroll-down 2s infinite;
+  width: 40px; /* Taille de l'image */
+  animation: scroll-down 2s infinite; /* Applique l'animation */
   opacity: 0;
-  cursor: pointer;
-  /* Accessibilité : focus visible */
-  outline: none;
-}
-.scroll-down-arrow img:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
 }
 
 @keyframes scroll-down {
@@ -413,19 +394,18 @@ button.visionner-trigger-h3:hover::after {
   }
   50% {
     opacity: 1;
-    transform: translateY(10px);
+    transform: translateY(10px); /* Déplace légèrement vers le bas */
   }
   100% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px); /* Déplace encore plus vers le bas */
   }
 }
 
-/* Flèche up : rotation + animation inverse */
 .scroll-down-arrow.up img {
   transform: rotate(180deg);
   animation: scroll-up 2s infinite;
-  cursor: pointer;
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
 }
 
 @keyframes scroll-up {
@@ -442,24 +422,30 @@ button.visionner-trigger-h3:hover::after {
     transform: rotate(180deg) translateY(0px);
   }
 }
+/* Loading  */
 
-/* Responsive : réduit la taille sur mobile */
-@media (max-width: 600px) {
-  .scroll-down-arrow {
-    display: none !important;
+/* @media (max-width: 1400px) {
+  html { font-size: 16px; }
+}
+@media (max-width: 900px) {
+  html { font-size: 12px; }
+}
+@media (max-width: 700px), (max-height: 500px) {
+  body > *:not(.mobile-warning) { display: none !important; }
+  .mobile-warning {
+    display: flex !important;
+    position: fixed;
+    z-index: 999999;
+    background: var(--main-bg-color);
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5vw;
   }
 }
-.index-soustitre {
-  font-size: clamp(1.5rem, 2vw, 2.5em);
-  position: absolute;
-  color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
-  /* white-space: nowrap; */ /* On retire cette ligne pour permettre le retour à la ligne dans l'état .move */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  font-weight: 300;
-}
+.mobile-warning { display: none; } */

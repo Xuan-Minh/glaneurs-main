@@ -120,7 +120,7 @@ header.hide-header {
   bottom: -3px;
   width: 0;
   height: 2px;
-  background: #fffcd5;
+  background: #ddd;
   transition: width 0.3s;
   border-radius: 2px; /* Arrondi les bords du soulignement */
 }
@@ -131,7 +131,7 @@ header.hide-header {
 }
 
 .lang-option.active {
-  color: #fffcd5;
+  color: #ddd;
   font-weight: bold;
 }
 
@@ -165,35 +165,35 @@ header.hide-header {
 
 .menu-burger:hover span:nth-child(1) {
   transform: scaleX(1);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 .menu-burger:hover span:nth-child(2) {
   transform: scaleX(0.8);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 .menu-burger:hover span:nth-child(3) {
   transform: scaleX(0.6);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 
 .menu-burger.open span:nth-child(1) {
   transform: scaleX(0.9) rotate(-45deg);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 .menu-burger.open span:nth-child(2) {
   opacity: 0;
 }
 .menu-burger.open span:nth-child(3) {
   transform: scaleX(0.9) rotate(45deg);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 .menu-burger.open:hover span:nth-child(1) {
   transform: scaleX(0.9) rotate(-45deg);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 .menu-burger.open:hover span:nth-child(3) {
   transform: scaleX(0.9) rotate(45deg);
-  background-color: #fffcd5;
+  background-color: #ddd;
 }
 
 /* --------------------- MENU VOLET ------------------------------------------- */
