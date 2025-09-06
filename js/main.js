@@ -823,10 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateAudioElements();
     updateUI();
-    // Met à jour le CTA flottant si présent
-    try {
-      if (typeof updateSoundCTA === "function") updateSoundCTA();
-    } catch (e) {}
+    // Le CTA flottant a été retiré — plus de mise à jour nécessaire
   }
 
   function handleSoundIconClick() {
@@ -851,10 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mettre à jour les autres éléments audio et l'UI
     updateAudioElements();
     updateUI();
-    // Met à jour le CTA flottant
-    try {
-      if (typeof updateSoundCTA === "function") updateSoundCTA();
-    } catch (e) {}
+    // CTA retiré — plus d'appel nécessaire
   }
 
   audioContainer.addEventListener("click", handleSoundIconClick);
@@ -864,48 +858,12 @@ document.addEventListener("DOMContentLoaded", () => {
     enterButton.addEventListener("click", initAudio);
   }
   // État initial au chargement (prend en compte le localStorage)
-  // Création du bouton flottant sound CTA (IIFE)
-  (function createSoundCTA() {
-    if (document.getElementById("sound-cta")) return;
-    const cta = document.createElement("button");
-    cta.id = "sound-cta";
-    cta.setAttribute("aria-label", "Activer le son");
-    cta.setAttribute("title", "Activer le son");
-    // Inline styles garantis
-    cta.style.cssText =
-      "position:fixed;right:18px;bottom:18px;z-index:9999;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.94);display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);cursor:pointer;border:none;";
-    cta.innerHTML =
-      '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M4 9v6h4l5 4V5L8 9H4z"/></svg>';
-    cta.addEventListener("click", function () {
-      if (typeof initAudio === "function") initAudio();
-      cta.classList.remove("pulse");
-      cta.style.display = "none";
-    });
-    document.body.appendChild(cta);
-  })();
-
-  // Met à jour l'affichage du CTA selon l'état global
-  function updateSoundCTA() {
-    const cta = document.getElementById("sound-cta");
-    if (!cta) return;
-    // Montrer le CTA si l'audio n'a pas encore été initialisé (invite à activer)
-    if (!audioContextStarted) {
-      cta.classList.add("pulse");
-      cta.style.display = "flex";
-      cta.setAttribute("aria-hidden", "false");
-    } else {
-      cta.classList.remove("pulse");
-      cta.style.display = "none";
-      cta.setAttribute("aria-hidden", "true");
-    }
-  }
+  // Le CTA flottant a été retiré car sa fonction est redondante avec la notification.
 
   // Initial UI sync
   updateUI();
   updateAudioElements();
-  try {
-    updateSoundCTA();
-  } catch (e) {}
+  // CTA supprimé — pas d'appel nécessaire
 });
 
 /**
