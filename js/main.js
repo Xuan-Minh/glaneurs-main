@@ -608,6 +608,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let waveXOffset = 0;
   // Amplitude factor 0..1 for the visual wave; we animate this value for smooth fallback
   let waveAmplitude = isGloballyMuted ? 0 : 1;
+  // Expose for external modules and notifications
+  window.waveAmplitude = waveAmplitude;
   let _amplitudeAnim = null; // RAF id for amplitude animation
 
   // --- NOUVELLE LOGIQUE DE PERSISTANCE ---
@@ -645,6 +647,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawMovingWave() {
+    // Nous sommes dans une frame exécutée par RAF : réinitialise l'id courant
+    animationFrameId = null;
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.beginPath();
     ctx.moveTo(0, canvasHeight / 2);
@@ -664,14 +668,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Utilise un seuil pour éviter les boucles infinies dues aux petites valeurs flottantes.
     const RUN_THRESHOLD = 0.001;
     if (waveAmplitude > RUN_THRESHOLD) {
-      // Ne crée qu'un seul RAF en même temps
+      // Planifie la prochaine frame si aucune n'est en file
       if (!animationFrameId)
         animationFrameId = requestAnimationFrame(drawMovingWave);
-      else animationFrameId = requestAnimationFrame(drawMovingWave);
     } else {
       // Arrête la boucle proprement
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      animationFrameId = null;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
       drawFlatLine();
     }
   }
@@ -690,6 +695,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // ease-out
         const eased = 1 - Math.pow(1 - t, 3);
         waveAmplitude = from + diff * eased;
+        // exposer l'état courant pour les autres modules
+        try {
+          window.waveAmplitude = waveAmplitude;
+        } catch (e) {}
         // If we are animating towards non-zero amplitude, ensure the draw loop runs
         if (waveAmplitude > 0 && !animationFrameId) {
           animationFrameId = requestAnimationFrame(drawMovingWave);
@@ -698,6 +707,9 @@ document.addEventListener("DOMContentLoaded", () => {
           _amplitudeAnim = requestAnimationFrame(step);
         } else {
           waveAmplitude = to;
+          try {
+            window.waveAmplitude = waveAmplitude;
+          } catch (e) {}
           _amplitudeAnim = null;
           // If amplitude reached 0, cancel draw loop and show flat line
           if (waveAmplitude <= 0) {
@@ -737,6 +749,9 @@ document.addEventListener("DOMContentLoaded", () => {
     animationFrameId = null;
     try {
       waveAmplitude = 0;
+      try {
+        window.waveAmplitude = 0;
+      } catch (e) {}
     } catch (e) {}
     try {
       drawFlatLine();
