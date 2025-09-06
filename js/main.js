@@ -188,9 +188,23 @@ $(document).ready(function () {
     if (document.visibilityState === "hidden") {
       stopArirangAudio();
     }
-    // Ne relance le son que s'il n'est pas coupé globalement
-    if (document.visibilityState === "visible" && !isGloballyMuted) {
-      playArirangAudio();
+    // Quand la page redevient visible, relancer l'audio et l'animation de la wave
+    if (document.visibilityState === "visible") {
+      if (!isGloballyMuted) {
+        try {
+          if (typeof playArirangAudio === "function") playArirangAudio();
+        } catch (e) {}
+      }
+      // S'assurer que la waveform visuelle revient à son état (animateWaveAmplitude / updateUI)
+      try {
+        if (typeof updateUI === "function") {
+          updateUI();
+        } else if (typeof window.animateWaveAmplitude === "function") {
+          window
+            .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
+            .catch(() => {});
+        }
+      } catch (e) {}
     }
   });
 
@@ -286,6 +300,14 @@ $(document).ready(function () {
         stopArirangAudio();
       }
     })();
+    // Réinitialise l'UI audio / waveform lors du retour depuis le bfcache
+    try {
+      if (typeof updateUI === "function") updateUI();
+      else if (typeof window.animateWaveAmplitude === "function")
+        window
+          .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
+          .catch(() => {});
+    } catch (e) {}
   });
 
   // --- ANIMATION D'ENTRÉE POUR UN CHARGEMENT NORMAL ---
