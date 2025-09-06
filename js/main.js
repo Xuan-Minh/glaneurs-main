@@ -195,15 +195,18 @@ $(document).ready(function () {
           if (typeof playArirangAudio === "function") playArirangAudio();
         } catch (e) {}
       }
-      // S'assurer que la waveform visuelle revient à son état (animateWaveAmplitude / updateUI)
+      // S'assurer que la waveform visuelle revient à son état (planifié sur la frame suivante
+      // pour éviter une animation qui paraîtrait déjà terminée au refresh de l'onglet).
       try {
-        if (typeof updateUI === "function") {
-          updateUI();
-        } else if (typeof window.animateWaveAmplitude === "function") {
-          window
-            .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
-            .catch(() => {});
-        }
+        requestAnimationFrame(() => {
+          if (typeof updateUI === "function") {
+            updateUI();
+          } else if (typeof window.animateWaveAmplitude === "function") {
+            window
+              .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
+              .catch(() => {});
+          }
+        });
       } catch (e) {}
     }
   });
@@ -302,11 +305,13 @@ $(document).ready(function () {
     })();
     // Réinitialise l'UI audio / waveform lors du retour depuis le bfcache
     try {
-      if (typeof updateUI === "function") updateUI();
-      else if (typeof window.animateWaveAmplitude === "function")
-        window
-          .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
-          .catch(() => {});
+      requestAnimationFrame(() => {
+        if (typeof updateUI === "function") updateUI();
+        else if (typeof window.animateWaveAmplitude === "function")
+          window
+            .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
+            .catch(() => {});
+      });
     } catch (e) {}
   });
 
