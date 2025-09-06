@@ -97,17 +97,66 @@ function playArirangAudio() {
               "Arirang audio autoplay was prevented or failed:",
               error
             );
-            if (audio.error) {
+            if (audio && audio.error) {
               console.error("Audio error code:", audio.error.code);
             }
-            // Indiquer à l'utilisateur qu'il doit interagir pour autoriser le son
-            if (typeof showNotification === "function") {
-              showNotification(getLocalizedMessage("autoplayBlocked"));
+
+            // Certains navigateurs rejettent la Promise mais démarrent quand même la
+            // lecture. Dans ce cas, éviter d'afficher la notification inutilement.
+            try {
+              if (audio && !audio.paused && audio.currentTime > 0) {
+                // La lecture a bien commencé malgré le rejet : on enlève les handlers
+                $(document).off("click.autoplay keydown.autoplay");
+                return;
+              }
+            } catch (e) {
+              // noop
             }
+
+            // Indiquer à l'utilisateur qu'il doit interagir pour autoriser le son
+            try {
+              if (typeof showNotification === "function") {
+                // double-check: ne pas montrer si audio s'est mis à jouer
+                const mainAudio = document.getElementById("audio-arirang");
+                if (!(mainAudio && !mainAudio.paused)) {
+                  showNotification(getLocalizedMessage("autoplayBlocked"));
+                }
+              }
+            } catch (e) {
+              // noop
+            }
+
             $(document).one("click.autoplay keydown.autoplay", function () {
               if (!isGloballyMuted) playArirangAudio();
             });
           });
+        // Safety: certains navigateurs peuvent résoudre/rejeter de façon incohérente.
+        // Après un court délai, vérifier si la lecture a effectivement avancé ; si non,
+        // afficher la notification d'autoplay bloqué (heuristique complémentaire).
+        setTimeout(() => {
+          try {
+            const a = document.getElementById("audio-arirang");
+            if (a) {
+              const consideredBlocked = a.paused || a.currentTime === 0;
+              if (consideredBlocked) {
+                try {
+                  if (typeof showNotification === "function") {
+                    // double-check: ne pas montrer si audio s'est mis à jouer juste avant
+                    if (!(a && !a.paused && a.currentTime > 0)) {
+                      showNotification(getLocalizedMessage("autoplayBlocked"));
+                    }
+                  }
+                } catch (e) {}
+                // Installer un handler one-shot pour relancer au prochain événement utilisateur
+                $(document).one("click.autoplay keydown.autoplay", function () {
+                  if (!isGloballyMuted) playArirangAudio();
+                });
+              }
+            }
+          } catch (e) {
+            // noop
+          }
+        }, 600);
       }
     } else if (!audio.muted && audio.volume < 0.3) {
       fadeAudio(audio, 0.3, 2000);
@@ -920,6 +969,17 @@ function showNotification(message, duration = 3000) {
     notification = document.createElement("div");
     notification.id = "notification-popup";
     document.body.appendChild(notification);
+  }
+
+  // Si l'audio principal est déjà en train de jouer, on évite d'afficher
+  // une notification (empêche les faux-positifs d'autoplay).
+  try {
+    const arirang = document.getElementById("audio-arirang");
+    if (arirang && !arirang.paused && arirang.currentTime > 0) {
+      return; // audio déjà en cours => ne pas afficher la popup
+    }
+  } catch (e) {
+    // noop
   }
 
   // Définit le message et affiche la notification
