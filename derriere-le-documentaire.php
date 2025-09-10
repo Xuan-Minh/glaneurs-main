@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/derriereledocumentaire.css">
    <?php $pdo = getPDO();
 
-    // NOUVELLE REQUÊTE OPTIMISÉE (1 seule requête au lieu de N+1)
     $query = "
         SELECT 
             m.*, 

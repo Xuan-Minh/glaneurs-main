@@ -3,6 +3,7 @@ const fadeIntervals = new WeakMap();
 let isGloballyMuted = true;
 let audioContextStarted = false;
 window.shouldPlayPortraitsAudio = false;
+window.isLangSwitching = false;
 
 // Petit helper de localisation pour messages UI (fr / ko / en)
 function getLocalizedMessage(key) {
@@ -576,26 +577,32 @@ $(".menu-video-item").on("mouseleave", function () {
 
 // ----------------------------------------------- LANGUE ---------------------------------- //
 
-$(document).on("click", ".lang-option", function () {
-  let lang = $(this).data("lang");
+$(document).on("click", ".lang-option", function (e) {
+  e.preventDefault();
+  window.isLangSwitching = true;
+  let lang = $(this).data("lang") || $(this).attr("lang");
   if ($(this).hasClass("active")) return;
 
   $(".lang-option").removeClass("active");
   $(this).addClass("active");
   $("#menuVolet").removeClass("open");
 
-  // Lance l'animation overlay
-  const $overlay = $("#transition-overlay");
-  $overlay.removeClass("hide").addClass("active");
+  // Transition sonore : fade out audio et wave
+  if (typeof stopArirangAudio === "function") stopArirangAudio();
+  if (typeof window.animateWaveAmplitude === "function")
+    window.animateWaveAmplitude(0, 600);
 
-  // Attend la fin réelle de la transition CSS avant de changer la langue
-  $overlay.one("transitionend", function () {
+  // Animation fade-in sur la page de départ
+  const $overlay = $("#transition-overlay");
+  $overlay.removeClass("hide").addClass("active fade-in");
+
+  // Attendre ~700ms pour laisser le fade-in s'afficher, puis changer la langue
+  setTimeout(function () {
     let url = new URL(window.location.href);
     url.searchParams.set("lang", lang);
     window.location.href = url.toString();
-  });
+  }, 700); // même durée que la transition CSS
 });
-
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
 let lastScroll = 0;
 const $header = $("header");
@@ -647,8 +654,8 @@ document.addEventListener("click", function (e) {
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
-    if (!$(".loading-screen").length) {
-      $("#transition-overlay").addClass("hide"); // .hide déclenche la transition CSS
+    if (!window.isLangSwitching) {
+      $("#transition-overlay").addClass("hide");
     }
   }, 50);
 });

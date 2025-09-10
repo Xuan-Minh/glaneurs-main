@@ -69,7 +69,6 @@ if (!$isMobile) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo getTranslation("index_titre", $lang) ?></title>
     
-    <?php // On charge les CSS différemment ?>
     <?php if ($isMobile): ?>
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/index.php?lang=<?php echo $lang; ?>" />
