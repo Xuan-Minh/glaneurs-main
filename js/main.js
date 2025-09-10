@@ -994,22 +994,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // CTA supprimé — pas d'appel nécessaire
 });
 
-// Initialisation de Lenis pour détecter les mouvements lents
-const lenis = new Lenis({
-  duration: 0.6, // Durée rapide pour un défilement fluide
-  easing: (t) => t, // Easing linéaire pour une réponse immédiate
-  smooth: true,
-  gestureMultiplier: 1.5, // Sensibilité accrue aux gestes
-  touchMultiplier: 3.0, // Augmente la sensibilité aux mouvements lents
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
-
 /**
  * Affiche une notification en bas de l'écran.
  * @param {string} message Le message à afficher.
