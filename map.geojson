@@ -4,7 +4,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Départ"
+        "name_fr": "Rencontre avec Mr Lee (Départ)",
+        "name_en": "Meeting with Mr Lee (Start)",
+        "name_ko": "이씨와의 만남 (출발)",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -15,7 +21,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Recyclerie"
+        "name_fr": "Le centre de recyclerie - Début du parcours",
+        "name_en": "The recycling center - Start of the route",
+        "name_ko": "재활용 센터 - 경로 시작",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -25,7 +37,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Pharmacie"
+        "name_fr": "La pharmacie",
+        "name_en": "The pharmacy",
+        "name_ko": "약국",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -36,7 +54,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "GS25 (Recharge SD)"
+        "name_fr": "Le GS25",
+        "name_en": "The GS25",
+        "name_ko": "GS25",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -47,7 +71,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Entrepôt"
+        "name_fr": "L'entrepôt et le batiment en construction",
+        "name_en": "The warehouse and the building under construction",
+        "name_ko": "창고 및 건설 중인 건물",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -58,7 +88,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Immeuble"
+        "name_fr": "L'immeuble municipal",
+        "name_en": "The municipal building",
+        "name_ko": "시청 건물",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -69,7 +105,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Arrivée (Recyclerie)"
+        "name": "Arrivée (Recyclerie)",
+        "description_fr": "Description en français.",
+        "description_en": "Description in English.",
+        "description_ko": "한국어 설명.",
+        "image": "img/archives/recyclerie.jpg"
       },
       "geometry": {
         "type": "Point",

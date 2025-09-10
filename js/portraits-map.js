@@ -112,10 +112,26 @@ document.addEventListener("DOMContentLoaded", function () {
           f.geometry.coordinates[1] === points[i][1]
       );
       const props = (feat && feat.properties) || {};
+      // Langue courante (html lang ou navigateur)
+      const lang = (
+        document.documentElement.lang ||
+        navigator.language ||
+        "fr"
+      ).slice(0, 2);
+      // Titre multilingue
+      const title =
+        props[`name_${lang}`] ||
+        props.name_fr ||
+        props.name ||
+        `Point ${i + 1}`;
+      // Description multilingue
+      const desc =
+        props[`description_${lang}`] ||
+        props.description_fr ||
+        props.description ||
+        LOREM;
       // choose a seed for placeholder images (prefer name when available)
-      const seed = props.name
-        ? String(props.name).replace(/\s+/g, "-")
-        : `pt-${i}`;
+      const seed = title ? String(title).replace(/\s+/g, "-") : `pt-${i}`;
       const placeholder = `https://picsum.photos/seed/${encodeURIComponent(
         seed
       )}/600/360`;
@@ -123,8 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const lat = points[i] && points[i][1];
       return {
         index: i,
-        name: props.name || `Point ${i + 1}`,
-        description: props.description || LOREM,
+        name: title,
+        description: desc,
         image: props.image || placeholder,
         fraction: pointFractions[i],
         coords:
