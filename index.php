@@ -1,4 +1,3 @@
-
 <?php
 header("Vary: User-Agent");
 include 'includes/lang.php';
@@ -89,6 +88,7 @@ if (!$isMobile) {
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
     <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />
     <link rel="alternate" hreflang="ko" href="https://glaneursdecarton.mastercmw.com/?lang=ko" />
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js"></script>
 </head>
 <body>
 
