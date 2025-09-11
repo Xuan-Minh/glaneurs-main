@@ -39,9 +39,14 @@
     </p>
 
     <h3><?php echo getTranslation("mentionslegales_propriete_intellectuelle_titre", $lang) ?><br></h3>
-    <p class="preserve-lines">
-      <?php echo getTranslation("mentionslegales_propriete_intellectuelle_texte", $lang) ?>
-    </p>
+    <ul class="propriete-intellectuelle-list">
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_film", $lang) ?></li>
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_site", $lang) ?></li>
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_ambiances", $lang) ?></li>
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_arirang", $lang) ?></li>
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_musique", $lang) ?></li>
+      <li><?php echo getTranslation("mentionslegales_propriete_intellectuelle_photos", $lang) ?></li>
+    </ul>
     <h3><?php echo getTranslation("mentionslegales_donnees_personnelles_titre", $lang) ?><br></h3>
     <p><?php echo getTranslation("mentionslegales_donnees_personnelles_texte", $lang) ?>
     </p>
