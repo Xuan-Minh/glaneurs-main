@@ -96,12 +96,21 @@
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 400;
   opacity: 0.85;
-  margin: 0;
   line-height: 1.6;
+}
+
+.dld-remerciements .styled-paragraph {
+  text-indent: 2em;
+  margin-top: 1em;
 }
 
 #last-paragraph {
   margin-bottom: 5vh;
+}
+
+.styled-paragraph {
+  text-indent: 2em;
+  margin-bottom: 1em;
 }
 
 /* ==========================================================================

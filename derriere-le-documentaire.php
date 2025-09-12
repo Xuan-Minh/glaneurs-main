@@ -101,29 +101,44 @@
 <?php endforeach; ?>
     </div>
 
-    <section class="dld-remerciements content-anim preserve-lines">
+    <section class="dld-remerciements content-anim">
         <h2><?php echo getTranslation("remerciements_titre", $lang); ?></h2>
-        <p>
-            <?php echo getTranslation("derriereledocumentaire_messagemerci", $lang); ?></p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_messagemerci_p1", $lang); ?>
+        </p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_messagemerci_p2", $lang); ?>
+        </p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_messagemerci_p3", $lang); ?>
+        </p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_messagemerci_p4", $lang); ?>
+        </p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_messagemerci_p5", $lang); ?>
+        </p>
     </section>       
     <section class="dld-remerciements content-anim">
         <h2><?php echo getTranslation('derriereledocumentaire_collaborationtitre', $lang); ?></h2>
-        <p>
+        <p class="styled-paragraph"> 
             <?php echo getTranslation('derriereledocumentaire_collaboration', $lang); ?>
         </p>
     </section>
     <section class="dld-remerciements content-anim">
          <h2><?php echo getTranslation('derriereledocumentaire_soutienstitre' , $lang); ?></h2>
-         <p class="preserve-lines">
+        <p class="styled-paragraph">
             <?php echo getTranslation('derriereledocumentaire_soutiens', $lang); ?>
-         </p><p class="supporters-list" id="last-paragraph">
+        </p>
+        <p class="styled-paragraph">
+            <?php echo getTranslation("derriereledocumentaire_soutiens2", $lang); ?>
+        </p>
+        <p class="supporters-list" id="last-paragraph">
             <?php
-                // On récupère tous les soutiens depuis la BDD, triés par ordre alphabétique
                 $supporters = $pdo->query("SELECT name FROM supporters ORDER BY name ASC")->fetchAll(PDO::FETCH_COLUMN);
-                // On les affiche, séparés par une virgule et un espace
                 echo implode(', ', $supporters);
             ?>
-         </p>
+        </p>
     </section>
     <?php include "includes/layout/jsinclude.php"; ?>
     <script src="js/derriereledocumentaire.js"></script>
