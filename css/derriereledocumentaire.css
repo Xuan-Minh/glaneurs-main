@@ -65,7 +65,7 @@
    ========================================================================== */
 
 .dld-presentation {
-  max-width: 1500px;
+  max-width: 1000px;
   padding: 5vw;
 }
 
@@ -102,6 +102,13 @@
 
 #last-paragraph {
   margin-bottom: 5vh;
+}
+.styled-paragraph {
+  text-indent: 2em; /* Ajoute un alinéa */
+  text-align: justify; /* Justifie le texte */
+  line-height: 1.8; /* Améliore l'espacement entre les lignes */
+  margin-top: 0.5em; /* Réduit la marge supérieure entre les paragraphes */
+  margin-bottom: 0.5em; /* Réduit la marge inférieure entre les paragraphes */
 }
 
 /* ==========================================================================
