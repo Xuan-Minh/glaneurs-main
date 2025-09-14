@@ -5,6 +5,10 @@
 // Récupère les archives depuis la base
 $pdo = getPDO();
 $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
+// Structure des chapitres utilisée par la navigation (définie en amont)
+$chapters_structure = array(
+    1 => 3, 2 => 5, 3 => 2, 4 => 5, 5 => 6, 6 => 3
+);
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>" <?php if ($lang == 'ko') echo ' class="ko-lang"'; ?>>
@@ -20,6 +24,16 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include "includes/layout/header.php"; ?>
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
+    <!-- Menu hors du container scrollable pour que position:fixed fonctionne correctement -->
+    <nav class="archive-nav-container">
+        <ul>
+            <?php
+            foreach ($chapters_structure as $chap_num => $text_count) {
+                echo '<li><a href="#chapter-' . $chap_num . '" class="nav-link" data-scroll-to="chapter-' . $chap_num . '">' . getTranslation("chapitre{$chap_num}_titre", $lang) . '</a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
     <div class="archives-scroll">
         <section class="archive-hero">
             <video autoplay muted loop poster="img/posters/archives_poster.png">
@@ -29,23 +43,7 @@ $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
                 <?php echo getTranslation("archives_titre", $lang); ?>
             </h2>
         </section>
-         <section class="archives-content">
-            <!-- NOUVEAU: Menu de navigation des chapitres -->
-            <nav class="archive-nav-container">
-                <ul>
-                    <?php
-                    // La structure doit être définie ici pour être utilisée par la nav et le contenu
-                    $chapters_structure = array(
-                        1 => 3, 2 => 5, 3 => 2, 4 => 5, 5 => 6, 6 => 3
-                    );
-
-                    foreach ($chapters_structure as $chap_num => $text_count) {
-                        echo '<li><a href="#chapter-' . $chap_num . '" class="nav-link" data-scroll-to="chapter-' . $chap_num . '">' . getTranslation("chapitre{$chap_num}_titre", $lang) . '</a></li>';
-                    }
-                    ?>
-                </ul>
-            </nav>
-
+        <section class="archives-content">
             <div class="archives-narrative">
                  <section class="archives-intro content-anim preserve-lines">
                     <p><?php echo getTranslation("archives_intro_texte", $lang); ?></p>
