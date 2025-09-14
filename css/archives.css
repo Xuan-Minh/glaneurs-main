@@ -40,7 +40,7 @@
 .archives-content {
   min-height: 100vh;
   background: var(--main-bg-color);
-  /* Contenu occupe toute la largeur; le menu flottera par-dessus */
+  /* Contenu occupe toute la largeur; le menu flottera par-dess us */
   padding: 5vh 0 0 0;
   font-size: 1.2em;
   font-weight: 400;
