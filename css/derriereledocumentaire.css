@@ -65,8 +65,11 @@
    ========================================================================== */
 
 .dld-presentation {
-  max-width: 1500px;
+  max-width: 1000px;
   padding: 5vw;
+}
+.dld-presentation p {
+  text-align: justify;
 }
 
 .dld-presentation h2 {
@@ -96,21 +99,18 @@
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 400;
   opacity: 0.85;
+  margin: 0;
   line-height: 1.6;
-}
-
-.dld-remerciements .styled-paragraph {
-  text-indent: 2em;
-  margin-top: 1em;
 }
 
 #last-paragraph {
   margin-bottom: 5vh;
 }
-
 .styled-paragraph {
-  text-indent: 2em;
-  margin-bottom: 1em;
+  text-indent: 2em; /* Ajoute un alinéa */
+  text-align: justify; /* Justifie le texte */
+  line-height: 1.8; /* Améliore l'espacement entre les lignes */
+  margin-bottom: 1.5em; /* Ajoute de l'espace entre les paragraphes */
 }
 
 /* ==========================================================================
