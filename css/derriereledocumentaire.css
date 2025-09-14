@@ -68,9 +68,6 @@
   max-width: 1000px;
   padding: 5vw;
 }
-.dld-presentation p {
-  text-align: justify;
-}
 
 .dld-presentation h2 {
   padding: 0 0 0.9vw 0;
@@ -99,7 +96,6 @@
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   font-weight: 400;
   opacity: 0.85;
-  margin: 0;
   line-height: 1.6;
 }
 
