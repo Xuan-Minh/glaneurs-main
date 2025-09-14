@@ -93,26 +93,44 @@ $(function () {
     */
 
     // NOUVELLE LOGIQUE DE VISIBILITÉ
-    const heroSection = document.querySelector(".archive-hero");
-    if (heroSection) {
-      const navVisibilityObserver = new IntersectionObserver(
+    // Le menu devient visible soit quand le hero n'est plus visible,
+    // soit dès que l'intro (le début du contenu) est visible —
+    // cela évite d'attendre la fin de l'intro pour afficher le menu.
+    // Le menu ne doit être visible que quand le chapitre 1 est visible
+    let visibleChapters = 0;
+
+    function updateNavVisibility() {
+      if (!navContainer) return;
+      if (visibleChapters > 0) {
+        navContainer.classList.add("is-visible");
+        console.debug("Menu visible : au moins un chapitre visible", {
+          visibleChapters,
+        });
+      } else {
+        navContainer.classList.remove("is-visible");
+        console.debug("Menu caché : intro ou hero", { visibleChapters });
+      }
+    }
+
+    // Observer tous les chapitres
+    if (chapters && chapters.length > 0) {
+      const chapterObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            // Si la section hero n'est PLUS visible (l'utilisateur a scrollé vers le bas)
-            if (!entry.isIntersecting) {
-              navContainer.classList.add("is-visible");
+            if (entry.isIntersecting) {
+              visibleChapters++;
             } else {
-              // Si la section hero est de nouveau visible (l'utilisateur est remonté tout en haut)
-              navContainer.classList.remove("is-visible");
+              visibleChapters--;
             }
+            visibleChapters = Math.max(0, visibleChapters);
+            updateNavVisibility();
           });
         },
-        {
-          threshold: 0.01, // Se déclenche dès que la section hero est presque entièrement partie
-        }
+        { rootMargin: "0px 0px -60% 0px" }
       );
-
-      navVisibilityObserver.observe(heroSection);
+      chapters.forEach((chapter) => {
+        chapterObserver.observe(chapter);
+      });
     }
   }
 });
