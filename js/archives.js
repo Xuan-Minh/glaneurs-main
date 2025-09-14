@@ -29,44 +29,51 @@ $(function () {
     });
   }
   // --- LOGIQUE POUR LA NAVIGATION DES CHAPITRES ---
-  const navContainer = document.querySelector('.archive-nav-container');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const chapters = document.querySelectorAll('.archive-chapter');
+  const navContainer = document.querySelector(".archive-nav-container");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const chapters = document.querySelectorAll(".archive-chapter");
 
   if (navContainer && navLinks.length > 0 && chapters.length > 0) {
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
+        const targetId = this.getAttribute("href");
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: "smooth",
+            block: "start",
           });
         }
       });
     });
 
-    const activeLinkObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const chapterId = entry.target.id;
-          navLinks.forEach(link => link.classList.remove('active'));
-          const activeLink = document.querySelector(`.nav-link[data-scroll-to='${chapterId}']`);
-          if (activeLink) {
-            activeLink.classList.add('active');
+    const activeLinkObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const chapterId = entry.target.id;
+            navLinks.forEach((link) => link.classList.remove("active"));
+            const activeLink = document.querySelector(
+              `.nav-link[data-scroll-to='${chapterId}']`
+            );
+            if (activeLink) {
+              activeLink.classList.add("active");
+            }
           }
-        }
-      });
-    }, { 
-      rootMargin: '0px 0px -40% 0px'
-    });
+        });
+      },
+      {
+        rootMargin: "0px 0px -40% 0px",
+      }
+    );
 
-    chapters.forEach(chapter => {
+    chapters.forEach((chapter) => {
       activeLinkObserver.observe(chapter);
     });
 
+    // ANCIENNE LOGIQUE (supprimée)
+    /*
     const firstChapter = chapters[0];
     const navVisibilityObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -83,5 +90,29 @@ $(function () {
     });
 
     navVisibilityObserver.observe(firstChapter);
+    */
+
+    // NOUVELLE LOGIQUE DE VISIBILITÉ
+    const heroSection = document.querySelector(".archive-hero");
+    if (heroSection) {
+      const navVisibilityObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Si la section hero n'est PLUS visible (l'utilisateur a scrollé vers le bas)
+            if (!entry.isIntersecting) {
+              navContainer.classList.add("is-visible");
+            } else {
+              // Si la section hero est de nouveau visible (l'utilisateur est remonté tout en haut)
+              navContainer.classList.remove("is-visible");
+            }
+          });
+        },
+        {
+          threshold: 0.01, // Se déclenche dès que la section hero est presque entièrement partie
+        }
+      );
+
+      navVisibilityObserver.observe(heroSection);
+    }
   }
 });

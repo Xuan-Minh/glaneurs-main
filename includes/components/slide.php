@@ -8,10 +8,7 @@ foreach ($slides as $slide) {
     if ($index === 3) $extraClass = ' slide3';
     echo '<div class="slides slide' . $index . $extraClass . '">';
 
-    // --- DÉBUT DE LA MODIFICATION ---
-    // On remplace l'ancienne génération de la vidéo par celle-ci.
-    // Elle utilise la variable $isFirst (que vous aviez déjà) pour la logique de 'preload'
-    // et ajoute l'attribut 'poster' que vous avez défini dans index.php.
+
     $preload_attr = $isFirst ? 'auto' : 'metadata';
     echo '<video class="background-video" 
                    preload="' . $preload_attr . '" 
@@ -19,11 +16,9 @@ foreach ($slides as $slide) {
                    poster="' . htmlspecialchars($slide['poster']) . '">';
     echo '<source src="' . htmlspecialchars($slide["srcvideobg"]) . '" type="video/mp4" />';
     echo '</video>';
-    // --- FIN DE LA MODIFICATION ---
 
     $vimeoId = substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1);
 
-    // Le reste de votre logique pour les slides reste identique...
     if ($index === 1) {
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
