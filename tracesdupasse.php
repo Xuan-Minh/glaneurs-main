@@ -7,7 +7,7 @@ $pdo = getPDO();
 $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 // Structure des chapitres utilisée par la navigation (définie en amont)
 $chapters_structure = array(
-    1 => 3, 2 => 5, 3 => 2, 4 => 5, 5 => 6, 6 => 3
+    1 => 3, 2 => 6, 3 => 5, 4 => 3, 5 => 6, 6 => 3
 );
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ $chapters_structure = array(
                     <p><?php echo getTranslation("archives_intro_texte2", $lang); ?></p>
 
                     <!-- NOUVEAU: Mini-galerie d'introduction -->
-                    <div class="intro-image-gallery">
+                    <div class="intro-image-gallery content-anim">
                         <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri1.jpg" data-titre="Agriculture 1" data-date="Date 1" data-auteur="Auteur 1">
                             <img src="img/archives/1951-intro-agri1.jpg" alt="Agriculture">
                         </a>
