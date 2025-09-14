@@ -47,6 +47,7 @@ $chapters_structure = array(
             <div class="archives-narrative">
                  <section class="archives-intro content-anim preserve-lines">
                     <p><?php echo getTranslation("archives_intro_texte", $lang); ?></p>
+                    <p><?php echo getTranslation("archives_intro_texte2", $lang); ?></p>
 
                     <!-- NOUVEAU: Mini-galerie d'introduction -->
                     <div class="intro-image-gallery">

@@ -1,4 +1,4 @@
-/* NOUVEAU: Style pour la mini-galerie d'introduction */
+/* --- INTRO IMAGE GALLERY --- */
 .intro-image-gallery {
   display: flex;
   justify-content: center;
@@ -6,17 +6,17 @@
   gap: 20px;
   flex-wrap: nowrap;
 }
-
 .intro-image-gallery .archive-gallery-item {
-  width: clamp(200px, 22vw, 280px); /* Taille responsive */
+  width: clamp(200px, 22vw, 280px);
   height: auto;
 }
+
+/* --- GENERAL LAYOUT & SCROLL --- */
 .archives-scroll {
   height: 100vh;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
 }
-
 .archives-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
@@ -24,12 +24,13 @@
 .archives-content {
   min-height: 100vh;
   background: var(--main-bg-color);
-  /* Contenu occupe toute la largeur; le menu flottera par-dessus sans créer de marge */
+  /* Contenu occupe toute la largeur; le menu flottera par-dessus */
   padding: 5vh 0 0 0;
   font-size: 1.2em;
   font-weight: 400;
   opacity: 1;
   margin: 0;
+  position: relative; /* nécessaire pour les images flottantes */
 }
 
 /* --- HERO SECTION --- */
@@ -44,7 +45,6 @@
   max-width: 2560px;
   margin: 0 auto;
 }
-
 .archive-hero::after {
   content: "";
   position: absolute;
@@ -60,7 +60,6 @@
   z-index: 2;
   pointer-events: none;
 }
-
 .archive-hero video {
   position: absolute;
   top: 0;
@@ -70,7 +69,6 @@
   object-fit: cover;
   z-index: 1;
 }
-
 .archive-hero .archive-title {
   position: relative;
   z-index: 3;
@@ -80,30 +78,29 @@
   text-align: center;
 }
 
-/* --- NAVIGATION MENU --- */
+/* --- NAVIGATION MENU (single canonical block) --- */
 .archive-nav-container {
   position: fixed; /* Assure que le menu flotte */
   left: 2rem;
   top: 50%;
   transform: translateY(-50%);
   width: 220px;
-  z-index: 1000; /* Au-dessus du contenu */
+  z-index: 10000; /* Au-dessus du contenu */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none; /* désactivé quand caché */
 }
-
 .archive-nav-container.is-visible {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
-
 .archive-nav-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .archive-nav-container .nav-link {
   display: block;
   padding: 10px 15px;
@@ -113,108 +110,81 @@
   transition: all 0.3s ease;
   font-size: 0.9rem;
 }
-
 .archive-nav-container .nav-link:hover {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.05);
 }
-
 .archive-nav-container .nav-link.active {
   color: #e0ded8;
   border-left-color: #fff;
   font-weight: bold;
 }
 
-/* Force le menu à être fixé à la fenêtre même si des parents ont des transforms */
+/* Guard: ensure fixed even if parents have transforms */
 .archive-nav-container {
   position: fixed !important;
   left: 2rem !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 220px !important;
-  z-index: 10000 !important;
 }
-
-/* Assure que le menu ne prend pas d'espace dans le flux */
 .archive-nav-placeholder {
   display: none;
 }
 
-/* --- NARRATIVE CONTENT --- */
+/* --- NARRATIVE & INTRO --- */
 .archives-narrative {
-  /* Centre le contenu et limite la largeur pour une lecture confortable */
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 2rem;
-  position: relative; /* Se place au-dessus des images flottantes */
+  position: relative;
   z-index: 2;
-}
-
-/* S'assurer que la zone narrative occupe toute la hauteur de la fenêtre */
-.archives-narrative {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; /* centre horizontalement le contenu */
-  justify-content: flex-start; /* laisser défiler depuis le haut */
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .archives-intro {
-  width: 90vw;
+  /* Container centered within parent; width grows symmetrically */
+  width: 100%;
   max-width: 900px;
-  margin: 0 auto;
-  padding: 5vw 0;
+  box-sizing: border-box;
+  margin: 0;
   color: #fff;
   text-align: center;
-  font-family: "Figtree", sans-serif;
+  font-family: "Libre Baskerville", sans-serif;
+}
+.archives-intro p {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  /* Espace plus grand entre les paragraphes d'intro */
+  line-height: 1.8;
+}
+
+/* DEBUG: outline helper — n'ajoutez cette classe que temporairement via la console
+   pour voir quelles boîtes occupent l'espace entre paragraphes.
+   Usage dans la console: document.querySelector('.archives-intro').classList.add('debug-outline')
+   Supprimer: document.querySelector('.archives-intro').classList.remove('debug-outline') */
+.archives-intro.debug-outline * {
+  outline: 2px dashed rgba(255, 120, 90, 0.85);
+  background: rgba(255, 255, 255, 0.01);
 }
 
 /* Premier paragraphe percutant dans l'intro */
-.archives-intro > p:first-of-type {
-  font-size: clamp(1.25rem, 2.4vw, 1.9rem);
-  font-weight: 700;
-  line-height: 1.28;
-  color: #f6f5ef;
-  margin: 0 0 2rem 0;
-  letter-spacing: -0.01em;
-  max-width: 90ch;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  padding: 0.9rem 1.25rem;
-  border-left: 8px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.025),
-    rgba(255, 255, 255, 0)
-  );
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* Ajustements pour petits écrans */
-@media (max-width: 720px) {
-  .archives-intro > p:first-of-type {
-    font-size: 1.2rem;
-    padding: 0.6rem 0.9rem;
-    border-left-width: 5px;
-    max-width: 100%;
-    box-shadow: none;
-    line-height: 1.3;
-  }
-}
 
 .archive-chapter {
   max-width: 75ch;
   margin: 0 auto 5rem auto;
   padding: 0 2rem;
-  /* Permettre à chaque chapitre d'occuper toute la fenêtre si nécessaire */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .archive-chapter h3 {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
@@ -223,7 +193,6 @@
   padding-left: 1rem;
   font-family: "Libre Baskerville", serif;
 }
-
 .archive-chapter p {
   font-size: 1.1rem;
   line-height: 1.9;
@@ -234,13 +203,22 @@
   margin-bottom: 1em;
 }
 
+/* Indentation: applique un retrait de première ligne aux paragraphes
+   de la zone narrative et des chapitres, sauf le paragraphe intro "percutant" */
+.archives-narrative p,
+.archive-chapter p {
+  text-indent: 2em;
+  margin-top: 0.8rem;
+  margin-bottom: 1em;
+  text-align: justify;
+}
+
 /* --- ARCHIVES GALLERY (GRID & OVERLAY) --- */
 .archives-gallery-section {
   margin-top: 8rem;
   padding-top: 4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .gallery-title {
   text-align: center;
   font-size: 2.5rem;
@@ -248,14 +226,12 @@
   color: #e0ded8;
   font-family: "Libre Baskerville", serif;
 }
-
 .archive-gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
-
 .archive-gallery-item {
   width: 180px;
   margin: 10px;
@@ -264,17 +240,14 @@
   box-shadow: 0 2px 8px #0005;
   transition: transform 0.2s;
 }
-
 .archive-gallery-item img {
   width: 100%;
   display: block;
   transition: transform 0.2s;
 }
-
 .archive-gallery-item:hover {
   transform: scale(1.05);
 }
-
 .archive-gallery-item:hover img {
   transform: scale(1.05);
 }
@@ -286,11 +259,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  display: none; /* Caché par défaut, géré par JS */
+  display: none;
   align-items: center;
   justify-content: center;
 }
-
 .archive-overlay-bg {
   position: absolute;
   top: 0;
@@ -299,7 +271,6 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.85);
 }
-
 .archive-overlay-content {
   display: flex;
   align-items: center;
@@ -310,11 +281,9 @@
   position: relative;
   gap: 70px;
 }
-
 .archive-overlay-photo {
   flex: 0 1 auto;
 }
-
 .archive-overlay-photo img {
   max-width: 50vw;
   max-height: 70vh;
@@ -322,7 +291,6 @@
   height: auto;
   box-shadow: 0 4px 32px #000a;
 }
-
 .archive-overlay-info {
   flex: 0 0 320px;
   color: #fff;
@@ -336,14 +304,12 @@
   max-width: 400px;
   word-break: break-word;
 }
-
 .archive-overlay-title {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   margin-bottom: 0.5em;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
 }
-
 .archive-overlay-close {
   position: absolute;
   top: 24px;
@@ -353,7 +319,6 @@
   cursor: pointer;
   z-index: 20;
 }
-
 .archive-overlay-arrow {
   display: none;
   align-items: center;
@@ -366,31 +331,26 @@
   opacity: 0.8;
   transition: opacity 0.2s, transform 0.3s;
 }
-
 .archive-overlay-arrow.left {
   left: 2vw;
 }
 .archive-overlay-arrow.right {
   right: 2vw;
 }
-
 .archive-overlay-arrow img {
   width: 32px;
   opacity: 0;
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
-
 .archive-overlay-arrow.left img {
   transform: rotate(-90deg);
   animation-name: scroll-side-left;
 }
-
 .archive-overlay-arrow.right img {
   transform: rotate(90deg);
   animation-name: scroll-side-right;
 }
-
 .archive-overlay[style*="display: block"] .archive-overlay-arrow,
 .archive-overlay[style*="display: flex"] .archive-overlay-arrow {
   display: flex !important;
@@ -407,7 +367,6 @@
     transform: rotate(90deg) translateX(10px);
   }
 }
-
 @keyframes scroll-side-left {
   0%,
   100% {
@@ -420,466 +379,40 @@
   }
 }
 
-/* --- RESPONSIVE DESIGN (Désactivé par la demande de ne pas avoir de version mobile) --- */
-/*
-@media (max-width: 1024px) {
-  .archives-content {
-    padding: 5vh 0 0 0;
-    flex-direction: column;
-  }
-  .archive-nav-container {
-    position: relative; 
-    transform: none;
-    top: auto;
-    left: auto;
-    width: 100%;
-    padding-right: 0;
-    margin-bottom: 2rem;
-    opacity: 1;
-    visibility: visible;
-  }
-  .archive-nav-container ul {
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  .archive-nav-container .nav-link {
-    border-radius: 20px;
-    border-left: none;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  .archive-nav-container .nav-link.active {
-    border-color: #c8a165;
-    background-color: rgba(200, 161, 101, 0.1);
-  }
-}
-
-@media (max-width: 900px) {
-  .archive-overlay-content {
-    flex-direction: column;
-    gap: 20px;
-    width: 100vw;
-    max-width: 100vw;
-    padding: 0;
-  }
-  .archive-overlay-photo img {
-    max-width: 90vw;
-    max-height: 50vh;
-  }
-  .archive-overlay-info {
-    padding: 20px 10px;
-    font-size: 1em;
-    min-width: 0;
-    max-width: 100vw;
-  }
-  .archive-chapter h3 {
-    font-size: 1.8rem;
-  }
-  .archive-chapter p {
-    font-size: 1rem;
-  }
-}
-*/
-/* filepath: c:\MAMP\htdocs\glaneurs-main\css\archives.css */
-/* --- GENERAL LAYOUT & SCROLL --- */
-.archives-scroll {
-  height: 100vh;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE & Edge */
-}
-
-.archives-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* --- HERO SECTION --- */
-.archive-hero {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 2560px;
-  margin: 0 auto;
-}
-
-.archive-hero::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 18vh;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    var(--main-bg-color) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
-
-.archive-hero video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.archive-hero .archive-title {
-  position: relative;
-  z-index: 3;
-  color: #fff;
-  font-family: "Libre Baskerville", serif;
-  font-size: 3vw;
-  text-align: center;
-}
-
-/* --- NAVIGATION MENU --- */
-.archive-nav-container {
-  position: fixed; /* Assure que le menu flotte */
-  left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 220px;
-  z-index: 1000; /* Au-dessus du contenu */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.archive-nav-container.is-visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.archive-nav-container ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.archive-nav-container .nav-link {
-  display: block;
-  padding: 10px 15px;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  border-left: 3px solid transparent;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.archive-nav-container .nav-link:hover {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.archive-nav-container .nav-link.active {
-  color: #e0ded8;
-  border-left-color: #fff;
-  font-weight: bold;
-}
-
-/* Force le menu à être fixé à la fenêtre même si des parents ont des transforms */
-.archive-nav-container {
-  position: fixed !important;
-  left: 2rem !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 220px !important;
-  z-index: 10000 !important;
-}
-
-/* Assure que le menu ne prend pas d'espace dans le flux */
-.archive-nav-placeholder {
-  display: none;
-}
-
-/* --- NARRATIVE CONTENT --- */
-.archives-narrative {
-  /* On retire le padding qui était sur archives-content pour le mettre ici */
-  padding: 2rem 5vw;
-}
-
-.archives-intro {
-  width: 90vw;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 5vw 0;
-  color: #fff;
-  text-align: center;
-  font-family: "Figtree", sans-serif;
-}
-
-.archive-chapter {
-  max-width: 75ch;
-  margin: 0 auto 5rem auto;
-  padding: 0 2rem;
-}
-
-.archive-chapter h3 {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
-  color: #e0ded8;
-  border-left: 3px solid #fff;
-  padding-left: 1rem;
-  font-family: "Libre Baskerville", serif;
-}
-
-.archive-chapter p {
-  font-size: 1.1rem;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: pre-wrap;
-  text-align: justify;
-  text-indent: 2em;
-  margin-bottom: 1em;
-}
-
-/* --- ARCHIVES GALLERY (GRID & OVERLAY) --- */
-.archives-gallery-section {
-  margin-top: 8rem;
-  padding-top: 4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.gallery-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 4rem;
-  color: #e0ded8;
-  font-family: "Libre Baskerville", serif;
-}
-
-.archive-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.archive-gallery-item {
-  width: 180px;
-  margin: 10px;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 2px 8px #0005;
-  transition: transform 0.2s;
-}
-
-.archive-gallery-item img {
-  width: 100%;
-  display: block;
-  transition: transform 0.2s;
-}
-
-.archive-gallery-item:hover {
-  transform: scale(1.05);
-}
-
-.archive-gallery-item:hover img {
-  transform: scale(1.05);
-}
-
-.archive-overlay {
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none; /* Caché par défaut, géré par JS */
-  align-items: center;
-  justify-content: center;
-}
-
-.archive-overlay-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-}
-
-.archive-overlay-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 95vw;
-  width: 95vw;
-  max-height: 90vh;
-  position: relative;
-  gap: 70px;
-}
-
-.archive-overlay-photo {
-  flex: 0 1 auto;
-}
-
-.archive-overlay-photo img {
-  max-width: 50vw;
-  max-height: 70vh;
-  width: auto;
-  height: auto;
-  box-shadow: 0 4px 32px #000a;
-}
-
-.archive-overlay-info {
-  flex: 0 0 320px;
-  color: #fff;
-  padding: 40px 40px 40px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
-  text-shadow: 0 2px 8px #000a;
-  min-width: 250px;
-  max-width: 400px;
-  word-break: break-word;
-}
-
-.archive-overlay-title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  margin-bottom: 0.5em;
-  font-family: "Libre Baskerville", serif;
-  font-weight: bold;
-}
-
-.archive-overlay-close {
-  position: absolute;
-  top: 24px;
-  right: 36px;
-  color: #fff;
-  font-size: 2.2em;
-  cursor: pointer;
-  z-index: 20;
-}
-
-.archive-overlay-arrow {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s, transform 0.3s;
-}
-
-.archive-overlay-arrow.left {
-  left: 2vw;
-}
-.archive-overlay-arrow.right {
-  right: 2vw;
-}
-
-.archive-overlay-arrow img {
-  width: 32px;
-  opacity: 0;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-.archive-overlay-arrow.left img {
-  transform: rotate(-90deg);
-  animation-name: scroll-side-left;
-}
-
-.archive-overlay-arrow.right img {
-  transform: rotate(90deg);
-  animation-name: scroll-side-right;
-}
-
-.archive-overlay[style*="display: block"] .archive-overlay-arrow,
-.archive-overlay[style*="display: flex"] .archive-overlay-arrow {
-  display: flex !important;
-}
-
-@keyframes scroll-side-right {
-  0%,
-  100% {
-    opacity: 0;
-    transform: rotate(90deg) translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(90deg) translateX(10px);
-  }
-}
-
-@keyframes scroll-side-left {
-  0%,
-  100% {
-    opacity: 0;
-    transform: rotate(-90deg) translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(-90deg) translateX(-10px);
-  }
-}
-
-/* --- NOUVEAU: IMAGES FLOTTANTES EN ARRIÈRE-PLAN --- */
-
-.archives-content {
-  /* Cette propriété est cruciale pour que le positionnement absolu des enfants fonctionne */
-  position: relative;
-}
-
+/* --- FLOATING IMAGES (background) --- */
 .floating-images-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Placé sous le texte */
-  /* pointer-events: none; A RETIRER pour que les images soient cliquables */
-  overflow: hidden; /* Empêche les images de déborder si elles sont trop grandes */
+  z-index: 1;
+  overflow: hidden;
 }
-
 .floating-image {
   position: absolute;
-  display: block; /* Important pour que le <a> se comporte comme un bloc */
-  opacity: 0.1; /* Opacité encore plus faible */
-  filter: grayscale(80%) blur(1px); /* Effet "archive" et léger flou */
-  z-index: 1; /* z-index de base */
-  transform: translateY(
-    var(--translate-y, 0px)
-  ); /* Utilise une variable CSS pour la parallaxe */
-  /* Transition plus douce pour le survol */
+  display: block;
+  opacity: 0.1;
+  filter: grayscale(80%) blur(1px);
+  z-index: 1;
+  transform: translateY(var(--translate-y, 0px));
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease,
     filter 0.4s ease;
 }
-
-/* NOUVEAU: Style pour l'image à l'intérieur du lien */
 .floating-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-/* NOUVEAU: Effet au survol */
 .floating-image:hover {
-  opacity: 1; /* Opacité d'origine */
-  filter: grayscale(0%) blur(0); /* Filtre retiré */
-  z-index: 3; /* Passe au-dessus du texte et des autres images */
-  /* Combine la parallaxe (via la variable) et le zoom */
+  opacity: 1;
+  filter: grayscale(0%) blur(0);
+  z-index: 3;
   transform: translateY(var(--translate-y, 0px)) scale(1.1);
   cursor: pointer;
 }
 
-/* Positionnement individuel de chaque image */
 #float-img-1 {
   top: 20vh;
   left: 5vw;
@@ -911,23 +444,33 @@
   max-width: 200px;
 }
 
-/* S'assurer que le texte est au-dessus; le menu reste un overlay fixé à la fenêtre */
+/* Keep text above floating images */
 .archives-narrative {
   position: relative;
   z-index: 2;
 }
-.archive-nav-container {
-  /* position: fixed est appliqué ailleurs avec !important; ici on s'assure seulement du stacking */
-  z-index: 10000;
-  pointer-events: none; /* désactivé quand caché */
-}
-.archive-nav-container.is-visible {
-  pointer-events: auto; /* activé quand visible */
-}
 
-/* Cacher les images sur les petits écrans pour ne pas surcharger */
+/* Hide floating images on small screens */
 @media (max-width: 768px) {
   .floating-images-container {
     display: none;
   }
 }
+
+/* --- RESPONSIVE SNIPPETS (kept commented if needed) --- */
+/*
+@media (max-width: 1024px) {
+  .archives-content { padding: 5vh 0 0 0; flex-direction: column; }
+  .archive-nav-container { position: relative; transform: none; top: auto; left: auto; width: 100%; padding-right: 0; margin-bottom: 2rem; opacity: 1; visibility: visible; }
+  .archive-nav-container ul { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .archive-nav-container .nav-link { border-radius: 20px; border-left: none; border: 1px solid rgba(255,255,255,0.2); }
+  .archive-nav-container .nav-link.active { border-color: #c8a165; background-color: rgba(200,161,101,0.1); }
+}
+@media (max-width: 900px) {
+  .archive-overlay-content { flex-direction: column; gap: 20px; width: 100vw; max-width: 100vw; padding: 0; }
+  .archive-overlay-photo img { max-width: 90vw; max-height: 50vh; }
+  .archive-overlay-info { padding: 20px 10px; font-size: 1em; min-width: 0; max-width: 100vw; }
+  .archive-chapter h3 { font-size: 1.8rem; }
+  .archive-chapter p { font-size: 1rem; }
+}
+*/
