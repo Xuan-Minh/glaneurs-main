@@ -405,6 +405,10 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   const visionner = slide.find(".visionner");
   const vimeoId = $(this).data("vimeo");
   const lang = $(this).data("lang") || "fr";
+  const rawTimecode =
+    $(this).data("timecode") ||
+    slide.find("[data-timecode]").data("timecode") ||
+    "";
   const vimeoUrl = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&texttrack=${lang}`;
 
   // Supprime tout iframe existant dans le visionneur
@@ -424,6 +428,29 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 
   // Crée un nouveau player Vimeo et attache l'event 'ended'
   vimeoPlayer = new Vimeo.Player(iframe[0]);
+  // Helper: parse "#t=1m2s" or "#t=62s" or "62" to seconds
+  function parseTimecode(tc) {
+    if (!tc) return null;
+    let s = String(tc).trim();
+    if (s.startsWith("#t=")) s = s.slice(3);
+    if (/^\d+$/.test(s)) return parseInt(s, 10);
+    const m = s.match(/(?:(\d+)m)?(?:(\d+)s)?/i);
+    if (!m) return null;
+    const mins = m[1] ? parseInt(m[1], 10) : 0;
+    const secs = m[2] ? parseInt(m[2], 10) : 0;
+    return mins * 60 + secs;
+  }
+  const startAt = parseTimecode(rawTimecode);
+
+  const hasTimecode = startAt != null && !isNaN(startAt) && startAt > 0;
+  vimeoPlayer
+    .ready()
+    .then(() => {
+      if (hasTimecode) {
+        return vimeoPlayer.setCurrentTime(startAt).catch(() => {});
+      }
+    })
+    .then(() => vimeoPlayer.play().catch(() => {}));
   vimeoPlayer.on("ended", function () {
     visionner.fadeOut(400, function () {
       $("body").css("overflow", "auto");

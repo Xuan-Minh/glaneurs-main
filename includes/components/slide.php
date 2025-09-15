@@ -37,8 +37,9 @@ foreach ($slides as $slide) {
         if (isset($slide["quote_author"])) {
             $author_attr = ' data-author="— ' . htmlspecialchars($slide["quote_author"]) . '"';
         }
-        echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '"' . $author_attr . '>' . $slide["chapitre"] . '</h2>';
-        echo '<button type="button" class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '" style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</button>';
+        $timecode_attr = isset($slide["timecode"]) ? ' data-timecode="' . htmlspecialchars($slide["timecode"]) . '"' : '';
+        echo '<h2 data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '"' . $author_attr . $timecode_attr . '>' . $slide["chapitre"] . '</h2>';
+        echo '<button type="button" class="visionner-trigger visionner-trigger-h3" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '"' . $timecode_attr . ' style="margin-top:30px;display:inline-block;">' . getTranslation("index_voirpartie". ($index-1), $lang) . '</button>';
         echo '<div class="sliderButton">';
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
