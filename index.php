@@ -27,7 +27,7 @@ $slides = array(
         "srcvideobg" => "video/web/bache.mp4",
         "poster" => "img/posters/bache_poster.png",
         "srcaudio" => "audio/chap2.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914#t=10m34s", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914#t=10m35s", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info_archives", $lang),
         "urlsuite" => "",
         "quote_author" => "LEE Sangman",
