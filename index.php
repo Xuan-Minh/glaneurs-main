@@ -17,17 +17,17 @@ $slides = array(
         "srcvideobg" => "video/web/recyclerie.mp4",
         "poster" => "img/posters/recyclerie_poster.png", 
         "srcaudio" => "audio/chap1.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914#t=3m36s", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
         "urlsuite" => "",
-        "quote_author" => getTranslation("portraits_arirang", $lang)
+        "quote_author" => getTranslation("portraits_arirang", $lang),
     ),
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
         "srcvideobg" => "video/web/bache.mp4",
         "poster" => "img/posters/bache_poster.png",
         "srcaudio" => "audio/chap2.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914#t=10m34s", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info_archives", $lang),
         "urlsuite" => "",
         "quote_author" => "LEE Sangman",
@@ -39,7 +39,7 @@ $slides = array(
         "srcvideobg" => "video/web/lee.mp4",
         "poster" => "img/posters/lee_poster.png",
         "srcaudio" => "audio/chap3.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914#t=18m40s", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
         "urlsuite" => "",
         "quote_author" => "LEE Sangman" // Utilise la clé de traduction existante

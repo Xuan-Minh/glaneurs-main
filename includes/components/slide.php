@@ -18,7 +18,6 @@ foreach ($slides as $slide) {
     echo '</video>';
 
     $vimeoId = substr($slide["srcdocupart"], strrpos($slide["srcdocupart"], '/') + 1);
-
     if ($index === 1) {
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
