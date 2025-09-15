@@ -90,6 +90,9 @@ function addHideHeaderOnScroll(scrollElement) {
 
 function playArirangAudio() {
   if (isGloballyMuted) return;
+  try {
+    if ($ && $(".visionner:visible").length > 0) return; // Ne jamais lancer si un visionneur est ouvert
+  } catch (e) {}
   const audio = document.getElementById("audio-arirang");
   if (audio) {
     if (audio.paused) {
@@ -250,8 +253,11 @@ $(document).ready(function () {
     // Quand la page redevient visible, relancer l'audio et l'animation de la wave
     if (document.visibilityState === "visible") {
       if (!isGloballyMuted) {
+        // Ne relance pas l'audio d'ambiance si un visionneur est ouvert
         try {
-          if (typeof playArirangAudio === "function") playArirangAudio();
+          if (!($ && $(".visionner:visible").length > 0)) {
+            if (typeof playArirangAudio === "function") playArirangAudio();
+          }
         } catch (e) {}
       }
       // S'assurer que la waveform visuelle revient à son état (planifié sur la frame suivante

@@ -112,6 +112,12 @@ $("#enter-button").click(function () {
   // Sécurité retour bfcache
   window.addEventListener("pageshow", function () {
     $("#transition-overlay").addClass("hide").removeClass("active");
+    // Empêcher toute relance de l'audio d'ambiance si un visionneur est affiché
+    try {
+      if ($ && $(".visionner:visible").length > 0) {
+        if (typeof stopArirangAudio === "function") stopArirangAudio();
+      }
+    } catch (e) {}
   });
 });
 
@@ -356,9 +362,17 @@ $(".close-visionner").click(function (event) {
   visionner.fadeOut(400, function () {
     // On cache le lien car on affiche l'info
     fadeVisionnerTriggerH3(slide, true); // CHANGEMENT ICI : de false à true
+    try {
+      window.__visionnerOpen = false;
+    } catch (e) {}
+    // Relancer l'ambiance uniquement après fermeture effective de la modale
+    try {
+      if (!($ && $(".visionner:visible").length > 0)) {
+        playArirangAudio();
+      }
+    } catch (e) {}
   });
 
-  playArirangAudio();
   $("body").css("overflow", "auto");
   info.fadeIn(2000);
 
@@ -395,6 +409,10 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 
   lastFocusedElement = $(this);
   stopArirangAudio();
+  try {
+    // Flag interne si nécessaire plus tard
+    window.__visionnerOpen = true;
+  } catch (e) {}
   const slide = $(this).closest(".slides");
   const isFirstSlide = slide.hasClass("slide1");
   // Prévenir tout flicker : retirer immédiatement les classes flou/move si première slide
@@ -469,6 +487,12 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       }
       slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
       slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+      // Redémarrer l'ambiance après disparition effective
+      try {
+        if (!($ && $(".visionner:visible").length > 0)) {
+          playArirangAudio();
+        }
+      } catch (e) {}
     });
   });
 
