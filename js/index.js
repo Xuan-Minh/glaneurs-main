@@ -368,7 +368,11 @@ $(".close-visionner").click(function (event) {
     // Relancer l'ambiance uniquement après fermeture effective de la modale
     try {
       if (!($ && $(".visionner:visible").length > 0)) {
-        playArirangAudio();
+        if (typeof window.resumeArirangAudio === "function") {
+          window.resumeArirangAudio(0.3, 600);
+        } else {
+          playArirangAudio();
+        }
       }
     } catch (e) {}
   });
@@ -490,7 +494,11 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       // Redémarrer l'ambiance après disparition effective
       try {
         if (!($ && $(".visionner:visible").length > 0)) {
-          playArirangAudio();
+          if (typeof window.resumeArirangAudio === "function") {
+            window.resumeArirangAudio(0.3, 600);
+          } else {
+            playArirangAudio();
+          }
         }
       } catch (e) {}
     });

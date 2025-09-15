@@ -193,6 +193,35 @@ function stopArirangAudio() {
   }
 }
 
+// Helper public: reprise douce de l'ambiance après la fermeture du visionneur
+window.resumeArirangAudio = function (targetVol = 0.3, duration = 600) {
+  try {
+    if (isGloballyMuted) return;
+    if ($ && $(".visionner:visible").length > 0) return; // Ne rien faire si une modale est visible
+  } catch (e) {}
+
+  const audio = document.getElementById("audio-arirang");
+  if (!audio) return;
+
+  const safeVol = Math.max(0, Math.min(1, Number(targetVol) || 0.3));
+  const start = audio.paused ? audio.play() : Promise.resolve();
+  (start || Promise.resolve())
+    .then(() => {
+      try {
+        if (audio.muted) audio.muted = false;
+      } catch (e) {}
+      try {
+        fadeAudio(audio, safeVol, Math.max(0, Number(duration) || 600));
+      } catch (e) {}
+    })
+    .catch(() => {
+      // Si la reprise directe échoue (autoplay), laisser playArirangAudio gérer le fallback
+      try {
+        if (typeof playArirangAudio === "function") playArirangAudio();
+      } catch (e) {}
+    });
+};
+
 $(document).on("keydown", function (e) {
   // Vérifie que l'utilisateur n'est pas en train de saisir du texte dans un input/textarea
   if (e.key.toLowerCase() === "p" && !$("input, textarea").is(":focus")) {
