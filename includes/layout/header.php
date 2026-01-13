@@ -6,9 +6,7 @@
     <div class="header-controls">
         <!-- Logo (affiché sauf sur la home) -->
         <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
-            <!-- <a href="index.php" class="logo-link">
-                <img src="img/favicon.png" alt="Logo Les glaneurs de carton" class="logo">
-            </a> -->
+
         <?php endif; ?>
 
         <!-- Sélecteur de langue -->
@@ -32,8 +30,6 @@
 
     <!-- Contrôle audio global -->
     <?php
-    // Lecture sécurisée du titre du contrôle audio : si la traduction manque,
-    // on fournit un fallback localisé pour éviter d'afficher le placeholder.
     $audioTitle = getTranslation('Audio ON/OFF', $lang);
     if (strpos($audioTitle, 'TRADUCTION_MANQUANTE:') === 0) {
         $fallbacks = [
@@ -66,8 +62,10 @@
     <?php } ?>
 </script>
 <!-- Menu volet latéral (navigation principale) -->
+
 <div class="menu-volet" id="menuVolet">
     <div class="menu-volet-content">
+        
         <?php
         $videoSources = [
             [
@@ -101,10 +99,11 @@
     </div>
     <div class="menu-links">
         <ul>
+            <li id="menu-accueil"><a href="./" class="transition-link" id="menu-accueil-style"><?php echo getTranslation('index_titre', "fr") ?></a></li>
             <li><a href="portraits" class="transition-link" title="<?php echo getTranslation('portraits_titre', $lang) ?>"><?php echo getTranslation('portraits_titre', $lang) ?></a></li>
             <li><a href="tracesdupasse" class="transition-link" title="<?php echo getTranslation('archives_titre', $lang) ?>"><?php echo getTranslation('archives_titre', $lang) ?></a></li>
             <li><a href="derriere-le-documentaire" class="transition-link" title="<?php echo getTranslation('derriereledocumentaire_titre', $lang) ?>"><?php echo getTranslation('derriereledocumentaire_titre', $lang) ?></a></li>
-            <li id="menu-accueil"><a href="./" class="transition-link" id="menu-accueil-style"><?php echo getTranslation('index_titre', $lang) ?></a></li>
+           
             <li class="mentionslegales-right"><a href="mentionslegales" class="transition-link" title="<?php echo getTranslation('mentionslegales_titre', $lang) ?>"><?php echo getTranslation('mentionslegales_titre', $lang) ?></a></li>
         </ul>
     </div>

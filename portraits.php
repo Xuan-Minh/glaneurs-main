@@ -15,7 +15,7 @@ function display_portrait_content($portrait_id, $lang) {
 
     foreach ($result as $row) {
         $content = !empty($row['content_' . $lang]) ? $row['content_' . $lang] : $row['content_fr'];
-        $data_extra = json_decode($row['data_extra'], true);
+        $data_extra = json_decode($row['data_extra'] ?? '', true);
 
         switch ($row['element_type']) {
             case 'subtitle':

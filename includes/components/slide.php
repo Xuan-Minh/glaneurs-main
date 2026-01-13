@@ -22,10 +22,8 @@ foreach ($slides as $slide) {
         echo '<div class="visionner">';
         echo '<div class="close-visionner"></div>';
         echo '</div>';
-          echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . getTranslation("index_titre", $lang) . '</h1>';
-        if($lang === "fr"){
-      
-        echo '<div class="index-soustitre" data-chapitre="' . $slide["chapitre"] . '">' . getTranslation("index_titre","ko") . '</div>';}
+        echo '<h1 data-chapitre="' . $slide["chapitre"] . '">' . getTranslation("index_titre", "fr") . '</h1>';
+        echo '<div class="index-soustitre" data-chapitre="' . $slide["chapitre"] . ' title="Zizi">' . getTranslation("index_titre","ko") . '</div>';
         echo '<button type="button" class="visionner-trigger visionner-trigger-h3 always-visible" data-vimeo="' . $vimeoId . '" data-lang="' . $lang . '">' . getTranslation("index_docufull", $lang) . '</button>';
     }
 
