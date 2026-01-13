@@ -1,8 +1,6 @@
 <?php include 'includes/lang.php'; // Inclut le fichier pour gérer la langue
 ?>
 <?php
-// ...avant le </div> de .archives-scroll...
-// Récupère les archives depuis la base
 $pdo = getPDO();
 $archives = $pdo->query("SELECT * FROM archives")->fetchAll(PDO::FETCH_ASSOC);
 // Structure des chapitres utilisée par la navigation (définie en amont)

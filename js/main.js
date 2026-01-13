@@ -5,7 +5,6 @@ let audioContextStarted = false;
 window.shouldPlayPortraitsAudio = false;
 window.isLangSwitching = false;
 
-// Petit helper de localisation pour messages UI (fr / ko / en)
 function getLocalizedMessage(key) {
   const langAttr =
     (document && document.documentElement && document.documentElement.lang) ||
@@ -105,7 +104,6 @@ function playArirangAudio() {
             $(document).off("click.autoplay keydown.autoplay");
           })
           .catch((error) => {
-            // Ajout d’un log plus détaillé
             console.error(
               "Arirang audio autoplay was prevented or failed:",
               error
@@ -143,9 +141,7 @@ function playArirangAudio() {
               if (!isGloballyMuted) playArirangAudio();
             });
           });
-        // Safety: certains navigateurs peuvent résoudre/rejeter de façon incohérente.
-        // Après un court délai, vérifier si la lecture a effectivement avancé ; si non,
-        // afficher la notification d'autoplay bloqué (heuristique complémentaire).
+        // Vérifier après délai si autoplay bloqué
         setTimeout(() => {
           try {
             const a = document.getElementById("audio-arirang");
@@ -329,9 +325,7 @@ $(document).ready(function () {
     // Si on doit changer de page :
     // 1. Gérer l'audio (fade global + portraits)
     if (typeof stopArirangAudio === "function") stopArirangAudio();
-    // Si la page portraits expose une API promise-based, on attend son fade pour éviter
-    // une coupure franche. Sinon on attend un court délai pour laisser le fade local
-    // se produire.
+
     const portraitsFadePromise =
       typeof window.requestPortraitsFadeOut === "function"
         ? window.requestPortraitsFadeOut(600)
@@ -366,23 +360,11 @@ $(document).ready(function () {
 
     // Si on vient du cache (bouton précédent), on force la ré-animation
     const overlay = $("#transition-overlay");
-
-    // Étape A : On retire la classe 'hide' et on désactive la transition
-    // pour que l'overlay redevienne visible instantanément, sans animation.
     overlay.css("transition", "none");
     overlay.removeClass("hide");
-
-    // Étape B (L'ASTUCE CLÉ) : On force le navigateur à recalculer le style.
-    // En demandant son 'offsetHeight', on l'oblige à prendre en compte le changement de l'étape A.
-    // Sans cette ligne, le navigateur est "trop intelligent" et ne voit pas de changement à animer.
     void overlay[0].offsetHeight;
-
-    // Étape C : Maintenant que le navigateur sait que l'overlay est visible,
-    // on réactive l'animation et on rajoute la classe pour le faire disparaître en fondu.
     overlay.css("transition", "opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)");
     overlay.addClass("hide");
-
-    // Étape D : On réinitialise le reste de la page pour un état propre
     window.scrollTo(0, 0);
     $("body").css("overflow", "auto");
     $(".visionner").fadeOut(0);
@@ -595,12 +577,6 @@ function scrollToAndTrigger(slideNumber) {
 // ----------------------------------------------- HOVER VIDEO ---------------------------------- //
 $(".menu-video-item").on("mouseenter", function () {
   const video = $(this).find(".menu-video")[0];
-  if (video) {
-    video.play().catch((error) => {
-      // Gère les erreurs potentielles si l'autoplay est bloqué
-      // console.warn("Video play被阻止:", error);
-    });
-  }
 });
 
 $(".menu-video-item").on("mouseleave", function () {
@@ -713,8 +689,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ".portraits-sound-overlay__content"
     );
     if (overlayContent) {
-      // role=status permet aux lecteurs d'écran d'annoncer le contenu non interactif
-      // si l'overlay nécessite interaction, role=dialog serait plus approprié.
       if (!overlayContent.hasAttribute("role"))
         overlayContent.setAttribute("role", "status");
       if (!overlayContent.hasAttribute("aria-live"))
@@ -751,10 +725,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof playArirangAudio === "function") {
           playArirangAudio();
         }
-        // MODIFICATION ICI : On ne lance pas directement, on lève le drapeau
         if (typeof startPortraitsAudio === "function") {
           window.shouldPlayPortraitsAudio = true;
-          // On essaie quand même de le lancer, au cas où il serait déjà prêt
           startPortraitsAudio();
         }
       }, 100);

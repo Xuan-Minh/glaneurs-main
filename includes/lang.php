@@ -49,8 +49,6 @@ function getPDO()
         try {
             $pdo = new PDO($dsn, $username, $password, $options);
         } catch (PDOException $error) {
-            // Affiche une erreur claire si la connexion échoue
-            // die('Erreur de connexion à la base de données.');
             die('Erreur de connexion : ' . $error->getMessage()); // Gardez ceci pour le dernier test
         }
     }
@@ -64,7 +62,6 @@ function getTranslation($key, $lang = 'fr')
     static $translations = null;
     if ($translations === null) {
         $pdo = getPDO();
-        // Optimisation : ne sélectionner que les colonnes nécessaires
         $stmt = $pdo->query("SELECT key_name, fr, en, ko FROM translations");
         $translations = [];
         foreach ($stmt as $row) {

@@ -1,7 +1,6 @@
 // ----------------------------------------------- Derrière le documentaire ---------------------------------- //
 $(function () {
   function randomizeTeamStatesRespectHover() {
-    // Sélectionne uniquement les membres qui NE sont PAS hover
     const members = $(".team-member").not(".hover-force").toArray();
     // Remet tous ces membres en photo
     $(members).removeClass("show-info").addClass("show-photo");

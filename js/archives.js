@@ -72,31 +72,6 @@ $(function () {
       activeLinkObserver.observe(chapter);
     });
 
-    // ANCIENNE LOGIQUE (supprimée)
-    /*
-    const firstChapter = chapters[0];
-    const navVisibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navContainer.classList.add('is-visible');
-        } else {
-          if (entry.boundingClientRect.top > 0) {
-            navContainer.classList.remove('is-visible');
-          }
-        }
-      });
-    }, {
-      rootMargin: '0px 0px -50% 0px'
-    });
-
-    navVisibilityObserver.observe(firstChapter);
-    */
-
-    // NOUVELLE LOGIQUE DE VISIBILITÉ
-    // Le menu devient visible soit quand le hero n'est plus visible,
-    // soit dès que l'intro (le début du contenu) est visible —
-    // cela évite d'attendre la fin de l'intro pour afficher le menu.
-    // Le menu ne doit être visible que quand le chapitre 1 est visible
     let visibleChapters = 0;
 
     function updateNavVisibility() {
