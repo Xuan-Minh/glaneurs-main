@@ -30,6 +30,19 @@ $(document).ready(function () {
       // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
       // et qu'il n'y a pas de modale vidéo active
       if (audio && audio.paused && $(".visionner:visible").length === 0) {
+        // Si l'audio n'a jamais été initialisé (pas de loading screen / localStorage vidé),
+        // on déclenche l'init complète (déverrouille + persistance) sur cette interaction.
+        try {
+          if (
+            typeof window.initSiteAudio === "function" &&
+            (typeof audioContextStarted === "undefined" ||
+              audioContextStarted === false)
+          ) {
+            window.initSiteAudio();
+            return;
+          }
+        } catch (e) {}
+
         playArirangAudio();
       }
     });

@@ -975,10 +975,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Le CTA flottant a été retiré — plus de mise à jour nécessaire
   }
 
+  // Expose l'init pour les pages / scripts qui n'ont pas le bouton "Entrer".
+  // (Toujours déclenché par une interaction utilisateur : clic/clavier.)
+  try {
+    window.initSiteAudio = initAudio;
+  } catch (e) {}
+
   function handleSoundIconClick() {
     // Si le contexte audio n'a pas encore été initié par l'utilisateur (via le bouton "Entrer"),
-    // l'icône de son ne doit rien faire. C'est le bouton "Entrer" qui a la priorité.
+    // on initialise ici pour éviter un état "bloqué" quand le loading screen n'est pas affiché.
     if (!audioContextStarted) {
+      initAudio();
       return;
     }
 
