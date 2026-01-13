@@ -8,7 +8,7 @@ $slides = array(
         "srcvideobg" => "video/web/chariot.mp4",
         "poster" => "img/posters/chariot_poster.png", 
         "srcaudio" => "audio/chap1.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914", 
         "info" => "",
         "urlsuite" => ""
     ),

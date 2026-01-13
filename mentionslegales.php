@@ -26,7 +26,7 @@
     <p> 01 60 95 71 79</p>
 
     <h3><?php echo getTranslation("mentionslegales_conception", $lang) ?><br></h3>
-    <p> Sakina DOUIOU, Ines DOS SANTOS, Sarah CROS, Xuan-Minh TRAN</p>
+    <p> Sakina DOUIOU, Xuan-Minh TRAN, Ines DOS SANTOS, Sarah CROS </p>
 
     <h3><?php echo getTranslation("mentionslegales_dvt", $lang) ?><br></h3>
     <p> Xuan-Minh TRAN</p>
@@ -53,13 +53,6 @@
      <h3><?php echo getTranslation("mentionslegales_sources_titre", $lang) ?><br></h3>
     <p><?php echo getTranslation("mentionslegales_sources_texte", $lang) ?>
     </p>
-   <!-- <div class="button-container">
-        
-        <button type="button" class="feedback-button" data-email="glaneursdecarton.docu@gmail.com" data-lang="<?php echo $lang; ?>">
-            <span><?php echo getTranslation("mentionslegales_avis_bouton", $lang); ?></span>
-            <svg class="arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="white"></path></svg>
-        </button>
-    </div> -->
   </div>
   </div>
 </section >

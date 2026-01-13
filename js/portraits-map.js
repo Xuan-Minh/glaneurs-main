@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // portraits-map.js: render inline SVG from map.geojson and wire interactions
-
   async function renderSVGFromGeoJSON() {
     const container = document.querySelector("#map-parcours");
     if (!container) return;
 
-    // load geojson
     let geo;
     try {
       const resp = await fetch("map.geojson");
@@ -228,6 +225,14 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!v) return 9 * 60;
       v = String(v).trim();
       if (/^\d{1,2}$/.test(v)) return (Number(v) % 24) * 60;
+
+      // Support formats: "9h", "9h00", "09h00", "9 h 00" (case-insensitive)
+      const h = v
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .match(/^(\d{1,2})h(?:(\d{2}))?$/);
+      if (h) return (Number(h[1]) % 24) * 60 + Number(h[2] || 0);
+
       const m = v.match(/^(\d{1,2}):(\d{2})$/);
       if (m) return (Number(m[1]) % 24) * 60 + Number(m[2]);
       return 9 * 60;
@@ -235,12 +240,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const startMinutes = parseTimeAttr(
       container.getAttribute("data-start") ||
         container.getAttribute("data-start-time") ||
-        "9:00"
+        "9h00"
     );
     const endMinutes = parseTimeAttr(
       container.getAttribute("data-end") ||
         container.getAttribute("data-end-time") ||
-        "13:00"
+        "13h00"
     );
     container.style.position = container.style.position || "relative";
     const svgEl = container.querySelector("svg");
@@ -364,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         timeEl.textContent =
           String(Math.floor(mins / 60)).padStart(2, "0") +
-          ":" +
+          "h" +
           String(mins % 60).padStart(2, "0");
       } catch (e) {}
       for (let i = 0; i < pointFractions.length; i++) {

@@ -90,21 +90,15 @@ window.setPortraitsMuteState = function (isMuted) {
     });
   }
 };
-
-// Expose a promise-based API to request a fade out that callers can await.
-// duration is in milliseconds and corresponds to the maximum time we should wait
-// for the fades scheduled by setPortraitsMuteState to complete.
 window.requestPortraitsFadeOut = function (duration = 500) {
   return new Promise((resolve) => {
     try {
       if (typeof window.setPortraitsMuteState === "function") {
-        // demand mute (portraits.js will schedule WebAudio ramps)
         window.setPortraitsMuteState(true);
       }
     } catch (e) {
       // ignore
     }
-    // resolve after duration (allowing fades to complete). We keep a minimum guard.
     const wait = Math.max(200, duration);
     setTimeout(() => resolve(), wait);
   });
