@@ -98,7 +98,7 @@ $("#enter-button").click(function () {
   // 1) Faire apparaître le rideau noir en fondu (0 -> 1)
   $overlay.removeClass("hide").addClass("active");
 
-  // 2) Quand il est opaque, basculer du loading à la home
+  // 2) Quand il est opaque, basculer du loading à la homeBouton
   setTimeout(function () {
     $(".loading-screen").remove(); // retire le loading (plus de flash)
     $(".container").removeClass("hidden").show();

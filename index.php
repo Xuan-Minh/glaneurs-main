@@ -135,7 +135,7 @@ if (!$isMobile) {
     <?php if ($showLoading): ?>
     <?php include 'includes/layout/loading.php'; ?>
     <?php endif; ?>
-    <audio id="audio-arirang" src="audio/homepage.mp3" loop preload="auto"></audio>
+    <audio id="audio-arirang" src="audio/homeBoutonpage.mp3" loop preload="auto"></audio>
     <?php include 'includes/layout/header.php'; ?>
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
         <?php

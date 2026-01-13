@@ -197,8 +197,6 @@ header.hide-header {
 }
 
 /* --------------------- MENU VOLET ------------------------------------------- */
-/* Dans css/navbar.css */
-
 .menu-volet {
   position: fixed;
   top: 0;
@@ -222,9 +220,7 @@ header.hide-header {
 }
 
 .menu-volet-content {
-  /* margin-top: 10%; */ /* Remplacé par padding-top pour plus de contrôle */
   padding-top: 10vh; /* Espace en haut relatif à la hauteur de la fenêtre */
-  /* Vous pouvez aussi utiliser une valeur en px, ex: 40px */
   padding-bottom: 3vh; /* Espace en bas pour le contenu */
   width: 80%;
   max-width: 1200px;
@@ -296,7 +292,7 @@ header.hide-header {
   color: white;
   text-decoration: none;
   font-family: "Figtree", sans-serif;
-  font-size: clamp(1.2rem, 1.6vw, 1.6rem); /* Agrandit la taille de la police */
+  font-size: clamp(1.2rem, 1.2vw, 1.6rem); /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
   transition: color 0.3s ease;
@@ -364,21 +360,23 @@ li.mentionslegales-right a {
   font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
 }
 
-#home-style {
+#homeBouton-style {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-size: clamp(1.2rem, 2vw, 2rem);
   font-family: "Libre Baskerville", serif !important;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
-#home-style::after {
+#homeBouton-style::after {
   display: none;
 }
-#home-style span {
+#homeBouton-style span {
   position: relative;
 }
-#home-style span::after {
+#homeBouton-style span::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -390,10 +388,10 @@ li.mentionslegales-right a {
   border-radius: 2px;
   z-index: -1;
 }
-#home-style:hover span::after {
+#homeBouton-style:hover span::after {
   width: 100%;
 }
-.menu-home-subtitle {
+.menu-homeBouton-subtitle {
   font-size: clamp(0.9rem, 1.5vw, 1.5rem);
   font-family: "Noto Sans KR", sans-serif;
   color: rgba(255, 255, 255, 0.8);
@@ -424,7 +422,6 @@ li.mentionslegales-right a {
   fill: white;
   margin-right: 8px;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* On retire width/margin-right */
-  /* display: inline-block; est le comportement par défaut dans un flex container */
 }
 #global-audio-control-container svg.icon-hidden {
   opacity: 0;
