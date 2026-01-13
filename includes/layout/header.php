@@ -4,7 +4,6 @@
 
 <header>
     <div class="header-controls">
-        <!-- Logo (affiché sauf sur la home) -->
         <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>
 
         <?php endif; ?>
@@ -99,7 +98,10 @@
     </div>
     <div class="menu-links">
         <ul>
-            <li id="menu-accueil"><a href="./" class="transition-link" id="menu-accueil-style"><?php echo getTranslation('index_titre', "fr") ?></a></li>
+            <li><a href="./" class="transition-link" id="home-style">
+                <span><?php echo getTranslation('index_titre', "fr") ?></span>
+                <span class="menu-home-subtitle"><?php echo getTranslation('index_titre', "ko") ?></span>
+            </a></li>
             <li><a href="portraits" class="transition-link" title="<?php echo getTranslation('portraits_titre', $lang) ?>"><?php echo getTranslation('portraits_titre', $lang) ?></a></li>
             <li><a href="tracesdupasse" class="transition-link" title="<?php echo getTranslation('archives_titre', $lang) ?>"><?php echo getTranslation('archives_titre', $lang) ?></a></li>
             <li><a href="derriere-le-documentaire" class="transition-link" title="<?php echo getTranslation('derriereledocumentaire_titre', $lang) ?>"><?php echo getTranslation('derriereledocumentaire_titre', $lang) ?></a></li>

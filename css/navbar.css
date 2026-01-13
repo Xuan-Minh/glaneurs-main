@@ -272,7 +272,6 @@ header.hide-header {
 .menu-links {
   width: 80%;
   text-align: left;
-  margin-top: 20px;
   justify-content: flex-start;
 }
 .menu-links h4 {
@@ -365,32 +364,44 @@ li.mentionslegales-right a {
   font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
 }
 
-#menu-accueil {
-  margin-top: 10%;
-}
-#menu-accueil-style {
+#home-style {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-size: clamp(1.2rem, 2vw, 2rem);
   font-family: "Libre Baskerville", serif !important;
-}
-/* ----------------------------- LOGO ------------------------ */
-.logo-link {
-  z-index: 1000;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  text-decoration: none;
+}
+#home-style::after {
+  display: none;
+}
+#home-style span {
+  position: relative;
+}
+#home-style span::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ddd;
+  transition: width 0.5s ease;
+  border-radius: 2px;
+  z-index: -1;
+}
+#home-style:hover span::after {
+  width: 100%;
+}
+.menu-home-subtitle {
+  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
+  font-family: "Noto Sans KR", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.2em;
+  font-weight: 100;
 }
 
-.logo {
-  width: 40px; /* Ajuste la taille du logo */
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.1); /* Agrandit légèrement le logo au survol */
-}
+/* --------------------- BOUTON AUDIO GLOBAL ---------------------------------- */
 
 #global-audio-control-container {
   position: fixed; /* Ou 'absolute' si votre header est 'fixed' */
@@ -423,6 +434,5 @@ li.mentionslegales-right a {
 }
 
 #wave {
-  /* Le canvas est petit, pas besoin de beaucoup de style ici */
   vertical-align: middle; /* Pour un meilleur alignement avec l'icône */
 }
