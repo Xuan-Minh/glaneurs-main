@@ -431,12 +431,26 @@ $(document).ready(function () {
   });
   const slides = document.querySelectorAll(".slides");
   const scrollArrow = document.querySelector(".scroll-down-arrow");
-  // Amélioration : rendre le scroll à la molette plus réactif sur la page d'accueil
-  // On transforme un unique 'wheel' significatif en saut vers la slide suivante/précédente.
-  // Débounce pour éviter les sauts multiples lors du même mouvement de molette.
+  // Sur l'index, on peut avoir du scroll-snap CSS. Dans ce cas, ne PAS intercepter la molette :
+  // scroll-snap + preventDefault + scrollIntoView = sensation "clunky" (double logique).
   if (slides.length) {
     const container = document.querySelector(".container");
     if (container) {
+      let hasCssScrollSnap = false;
+      try {
+        const snapType = (
+          getComputedStyle(container).scrollSnapType || ""
+        ).trim();
+        hasCssScrollSnap = snapType !== "" && snapType !== "none";
+      } catch (e) {
+        hasCssScrollSnap = false;
+      }
+
+      // Si scroll-snap est actif, laisser le navigateur gérer le scroll.
+      if (hasCssScrollSnap) {
+        return;
+      }
+
       let wheelDebounce = false;
       container.addEventListener(
         "wheel",
