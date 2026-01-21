@@ -1,5 +1,4 @@
 
-<!-- Overlay de transition pour les effets de page -->
 <div id="transition-overlay" class="active"></div>
 
 <header>
@@ -50,7 +49,6 @@
     </div>
 </header>
 
-<!-- Expose minimal translations pour JS -->
 <script>
     window.I18N = window.I18N || {};
     <?php $__t = getTranslation('autoplayBlocked', $lang); if (strpos($__t, 'TRADUCTION_MANQUANTE:') === false) { ?>

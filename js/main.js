@@ -14,8 +14,8 @@ function getLocalizedMessage(key) {
   const locale = lang.startsWith("ko")
     ? "ko"
     : lang.startsWith("en")
-    ? "en"
-    : "fr";
+      ? "en"
+      : "fr";
   const messages = {
     autoplayBlocked: {
       fr: "Le son est bloqué par votre navigateur. Cliquez pour l'activer.",
@@ -106,7 +106,7 @@ function playArirangAudio() {
           .catch((error) => {
             console.error(
               "Arirang audio autoplay was prevented or failed:",
-              error
+              error,
             );
             if (audio && audio.error) {
               console.error("Audio error code:", audio.error.code);
@@ -285,8 +285,6 @@ $(document).ready(function () {
           }
         } catch (e) {}
       }
-      // S'assurer que la waveform visuelle revient à son état (planifié sur la frame suivante
-      // pour éviter une animation qui paraîtrait déjà terminée au refresh de l'onglet).
       try {
         requestAnimationFrame(() => {
           if (typeof updateUI === "function") {
@@ -312,7 +310,7 @@ $(document).ready(function () {
     const currentPath = window.location.pathname.replace(/\/$/, "");
     const targetPath = new URL(href, window.location.origin).pathname.replace(
       /\/$/,
-      ""
+      "",
     );
 
     if (currentPath === targetPath) {
@@ -495,7 +493,7 @@ $(document).ready(function () {
           // Débounce : on réautorise après 600ms (suffisant pour l'animation smooth)
           setTimeout(() => (wheelDebounce = false), 600);
         },
-        { passive: false }
+        { passive: false },
       );
     }
   }
@@ -515,7 +513,7 @@ $(document).ready(function () {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
     slides.forEach((slide) => observer.observe(slide));
   }
@@ -544,7 +542,7 @@ $(document).ready(function () {
           nextSlide.scrollIntoView({ behavior: "smooth" });
         }
       }
-    }
+    },
   );
   // ----------------------------------------------- Scroll depuis d'autres pages---------------------------------- //
   const urlParams = new URLSearchParams(window.location.search);
@@ -661,7 +659,7 @@ $(function () {
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.2 },
   ); // 20% visible
 
   anims.forEach((el) => observer.observe(el));
@@ -686,7 +684,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 document.addEventListener("DOMContentLoaded", () => {
   const audioContainer = document.getElementById(
-    "global-audio-control-container"
+    "global-audio-control-container",
   );
   const waveCanvas = document.getElementById("wave");
   const iconSoundOn = document.getElementById("icon-sound-on");
@@ -700,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // s'assurer qu'il est lisible par les lecteurs d'écran et focusable.
   try {
     const overlayContent = document.querySelector(
-      ".portraits-sound-overlay__content"
+      ".portraits-sound-overlay__content",
     );
     if (overlayContent) {
       if (!overlayContent.hasAttribute("role"))
@@ -1073,37 +1071,4 @@ function showNotification(message, duration = 3000) {
   setTimeout(() => {
     notification.classList.remove("show");
   }, duration);
-}
-
-const feedbackButton = document.querySelector(".feedback-button");
-
-if (feedbackButton) {
-  feedbackButton.addEventListener("click", function () {
-    const email = this.dataset.email;
-
-    // Utilise l'API du presse-papiers (moderne et sécurisée)
-    navigator.clipboard
-      .writeText(email)
-      .then(() => {
-        // Succès de la copie
-        const successMessage =
-          this.dataset.lang === "ko"
-            ? "이메일이 복사되었습니다!"
-            : this.dataset.lang === "en"
-            ? "Email copied to clipboard!"
-            : "Email copié dans le presse-papiers !";
-        showNotification(successMessage);
-      })
-      .catch((err) => {
-        // Erreur lors de la copie
-        console.error("Erreur lors de la copie de l'email : ", err);
-        const errorMessage =
-          this.dataset.lang === "ko"
-            ? "복사 실패"
-            : this.dataset.lang === "en"
-            ? "Copy failed"
-            : "La copie a échoué";
-        showNotification(errorMessage);
-      });
-  });
 }

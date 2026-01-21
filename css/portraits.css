@@ -23,7 +23,9 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s;
+  transition:
+    flex 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +164,9 @@
   text-align: center;
   line-height: 1.2;
   font-weight: 400;
-  transition: opacity 0.36s ease, transform 0.36s ease;
+  transition:
+    opacity 0.36s ease,
+    transform 0.36s ease;
 }
 
 .detail-content p {
@@ -190,7 +194,9 @@
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .portrait-image-gallery .archive-gallery-item:hover {
@@ -325,7 +331,9 @@
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
 .back-to-portraits:hover {
@@ -395,104 +403,6 @@
   stroke: #fff;
   stroke-width: 3;
   transition: 0.1s;
-}
-
-/* ==========================================================================
-   4. RESPONSIVE DESIGN
-   ========================================================================== */
-
-/* --- Tablettes --- */
-@media (max-width: 992px) {
-  .section1-video {
-    transform: translate(-45%, -50%) scale(0.9);
-  }
-  .section2-video {
-    transform: translate(-40%, -50%) scale(0.9);
-  }
-  .section3-video {
-    transform: translate(-65%, -45%) scale(0.9);
-  }
-  .section4-video {
-    transform: translate(-45%, -55%) scale(0.9);
-  }
-
-  .portrait-section.active,
-  .portrait-section:hover {
-    flex: 2.2;
-  }
-
-  .portrait-name {
-    font-size: clamp(1.1rem, 2.2vw, 1.8rem);
-    bottom: 12%;
-  }
-
-  .portrait-detail {
-    padding: 30px 6vw;
-  }
-
-  .portrait-detail h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-  }
-
-  .portrait-detail p {
-    font-size: clamp(0.85rem, 1.6vw, 1.05rem);
-  }
-}
-
-/* --- Mobiles --- */
-@media (max-width: 768px) {
-  .section1-video {
-    transform: translate(-45%, -50%) scale(0.8);
-  }
-  .section2-video {
-    transform: translate(-42.5%, -50%) scale(0.8);
-  }
-  .section3-video {
-    transform: translate(-65%, -46%) scale(0.8);
-  }
-  .section4-video {
-    transform: translate(-45%, -55%) scale(0.8);
-  }
-
-  .portrait-section.active,
-  .portrait-section:hover {
-    flex: 2;
-  }
-
-  .portrait-name {
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    bottom: 10%;
-  }
-
-  .portrait-detail {
-    padding: 25px 5vw;
-  }
-
-  .portrait-detail h2 {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-  }
-
-  .portrait-detail p {
-    font-size: clamp(0.8rem, 2vw, 1rem);
-  }
-
-  .back-to-portraits {
-    padding: clamp(8px, 1.2vw, 12px) clamp(20px, 2.5vw, 30px);
-    font-size: clamp(0.8rem, 1.8vw, 1rem);
-  }
-
-  .volume-control {
-    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-  }
-
-  #volumeRange {
-    width: clamp(70px, 12vw, 100px);
-  }
-
-  .sound-wave-container {
-    width: clamp(60px, 12vw, 100px);
-    height: clamp(25px, 6vw, 35px);
-  }
 }
 
 /* Leaflet: fond transparent et masquage des tuiles */

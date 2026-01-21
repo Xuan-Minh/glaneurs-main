@@ -257,39 +257,3 @@
     bottom: 8%;
   }
 }
-
-/* --- Mobile Phones --- */
-@media (max-width: 576px) {
-  .dld-title h2 {
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-  }
-  .dld-remerciements h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-  }
-  .dld-remerciements p {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  }
-
-  .team-grid {
-    gap: 20px;
-  }
-  .team-member {
-    min-width: 150px;
-  }
-  .team-face,
-  .team-info {
-    padding: 15px;
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  }
-  .team-name {
-    font-size: clamp(1rem, 2.8vw, 1.3rem);
-  }
-  .team-role {
-    font-size: clamp(0.8rem, 2.2vw, 1rem);
-  }
-  .team-portfolio {
-    font-size: clamp(0.8rem, 2.2vw, 1rem);
-    right: 15px;
-    bottom: 15px;
-  }
-}
