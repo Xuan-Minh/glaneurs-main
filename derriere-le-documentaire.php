@@ -141,7 +141,7 @@
         </p>
     </section>
     <?php include "includes/layout/jsinclude.php"; ?>
-    <script src="js/derriereledocumentaire.js"></script>
+    <script src="js/pages/derriereledocumentaire.js"></script>
 </body>
 
 </html>

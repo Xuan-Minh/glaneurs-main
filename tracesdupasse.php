@@ -88,8 +88,8 @@ $chapters_structure = array(
     </div>
 
     <?php include "includes/layout/jsinclude.php"; ?>
-    <script src="js/archives.js" defer></script>
-    <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
+    <script src="js/pages/archives.js" defer></script>
+    <script src="js/features/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
     <?php include "includes/components/visionner.php"; ?>
 </body>
 </html>

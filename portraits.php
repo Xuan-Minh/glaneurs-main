@@ -105,8 +105,7 @@ function display_portrait_content($portrait_id, $lang) {
     <title><?php echo getTranslation("portraits_titre", $lang) ?></title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="js/parcours.js"></script>
-    <script src="js/portraits-map.js"></script>
+    <script src="js/features/portraits-map.js"></script>
 </head>
 
 <body>
@@ -178,8 +177,8 @@ function display_portrait_content($portrait_id, $lang) {
     ?>
 
     <?php include "includes/layout/jsinclude.php"; ?>
-    <script src="js/portraits.js" defer></script>
-    <script src="js/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
+    <script src="js/pages/portraits.js" defer></script>
+    <script src="js/features/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
     <?php include "includes/components/visionner.php"; ?>
 </body>
 </html>

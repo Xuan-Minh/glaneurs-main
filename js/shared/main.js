@@ -205,38 +205,6 @@ $(document).on("keydown", function (e) {
       $(this).find(".close-visionner").trigger("click");
     });
   }
-  if (
-    !$("input, textarea").is(":focus") && // Pas dans un champ texte
-    $(".slides").length > 1
-  ) {
-    const $slides = $(".slides");
-    // Trouve la slide la plus visible (milieu de l'écran)
-    let currentIndex = 0;
-    let minDist = Infinity;
-    const viewportMiddle = window.innerHeight / 2;
-    $slides.each(function (i, slide) {
-      const rect = slide.getBoundingClientRect();
-      const slideMiddle = rect.top + rect.height / 2;
-      const dist = Math.abs(slideMiddle - viewportMiddle);
-      if (dist < minDist) {
-        minDist = dist;
-        currentIndex = i;
-      }
-    });
-
-    if (e.key === "ArrowDown") {
-      // Flèche bas : slide suivante
-      if (currentIndex < $slides.length - 1) {
-        $slides.eq(currentIndex + 1)[0].scrollIntoView({ behavior: "smooth" });
-      }
-    }
-    if (e.key === "ArrowUp") {
-      // Flèche haut : slide précédente
-      if (currentIndex > 0) {
-        $slides.eq(currentIndex - 1)[0].scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }
 });
 $(document).ready(function () {
   // ----------------------------------------------- LOADING ---------------------------------- //
@@ -342,6 +310,7 @@ $(document).ready(function () {
     window.scrollTo(0, 0);
     $("body").css("overflow", "auto");
     $(".visionner").fadeOut(0);
+
     // Demande au module portraits de se fondre si présent, puis stop l'audio principal.
     (async function () {
       if (typeof window.requestPortraitsFadeOut === "function") {
@@ -353,6 +322,7 @@ $(document).ready(function () {
         stopArirangAudio();
       }
     })();
+
     // Réinitialise l'UI audio / waveform lors du retour depuis le bfcache
     try {
       requestAnimationFrame(() => {
@@ -403,128 +373,6 @@ $(document).ready(function () {
       menuBurger.removeClass("open");
     }
   });
-  const slides = document.querySelectorAll(".slides");
-  const scrollArrow = document.querySelector(".scroll-down-arrow");
-  // Sur l'index, on peut avoir du scroll-snap CSS. Dans ce cas, ne PAS intercepter la molette :
-  // scroll-snap + preventDefault + scrollIntoView = sensation "clunky" (double logique).
-  if (slides.length) {
-    const container = document.querySelector(".container");
-    if (container) {
-      let hasCssScrollSnap = false;
-      try {
-        const snapType = (
-          getComputedStyle(container).scrollSnapType || ""
-        ).trim();
-        hasCssScrollSnap = snapType !== "" && snapType !== "none";
-      } catch (e) {
-        hasCssScrollSnap = false;
-      }
-
-      // Si scroll-snap est actif, laisser le navigateur gérer le scroll.
-      if (hasCssScrollSnap) {
-        return;
-      }
-
-      let wheelDebounce = false;
-      container.addEventListener(
-        "wheel",
-        (ev) => {
-          // Si un saut est déjà en cours, ignorer
-          if (wheelDebounce) return;
-          const delta = ev.deltaY;
-          // Seuil pour ignorer petits mouvements (touchpads, légers scrolls)
-          if (Math.abs(delta) < 40) return;
-          wheelDebounce = true;
-          // Empêche le scroll par défaut pendant le jump pour éviter double animation
-          ev.preventDefault();
-          if (delta > 0) {
-            // vers le bas : prochaine slide
-            const $slides = $(slides);
-            let nextSlide = null;
-            $slides.each(function (i, slide) {
-              const rect = slide.getBoundingClientRect();
-              if (rect.top > 10) {
-                nextSlide = slide;
-                return false;
-              }
-            });
-            if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
-          } else {
-            // vers le haut : slide précédente
-            const viewportMiddle = window.innerHeight / 2;
-            let currentIndex = 0;
-            let minDist = Infinity;
-            slides.forEach((slide, i) => {
-              const rect = slide.getBoundingClientRect();
-              const slideMiddle = rect.top + rect.height / 2;
-              const dist = Math.abs(slideMiddle - viewportMiddle);
-              if (dist < minDist) {
-                minDist = dist;
-                currentIndex = i;
-              }
-            });
-            if (currentIndex > 0)
-              slides[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
-          }
-          // Débounce : on réautorise après 600ms (suffisant pour l'animation smooth)
-          setTimeout(() => (wheelDebounce = false), 600);
-        },
-        { passive: false },
-      );
-    }
-  }
-  if (slides.length && scrollArrow) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (
-              Array.from(slides).indexOf(entry.target) ===
-              slides.length - 1
-            ) {
-              scrollArrow.classList.add("up");
-            } else {
-              scrollArrow.classList.remove("up");
-            }
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-    slides.forEach((slide) => observer.observe(slide));
-  }
-
-  // Handler de clic sur la flèche (à l'extérieur de l'observer)
-  $(document).on(
-    "click",
-    ".scroll-down-arrow, .scroll-down-arrow img",
-    function (event) {
-      event.stopPropagation();
-      const $arrow = $(this).closest(".scroll-down-arrow");
-      if ($arrow.hasClass("up")) {
-        $(".container")[0].scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        const $slides = $(".slides");
-        let nextSlide = null;
-        $slides.each(function (i, slide) {
-          const rect = slide.getBoundingClientRect();
-          if (rect.top > 10) {
-            nextSlide = slide;
-            return false;
-          }
-        });
-        if (nextSlide) {
-          nextSlide.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    },
-  );
-  // ----------------------------------------------- Scroll depuis d'autres pages---------------------------------- //
-  const urlParams = new URLSearchParams(window.location.search);
-  const slideParam = urlParams.get("slide");
-  if (slideParam) {
-    scrollToAndTrigger(slideParam); // Décrémente slideParam pour correspondre à l'index
-  }
 });
 // ----------------------------------------------- Fade transition ---------------------------------- //
 
@@ -536,9 +384,9 @@ $(document).on("click", ".menu-video-item", function () {
   $("#menuVolet").removeClass("open");
   $("#menuBurger").removeClass("open");
 
-  if (isIndexPage) {
-    // Sur l'index : pas de transition, pas de délai
-    scrollToAndTrigger(slideNumber);
+  if (isIndexPage && typeof window.scrollToAndTrigger === "function") {
+    // Sur l'index : logique gérée par index.js
+    window.scrollToAndTrigger(slideNumber);
   } else {
     // Sur une autre page : transition overlay + délai
     setTimeout(function () {
@@ -549,18 +397,6 @@ $(document).on("click", ".menu-video-item", function () {
     }, 300); // Laisse le menu-volet se fermer
   }
 });
-// Fonction pour scroller et simuler le clic
-function scrollToAndTrigger(slideNumber) {
-  const $slide = $(".slides").eq(slideNumber); // Pas de -1 car slideNumber correspond déjà à l'index
-  if ($slide.length === 0) return;
-
-  $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
-
-  // Simule un clic sur le H2 pour ouvrir le visionneur
-  setTimeout(function () {
-    $slide.find("button.visionner-trigger-h3").trigger("click");
-  }, 600);
-}
 // ----------------------------------------------- HOVER VIDEO ---------------------------------- //
 $(".menu-video-item").on("mouseenter", function () {
   const video = $(this).find(".menu-video")[0];
@@ -604,6 +440,28 @@ $(document).on("click", ".lang-option", function (e) {
     window.location.href = url.toString();
   }, 700); // même durée que la transition CSS
 });
+
+// Helper réutilisable pour cacher/montrer le header sur un conteneur scrollable.
+// Utilisé par certaines pages (ex: archives) dont le scroll est interne au conteneur.
+function addHideHeaderOnScroll($scrollContainer) {
+  if (!$scrollContainer || !$scrollContainer.length) return;
+
+  const $header = $("header");
+  let lastScrollLocal = 0;
+
+  $scrollContainer
+    .off("scroll.hideHeader")
+    .on("scroll.hideHeader", function () {
+      const currentScroll = $scrollContainer.scrollTop();
+      if (currentScroll > lastScrollLocal && currentScroll > 200) {
+        $header.addClass("hide-header");
+      } else if (currentScroll < lastScrollLocal) {
+        $header.removeClass("hide-header");
+      }
+      if (currentScroll < 20) $header.removeClass("hide-header");
+      lastScrollLocal = currentScroll;
+    });
+}
 // ----------------------------------------------- hide navbar apres scroll ------------------------ //
 let lastScroll = 0;
 const $header = $("header");

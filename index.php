@@ -145,7 +145,7 @@ if (!$isMobile) {
     </div>
     <?php include 'includes/layout/jsinclude.php'; ?>
     <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/pages/index.js"></script>
 
 <?php endif; ?>
 

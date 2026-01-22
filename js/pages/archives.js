@@ -1,19 +1,25 @@
 $(function () {
   // --- LOGIQUE DU HEADER ---
-  const $header = $("header");
   const $archivesScroll = $(".archives-scroll");
   if ($archivesScroll.length) {
-    let lastScroll = 0;
-    $archivesScroll.on("scroll", function () {
-      const currentScroll = $archivesScroll.scrollTop();
-      if (currentScroll > lastScroll && currentScroll > 200) {
-        $header.addClass("hide-header");
-      } else if (currentScroll < lastScroll) {
-        $header.removeClass("hide-header");
-      }
-      if (currentScroll < 20) $header.removeClass("hide-header");
-      lastScroll = currentScroll;
-    });
+    // Réutilise l'helper global si disponible (défini dans main.js)
+    if (typeof addHideHeaderOnScroll === "function") {
+      addHideHeaderOnScroll($archivesScroll);
+    } else {
+      // Fallback local si main.js n'est pas chargé pour une raison quelconque
+      const $header = $("header");
+      let lastScroll = 0;
+      $archivesScroll.on("scroll", function () {
+        const currentScroll = $archivesScroll.scrollTop();
+        if (currentScroll > lastScroll && currentScroll > 200) {
+          $header.addClass("hide-header");
+        } else if (currentScroll < lastScroll) {
+          $header.removeClass("hide-header");
+        }
+        if (currentScroll < 20) $header.removeClass("hide-header");
+        lastScroll = currentScroll;
+      });
+    }
   }
   // --- NOUVEAU: LOGIQUE POUR LES IMAGES FLOTTANTES (PARALLAXE) ---
   const $floatingImages = $(".floating-image");
@@ -55,7 +61,7 @@ $(function () {
             const chapterId = entry.target.id;
             navLinks.forEach((link) => link.classList.remove("active"));
             const activeLink = document.querySelector(
-              `.nav-link[data-scroll-to='${chapterId}']`
+              `.nav-link[data-scroll-to='${chapterId}']`,
             );
             if (activeLink) {
               activeLink.classList.add("active");
@@ -65,7 +71,7 @@ $(function () {
       },
       {
         rootMargin: "0px 0px -40% 0px",
-      }
+      },
     );
 
     chapters.forEach((chapter) => {
@@ -101,7 +107,7 @@ $(function () {
             updateNavVisibility();
           });
         },
-        { rootMargin: "0px 0px -60% 0px" }
+        { rootMargin: "0px 0px -60% 0px" },
       );
       chapters.forEach((chapter) => {
         chapterObserver.observe(chapter);

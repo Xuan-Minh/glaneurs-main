@@ -10,7 +10,7 @@ $(document).ready(function () {
         // On ajoute la classe au conteneur parent pour déclencher les deux fondus
         loadingScreen.classList.add("loaded");
       },
-      { once: true }
+      { once: true },
     ); // L'événement ne se déclenche qu'une fois
   }
 
@@ -169,7 +169,7 @@ function showInfoPanel($slide) {
     }, 1500); // 1.5s, comme la transition CSS
   } else {
     console.debug(
-      "showInfoPanel: première slide détectée, saut des classes move/author-visible/flou"
+      "showInfoPanel: première slide détectée, saut des classes move/author-visible/flou",
     );
   }
 
@@ -347,7 +347,7 @@ try {
           if (t.classList.contains("flou")) {
             console.debug(
               "MutationObserver: flou ajouté à",
-              t.closest(".slides") ? t.closest(".slides").className : t
+              t.closest(".slides") ? t.closest(".slides").className : t,
             );
           }
         }
@@ -357,7 +357,7 @@ try {
   document
     .querySelectorAll(".slides > video")
     .forEach((v) =>
-      _mutObserver.observe(v, { attributes: true, attributeFilter: ["class"] })
+      _mutObserver.observe(v, { attributes: true, attributeFilter: ["class"] }),
     );
 } catch (e) {
   // ignore si le navigateur ne supporte pas MutationObserver
@@ -409,7 +409,7 @@ $(".close-visionner").click(function (event) {
     slide.find("video").addClass("flou");
   } else {
     console.debug(
-      ".close-visionner: première slide — pas de flou/zoom appliqué"
+      ".close-visionner: première slide — pas de flou/zoom appliqué",
     );
     // S'assurer qu'aucune classe indésirable ne reste
     $h2.removeClass("move author-visible animate-transform");
@@ -451,7 +451,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 
   // Crée et injecte le nouvel iframe
   const iframe = $(
-    `<iframe src="${vimeoUrl}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+    `<iframe src="${vimeoUrl}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`,
   );
   visionner.append(iframe);
 
@@ -563,10 +563,182 @@ $(function () {
     {
       // On observe à plusieurs seuils pour une détection plus fiable
       threshold: [0.2, 0.5, 0.8],
-    }
+    },
   );
 
   slides.forEach((slide) => observer.observe(slide));
 });
-// --------------------------------- Scroll Down Arrow --------------------------------- //
-// La logique de la flèche scroll est désormais centralisée dans main.js pour éviter toute duplication et garantir la cohérence sur toutes les pages.
+
+// --------------------------------- LOGIQUE SLIDES (INDEX) --------------------------------- //
+// Note: index.js n'est chargé que sur la home. On y garde donc toutes les interactions
+// spécifiques aux slides (scroll/wheel/flèche/?slide) pour éviter d'alourdir main.js.
+
+// Expose la fonction pour permettre à main.js (menu global) de déléguer le scroll sur l'index.
+window.scrollToAndTrigger = function (slideNumber) {
+  const idx = Number(slideNumber);
+  if (!Number.isFinite(idx)) return;
+
+  const $slide = $(".slides").eq(idx); // slideNumber correspond déjà à l'index
+  if ($slide.length === 0) return;
+
+  $slide[0].scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // Simule un clic pour ouvrir le visionneur
+  setTimeout(function () {
+    $slide.find("button.visionner-trigger-h3").trigger("click");
+  }, 600);
+};
+
+// Navigation clavier (flèches) entre slides
+$(document).on("keydown", function (e) {
+  if ($("input, textarea").is(":focus")) return;
+  if ($(".slides").length <= 1) return;
+
+  if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+
+  const $slides = $(".slides");
+  let currentIndex = 0;
+  let minDist = Infinity;
+  const viewportMiddle = window.innerHeight / 2;
+
+  $slides.each(function (i, slide) {
+    const rect = slide.getBoundingClientRect();
+    const slideMiddle = rect.top + rect.height / 2;
+    const dist = Math.abs(slideMiddle - viewportMiddle);
+    if (dist < minDist) {
+      minDist = dist;
+      currentIndex = i;
+    }
+  });
+
+  if (e.key === "ArrowDown" && currentIndex < $slides.length - 1) {
+    $slides.eq(currentIndex + 1)[0].scrollIntoView({ behavior: "smooth" });
+  }
+  if (e.key === "ArrowUp" && currentIndex > 0) {
+    $slides.eq(currentIndex - 1)[0].scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+$(document).ready(function () {
+  const slides = document.querySelectorAll(".slides");
+  const scrollArrow = document.querySelector(".scroll-down-arrow");
+  const container = document.querySelector(".container");
+
+  // Scroll depuis d'autres pages: ?slide=<index>
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const slideParam = urlParams.get("slide");
+    if (slideParam != null && typeof window.scrollToAndTrigger === "function") {
+      window.scrollToAndTrigger(slideParam);
+    }
+  } catch (e) {
+    // noop
+  }
+
+  // Sur l'index, on peut avoir du scroll-snap CSS. Dans ce cas, ne PAS intercepter la molette.
+  if (slides.length && container) {
+    let hasCssScrollSnap = false;
+    try {
+      const snapType = (
+        getComputedStyle(container).scrollSnapType || ""
+      ).trim();
+      hasCssScrollSnap = snapType !== "" && snapType !== "none";
+    } catch (e) {
+      hasCssScrollSnap = false;
+    }
+
+    if (!hasCssScrollSnap) {
+      let wheelDebounce = false;
+      container.addEventListener(
+        "wheel",
+        (ev) => {
+          if (wheelDebounce) return;
+          const delta = ev.deltaY;
+          if (Math.abs(delta) < 40) return;
+          wheelDebounce = true;
+
+          ev.preventDefault();
+
+          if (delta > 0) {
+            // vers le bas : prochaine slide
+            const $slides = $(slides);
+            let nextSlide = null;
+            $slides.each(function (i, slide) {
+              const rect = slide.getBoundingClientRect();
+              if (rect.top > 10) {
+                nextSlide = slide;
+                return false;
+              }
+            });
+            if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
+          } else {
+            // vers le haut : slide précédente
+            const viewportMiddle = window.innerHeight / 2;
+            let currentIndex = 0;
+            let minDist = Infinity;
+            slides.forEach((slide, i) => {
+              const rect = slide.getBoundingClientRect();
+              const slideMiddle = rect.top + rect.height / 2;
+              const dist = Math.abs(slideMiddle - viewportMiddle);
+              if (dist < minDist) {
+                minDist = dist;
+                currentIndex = i;
+              }
+            });
+            if (currentIndex > 0)
+              slides[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
+          }
+
+          setTimeout(() => (wheelDebounce = false), 600);
+        },
+        { passive: false },
+      );
+    }
+  }
+
+  // Observer pour inverser l'icône (down/up) selon la slide visible
+  if (slides.length && scrollArrow) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          if (Array.from(slides).indexOf(entry.target) === slides.length - 1) {
+            scrollArrow.classList.add("up");
+          } else {
+            scrollArrow.classList.remove("up");
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    slides.forEach((slide) => observer.observe(slide));
+  }
+});
+
+// Handler de clic sur la flèche (delegation)
+$(document).on(
+  "click",
+  ".scroll-down-arrow, .scroll-down-arrow img",
+  function (event) {
+    event.stopPropagation();
+    const $arrow = $(this).closest(".scroll-down-arrow");
+    const container = document.querySelector(".container");
+    if (!container) return;
+
+    if ($arrow.hasClass("up")) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const $slides = $(".slides");
+    let nextSlide = null;
+    $slides.each(function (i, slide) {
+      const rect = slide.getBoundingClientRect();
+      if (rect.top > 10) {
+        nextSlide = slide;
+        return false;
+      }
+    });
+    if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
+  },
+);
