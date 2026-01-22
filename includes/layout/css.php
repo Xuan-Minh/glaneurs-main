@@ -3,6 +3,7 @@
 <link rel="canonical" href="https://glaneursdecarton.mastercmw.com<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?lang=<?php echo $lang; ?>" />
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/font.css" type="text/css" />
+<link rel="stylesheet" href="css/typography.css" type="text/css" />
 <link rel="stylesheet" href="css/navbar.css" type="text/css" />
 <link rel="stylesheet" href="css/visionner.css" type="text/css" />
 <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>

@@ -398,21 +398,6 @@
   transition: 0.1s;
 }
 
-/* Leaflet: fond transparent et masquage des tuiles */
-#map-parcours,
-.leaflet-container {
-  background: transparent !important;
-}
-.leaflet-pane .leaflet-tile-pane {
-  display: none;
-}
-.leaflet-container .leaflet-control-container {
-  display: none;
-}
-.leaflet-overlay-pane svg {
-  overflow: visible;
-}
-
 #map-parcours {
   width: 100%;
   height: 400px;
