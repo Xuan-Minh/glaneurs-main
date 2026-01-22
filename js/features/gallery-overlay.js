@@ -97,7 +97,8 @@ function initGalleryOverlay() {
 
   $(document).on("keydown", function (e) {
     if (!$("#archive-overlay").is(":visible")) return;
-    if (e.key === "ArrowLeft") $(".archive-overlay-arrow.left").trigger("click");
+    if (e.key === "ArrowLeft")
+      $(".archive-overlay-arrow.left").trigger("click");
     if (e.key === "ArrowRight")
       $(".archive-overlay-arrow.right").trigger("click");
     if (e.key === "Escape") hideOverlay();
