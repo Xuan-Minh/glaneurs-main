@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+// Init autonome (feature) : s'exécute dès que le DOM est prêt.
+(function initPortraitsMapFeature() {
+  const start = function () {
   async function renderSVGFromGeoJSON() {
     const container = document.querySelector("#map-parcours");
     if (!container) return;
@@ -458,17 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const occ = findOccurrencesForPoint(el);
         let target = occ.find((f) => f > progress + 0.0001);
         if (typeof target === "undefined") target = occ[0];
-        // debug log to inspect occurrences and target
-        try {
-          console.log(
-            "portraits-map: click idx=",
-            idx,
-            "occ=",
-            occ,
-            "chosen=",
-            target
-          );
-        } catch (e) {}
         // set animation target
         setTarget(target);
         // show info immediately and mark filled; avoid direct style.transform changes
@@ -651,4 +642,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (target === "#detail2") setTimeout(renderSVGFromGeoJSON, 120);
     });
   });
-});
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+})();

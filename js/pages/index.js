@@ -14,7 +14,6 @@ $(document).ready(function () {
     ); // L'événement ne se déclenche qu'une fois
   }
 
-  let isAnimating = false;
   const definitionContainer = $("#definition-text");
   if (definitionContainer.length) {
     const definitionText = definitionContainer.data("definition");
@@ -47,6 +46,10 @@ $(document).ready(function () {
       }
     });
   }
+
+  // Init index-only (regroupé ici pour garder un seul DOM-ready dans ce fichier)
+  initIndexAutoCloseNonActiveSlides();
+  initIndexWheelAndScrollArrow();
 });
 
 // ----------------------------------------------- LOADING SCREEN ANIMATION ---------------------------------- //
@@ -168,9 +171,7 @@ function showInfoPanel($slide) {
       $h2.addClass("author-visible");
     }, 1500); // 1.5s, comme la transition CSS
   } else {
-    console.debug(
-      "showInfoPanel: première slide détectée, saut des classes move/author-visible/flou",
-    );
+    // Première slide : on saute move/author-visible/flou pour garder la cohérence visuelle.
   }
 
   $info.fadeIn(500);
@@ -337,32 +338,6 @@ function removeFocusTrap(container) {
   }
 }
 
-// Debug: observer pour détecter l'ajout de la classe 'flou' sur les vidéos des slides
-try {
-  const _mutObserver = new MutationObserver((mutations) => {
-    mutations.forEach((m) => {
-      if (m.type === "attributes" && m.attributeName === "class") {
-        const t = m.target;
-        if (t && t.matches && t.matches(".slides > video")) {
-          if (t.classList.contains("flou")) {
-            console.debug(
-              "MutationObserver: flou ajouté à",
-              t.closest(".slides") ? t.closest(".slides").className : t,
-            );
-          }
-        }
-      }
-    });
-  });
-  document
-    .querySelectorAll(".slides > video")
-    .forEach((v) =>
-      _mutObserver.observe(v, { attributes: true, attributeFilter: ["class"] }),
-    );
-} catch (e) {
-  // ignore si le navigateur ne supporte pas MutationObserver
-}
-
 $(".close-visionner").click(function (event) {
   event.stopPropagation();
   const slide = $(this).closest(".slides");
@@ -408,9 +383,6 @@ $(".close-visionner").click(function (event) {
 
     slide.find("video").addClass("flou");
   } else {
-    console.debug(
-      ".close-visionner: première slide — pas de flou/zoom appliqué",
-    );
     // S'assurer qu'aucune classe indésirable ne reste
     $h2.removeClass("move author-visible animate-transform");
     slide.find("video").removeClass("flou");
@@ -533,7 +505,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 });
 // -------------------------------- AUTO CLOSE Player Vimeo --------------------------------- //
 
-$(function () {
+function initIndexAutoCloseNonActiveSlides() {
   const slides = document.querySelectorAll(".slides");
   if (slides.length === 0) return;
 
@@ -567,7 +539,7 @@ $(function () {
   );
 
   slides.forEach((slide) => observer.observe(slide));
-});
+}
 
 // --------------------------------- LOGIQUE SLIDES (INDEX) --------------------------------- //
 // Note: index.js n'est chargé que sur la home. On y garde donc toutes les interactions
@@ -619,7 +591,7 @@ $(document).on("keydown", function (e) {
   }
 });
 
-$(document).ready(function () {
+function initIndexWheelAndScrollArrow() {
   const slides = document.querySelectorAll(".slides");
   const scrollArrow = document.querySelector(".scroll-down-arrow");
   const container = document.querySelector(".container");
@@ -713,7 +685,7 @@ $(document).ready(function () {
     );
     slides.forEach((slide) => observer.observe(slide));
   }
-});
+}
 
 // Handler de clic sur la flèche (delegation)
 $(document).on(

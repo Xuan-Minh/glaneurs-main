@@ -103,8 +103,6 @@ function display_portrait_content($portrait_id, $lang) {
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
     <title><?php echo getTranslation("portraits_titre", $lang) ?></title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/features/portraits-map.js"></script>
 </head>
 

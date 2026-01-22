@@ -1,12 +1,22 @@
-$(function () {
+$(document).ready(function () {
+  initGalleryOverlay();
+});
+
+function initGalleryOverlay() {
   // --- LOGIQUE DE L'OVERLAY (APPLICABLE PARTOUT) ---
   function getGalleryItems() {
     return $(".archive-gallery-item");
   }
 
-  // Toujours initialiser les handlers : certains contenus peuvent être injectés après le DOM ready.
   let currentIndex = 0;
   let currentGalleryData = [];
+
+  function hideOverlay() {
+    const $overlay = $("#archive-overlay");
+    if (!$overlay.length) return;
+    $overlay.fadeOut(300);
+    $("body").css("overflow", "auto");
+  }
 
   function showOverlay(index) {
     const $overlay = $("#archive-overlay");
@@ -35,7 +45,7 @@ $(function () {
     }, 10);
   }
 
-  // Important : utiliser un écouteur délégué pour fonctionner avec le contenu dynamique
+  // Important : écouteur délégué pour fonctionner avec le contenu dynamique
   $(document).on("click", ".archive-gallery-item", function (e) {
     const $overlay = $("#archive-overlay");
     if (!$overlay.length) return;
@@ -61,7 +71,8 @@ $(function () {
     showOverlay(clickedIndex);
   });
 
-  $(".archive-overlay-arrow.left").on("click", function (e) {
+  // Flèches et fermeture: délégation => ok même si l'overlay est injecté après.
+  $(document).on("click", ".archive-overlay-arrow.left", function (e) {
     if (!currentGalleryData.length) return;
     e.stopPropagation();
     showOverlay(
@@ -70,21 +81,25 @@ $(function () {
     );
   });
 
-  $(".archive-overlay-arrow.right").on("click", function (e) {
+  $(document).on("click", ".archive-overlay-arrow.right", function (e) {
     if (!currentGalleryData.length) return;
     e.stopPropagation();
     showOverlay((currentIndex + 1) % currentGalleryData.length);
   });
 
-  $(".archive-overlay-close, .archive-overlay-bg").on("click", function () {
-    $("#archive-overlay").fadeOut(300);
-    $("body").css("overflow", "auto");
-  });
+  $(document).on(
+    "click",
+    ".archive-overlay-close, .archive-overlay-bg",
+    function () {
+      hideOverlay();
+    },
+  );
 
   $(document).on("keydown", function (e) {
     if (!$("#archive-overlay").is(":visible")) return;
-    if (e.key === "ArrowLeft") $(".archive-overlay-arrow.left").click();
-    if (e.key === "ArrowRight") $(".archive-overlay-arrow.right").click();
-    if (e.key === "Escape") $(".archive-overlay-close").click();
+    if (e.key === "ArrowLeft") $(".archive-overlay-arrow.left").trigger("click");
+    if (e.key === "ArrowRight")
+      $(".archive-overlay-arrow.right").trigger("click");
+    if (e.key === "Escape") hideOverlay();
   });
-});
+}

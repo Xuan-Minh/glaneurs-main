@@ -1,4 +1,8 @@
-$(function () {
+$(document).ready(function () {
+  initArchivesPage();
+});
+
+function initArchivesPage() {
   // --- LOGIQUE DU HEADER ---
   const $archivesScroll = $(".archives-scroll");
   if ($archivesScroll.length) {
@@ -84,12 +88,8 @@ $(function () {
       if (!navContainer) return;
       if (visibleChapters > 0) {
         navContainer.classList.add("is-visible");
-        console.debug("Menu visible : au moins un chapitre visible", {
-          visibleChapters,
-        });
       } else {
         navContainer.classList.remove("is-visible");
-        console.debug("Menu caché : intro ou hero", { visibleChapters });
       }
     }
 
@@ -114,4 +114,4 @@ $(function () {
       });
     }
   }
-});
+}

@@ -1,5 +1,16 @@
 // ----------------------------------------------- Derrière le documentaire ---------------------------------- //
-$(function () {
+$(document).ready(function () {
+  initDerriereLeDocumentairePage();
+});
+
+function initDerriereLeDocumentairePage() {
+  initTeamRandomizer();
+}
+
+function initTeamRandomizer() {
+  const $membersAll = $(".team-member");
+  if (!$membersAll.length) return;
+
   function randomizeTeamStatesRespectHover() {
     const members = $(".team-member").not(".hover-force").toArray();
     // Remet tous ces membres en photo
@@ -19,7 +30,7 @@ $(function () {
 
   setInterval(randomizeTeamStatesRespectHover, 3000);
   randomizeTeamStatesRespectHover();
-});
+}
 //  ----------------------------------------------- Portfolio ---------------------------------- //
 $(document).on("click", ".team-member", function (e) {
   if ($(e.target).is(".team-portfolio")) return;

@@ -341,6 +341,13 @@ $(document).ready(function () {
     $("#transition-overlay").addClass("hide");
   }, 50);
 
+  // Ancien DOMContentLoaded: sécurité pour éviter un overlay bloqué lors de certains enchaînements.
+  setTimeout(function () {
+    if (!window.isLangSwitching) {
+      $("#transition-overlay").addClass("hide");
+    }
+  }, 50);
+
   // ----------------------------------------------- Menu Burger & Menu Volet ---------------------------------- //
   // Sélectionne les éléments du menu burger (icône) et du menu volet (navigation latérale)
   const menuBurger = $("#menuBurger");
@@ -373,6 +380,31 @@ $(document).ready(function () {
       menuBurger.removeClass("open");
     }
   });
+
+  // ----------------------------------------------- Animation de contenu ---------------------------------- //
+  // Déclenche l’animation (class .visible) au scroll / apparition dans le viewport.
+  // (Ancien bloc $(function(){...}) regroupé ici pour n’avoir qu’un seul ready.)
+  {
+    const anims = document.querySelectorAll(".content-anim");
+    if (anims && anims.length) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              obs.unobserve(entry.target); // Optionnel : n'observe plus après animation
+            }
+          });
+        },
+        { threshold: 0.2 },
+      ); // 20% visible
+
+      anims.forEach((el) => observer.observe(el));
+    }
+  }
+
+  // Ancien DOMContentLoaded: init du contrôle audio global (si présent sur la page)
+  initGlobalAudioControls();
 });
 // ----------------------------------------------- Fade transition ---------------------------------- //
 
@@ -480,27 +512,6 @@ window.addEventListener("scroll", function () {
 });
 // Reset
 
-// ----------------------------------------------- Animation de contenu ---------------------------------- //
-$(function () {
-  // Sélectionne tous les éléments à animer
-  const anims = document.querySelectorAll(".content-anim");
-
-  // Crée l'observer
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          obs.unobserve(entry.target); // Optionnel : n'observe plus après animation
-        }
-      });
-    },
-    { threshold: 0.2 },
-  ); // 20% visible
-
-  anims.forEach((el) => observer.observe(el));
-});
-
 // Effet halo brumeux au clic
 document.addEventListener("click", function (e) {
   const halo = document.createElement("div");
@@ -511,14 +522,7 @@ document.addEventListener("click", function (e) {
   setTimeout(() => halo.remove(), 1000); // retire l'effet après l'anim
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    if (!window.isLangSwitching) {
-      $("#transition-overlay").addClass("hide");
-    }
-  }, 50);
-});
-document.addEventListener("DOMContentLoaded", () => {
+function initGlobalAudioControls() {
   const audioContainer = document.getElementById(
     "global-audio-control-container",
   );
@@ -573,9 +577,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof playArirangAudio === "function") {
           playArirangAudio();
         }
-        if (typeof startPortraitsAudio === "function") {
+        if (typeof window.startPortraitsAudio === "function") {
           window.shouldPlayPortraitsAudio = true;
-          startPortraitsAudio();
+          window.startPortraitsAudio();
         }
       }, 100);
     }
@@ -770,6 +774,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
+  // Expose en option : showNotification peut l'utiliser en fallback.
+  try {
+    window.hintWave = hintWave;
+  } catch (e) {}
+
   function initAudio() {
     if (audioContextStarted) return;
 
@@ -784,8 +793,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof playArirangAudio === "function") {
         playArirangAudio();
       }
-      if (typeof startPortraitsAudio === "function") {
-        startPortraitsAudio();
+      if (typeof window.startPortraitsAudio === "function") {
+        window.startPortraitsAudio();
       }
     }
 
@@ -815,7 +824,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof stopArirangAudio === "function") stopArirangAudio();
     } else {
       if (typeof playArirangAudio === "function") playArirangAudio();
-      if (typeof startPortraitsAudio === "function") startPortraitsAudio();
+      if (typeof window.startPortraitsAudio === "function")
+        window.startPortraitsAudio();
     }
 
     // Mettre à jour les autres éléments audio et l'UI
@@ -837,7 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateUI();
   updateAudioElements();
   // CTA supprimé — pas d'appel nécessaire
-});
+}
 
 /**
  * Affiche une notification en bas de l'écran.
