@@ -4,7 +4,8 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -157,7 +158,9 @@ header.hide-header {
   height: 3px;
   background-color: #ddd;
   border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s,
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s,
     opacity 0.2s; /* Ajoute une transition pour la couleur et l'opacité */
   transform-origin: right;
   transform: scaleX(1);
@@ -207,7 +210,7 @@ header.hide-header {
   background-color: var(--main-bg-color);
   z-index: 999;
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.5s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -421,7 +424,9 @@ li.mentionslegales-right a {
   height: 20px;
   fill: white;
   margin-right: 8px;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* On retire width/margin-right */
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out; /* On retire width/margin-right */
 }
 #global-audio-control-container svg.icon-hidden {
   opacity: 0;

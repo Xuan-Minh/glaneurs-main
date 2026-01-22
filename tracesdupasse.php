@@ -69,7 +69,6 @@ $chapters_structure = array(
                     <section id="chapter-<?php echo $chap_num; ?>" class="archive-chapter content-anim">
                         <h3><?php echo getTranslation("chapitre{$chap_num}_titre", $lang); ?></h3>
                         <?php
-                        // Boucle intérieure pour afficher chaque paragraphe du chapitre
                         for ($i = 1; $i <= $text_count; $i++) {
                         ?>
                             <p class="preserve-lines"><?php echo getTranslation("chapitre{$chap_num}_texte{$i}", $lang); ?></p>

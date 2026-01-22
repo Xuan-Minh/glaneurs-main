@@ -16,8 +16,8 @@ body {
   height: 100%;
   color: white;
   text-align: center;
-  position: relative; /* Ajouté pour le contexte z-index */
-  isolation: isolate; /* Crée un nouveau contexte de superposition propre */
+  position: relative;
+  isolation: isolate;
 }
 
 .mobile-bg-video {

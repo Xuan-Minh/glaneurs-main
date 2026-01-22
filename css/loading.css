@@ -4,7 +4,7 @@
 
 .loading-screen {
   position: fixed;
-  inset: 0; /* Raccourci pour top/left/right/bottom: 0 */
+  inset: 0;
   background: #000;
   z-index: 9999;
   overflow: hidden;
@@ -166,7 +166,6 @@
 
 /* Ajustement spécifique pour le logo UGE (plus petit que DE) */
 .universites img[src$="uge_white.svg"] {
-  /* Rendre UGE sensiblement plus petit que Dong-Eui */
   height: clamp(28px, 4vw, 48px);
   max-height: 48px;
   width: auto;

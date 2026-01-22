@@ -8,12 +8,10 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  /* NOUVEAU : Cacher par défaut et préparer la transition */
   opacity: 0;
   transition: opacity 0.6s ease-in-out;
 }
 
-/* NOUVEAU : Classe pour révéler le conteneur */
 .portraits-container.loaded {
   opacity: 1;
 }
@@ -32,7 +30,6 @@
   cursor: pointer;
 }
 
-/* Dégradé en bas de chaque section */
 .portrait-section::after {
   content: "";
   position: absolute;
@@ -64,7 +61,6 @@
   transform-origin: center center;
 }
 
-/* Ajustements spécifiques des vidéos */
 .section1-video {
   transform: translate(-45%, -50%);
 }
@@ -78,7 +74,6 @@
   transform: translate(-45%, -55%);
 }
 
-/* États : survol et section active */
 .portrait-section.active,
 .portrait-section:hover {
   flex: 2.5;
@@ -105,8 +100,6 @@
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
-
-  /* Styles pour la carte Leaflet (fond transparent, points et tracé visibles) */
   pointer-events: none;
   z-index: 3;
 }
