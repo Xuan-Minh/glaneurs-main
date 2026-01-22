@@ -30,7 +30,6 @@ function getLocalizedMessage(key) {
   );
 }
 
-// Helper qui lit les messages exposés côté serveur (window.I18N) si disponible
 function getI18nMessage(key) {
   try {
     if (window && window.I18N && typeof window.I18N[key] === "string")
@@ -72,21 +71,6 @@ function fadeAudio(audio, to, duration = 1000) {
   fadeIntervals.set(audio, id);
 }
 
-function addHideHeaderOnScroll(scrollElement) {
-  const $header = $("header");
-  let lastScroll = 0;
-  $(scrollElement).on("scroll", function () {
-    const currentScroll = $(this).scrollTop();
-    if (currentScroll > lastScroll && currentScroll > 200) {
-      $header.addClass("hide-header");
-    } else if (currentScroll < lastScroll) {
-      $header.removeClass("hide-header");
-    }
-    if (currentScroll < 20) $header.removeClass("hide-header");
-    lastScroll = currentScroll;
-  });
-}
-
 function playArirangAudio() {
   if (isGloballyMuted) return;
   try {
@@ -111,9 +95,6 @@ function playArirangAudio() {
             if (audio && audio.error) {
               console.error("Audio error code:", audio.error.code);
             }
-
-            // Certains navigateurs rejettent la Promise mais démarrent quand même la
-            // lecture. Dans ce cas, éviter d'afficher la notification inutilement.
             try {
               if (audio && !audio.paused && audio.currentTime > 0) {
                 // La lecture a bien commencé malgré le rejet : on enlève les handlers
@@ -173,13 +154,10 @@ function playArirangAudio() {
   }
 }
 
-// ... (le reste de votre code reste le même)
-
 function stopArirangAudio() {
   const audio = document.getElementById("audio-arirang");
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
-  // Assure l'arrêt de la waveform visuelle si elle tourne
   try {
     if (typeof window.animateWaveAmplitude === "function") {
       window.animateWaveAmplitude(0, 300).catch(() => {});
@@ -189,7 +167,6 @@ function stopArirangAudio() {
   }
 }
 
-// Helper public: reprise douce de l'ambiance après la fermeture du visionneur
 window.resumeArirangAudio = function (targetVol = 0.3, duration = 600) {
   try {
     if (isGloballyMuted) return;
@@ -224,7 +201,6 @@ $(document).on("keydown", function (e) {
     window.location.href = "tools/reset.php";
   }
   if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
-    // Ferme tous les visionneurs ouverts
     $(".visionner:visible").each(function () {
       $(this).find(".close-visionner").trigger("click");
     });
@@ -526,7 +502,6 @@ $(document).ready(function () {
       event.stopPropagation();
       const $arrow = $(this).closest(".scroll-down-arrow");
       if ($arrow.hasClass("up")) {
-        console.log("Flèche UP cliquée");
         $(".container")[0].scrollTo({ top: 0, behavior: "smooth" });
       } else {
         const $slides = $(".slides");
@@ -589,6 +564,9 @@ function scrollToAndTrigger(slideNumber) {
 // ----------------------------------------------- HOVER VIDEO ---------------------------------- //
 $(".menu-video-item").on("mouseenter", function () {
   const video = $(this).find(".menu-video")[0];
+  if (video) {
+    video.play();
+  }
 });
 
 $(".menu-video-item").on("mouseleave", function () {
@@ -757,7 +735,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawMovingWave() {
-    // Nous sommes dans une frame exécutée par RAF : réinitialise l'id courant
     animationFrameId = null;
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.beginPath();
@@ -774,8 +751,6 @@ document.addEventListener("DOMContentLoaded", () => {
     waveXOffset += 0.3;
     if (waveXOffset > Math.PI * 100) waveXOffset = 0;
 
-    // Continue la boucle d'animation tant que l'amplitude est suffisamment élevée.
-    // Utilise un seuil pour éviter les boucles infinies dues aux petites valeurs flottantes.
     const RUN_THRESHOLD = 0.001;
     if (waveAmplitude > RUN_THRESHOLD) {
       // Planifie la prochaine frame si aucune n'est en file
@@ -791,8 +766,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Animate the visual wave amplitude from current value to `to` (0..1) over duration ms.
-  // Returns a Promise that resolves when animation completes.
   window.animateWaveAmplitude = function (to, duration = 500) {
     if (_amplitudeAnim) cancelAnimationFrame(_amplitudeAnim);
     const start = performance.now();
@@ -882,7 +855,6 @@ document.addEventListener("DOMContentLoaded", () => {
           media.muted = isGloballyMuted;
         }
       }
-      // NE TOUCHE PAS AUX VIDEOS DE FOND
     });
 
     // AJOUT : Communique l'état du son au script des portraits s'il est présent
@@ -927,8 +899,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Hint visuel : pulse temporairement la waveform même si le son est coupé.
-  // Utilisé pour tester la proposition #3 (wave hint).
   function hintWave(duration = 600) {
     // Si la waveform n'existe pas, rien
     if (typeof window.animateWaveAmplitude !== "function")
@@ -941,13 +911,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.animateWaveAmplitude(from, Math.max(300, duration / 2));
       });
   }
-
-  // Raccourci clavier utile pour tests locaux : 'w' déclenche le hint
-  document.addEventListener("keydown", function (e) {
-    if (e.key && e.key.toLowerCase() === "w") {
-      hintWave(800).catch(() => {});
-    }
-  });
 
   function initAudio() {
     if (audioContextStarted) return;
@@ -987,8 +950,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Si on arrive ici, c'est que initAudio() a déjà été appelé au moins une fois.
-    // L'icône peut maintenant gérer le changement d'état (muet/non muet).
     isGloballyMuted = !isGloballyMuted; // On inverse l'état
 
     // Utiliser le fade plutôt que le mute instantané pour audio-arirang
