@@ -8,7 +8,6 @@
 /* ------------------------ GENERAL ------------------------------------------- */
 html,
 body {
-  font-family: "Figtree", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -62,25 +61,17 @@ button {
   margin: 10vh auto 3vh auto;
   color: #fff;
   text-align: center;
-  font-family: "Figtree", sans-serif;
 }
 h2 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
   margin-bottom: 0.5em;
-  font-family: "Libre Baskerville", serif;
-  font-weight: normal;
-  letter-spacing: 0.02em;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 .page-intro h2 {
   /* font-size: 2.2em; */
-  font-size: clamp(1.8rem, 3vw, 2.5rem); /* Exemple avec clamp */
   margin-bottom: 0.5em;
 }
 
 p {
-  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
-  font-weight: 400;
   opacity: 0.85;
   margin: 0;
 }
@@ -89,7 +80,9 @@ p {
 .content-anim {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.7s, transform 1.2s;
+  transition:
+    opacity 0.7s,
+    transform 1.2s;
 }
 .content-anim.visible {
   opacity: 1;
@@ -145,7 +138,7 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 9999;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.9rem;
   opacity: 0;
   pointer-events: none; /* Empêche l'interaction quand caché */

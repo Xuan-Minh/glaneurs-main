@@ -6,7 +6,7 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: var(--main-bg-color);
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .mobile-only {
@@ -74,7 +74,7 @@ body {
 }
 
 .mobile-slide h1 {
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   font-weight: normal;
   font-size: clamp(2rem, 7vw, 3rem);
   margin-bottom: 1.5em;
@@ -125,7 +125,7 @@ body {
 }
 
 .mobile-footer-prompt {
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   position: absolute;
   bottom: 60px;
   left: 0;

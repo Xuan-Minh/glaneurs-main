@@ -96,7 +96,7 @@
   width: 90%;
   text-align: center;
   color: white;
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
@@ -123,7 +123,7 @@
   justify-content: center;
   background: var(--main-bg-color);
   color: white;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   padding: 40px 10vw;
   box-sizing: border-box;
 }
@@ -141,14 +141,13 @@
 }
 
 .detail-content h2 {
-  font-family: "Libre Baskerville", serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-family: var(--font-serif);
   margin-bottom: 0.7em;
 }
 
 /* Subtitle style for portrait-detail (new element_type: subtitle) */
 .portrait-subtitle {
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   font-size: clamp(1rem, 2vw, 1.2rem);
   font-style: italic;
   color: rgba(255, 255, 255, 0.95);
@@ -316,7 +315,7 @@
   margin-top: 40px;
   padding: 12px 24px;
   font-size: clamp(0.9rem, 1.6vw, 1.1rem);
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
   border: none;

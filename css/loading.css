@@ -99,14 +99,14 @@
 .loading-titre {
   font-size: clamp(2rem, 3vw, 3em);
   font-weight: 400;
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   margin-bottom: 0;
 }
 .loading-soustitre {
   font-size: 1.5em !important;
   font-weight: 400;
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   margin-bottom: 0;
 }
@@ -187,7 +187,7 @@
 
 #enter-button {
   background-color: transparent;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(0.8em, 1vw, 2em);
   color: white;
   margin-top: 20px;

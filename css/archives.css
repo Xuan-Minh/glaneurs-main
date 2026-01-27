@@ -32,7 +32,7 @@
   padding: 5vh 0 0 0;
   font-size: 1.2em;
   font-weight: 400;
-  font-family: "Libre Baskerville", serif;
+  font-family: var(--font-serif);
   opacity: 1;
   margin: 0;
   position: relative; /* nécessaire pour les images flottantes */
@@ -82,7 +82,7 @@
   text-align: center;
 }
 .ko-lang .archive-title {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: var(--font-kr);
 }
 
 /* --- NAVIGATION MENU --- */

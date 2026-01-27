@@ -1,0 +1,91 @@
+/* Typography tokens (SAFE)
+	 Ce fichier définit des variables CSS pour les polices.
+	 Important: pas de styles globaux (body/h1/...) ici pour ne pas casser
+	 la stylisation existante. On migrera fichier par fichier.
+*/
+
+:root {
+  /* Font stacks (doivent matcher les font-family existants) */
+  --font-sans: "Figtree", sans-serif;
+  --font-serif: "Libre Baskerville", serif;
+  --font-kr: "Noto Sans KR", sans-serif;
+
+  /* Aliases (pour le jour où on remplace dans les CSS) */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-serif);
+
+  /* Weights (indicatifs, si on veut uniformiser ensuite) */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ========== TITRES ========== */
+  --text-h1: clamp(2rem, 3vw, 3rem); /* Titre principal (hero, slides) */
+  --text-h2: clamp(1.8rem, 3vw, 2.5rem); /* Titre section */
+  --text-h3: clamp(1.2rem, 2vw, 1.5rem); /* Sous-titre */
+
+  /* ========== CORPS DE TEXTE ========== */
+  --text-body: clamp(0.9rem, 1.6vw, 1.1rem); /* Paragraphe standard */
+  --text-body-md: clamp(1rem, 1.8vw, 1.1rem); /* Paragraphe moyen */
+  --text-body-lg: clamp(1rem, 1.8vw, 1.3rem); /* Paragraphe large */
+  --text-small: clamp(
+    0.85rem,
+    1.5vw,
+    1.05rem
+  ); /* Texte petit (rôles, légendes) */
+  --text-caption: clamp(0.8rem, 1.8vw, 1rem); /* Caption/métadonnées */
+
+  /* ========== UI COMPOSANTS ========== */
+  --text-nav: clamp(16px, 1.2vw, 22px); /* Navigation header */
+  --text-menu-link: clamp(1.2rem, 1.2vw, 1.6rem); /* Liens menu volet */
+  --text-menu-home: clamp(1.2rem, 2vw, 2rem); /* Titre menu home */
+  --text-menu-subtitle: clamp(0.9rem, 1.5vw, 1.5rem); /* Sous-titre menu */
+  --text-button: clamp(1.2em, 1.9vw, 1.4em); /* Boutons/CTA */
+
+  /* ========== SPÉCIFIQUE PAGES ========== */
+  --text-portrait-name: clamp(1.8rem, 4vw, 3rem); /* Nom portrait */
+  --text-portrait-role: clamp(1rem, 2vw, 1.2rem); /* Rôle portrait */
+  --text-slide-title: clamp(1.5rem, 2vw, 2.9rem); /* Titre slide index */
+  --text-slide-title-md: clamp(1.3rem, 3vw, 1.8rem); /* Titre slide index (<=1250px) */
+  --text-slide-subtitle: clamp(1.5rem, 2vw, 2.5em); /* Sous-titre slide */
+  --text-archive-title: clamp(1.5rem, 2.5vw, 2rem); /* Titre archive */
+  --text-team-name: clamp(1.1rem, 2vw, 1.5rem); /* Nom équipe */
+}
+
+/*
+  Règles sémantiques (progressif)
+  Objectif: que les tailles/polices vivent ici, et que les CSS de pages/classes
+  ne gèrent plus (à terme) que le style/layout.
+  
+  Important: on commence volontairement petit (body, h2, p) pour ne rien casser.
+*/
+
+html,
+body {
+  font-family: var(--font-body);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.02em;
+}
+
+p {
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-kr {
+  font-family: var(--font-kr);
+}

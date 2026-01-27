@@ -100,7 +100,7 @@ header.hide-header {
   /* Nouveau code : */
   font-size: clamp(16px, 1.2vw, 22px);
 
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   color: #fff;
   user-select: none;
 }
@@ -261,7 +261,7 @@ header.hide-header {
 .menu-volet-content h4 {
   /* La police devient fluide avec une limite basse très faible */
   font-size: clamp(0.75rem, 1.5vw, 1em);
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   margin-top: 10px;
   text-align: center;
   width: 100%;
@@ -275,7 +275,7 @@ header.hide-header {
 }
 .menu-links h4 {
   font-size: 1.2em;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   color: white;
   margin-bottom: 10px;
 }
@@ -294,7 +294,7 @@ header.hide-header {
 .menu-links a {
   color: white;
   text-decoration: none;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(1.2rem, 1.2vw, 1.6rem); /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
@@ -326,7 +326,7 @@ header.hide-header {
 
 .menu-video-item h4 {
   font-size: 0.9em;
-  font-family: "Figtree", sans-serif;
+  font-family: var(--font-sans);
   margin-top: 5px;
   text-align: left; /* Aligne le texte à gauche */
   position: relative; /* Ajoute une position relative */
@@ -366,7 +366,7 @@ li.mentionslegales-right a {
 #homeBouton-style {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-size: clamp(1.2rem, 2vw, 2rem);
-  font-family: "Libre Baskerville", serif !important;
+  font-family: var(--font-serif) !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -396,7 +396,7 @@ li.mentionslegales-right a {
 }
 .menu-homeBouton-subtitle {
   font-size: clamp(0.9rem, 1.5vw, 1.5rem);
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: var(--font-kr);
   color: rgba(255, 255, 255, 0.8);
   margin-top: 0.2em;
   font-weight: 100;

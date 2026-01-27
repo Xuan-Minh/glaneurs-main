@@ -29,13 +29,6 @@
   font-style: normal;
   font-display: swap; /* Ajoutez cette ligne */
 }
-@font-face {
-  font-family: "New Edge";
-  src: url("../font/NewEdgeSoftPower4-LightRounded.otf") format("truetype");
-  font-weight: Regular;
-  font-style: Regular;
-  font-display: swap; /* Ajoutez cette ligne */
-}
 /* Noto Sans KR : import de toutes les graisses */
 
 @font-face {
