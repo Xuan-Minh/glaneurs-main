@@ -97,7 +97,7 @@
   text-align: center;
   color: white;
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-size: var(--text-h3);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
   pointer-events: none;
@@ -148,7 +148,7 @@
 /* Subtitle style for portrait-detail (new element_type: subtitle) */
 .portrait-subtitle {
   font-family: var(--font-serif);
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: var(--text-body-md);
   font-style: italic;
   color: rgba(255, 255, 255, 0.95);
   margin: 0 0 0.8rem 0;
@@ -162,7 +162,7 @@
 }
 
 .detail-content p {
-  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  font-size: var(--text-body);
   line-height: 1.6;
   max-width: 65ch;
   margin: 0 auto 1.5em auto;
@@ -282,7 +282,7 @@
 
 .video-text-overlay p {
   margin: 0;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-size: var(--text-body);
   line-height: 1.6;
   max-width: 100%;
 }
@@ -314,7 +314,7 @@
 .back-to-portraits {
   margin-top: 40px;
   padding: 12px 24px;
-  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-size: var(--text-body);
   font-family: var(--font-sans);
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);

@@ -118,7 +118,8 @@ if (!$isMobile) {
                 <source src="video/web/chariot.mp4" type="video/mp4">
             </video>
             <div class="mobile-slide">
-                <h1><?php echo getTranslation("index_titre", $lang); ?></h1>
+                <h1><?php echo getTranslation("index_titre", "fr"); ?></h1>
+                <h3 class="font-ko"><?php echo getTranslation("index_titre", "ko"); ?></h3>
                 <!-- On utilise les variables maintenant disponibles -->
                 <a class="visionner-trigger" href="https://vimeo.com/<?php echo $vimeoId_full_doc; ?>?texttrack=<?php echo $lang; ?>" target="_blank">
                     <?php echo getTranslation("index_docufull", $lang); ?>

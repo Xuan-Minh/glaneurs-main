@@ -24,7 +24,6 @@
   --text-h1: clamp(2rem, 3vw, 3rem); /* Titre principal (hero, slides) */
   --text-h2: clamp(1.8rem, 3vw, 2.5rem); /* Titre section */
   --text-h3: clamp(1.2rem, 2vw, 1.5rem); /* Sous-titre */
-
   /* ========== CORPS DE TEXTE ========== */
   --text-body: clamp(0.9rem, 1.6vw, 1.1rem); /* Paragraphe standard */
   --text-body-md: clamp(1rem, 1.8vw, 1.1rem); /* Paragraphe moyen */
@@ -47,7 +46,11 @@
   --text-portrait-name: clamp(1.8rem, 4vw, 3rem); /* Nom portrait */
   --text-portrait-role: clamp(1rem, 2vw, 1.2rem); /* Rôle portrait */
   --text-slide-title: clamp(1.5rem, 2vw, 2.9rem); /* Titre slide index */
-  --text-slide-title-md: clamp(1.3rem, 3vw, 1.8rem); /* Titre slide index (<=1250px) */
+  --text-slide-title-md: clamp(
+    1.3rem,
+    3vw,
+    1.8rem
+  ); /* Titre slide index (<=1250px) */
   --text-slide-subtitle: clamp(1.5rem, 2vw, 2.5em); /* Sous-titre slide */
   --text-archive-title: clamp(1.5rem, 2.5vw, 2rem); /* Titre archive */
   --text-team-name: clamp(1.1rem, 2vw, 1.5rem); /* Nom équipe */

@@ -14,15 +14,8 @@
   text-align: center;
   letter-spacing: 0.02em;
 }
-.page-intro h3 {
-  font-size: clamp(1rem, 1.8vw, 1.4rem);
-  margin-bottom: 0.5em;
-  font-family: var(--font-serif);
-  font-weight: bold;
-  letter-spacing: 0.02em;
-}
 .page-intro p {
-  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-size: var(--text-caption);
   font-weight: 400;
   opacity: 0.85;
   margin: 0;
@@ -35,7 +28,7 @@ section.mentions-legales-content {
 .mentions-legales-content h3 {
   margin-top: 2em;
   margin-bottom: 1em;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: var(--text-h3);
   text-align: left;
 }
 
@@ -56,7 +49,7 @@ section.mentions-legales-content {
   align-items: center;
   gap: 12px;
   padding: 12px 24px;
-  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-size: var(--text-body);
   font-family: var(--font-sans);
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
