@@ -71,7 +71,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: clamp(1.5em, 2vw, 2em);
+  font-size: var(--text-loading-item);
   text-align: center;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -92,12 +92,12 @@
 /* Styles spécifiques pour chaque item */
 .loading-item#loading-item1 .loading-content {
   text-align: left;
-  font-size: clamp(1em, 1.5vw, 1.5em);
+  font-size: var(--text-loading-content);
   margin-bottom: 2vw;
 }
 
 .loading-titre {
-  font-size: clamp(2rem, 3vw, 3em);
+  font-size: var(--text-loading-title);
   font-weight: 400;
   font-family: var(--font-serif);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -119,7 +119,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: clamp(1em, 1.2vw, 1.2 em);
+  font-size: var(--text-loading-text);
 }
 
 .universites {
@@ -180,7 +180,7 @@
 
 .loading-button {
   width: 100%;
-  font-size: clamp(1em, 2vw, 1.5em);
+  font-size: var(--text-loading-button);
   display: flex;
   justify-content: center;
 }
@@ -188,7 +188,7 @@
 #enter-button {
   background-color: transparent;
   font-family: var(--font-sans);
-  font-size: clamp(0.8em, 1vw, 2em);
+  font-size: var(--text-loading-enter);
   color: white;
   margin-top: 20px;
   padding: clamp(8px, 1.5vw, 12px) clamp(15px, 2.5vw, 25px);

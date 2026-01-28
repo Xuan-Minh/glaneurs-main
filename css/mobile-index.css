@@ -77,9 +77,18 @@ body {
   font-family: var(--font-serif);
   font-weight: normal;
   font-size: clamp(2rem, 7vw, 3rem);
-  margin-bottom: 1.5em;
   line-height: 1.3;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.mobile-slide h3.index-soustitre {
+  font-family: var(--font-kr);
+  font-weight: 300;
+  font-size: clamp(1.2rem, 3vw, 1.8rem); /* Plus petit que desktop */
+  margin-top: 0;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  position: static; /* Override desktop absolute positioning */
 }
 
 @keyframes nudge-right {
@@ -140,7 +149,7 @@ body {
 
 @media (max-width: 380px) {
   .mobile-slide h1 {
-    font-size: 1.8rem; /* On réduit encore un peu le titre */
+    font-size: 1.4rem; /* On réduit encore un peu le titre */
   }
   .mobile-slide .visionner-trigger {
     padding: 0.8em 1.5em; /* Bouton un peu plus petit */
@@ -155,18 +164,14 @@ body {
     font-size: 2rem;
   }
   .mobile-content {
-    /* On s'assure que le contenu ne soit pas écrasé */
     padding-bottom: 20px;
   }
 }
 .mobile-only .index-soustitre {
-  font-size: clamp(1rem, 2.5vw, 2.5em);
-  position: absolute;
-  color: white;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  max-width: 90%; /* Important pour que l'ellipsis fonctionne */
+  position: static; /* Flow normal pour mobile */
+  font-size: clamp(1.2rem, 3vw, 1.8rem); /* Plus petit que desktop */
+  margin-bottom: 2em;
+  top: auto;
+  left: auto;
+  transform: none;
 }

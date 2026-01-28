@@ -59,7 +59,7 @@ header.hide-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: clamp(16px, 1.2vw, 22px);
+  font-size: var(--text-nav);
   font-family: var(--font-sans);
   color: #fff;
   user-select: none;
@@ -220,7 +220,7 @@ header.hide-header {
 
 .menu-volet-content h4 {
   /* La police devient fluide avec une limite basse très faible */
-  font-size: clamp(0.75rem, 1.5vw, 1em);
+  font-size: var(--text-caption);
   font-family: var(--font-sans);
   margin-top: 10px;
   text-align: center;
@@ -255,7 +255,7 @@ header.hide-header {
   color: white;
   text-decoration: none;
   font-family: var(--font-sans);
-  font-size: clamp(1.2rem, 1.2vw, 1.6rem); /* Agrandit la taille de la police */
+  font-size: var(--text-menu-link); /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
   transition: color 0.3s ease;
@@ -320,12 +320,12 @@ li.mentionslegales-right {
   text-align: right; /* Taille de police plus petite */
 }
 li.mentionslegales-right a {
-  font-size: clamp(0.5em, 1vw, 0.9rem); /* Taille de police plus petite */
+  font-size: 0.8rem; /* Taille fixe pour élément spécifique */
 }
 
 #homeBouton-style {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-size: var(--text-menu-home);
   font-family: var(--font-serif) !important;
   display: flex;
   flex-direction: column;
@@ -355,7 +355,7 @@ li.mentionslegales-right a {
   width: 100%;
 }
 .menu-homeBouton-subtitle {
-  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
+  font-size: var(--text-menu-subtitle);
   font-family: var(--font-kr);
   color: rgba(255, 255, 255, 0.8);
   margin-top: 0.2em;

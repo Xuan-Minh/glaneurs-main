@@ -23,7 +23,7 @@
   /* ========== TITRES ========== */
   --text-h1: clamp(2rem, 3vw, 3rem); /* Titre principal (hero, slides) */
   --text-h2: clamp(1.8rem, 3vw, 2.5rem); /* Titre section */
-  --text-h3: clamp(1.2rem, 2vw, 1.5rem); /* Sous-titre */
+  --text-h3: clamp(1rem, 1.5vw, 1.5rem); /* Sous-titre - rapport 2:1 avec H1 */
   /* ========== CORPS DE TEXTE ========== */
   --text-body: clamp(0.9rem, 1.6vw, 1.1rem); /* Paragraphe standard */
   --text-body-md: clamp(1rem, 1.8vw, 1.1rem); /* Paragraphe moyen */
@@ -54,15 +54,14 @@
   --text-slide-subtitle: clamp(1.5rem, 2vw, 2.5em); /* Sous-titre slide */
   --text-archive-title: clamp(1.5rem, 2.5vw, 2rem); /* Titre archive */
   --text-team-name: clamp(1.1rem, 2vw, 1.5rem); /* Nom équipe */
+  /* ========== LOADING ========== */
+  --text-loading-item: clamp(1.5em, 2vw, 2em); /* Item loading général */
+  --text-loading-content: clamp(1em, 1.5vw, 1.5em); /* Contenu loading item1 */
+  --text-loading-title: clamp(2rem, 3vw, 3em); /* Titre loading */
+  --text-loading-text: clamp(1em, 1.2vw, 1.2em); /* Texte loading item3 */
+  --text-loading-button: clamp(1em, 2vw, 1.5em); /* Bouton loading container */
+  --text-loading-enter: clamp(0.8em, 1vw, 2em); /* Bouton "Entrer" */
 }
-
-/*
-  Règles sémantiques (progressif)
-  Objectif: que les tailles/polices vivent ici, et que les CSS de pages/classes
-  ne gèrent plus (à terme) que le style/layout.
-  
-  Important: on commence volontairement petit (body, h2, p) pour ne rien casser.
-*/
 
 html,
 body {

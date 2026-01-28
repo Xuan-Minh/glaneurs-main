@@ -156,7 +156,7 @@
   text-align: center;
 }
 .archives-intro p {
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  font-size: var(--text-body-md);
   font-weight: 400;
   margin-top: 0;
   margin-bottom: 1rem; /* réduire l'espace entre paragraphes d'intro */
@@ -297,14 +297,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-size: var(--text-body-md);
   text-shadow: 0 2px 8px #000a;
   min-width: 250px;
   max-width: 400px;
   word-break: break-word;
 }
 .archive-overlay-title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: var(--text-archive-title);
   margin-bottom: 0.5em;
   font-weight: bold;
 }

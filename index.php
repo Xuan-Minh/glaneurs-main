@@ -119,7 +119,7 @@ if (!$isMobile) {
             </video>
             <div class="mobile-slide">
                 <h1><?php echo getTranslation("index_titre", "fr"); ?></h1>
-                <h3 class="font-ko"><?php echo getTranslation("index_titre", "ko"); ?></h3>
+                <h3 class="index-soustitre"><?php echo getTranslation("index_titre", "ko"); ?></h3>
                 <!-- On utilise les variables maintenant disponibles -->
                 <a class="visionner-trigger" href="https://vimeo.com/<?php echo $vimeoId_full_doc; ?>?texttrack=<?php echo $lang; ?>" target="_blank">
                     <?php echo getTranslation("index_docufull", $lang); ?>
