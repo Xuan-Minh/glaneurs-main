@@ -23,15 +23,6 @@ $chapters_structure = array(
     <?php include "includes/layout/header.php"; ?>
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
     <!-- Menu hors du container scrollable pour que position:fixed fonctionne correctement -->
-    <nav class="archive-nav-container">
-        <ul>
-            <?php
-            foreach ($chapters_structure as $chap_num => $text_count) {
-                echo '<li><a href="#chapter-' . $chap_num . '" class="nav-link" data-scroll-to="chapter-' . $chap_num . '">' . getTranslation("chapitre{$chap_num}_titre", $lang) . '</a></li>';
-            }
-            ?>
-        </ul>
-    </nav>
     <div class="archives-scroll">
         <section class="archive-hero">
             <video autoplay muted loop poster="img/posters/archives_poster.png">
@@ -46,19 +37,6 @@ $chapters_structure = array(
                  <section class="archives-intro content-anim preserve-lines">
                     <p><?php echo getTranslation("archives_intro_texte", $lang); ?></p>
                     <p><?php echo getTranslation("archives_intro_texte2", $lang); ?></p>
-
-                    <!-- NOUVEAU: Mini-galerie d'introduction -->
-                    <div class="intro-image-gallery content-anim">
-                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri1.jpg" data-titre="Agriculture 1" data-date="Date 1" data-auteur="Auteur 1">
-                            <img src="img/archives/1951-intro-agri1.jpg" alt="Agriculture">
-                        </a>
-                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri2.jpg" data-titre="Agriculture 2" data-date="Date 2" data-auteur="Auteur 2">
-                            <img src="img/archives/1951-intro-agri2.jpg" alt="Agriculture">
-                        </a>
-                        <a class="archive-gallery-item" data-src="img/archives/1951-intro-agri3.jpg" data-titre="Agriculture 3" data-date="Date 3" data-auteur="Auteur 3">
-                            <img src="img/archives/1951-intro-agri3.jpg" alt="Agriculture">
-                        </a>
-                    </div>
                 </section>
 
                 <?php
@@ -80,9 +58,6 @@ $chapters_structure = array(
                 }
                 ?>
             </div>
-
-           
-            <?php include "includes/components/archives-overlay.php"; ?>
 
         </section>
     </div>

@@ -24,43 +24,12 @@ header.hide-header {
   z-index: 1000;
 }
 
-#languageToggle {
-  color: #fff; /* Texte blanc par défaut */
-  border: none; /* Supprime les contours */
-  background: none; /* Supprime le fond */
-  padding: 5px 10px; /* Taille du bouton */
-  font-size: 20px; /* Augmente légèrement la taille du texte */
-  cursor: pointer;
-  position: relative; /* Ajout de position relative */
-  transition: color 0.3s ease; /* Transition uniquement sur la couleur */
-}
-
-#languageToggle::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Ajuste la position du soulignement */
-  left: 0;
-  width: 0; /* Initialise la largeur à 0 */
-  height: 3px; /* Épaisseur du soulignement */
-  border-radius: 2px; /* Arrondi les bords du soulignement */
-  background-color: #ddd; /* Couleur du soulignement */
-  transition: width 0.5s ease; /* Animation de largeur */
-  z-index: -1; /* Pour que le soulignement passe sous le texte */
-}
-
-#languageToggle:hover {
-  color: #ddd; /* Légère modification de la couleur au survol */
-}
-#languageToggle:hover::after {
-  width: 100%; /* Soulignement complet au survol */
-}
 /* Language selector */
 .language-selector {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: var(--text-nav);
-  font-family: var(--font-sans);
   color: #fff;
   user-select: none;
 }
@@ -219,9 +188,6 @@ header.hide-header {
 }
 
 .menu-volet-content h4 {
-  /* La police devient fluide avec une limite basse très faible */
-  font-size: var(--text-caption);
-  font-family: var(--font-sans);
   margin-top: 10px;
   text-align: center;
   width: 100%;
@@ -235,7 +201,6 @@ header.hide-header {
 }
 .menu-links h4 {
   font-size: 1.2em;
-  font-family: var(--font-sans);
   color: white;
   margin-bottom: 10px;
 }
@@ -254,7 +219,6 @@ header.hide-header {
 .menu-links a {
   color: white;
   text-decoration: none;
-  font-family: var(--font-sans);
   font-size: var(--text-menu-link); /* Agrandit la taille de la police */
   display: inline-block; /* Affiche chaque lien sur une nouvelle ligne */
   padding: 5px 0; /* Ajoute un espace au-dessus et en dessous du texte */
@@ -286,7 +250,6 @@ header.hide-header {
 
 .menu-video-item h4 {
   font-size: 0.9em;
-  font-family: var(--font-sans);
   margin-top: 5px;
   text-align: left; /* Aligne le texte à gauche */
   position: relative; /* Ajoute une position relative */

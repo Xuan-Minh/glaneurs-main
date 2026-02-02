@@ -115,25 +115,25 @@ function display_portrait_content($portrait_id, $lang) {
             <video autoplay muted loop class="portrait-video section1-video" poster="img/posters/glaneuse-test_poster.png">
                 <source src="video/web/glaneuse-test.mp4" type="video/mp4">
             </video>
-            <div class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></div>
+            <h2 class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></h2>
         </div>
         <div class="portrait-section section2" data-target="#detail2" data-audio="audio/arirang_harp.mp3">
             <video autoplay muted loop class="portrait-video section2-video" poster="img/posters/lee-test_poster.png">
                 <source src="video/web/lee-test.mp4" type="video/mp4">
             </video>
-            <div class="portrait-name"><?php echo getTranslation("portraits_lee", $lang); ?></div>
+            <h2 class="portrait-name"><?php echo getTranslation("portraits_lee", $lang); ?></h2>
         </div>
         <div class="portrait-section section3" data-target="#detail3" data-audio="audio/arirang_piano.mp3">
             <video autoplay muted loop class="portrait-video section3-video" poster="img/posters/arirang-test_poster.png">
                 <source src="video/web/arirang-test.mp4" type="video/mp4">
             </video>
-            <div class="portrait-name"><?php echo getTranslation("portraits_arirang", $lang); ?></div>
+            <h2 class="portrait-name"><?php echo getTranslation("portraits_arirang", $lang); ?></h2>
         </div>
         <div class="portrait-section section4" data-target="#detail4" data-audio="audio/arirang_oboe.mp3">
             <video autoplay muted loop class="portrait-video section4-video" poster="img/posters/glaneuse-test_poster.png">
                 <source src="video/web/glaneuse-test.mp4" type="video/mp4">
             </video>
-            <div class="portrait-name"><?php echo getTranslation("portraits_jo", $lang); ?></div>
+            <h2 class="portrait-name"><?php echo getTranslation("portraits_jo", $lang); ?></h2>
         </div>
     </div>
 

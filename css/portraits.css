@@ -89,6 +89,7 @@
 }
 
 .portrait-name {
+  /* Taille a décider   font-size: var(--text-h3); */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -96,8 +97,6 @@
   width: 90%;
   text-align: center;
   color: white;
-  font-family: var(--font-serif);
-  font-size: var(--text-h3);
   opacity: 0;
   transition: opacity 0.5s 0.15s;
   pointer-events: none;
@@ -123,7 +122,6 @@
   justify-content: center;
   background: var(--main-bg-color);
   color: white;
-  font-family: var(--font-sans);
   padding: 40px 10vw;
   box-sizing: border-box;
 }
@@ -141,7 +139,6 @@
 }
 
 .detail-content h2 {
-  font-family: var(--font-serif);
   margin-bottom: 0.7em;
 }
 
@@ -315,7 +312,6 @@
   margin-top: 40px;
   padding: 12px 24px;
   font-size: var(--text-body);
-  font-family: var(--font-sans);
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
   border: none;

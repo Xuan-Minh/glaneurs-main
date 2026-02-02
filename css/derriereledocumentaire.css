@@ -43,7 +43,6 @@
   position: relative;
   z-index: 3;
   color: #fff;
-  font-family: var(--font-serif);
   text-align: center;
   width: 100vw;
   display: flex;
@@ -70,7 +69,6 @@
 
 .dld-presentation h2 {
   padding: 0 0 0.9vw 0;
-  font-size: var(--text-h2);
 }
 
 .dld-remerciements {
@@ -79,22 +77,11 @@
   margin: 5vh auto 0vh auto;
   color: #fff;
   text-align: center;
-  font-family: var(--font-sans);
-}
-
-.dld-remerciements h2 {
-  font-size: var(--text-h2);
-  margin-bottom: 0.5em;
-  font-family: var(--font-serif);
-  font-weight: normal;
-  letter-spacing: 0.02em;
 }
 
 .dld-remerciements p {
   text-align: justify;
   font-size: var(--text-body-md);
-  font-weight: 400;
-  opacity: 0.85;
   line-height: 1.6;
 }
 
@@ -104,7 +91,6 @@
 .styled-paragraph {
   text-indent: 2em; /* Ajoute un alinéa */
   text-align: justify; /* Justifie le texte */
-  line-height: 1.8; /* Améliore l'espacement entre les lignes */
   margin-bottom: 1.5em; /* Ajoute de l'espace entre les paragraphes */
 }
 
@@ -141,7 +127,6 @@
   align-items: flex-start;
   backface-visibility: hidden;
   transition: opacity 0.5s;
-  font-family: var(--font-sans);
   font-size: 1.2em;
   padding: 10%;
 }
@@ -189,7 +174,6 @@
 /* --- Team Member Content --- */
 
 .team-name {
-  font-size: var(--text-team-name);
   font-weight: bold;
   margin-bottom: 0.5em;
   letter-spacing: 0.02em;

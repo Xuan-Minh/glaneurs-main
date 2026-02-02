@@ -28,7 +28,6 @@ button {
   border: none;
   padding: 0; /* Réinitialise l'espacement interne */
   margin: 0; /* Réinitialise les marges externes */
-  font-family: inherit; /* Fait hériter la police du parent */
   color: inherit; /* Fait hériter la couleur du parent */
   cursor: pointer; /* Assure que le curseur est une main */
   text-align: inherit; /* Fait hériter l'alignement du texte */
@@ -137,7 +136,6 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 9999;
-  font-family: var(--font-sans);
   font-size: 0.9rem;
   opacity: 0;
   pointer-events: none; /* Empêche l'interaction quand caché */

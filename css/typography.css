@@ -1,9 +1,3 @@
-/* Typography tokens (SAFE)
-	 Ce fichier définit des variables CSS pour les polices.
-	 Important: pas de styles globaux (body/h1/...) ici pour ne pas casser
-	 la stylisation existante. On migrera fichier par fichier.
-*/
-
 :root {
   /* Font stacks (doivent matcher les font-family existants) */
   --font-sans: "Figtree", sans-serif;
@@ -66,20 +60,42 @@
 html,
 body {
   font-family: var(--font-body);
+  font-weight: var(--weight-regular);
 }
 
-h2 {
-  font-size: var(--text-h2);
+h1 {
   font-family: var(--font-heading);
   font-weight: var(--weight-regular);
   letter-spacing: 0.02em;
 }
 
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.02em;
+}
+h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+}
+h4 {
+  font-size: var(--text-caption);
+}
+
+.ko-lang body {
+  font-family: var(--font-kr);
+}
+.ko-lang h2 {
+  font-family: var(--font-kr);
+}
+button {
+  font-family: var(--font-body);
+}
 p {
   font-size: var(--text-body);
   font-weight: var(--weight-regular);
 }
-
 .font-body {
   font-family: var(--font-body);
 }

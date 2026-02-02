@@ -6,7 +6,6 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: var(--main-bg-color);
-  font-family: var(--font-sans);
 }
 
 .mobile-only {
@@ -74,7 +73,6 @@ body {
 }
 
 .mobile-slide h1 {
-  font-family: var(--font-serif);
   font-weight: normal;
   font-size: clamp(2rem, 7vw, 3rem);
   line-height: 1.3;
@@ -104,7 +102,6 @@ body {
   display: inline-flex; /* Utilise Flexbox pour aligner le contenu interne */
   align-items: center; /* Centre verticalement le texte et la flèche */
   gap: 0.7em; /* Crée un espace fixe entre le texte et la flèche */
-
   font-size: 1.1em;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 100px;
@@ -125,16 +122,10 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* Applique l'animation permanente */
   animation: nudge-right 1.5s ease-in-out infinite;
 }
 
-.mobile-slide .visionner-trigger:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
 .mobile-footer-prompt {
-  font-family: var(--font-sans);
   position: absolute;
   bottom: 60px;
   left: 0;
