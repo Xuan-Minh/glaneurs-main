@@ -38,47 +38,6 @@
 }
 
 /* --- HERO SECTION --- */
-.archive-hero {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 2560px;
-  margin: 0 auto;
-}
-.archive-hero::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 18vh;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    var(--main-bg-color) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
-.archive-hero video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 1;
-}
-.archive-hero .archive-title {
-  position: relative;
-  z-index: 3;
-  color: #fff;
-  text-align: center;
-}
 
 /* --- NARRATIVE & INTRO --- */
 .archives-narrative {

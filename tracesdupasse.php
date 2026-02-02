@@ -24,14 +24,7 @@ $chapters_structure = array(
     <audio id="audio-arirang" src="audio/slide3.mp3" loop preload="auto"></audio>
     <!-- Menu hors du container scrollable pour que position:fixed fonctionne correctement -->
     <div class="archives-scroll">
-        <section class="archive-hero">
-            <video autoplay muted loop poster="img/posters/archives_poster.png">
-                <source src="video/web/archives.mp4" type="video/mp4">
-            </video>
-            <h2 class="archive-title content-anim">
-                <?php echo getTranslation("archives_titre", $lang); ?>
-            </h2>
-        </section>
+        <?php include 'includes/components/hero.php'; renderHero('video/web/archives.mp4', 'img/posters/archives_poster.png', getTranslation("archives_titre", $lang), 'archive-hero', $lang); ?>
         <section class="archives-content">
             <div class="archives-narrative">
                  <section class="archives-intro content-anim preserve-lines">

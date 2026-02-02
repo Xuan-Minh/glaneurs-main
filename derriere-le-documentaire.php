@@ -45,14 +45,7 @@
     <audio id="audio-arirang" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
     <?php include "includes/layout/header.php"; ?>
 
-    <section class="dld-hero">
-        <video autoplay muted loop poster="img/posters/ville_poster.png">
-            <source src="video/web/ville.mp4" type="video/mp4">
-        </video>
-        <div class="dld-title content-anim">
-            <h2><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></h2>
-        </div>
-    </section>
+    <?php include 'includes/components/hero.php'; renderHero('video/web/ville.mp4', 'img/posters/ville_poster.png', getTranslation('derriereledocumentaire_titre', $lang), 'dld-hero', $lang); ?>
     <div class="page-intro dld-presentation content-anim">
 
         <h2><?php echo getTranslation('derriereledocumentaire_approche', $lang); ?></h2>

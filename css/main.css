@@ -148,3 +148,61 @@ p {
   opacity: 1;
   pointer-events: auto; /* Permet l'interaction quand visible */
 }
+
+/* -------------------------- HERO SECTIONS -------------------------- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 2560px;
+  margin: 0 auto;
+}
+
+.hero-section video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--main-bg-color) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.hero-title h2 {
+  margin: 0;
+  padding: 0 3vw;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
