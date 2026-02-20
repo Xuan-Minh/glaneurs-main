@@ -28,10 +28,15 @@
 
                 <?php echo getTranslation("loading_casque_message", $lang) ?>
             </div>
+            <?php if (defined('WIP_MODE') && WIP_MODE): ?>
             <div class="loading-button"><button id="enter-button" class="wip" disabled><span>À venir ...</span></button></div>
+            <?php else: ?>
+            <div class="loading-button"><button id="enter-button"><span><?php echo getTranslation("loading_enter_button", $lang); ?></span></button></div>
+            <?php endif; ?>
         </div>
     </div>
     
+    <?php if (defined('WIP_MODE') && WIP_MODE): ?>
     <!-- Mode WIP: Accès admin par 3 clics sur le bouton ou 3x Esc -->
     <script>
         (function() {
@@ -102,4 +107,5 @@
             }
         })();
     </script>
+    <?php endif; ?>
 </div>

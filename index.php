@@ -1,6 +1,7 @@
 
 <?php
 header("Vary: User-Agent");
+include 'wip-config.php';
 include 'includes/lang.php';
 $slides = array(
     array(
@@ -57,12 +58,19 @@ function isMobile() {
 
 $isMobile = isMobile();
 
-// MODE WIP: Forcer le loading screen à chaque chargement
-// En mode normal: $showLoading = false; if (!$isMobile) { if (!isset($_SESSION['hasVisitedIndex'])) { ... } }
+// Logique du loading screen (contrôlée par WIP_MODE)
 $showLoading = false;
 if (!$isMobile) {
-    // Mode WIP - toujours afficher le loading screen, peu importe la SESSION
-    $showLoading = true;
+    if (WIP_MODE) {
+        // Mode WIP: toujours afficher le loading screen
+        $showLoading = true;
+    } else {
+        // Mode normal: afficher le loading screen seulement lors de la première visite
+        if (!isset($_SESSION['hasVisitedIndex'])) {
+            $_SESSION['hasVisitedIndex'] = true;
+            $showLoading = true;
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
