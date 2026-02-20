@@ -1,6 +1,12 @@
 
 <div id="transition-overlay" class="active"></div>
 
+<!-- MODE WIP : Empêche le localStorage de charger la session précédente -->
+<script>
+    localStorage.removeItem('audioHasBeenInitialized');
+    localStorage.removeItem('isSiteMuted');
+</script>
+
 <header>
     <div class="header-controls">
         <?php if (basename($_SERVER['PHP_SELF']) !== 'index.php'): ?>

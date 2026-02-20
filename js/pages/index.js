@@ -106,7 +106,13 @@ $(".loading-screen").click(function () {
   showNextItem();
 });
 // ----------------------------------------------- ENTRER---------------------------------- //
-$("#enter-button").click(function () {
+$("#enter-button").click(function (e) {
+  // Empêcher le fonctionnement si le bouton est en mode WIP
+  if ($(this).hasClass("wip") || $(this).prop("disabled")) {
+    e.preventDefault();
+    return;
+  }
+
   clearInterval(intervalId);
 
   const $overlay = $("#transition-overlay");

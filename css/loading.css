@@ -223,3 +223,12 @@
 #enter-button:focus span::after {
   width: 100%;
 }
+
+#enter-button.wip {
+  cursor: not-allowed;
+}
+
+#enter-button.wip:hover span::after,
+#enter-button.wip:focus span::after {
+  width: 0;
+}

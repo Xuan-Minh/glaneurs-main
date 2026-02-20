@@ -57,13 +57,12 @@ function isMobile() {
 
 $isMobile = isMobile();
 
-// Logique simplifiée pour le loading screen (uniquement pour desktop)
+// MODE WIP: Forcer le loading screen à chaque chargement
+// En mode normal: $showLoading = false; if (!$isMobile) { if (!isset($_SESSION['hasVisitedIndex'])) { ... } }
 $showLoading = false;
 if (!$isMobile) {
-    if (!isset($_SESSION['hasVisitedIndex'])) {
-        $_SESSION['hasVisitedIndex'] = true;
-        $showLoading = true;
-    }
+    // Mode WIP - toujours afficher le loading screen, peu importe la SESSION
+    $showLoading = true;
 }
 ?>
 <!DOCTYPE html>

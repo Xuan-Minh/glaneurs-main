@@ -28,7 +28,78 @@
 
                 <?php echo getTranslation("loading_casque_message", $lang) ?>
             </div>
-            <div class="loading-button"><button id="enter-button"><span><?php echo getTranslation("loading_enter_button", $lang); ?></span></button></div>
+            <div class="loading-button"><button id="enter-button" class="wip" disabled><span>À venir ...</span></button></div>
         </div>
     </div>
+    
+    <!-- Mode WIP: Accès admin par 3 clics sur le bouton ou 3x Esc -->
+    <script>
+        (function() {
+            let clickCount = 0;
+            let escCount = 0;
+            let clickTimeout = null;
+            let escTimeout = null;
+            
+            // Méthode 1: 3 clics rapides sur le bouton
+            const enterButton = document.getElementById('enter-button');
+            if (enterButton) {
+                enterButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    clickCount++;
+                    
+                    // Reset le compteur après 1 seconde
+                    clearTimeout(clickTimeout);
+                    clickTimeout = setTimeout(() => { clickCount = 0; }, 1000);
+                    
+                    if (clickCount === 3) {
+                        skipWIPLoading();
+                        clickCount = 0;
+                    }
+                });
+            }
+            
+            // Méthode 2: 3x Esc rapidement
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    escCount++;
+                    
+                    clearTimeout(escTimeout);
+                    escTimeout = setTimeout(() => { escCount = 0; }, 1000);
+                    
+                    if (escCount === 3) {
+                        skipWIPLoading();
+                        escCount = 0;
+                    }
+                }
+            });
+            
+            function skipWIPLoading() {
+                const loadingScreen = document.querySelector('.loading-screen');
+                const container = document.querySelector('.container');
+                const overlay = document.getElementById('transition-overlay');
+                
+                if (!loadingScreen || !container) return;
+                
+                console.log('✓ Mode WIP contourné - accès au site');
+                
+                // Applique la même animation que le bouton "Entrer" normal
+                clearInterval(window.intervalId || 0);
+                
+                if (overlay) {
+                    overlay.classList.remove('hide');
+                    overlay.classList.add('active');
+                }
+                
+                setTimeout(function() {
+                    loadingScreen.remove();
+                    container.classList.remove('hidden');
+                    container.style.display = 'block';
+                    
+                    if (overlay) {
+                        overlay.classList.add('hide');
+                    }
+                }, 750);
+            }
+        })();
+    </script>
 </div>
