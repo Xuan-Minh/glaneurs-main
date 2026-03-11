@@ -21,6 +21,7 @@ body {
 body {
   width: 100%;
   overflow-x: hidden;
+  color: var(--main-text-color);
   /* scrollbar-color: var(--main-bg-color) var(--main-bg-color); */
 }
 button {
@@ -120,6 +121,31 @@ p {
 .preserve-lines {
   white-space: pre-wrap;
 }
+
+/* ==========================================================================
+   STYLES COMMUNS POUR LES PARAGRAPHES NARRATIFS
+   Harmonisation des styles entre archives, portraits, mentions légales, etc.
+   ========================================================================== */
+
+.narrative-paragraph,
+.preserve-lines p,
+p.preserve-lines,
+.styled-paragraph {
+  color: rgba(255, 255, 255, 0.8);
+  white-space: pre-wrap;
+  text-align: justify;
+  text-indent: 2em;
+  margin-top: 0.8rem;
+  margin-bottom: 1em;
+}
+
+/* Exceptions : paragraphes d'intro qui ne doivent pas avoir d'indentation */
+/*.archives-intro p,
+.detail-content > h2 + p {
+  text-indent: 0;
+  text-align: center;
+}
+*/
 
 #notification-popup {
   position: fixed;

@@ -15,7 +15,7 @@ function initGalleryOverlay() {
     const $overlay = $("#archive-overlay");
     if (!$overlay.length) return;
     $overlay.fadeOut(300);
-    $("body").css("overflow", "auto");
+    $("html").removeClass("overlay-open");
   }
 
   function showOverlay(index) {
@@ -38,7 +38,7 @@ function initGalleryOverlay() {
     $("#archive-overlay .archive-overlay-date").text(data.date);
     $("#archive-overlay .archive-overlay-auteur").text(data.auteur);
     $overlay.fadeIn(300);
-    $("body").css("overflow", "hidden");
+    $("html").addClass("overlay-open");
 
     setTimeout(function () {
       $info.addClass("visible");
@@ -51,7 +51,14 @@ function initGalleryOverlay() {
     if (!$overlay.length) return;
 
     e.preventDefault();
-    const $items = getGalleryItems();
+
+    // Scoper la navigation au .portrait-image-gallery parent si présent,
+    // sinon fallback sur tous les items de la page (page archives)
+    const $parentGallery = $(this).closest(".portrait-image-gallery");
+    const $items = $parentGallery.length
+      ? $parentGallery.find(".archive-gallery-item")
+      : getGalleryItems();
+
     if (!$items.length) return;
 
     // (re)construit la liste au moment du clic pour prendre en compte du contenu injecté

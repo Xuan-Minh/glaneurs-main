@@ -1,20 +1,6 @@
-/* --- INTRO IMAGE GALLERY --- */
-.intro-image-gallery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: nowrap;
-  width: 100%;
-  max-width: 1200px; /* rendre la galerie plus large */
-  margin: 0 auto;
-  padding: 0.5rem 2rem; /* réduire l'espace au-dessus et au-dessous */
-}
-.intro-image-gallery .archive-gallery-item {
-  width: clamp(300px, 28vw, 480px); /* images plus larges */
-  height: auto;
-  flex: 0 0 auto;
-}
+/* ==========================================================================
+   PAGE ARCHIVES - TRACES DU PASSÉ
+   ========================================================================== */
 
 /* --- GENERAL LAYOUT & SCROLL --- */
 .archives-scroll {
@@ -36,8 +22,6 @@
   margin: 0;
   position: relative; /* nécessaire pour les images flottantes */
 }
-
-/* --- HERO SECTION --- */
 
 /* --- NARRATIVE & INTRO --- */
 .archives-narrative {
@@ -66,333 +50,240 @@
   font-size: var(--text-body-md);
   font-weight: 400;
   margin-top: 0;
-  margin-bottom: 1rem; /* réduire l'espace entre paragraphes d'intro */
-  /* Espace plus grand entre les paragraphes d'intro */
+  margin-bottom: 1rem;
   line-height: 1.8;
+  /* text-indent: 0 et text-align: center définis dans main.css */
 }
 
-/* Réduire spécifiquement l'espace entre le 2ème paragraphe d'intro et la galerie */
-.archives-intro > p:last-of-type {
-  margin-bottom: 0.2rem; /* moins d'espace avant la galerie */
+/* ==========================================================================
+   STRUCTURE DU CONTENU DES ARCHIVES
+   ========================================================================== */
+
+/* --- GRANDES PARTIES (P1, P2, etc.) --- */
+.archives-part {
+  /* margin: 4rem 0; */
 }
 
-.archives-intro > .intro-image-gallery {
-  margin-top: 0; /* aucun espace supplémentaire au-dessus de la galerie */
-  padding-top: 0; /* écrase le padding général si nécessaire */
-  border-radius: 0 !important;
-}
-
-.archive-chapter {
+.archives-part-title {
+  font-size: 2.8rem;
+  margin: 3rem auto 2.5rem auto;
   max-width: 75ch;
-  margin: 0 auto 0 auto; /* réduit l'espace entre chapitres */
+  color: #bbbbbb;
+  text-align: center;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* --- INTRO DE PARTIE --- */
+.archives-part-intro {
+  max-width: 75ch;
+  margin: 0 auto 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- CHAPITRES (SOUS-PARTIES A, B, C) --- */
+.archives-chapter {
+  max-width: 75ch;
+  margin: 0 auto 0 auto;
   padding: 0 2rem;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.archive-chapter h3 {
+.archives-content p {
+  font-size: var(--text-body);
+  color: #fff;
+  line-height: 1.9;
+  max-width: 72ch;
+  margin: 0 auto 1em auto;
+  /* text-align: justify et text-indent: 2em définis dans main.css via .preserve-lines */
+}
+.archives-chapter h3 {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
   color: #e0ded8;
-  border-left: 3px solid #fff;
   padding-left: 1rem;
 }
-.archive-chapter p {
-  font-size: 1.1rem;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: pre-wrap;
-  text-align: justify;
-  text-indent: 2em;
-  margin-bottom: 1em;
-}
 
-/* Indentation: applique un retrait de première ligne aux paragraphes
-   de la zone narrative et des chapitres, sauf le paragraphe intro "percutant" */
-.archives-narrative p,
-.archive-chapter p {
-  text-indent: 2em;
-  margin-top: 0.8rem;
-  margin-bottom: 1em;
-  text-align: justify;
-}
-
-/* --- ARCHIVES GALLERY (GRID & OVERLAY) --- */
-.archives-gallery-section {
-  margin-top: 8rem;
-  padding-top: 4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-.gallery-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 4rem;
-  color: #e0ded8;
-}
-.archive-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  justify-content: center;
-}
-.archive-gallery-item {
-  width: clamp(200px, 20vw, 340px);
-  margin: 12px;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-.archive-gallery-item img {
-  width: 100%;
-  display: block;
-  transition: transform 0.2s;
-}
-.archive-gallery-item:hover {
-  transform: scale(1.05);
-}
-.archive-gallery-item:hover img {
-  transform: scale(1.05);
-}
-
-.archive-overlay {
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.archive-overlay-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-}
-.archive-overlay-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 95vw;
-  width: 95vw;
-  max-height: 90vh;
-  position: relative;
-  gap: 70px;
-}
-.archive-overlay-photo {
-  flex: 0 1 auto;
-}
-.archive-overlay-photo img {
-  max-width: 65vw;
-  max-height: 85vh;
-  width: auto;
-  height: auto;
-  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
-}
-.archive-overlay-info {
-  flex: 0 0 320px;
-  color: #fff;
-  padding: 40px 40px 40px 0;
+/* --- CONCLUSION --- */
+.archives-conclusion {
+  max-width: 75ch;
+  margin: 4rem auto 0 auto;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: var(--text-body-md);
-  text-shadow: 0 2px 8px #000a;
-  min-width: 250px;
-  max-width: 400px;
-  word-break: break-word;
-}
-.archive-overlay-title {
-  font-size: var(--text-archive-title);
-  margin-bottom: 0.5em;
-  font-weight: bold;
-}
-.archive-overlay-close {
-  position: absolute;
-  top: 24px;
-  right: 36px;
-  color: #fff;
-  font-size: 2.2em;
-  cursor: pointer;
-  z-index: 20;
-}
-.archive-overlay-arrow {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  opacity: 0.8;
-  transition:
-    opacity 0.2s,
-    transform 0.3s;
-}
-.archive-overlay-arrow.left {
-  left: 2vw;
-}
-.archive-overlay-arrow.right {
-  right: 2vw;
-}
-.archive-overlay-arrow img {
-  width: 32px;
-  opacity: 0;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-.archive-overlay-arrow.left img {
-  transform: rotate(-90deg);
-  animation-name: scroll-side-left;
-}
-.archive-overlay-arrow.right img {
-  transform: rotate(90deg);
-  animation-name: scroll-side-right;
-}
-.archive-overlay[style*="display: block"] .archive-overlay-arrow,
-.archive-overlay[style*="display: flex"] .archive-overlay-arrow {
-  display: flex !important;
 }
 
-@keyframes scroll-side-right {
-  0%,
-  100% {
-    opacity: 0;
-    transform: rotate(90deg) translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(90deg) translateX(10px);
-  }
-}
-@keyframes scroll-side-left {
-  0%,
-  100% {
-    opacity: 0;
-    transform: rotate(-90deg) translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(-90deg) translateX(-10px);
-  }
+.archives-conclusion h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #e0ded8;
+  padding-left: 1rem;
 }
 
-/* --- FLOATING IMAGES (background) --- */
-.floating-images-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+/* Les styles de paragraphes sont maintenant hérités de main.css via .preserve-lines */
+
+/* Scroll-lock quand la lightbox est ouverte */
+html.overlay-open,
+html.overlay-open body {
   overflow: hidden;
 }
-.floating-image {
+
+/* ==========================================================================
+   LIGHTBOX / OVERLAY GALERIE
+   ========================================================================== */
+
+.archive-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fond sombre cliquable pour fermer */
+.archive-overlay-bg {
   position: absolute;
-  display: block;
-  opacity: 0.1;
-  filter: grayscale(80%) blur(1px);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
   z-index: 1;
-  transform: translateY(var(--translate-y, 0px));
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    opacity 0.4s ease,
-    filter 0.4s ease;
 }
-.floating-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.floating-image:hover {
-  opacity: 1;
-  filter: grayscale(0%) blur(0);
-  z-index: 3;
-  transform: translateY(var(--translate-y, 0px)) scale(1.1);
+
+/* Bouton × de fermeture */
+.archive-overlay-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  z-index: 10;
+  font-size: 2.2rem;
+  color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  user-select: none;
+}
+.archive-overlay-close:hover {
+  color: #fff;
 }
 
-#float-img-1 {
-  top: 20vh;
-  left: 5vw;
-  width: 20vw;
-  max-width: 250px;
-}
-#float-img-2 {
-  top: 120vh;
-  right: 8vw;
-  width: 18vw;
-  max-width: 220px;
-}
-#float-img-3 {
-  top: 250vh;
-  left: 10vw;
-  width: 15vw;
-  max-width: 180px;
-}
-#float-img-4 {
-  top: 350vh;
-  right: 5vw;
-  width: 22vw;
-  max-width: 280px;
-}
-#float-img-5 {
-  top: 480vh;
-  left: 8vw;
-  width: 17vw;
-  max-width: 200px;
-}
-
-/* Keep text above floating images */
-.archives-narrative {
+/* Zone centrale : flèche | photo | info | flèche */
+.archive-overlay-content {
   position: relative;
   z-index: 2;
-}
-.tp-paragraph {
-  margin: 2rem 0;
-}
-.tp-image img {
-  display: block;
-  margin: 2rem auto;
-  max-width: 600px;
-}
-.tp-img-left-text-right {
   display: flex;
-  gap: 2rem;
   align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 90vw;
+  max-width: 1100px;
+  height: 80vh;
 }
-.tp-img-left-text-right img {
-  max-width: 350px;
-}
-.tp-img-left-text-right .tp-text {
-  flex: 1;
-}
-.tp-text-left-img-right {
+
+/* Photo */
+.archive-overlay-photo {
+  flex: 0 1 auto;
   display: flex;
-  gap: 2rem;
   align-items: center;
+  justify-content: center;
+  max-height: 100%;
 }
-.tp-text-left-img-right .tp-text {
-  flex: 1;
-}
-.tp-text-left-img-right img {
-  max-width: 350px;
-}
-.tp-img-top-text-bottom img {
+.archive-overlay-photo img {
+  max-height: 75vh;
+  max-width: 55vw;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
-  margin: 0 auto 1rem auto;
-  max-width: 500px;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
-.tp-img-top-text-bottom p {
-  text-align: center;
+
+/* Informations (titre, date, auteur) */
+.archive-overlay-info {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #e0e0e0;
+}
+
+.archive-overlay-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.archive-overlay-date,
+.archive-overlay-auteur {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+/* Flèches de navigation */
+.archive-overlay-arrow {
+  flex: 0 0 auto;
+  cursor: pointer;
+  z-index: 3;
+  padding: 8px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.archive-overlay-arrow:hover {
+  opacity: 1;
+}
+
+.scroll-side-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-side-arrow img {
+  width: 32px;
+  height: auto;
+}
+
+/* ==========================================================================
+   BLOCKQUOTES — Citations d'archives
+   ========================================================================== */
+
+/* Citations — style unifié */
+.archives-blockquote,
+.archives-transition-quote {
+  max-width: 65ch;
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem 1.5rem 2.5rem;
+  border-left: 3px solid rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+.archives-blockquote p,
+.archives-transition-quote p {
+  font-size: var(--text-body);
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 0.6rem 0;
+  text-indent: 0;
+  text-align: left;
+}
+
+.archives-blockquote cite,
+.archives-transition-quote cite {
+  display: block;
+  font-size: 0.78rem;
+  font-style: normal;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+/* La transition a juste plus d'espace vertical */
+.archives-transition-quote {
+  margin: 4rem auto;
 }
