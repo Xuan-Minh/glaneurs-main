@@ -10,8 +10,17 @@ function display_portrait_content($portrait_id, $lang) {
     $stmt->execute([$portrait_id]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $gallery_items = [];
-    $other_content = '';
+    // On construit le contenu dans l'ordre, en regroupant les gallery_image consécutives
+    // en blocs séparés, ce qui permet de placer plusieurs galeries à différents endroits.
+    $output = '';
+    $pending_gallery = [];
+
+    $flush_gallery = function() use (&$pending_gallery, &$output) {
+        if (!empty($pending_gallery)) {
+            $output .= '<div class="portrait-image-gallery">' . implode('', $pending_gallery) . '</div>';
+            $pending_gallery = [];
+        }
+    };
 
     foreach ($result as $row) {
         $content = !empty($row['content_' . $lang]) ? $row['content_' . $lang] : $row['content_fr'];
@@ -19,61 +28,55 @@ function display_portrait_content($portrait_id, $lang) {
 
         switch ($row['element_type']) {
             case 'subtitle':
-            // classe visuelle déjà ajoutée : .portrait-subtitle
-            $base_classes = 'portrait-subtitle content-anim';
-            $custom_classes = '';
-            if (isset($data_extra['class']) && !empty($data_extra['class'])) {
-                $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
-            }
-            // $content contient déjà la version dans la bonne langue (voir le début de la fonction)
-            $other_content .= '<h3 class="' . $base_classes . $custom_classes . '">' . htmlspecialchars($content) . '</h3>';
-            break;
-
-            case 'paragraph':
-               $base_classes = 'preserve-lines content-anim';
+                $flush_gallery();
+                $base_classes = 'portrait-subtitle content-anim';
                 $custom_classes = '';
-
-                // On vérifie si des classes personnalisées sont définies dans data_extra
                 if (isset($data_extra['class']) && !empty($data_extra['class'])) {
-                    // On s'assure que les classes sont bien formatées pour l'attribut HTML
                     $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
                 }
-
-                // On combine les classes de base et les classes personnalisées
-                $other_content .= '<p class="' . $base_classes . $custom_classes . '">' . nl2br(htmlspecialchars($content)) . '</p>';
+                $output .= '<h3 class="' . $base_classes . $custom_classes . '">' . htmlspecialchars($content) . '</h3>';
                 break;
 
-                 // NOUVEAU : Cas pour la vidéo de séparation
-                  case 'break_video':
+            case 'paragraph':
+                $flush_gallery();
+                if (empty(trim($content ?? ''))) break;
+                $base_classes = 'preserve-lines content-anim';
+                $custom_classes = '';
+                if (isset($data_extra['class']) && !empty($data_extra['class'])) {
+                    $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
+                }
+                $output .= '<p class="' . $base_classes . $custom_classes . '">' . nl2br(htmlspecialchars($content ?? '')) . '</p>';
+                break;
+
+            case 'break_video':
+                $flush_gallery();
                 $video_html = '<video src="' . htmlspecialchars($content) . '" autoplay muted loop playsinline></video>';
-                
-                // On vérifie si du texte doit être affiché par-dessus
                 $text_overlay_html = '';
                 if (isset($data_extra['text_' . $lang]) && !empty($data_extra['text_' . $lang])) {
                     $text_content = $data_extra['text_' . $lang];
                     $position_class = isset($data_extra['position']) && $data_extra['position'] === 'right' ? 'position-right' : 'position-left';
-                    
                     $text_overlay_html = '
                         <div class="video-text-overlay ' . $position_class . '">
                             <p>' . nl2br(htmlspecialchars($text_content)) . '</p>
                         </div>';
                 }
-
-                $other_content .= '
+                $output .= '
                     <div class="portrait-break-video">
                         ' . $video_html . '
                         ' . $text_overlay_html . '
                     </div>';
                 break;
 
+            case 'gallery_break':
+                // Séparateur invisible : coupe le groupe de galerie en cours
+                $flush_gallery();
+                break;
+
             case 'gallery_image':
                 $titre = isset($data_extra['titre_' . $lang]) ? $data_extra['titre_' . $lang] : (isset($data_extra['titre_fr']) ? $data_extra['titre_fr'] : '');
-                
-                // NOUVEAU: Extraire l'auteur et la date
                 $auteur = isset($data_extra['auteur']) ? $data_extra['auteur'] : '';
                 $date = isset($data_extra['date']) ? $data_extra['date'] : '';
-
-                $gallery_items[] = '
+                $pending_gallery[] = '
                     <a class="archive-gallery-item" 
                        data-src="' . htmlspecialchars($content) . '" 
                        data-titre="' . htmlspecialchars($titre) . '" 
@@ -85,11 +88,10 @@ function display_portrait_content($portrait_id, $lang) {
         }
     }
 
-    echo $other_content;
+    // Vider la dernière galerie pendante s'il en reste une
+    $flush_gallery();
 
-    if (!empty($gallery_items)) {
-        echo '<div class="portrait-image-gallery">' . implode('', $gallery_items) . '</div>';
-    }
+    echo $output;
 }
 ?>
 
