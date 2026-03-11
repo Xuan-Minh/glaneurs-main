@@ -53,3 +53,6 @@ naver*.html
 ### Fichiers de configuration locaux ou de production ###
 # Ignorer le fichier de configuration de production
 /includes/config.php
+
+
+.mov
