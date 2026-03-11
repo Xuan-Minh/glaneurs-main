@@ -24,18 +24,18 @@
 }
 
 .dld-remerciements p {
-  text-align: justify;
   font-size: var(--text-body-md);
-  line-height: 1.6;
+  line-height: 1.9;
+  /* text-align: justify défini dans main.css */
 }
 
 #last-paragraph {
   margin-bottom: 5vh;
 }
+
+/* Classe pour les paragraphes stylés - styles communs définis dans main.css */
 .styled-paragraph {
-  text-indent: 2em; /* Ajoute un alinéa */
-  text-align: justify; /* Justifie le texte */
-  margin-bottom: 1.5em; /* Ajoute de l'espace entre les paragraphes */
+  margin-bottom: 1.5em;
 }
 
 /* ==========================================================================

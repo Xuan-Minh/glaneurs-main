@@ -67,6 +67,7 @@ h1 {
   font-family: var(--font-heading);
   font-weight: var(--weight-regular);
   letter-spacing: 0.02em;
+  color: #fff;
 }
 
 h2 {
@@ -74,10 +75,13 @@ h2 {
   font-size: var(--text-h2);
   font-weight: var(--weight-regular);
   letter-spacing: 0.02em;
+  color: #fff;
 }
+
 h3 {
   font-family: var(--font-heading);
   font-weight: var(--weight-bold);
+  color: #fff;
 }
 h4 {
   font-size: var(--text-caption);
