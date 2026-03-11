@@ -42,7 +42,7 @@ yarn-error.log*
 # Il est recommandé d'ignorer les dumps SQL pour ne pas versionner
 # de données sensibles ou de gros fichiers de sauvegarde.
 # Vous pouvez décommenter la ligne suivante si vous le souhaitez.
-.sql
+*.sql
 
 ### Fichiers de vérification de services tiers ###
 # Ces fichiers ne sont utiles que sur le serveur de production et n'ont
@@ -55,4 +55,6 @@ naver*.html
 /includes/config.php
 
 
-.mov
+### Fichiers vidéo lourds ###
+# Fichiers originaux non compressés — à conserver localement uniquement
+*.mov
