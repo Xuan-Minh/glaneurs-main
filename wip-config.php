@@ -6,6 +6,6 @@
  * Change WIP_MODE à true pour activer le mode WIP et bloquer l'accès au site
  */
 
-define('WIP_MODE', true);
+define('WIP_MODE', false);
 
 ?>
