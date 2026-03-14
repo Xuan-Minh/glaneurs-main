@@ -251,7 +251,7 @@ html.overlay-open body {
    BLOCKQUOTES — Citations d'archives
    ========================================================================== */
 
-/* Citations — style unifié */
+/* Base commune des citations */
 .archives-blockquote,
 .archives-transition-quote {
   max-width: 65ch;
@@ -281,7 +281,7 @@ html.overlay-open body {
   text-transform: uppercase;
 }
 
-/* La transition a juste plus d'espace vertical */
+/* Citation de transition entre deux parties */
 .archives-transition-quote {
-  margin: 4rem auto;
+  margin: 0rem auto;
 }

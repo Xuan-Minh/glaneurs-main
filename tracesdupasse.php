@@ -4,6 +4,7 @@
     // sous_parties : int = nb de textes simples
     //                array = textes + blockquote + extra_textes optionnels
     // transition_quote : blockquote affiché entre la dernière sous-partie et la partie suivante
+    // intro_quote : blockquote affiché dans l'intro de partie après le paragraphe indiqué par "after"
     $archives_structure = [
         'p1' => [
             'titre' => 'p1_titre',
@@ -17,11 +18,15 @@
                     'extra_textes' => 1,
                 ],
             ],
-            'transition_quote' => ['key' => 'p1_transition_quote', 'source' => 'p1_transition_quote_source'],
         ],
         'p2' => [
             'titre' => 'p2_titre',
             'intro' => 5,
+            'intro_quote' => [
+                'key' => 'p1_transition_quote',
+                'source' => 'p1_transition_quote_source',
+                'after' => 2,
+            ],
             'sous_parties' => [
                 'A' => 4,
                 'B' => 5,
@@ -64,6 +69,13 @@
                                 <section class="archives-part-intro content-anim preserve-lines">
                                     <?php for ($i = 1; $i <= $part_data['intro']; $i++): ?>
                                         <p><?php echo getTranslation("{$part_id}_intro_texte{$i}", $lang); ?></p>
+
+                                        <?php if (isset($part_data['intro_quote']) && (int)$part_data['intro_quote']['after'] === $i): ?>
+                                            <blockquote class="archives-transition-quote content-anim">
+                                                <p><?php echo getTranslation($part_data['intro_quote']['key'], $lang); ?></p>
+                                                <cite><?php echo getTranslation($part_data['intro_quote']['source'], $lang); ?></cite>
+                                            </blockquote>
+                                        <?php endif; ?>
                                     <?php endfor; ?>
                                 </section>
                             <?php endif; ?>
