@@ -1,97 +1,167 @@
-<?php include 'includes/lang.php'; // Inclut le fichier pour gérer la langue
+<?php include 'includes/lang.php'; ?>
+<?php
+/**
+ * ==========================================================================
+ * CONFIGURATION DE LA PAGE PORTRAITS
+ * ==========================================================================
+ */
+$portraitSections = [
+    [
+        'id' => 1,
+        'sectionClass' => 'section1',
+        'detailId' => 'detail1',
+        'audio' => 'audio/arirang_bass.mp3',
+        'video' => 'video/web/glaneuse-test.mp4',
+        'poster' => 'img/posters/glaneuse-test_poster.png',
+        'nameKey' => 'portraits_master',
+        'hasMap' => false,
+    ],
+    [
+        'id' => 2,
+        'sectionClass' => 'section2',
+        'detailId' => 'detail2',
+        'audio' => 'audio/arirang_harp.mp3',
+        'video' => 'video/web/lee-test.mp4',
+        'poster' => 'img/posters/lee-test_poster.png',
+        'nameKey' => 'portraits_lee',
+        'hasMap' => true,
+    ],
+    [
+        'id' => 3,
+        'sectionClass' => 'section3',
+        'detailId' => 'detail3',
+        'audio' => 'audio/arirang_piano.mp3',
+        'video' => 'video/web/arirang-test.mp4',
+        'poster' => 'img/posters/arirang-test_poster.png',
+        'nameKey' => 'portraits_arirang',
+        'hasMap' => false,
+    ],
+    [
+        'id' => 4,
+        'sectionClass' => 'section4',
+        'detailId' => 'detail4',
+        'audio' => 'audio/arirang_oboe.mp3',
+        'video' => 'video/web/glaneuse-test.mp4',
+        'poster' => 'img/posters/glaneuse-test_poster.png',
+        'nameKey' => 'portraits_jo',
+        'hasMap' => false,
+    ],
+];
 
-function display_portrait_content($portrait_id, $lang) {
-    // 1. Obtenir la connexion à la BDD à l'intérieur de la fonction
-    $conn = getPDO(); 
+/**
+ * ==========================================================================
+ * HELPERS
+ * ==========================================================================
+ */
+function h(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
 
+function getPortraitRows(int $portraitId): array
+{
+    static $cache = [];
+    if (isset($cache[$portraitId])) {
+        return $cache[$portraitId];
+    }
+
+    $conn = getPDO();
     $sql = "SELECT * FROM portraits_content WHERE portrait_id = ? ORDER BY element_order ASC";
     $stmt = $conn->prepare($sql);
-    if ($stmt === false) { die("Erreur de préparation de la requête."); }
-    $stmt->execute([$portrait_id]);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // On construit le contenu dans l'ordre, en regroupant les gallery_image consécutives
-    // en blocs séparés, ce qui permet de placer plusieurs galeries à différents endroits.
-    $output = '';
-    $pending_gallery = [];
+    if ($stmt === false) {
+        die('Erreur de preparation de la requete.');
+    }
 
-    $flush_gallery = function() use (&$pending_gallery, &$output) {
-        if (!empty($pending_gallery)) {
-            $output .= '<div class="portrait-image-gallery">' . implode('', $pending_gallery) . '</div>';
-            $pending_gallery = [];
+    $stmt->execute([$portraitId]);
+    $cache[$portraitId] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $cache[$portraitId];
+}
+
+function renderPortraitContent(int $portraitId, string $lang): void
+{
+    $output = [];
+    $pendingGallery = [];
+
+    $flushGallery = function () use (&$pendingGallery, &$output): void {
+        if (empty($pendingGallery)) {
+            return;
         }
+        $output[] = '<div class="portrait-image-gallery">' . implode('', $pendingGallery) . '</div>';
+        $pendingGallery = [];
     };
 
-    foreach ($result as $row) {
-        $content = !empty($row['content_' . $lang]) ? $row['content_' . $lang] : $row['content_fr'];
-        $data_extra = json_decode($row['data_extra'] ?? '', true);
+    foreach (getPortraitRows($portraitId) as $row) {
+        $content = !empty($row['content_' . $lang]) ? (string)$row['content_' . $lang] : (string)($row['content_fr'] ?? '');
+        $dataExtra = json_decode($row['data_extra'] ?? '', true);
+        if (!is_array($dataExtra)) {
+            $dataExtra = [];
+        }
+
+        $customClass = !empty($dataExtra['class']) ? ' ' . h((string)$dataExtra['class']) : '';
 
         switch ($row['element_type']) {
             case 'subtitle':
-                $flush_gallery();
-                $base_classes = 'portrait-subtitle content-anim';
-                $custom_classes = '';
-                if (isset($data_extra['class']) && !empty($data_extra['class'])) {
-                    $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
-                }
-                $output .= '<h3 class="' . $base_classes . $custom_classes . '">' . htmlspecialchars($content) . '</h3>';
+                $flushGallery();
+                $output[] = '<h3 class="portrait-subtitle content-anim' . $customClass . '">' . formatRichText($content) . '</h3>';
                 break;
 
             case 'paragraph':
-                $flush_gallery();
-                if (empty(trim($content ?? ''))) break;
-                $base_classes = 'preserve-lines content-anim';
-                $custom_classes = '';
-                if (isset($data_extra['class']) && !empty($data_extra['class'])) {
-                    $custom_classes = ' ' . htmlspecialchars($data_extra['class']);
+                $flushGallery();
+                if (trim($content) === '') {
+                    break;
                 }
-                $output .= '<p class="' . $base_classes . $custom_classes . '">' . nl2br(htmlspecialchars($content ?? '')) . '</p>';
+                $output[] = '<p class="preserve-lines content-anim' . $customClass . '">' . formatRichText($content, true) . '</p>';
                 break;
 
             case 'break_video':
-                $flush_gallery();
-                $video_html = '<video src="' . htmlspecialchars($content) . '" autoplay muted loop playsinline></video>';
-                $text_overlay_html = '';
-                if (isset($data_extra['text_' . $lang]) && !empty($data_extra['text_' . $lang])) {
-                    $text_content = $data_extra['text_' . $lang];
-                    $position_class = isset($data_extra['position']) && $data_extra['position'] === 'right' ? 'position-right' : 'position-left';
-                    $text_overlay_html = '
-                        <div class="video-text-overlay ' . $position_class . '">
-                            <p>' . nl2br(htmlspecialchars($text_content)) . '</p>
-                        </div>';
+                $flushGallery();
+                $videoHtml = '<video src="' . h($content) . '" autoplay muted loop playsinline></video>';
+                $textOverlayHtml = '';
+
+                if (!empty($dataExtra['text_' . $lang])) {
+                    $textContent = (string)$dataExtra['text_' . $lang];
+                    $positionClass = (!empty($dataExtra['position']) && $dataExtra['position'] === 'right')
+                        ? 'position-right'
+                        : 'position-left';
+
+                    $textOverlayHtml =
+                        '<div class="video-text-overlay ' . $positionClass . '">' .
+                            '<p>' . formatRichText($textContent, true) . '</p>' .
+                        '</div>';
                 }
-                $output .= '
-                    <div class="portrait-break-video">
-                        ' . $video_html . '
-                        ' . $text_overlay_html . '
-                    </div>';
+
+                $output[] =
+                    '<div class="portrait-break-video">' .
+                        $videoHtml .
+                        $textOverlayHtml .
+                    '</div>';
                 break;
 
             case 'gallery_break':
-                // Séparateur invisible : coupe le groupe de galerie en cours
-                $flush_gallery();
+                $flushGallery();
                 break;
 
             case 'gallery_image':
-                $titre = isset($data_extra['titre_' . $lang]) ? $data_extra['titre_' . $lang] : (isset($data_extra['titre_fr']) ? $data_extra['titre_fr'] : '');
-                $auteur = isset($data_extra['auteur']) ? $data_extra['auteur'] : '';
-                $date = isset($data_extra['date']) ? $data_extra['date'] : '';
-                $pending_gallery[] = '
-                    <a class="archive-gallery-item" 
-                       data-src="' . htmlspecialchars($content) . '" 
-                       data-titre="' . htmlspecialchars($titre) . '" 
-                       data-date="' . htmlspecialchars($date) . '" 
-                       data-auteur="' . htmlspecialchars($auteur) . '">
-                        <img src="' . htmlspecialchars($content) . '" alt="' . htmlspecialchars($titre) . '">
-                    </a>';
+                $titre = (string)($dataExtra['titre_' . $lang] ?? $dataExtra['titre_fr'] ?? '');
+                $auteur = (string)($dataExtra['auteur'] ?? '');
+                $date = (string)($dataExtra['date'] ?? '');
+                $src = h($content);
+
+                $pendingGallery[] =
+                    '<a class="archive-gallery-item" ' .
+                        'data-src="' . $src . '" ' .
+                        'data-titre="' . h($titre) . '" ' .
+                        'data-date="' . h($date) . '" ' .
+                        'data-auteur="' . h($auteur) . '">' .
+                        '<img src="' . $src . '" alt="' . h($titre) . '">' .
+                    '</a>';
                 break;
         }
     }
 
-    // Vider la dernière galerie pendante s'il en reste une
-    $flush_gallery();
-
-    echo $output;
+    $flushGallery();
+    echo implode('', $output);
 }
 ?>
 
@@ -104,7 +174,7 @@ function display_portrait_content($portrait_id, $lang) {
     <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
-    <title><?php echo getTranslation("portraits_titre", $lang) ?></title>
+    <title><?php echo getTranslation('portraits_titre', $lang) ?></title>
     <script src="js/features/portraits-map.js"></script>
 </head>
 
@@ -112,73 +182,49 @@ function display_portrait_content($portrait_id, $lang) {
 
     <?php include "includes/layout/header.php"; ?>
 
-     <div class="portraits-container">
-        <div class="portrait-section section1" data-target="#detail1" data-audio="audio/arirang_bass.mp3">
-            <video autoplay muted loop class="portrait-video section1-video" poster="img/posters/glaneuse-test_poster.png">
-                <source src="video/web/glaneuse-test.mp4" type="video/mp4">
-            </video>
-            <h2 class="portrait-name"><?php echo getTranslation("portraits_master", $lang); ?></h2>
-        </div>
-        <div class="portrait-section section2" data-target="#detail2" data-audio="audio/arirang_harp.mp3">
-            <video autoplay muted loop class="portrait-video section2-video" poster="img/posters/lee-test_poster.png">
-                <source src="video/web/lee-test.mp4" type="video/mp4">
-            </video>
-            <h2 class="portrait-name"><?php echo getTranslation("portraits_lee", $lang); ?></h2>
-        </div>
-        <div class="portrait-section section3" data-target="#detail3" data-audio="audio/arirang_piano.mp3">
-            <video autoplay muted loop class="portrait-video section3-video" poster="img/posters/arirang-test_poster.png">
-                <source src="video/web/arirang-test.mp4" type="video/mp4">
-            </video>
-            <h2 class="portrait-name"><?php echo getTranslation("portraits_arirang", $lang); ?></h2>
-        </div>
-        <div class="portrait-section section4" data-target="#detail4" data-audio="audio/arirang_oboe.mp3">
-            <video autoplay muted loop class="portrait-video section4-video" poster="img/posters/glaneuse-test_poster.png">
-                <source src="video/web/glaneuse-test.mp4" type="video/mp4">
-            </video>
-            <h2 class="portrait-name"><?php echo getTranslation("portraits_jo", $lang); ?></h2>
-        </div>
+    <div class="portraits-container">
+        <?php foreach ($portraitSections as $section): ?>
+            <div
+                class="portrait-section <?php echo h($section['sectionClass']); ?>"
+                data-target="#<?php echo h($section['detailId']); ?>"
+                data-audio="<?php echo h($section['audio']); ?>"
+            >
+                <video
+                    autoplay
+                    muted
+                    loop
+                    class="portrait-video <?php echo h($section['sectionClass']); ?>-video"
+                    poster="<?php echo h($section['poster']); ?>"
+                >
+                    <source src="<?php echo h($section['video']); ?>" type="video/mp4">
+                </video>
+                <h2 class="portrait-name"><?php echo getTranslation($section['nameKey'], $lang); ?></h2>
+            </div>
+        <?php endforeach; ?>
     </div>
 
-    <section class="portrait-detail" id="detail1">
-        <div class="detail-content">
-            <h2><?php echo getTranslation("portraits_master", $lang); ?></h2>
-            <?php display_portrait_content(1, $lang); ?>
-            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . '</span>' ?></button>
-        </div>
-    </section>
+    <?php foreach ($portraitSections as $section): ?>
+        <section class="portrait-detail" id="<?php echo h($section['detailId']); ?>">
+            <div class="detail-content">
+                <h2><?php echo getTranslation($section['nameKey'], $lang); ?></h2>
+                <?php renderPortraitContent((int)$section['id'], $lang); ?>
 
-    <section class="portrait-detail" id="detail2">
-        <div class="detail-content">
-            <h2><?php echo getTranslation("portraits_lee", $lang); ?></h2>
-            <?php display_portrait_content(2, $lang); ?>
-            <div id="map-parcours" style="width:100%;height:400px;margin:20px 0;"></div>
-            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
-        </div>
-    </section>
+                <?php if (!empty($section['hasMap'])): ?>
+                    <div id="map-parcours" style="width:100%;height:400px;margin:20px 0;"></div>
+                <?php endif; ?>
 
-    <section class="portrait-detail" id="detail3">
-        <div class="detail-content">
-            <h2><?php echo getTranslation("portraits_arirang", $lang); ?></h2>
-            <?php display_portrait_content(3, $lang); ?>
-            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
-        </div>
-    </section>
+                <button class="back-to-portraits">
+                    <span><?php echo getTranslation('portraits_voirlesautres', $lang); ?></span>
+                </button>
+            </div>
+        </section>
+    <?php endforeach; ?>
 
-    <section class="portrait-detail" id="detail4">
-        <div class="detail-content">
-            <h2><?php echo getTranslation("portraits_jo", $lang); ?></h2>
-            <?php display_portrait_content(4, $lang); ?>
-            <button class="back-to-portraits"><?php echo "<span>" . getTranslation("portraits_voirlesautres", $lang) . "</span>"; ?></button>
-        </div>
-     </section>
+    <?php include 'includes/components/archives-overlay.php'; ?>
 
-    <?php 
-    include "includes/components/archives-overlay.php"; 
-    ?>
-
-    <?php include "includes/layout/jsinclude.php"; ?>
+    <?php include 'includes/layout/jsinclude.php'; ?>
     <script src="js/pages/portraits.js" defer></script>
-    <script src="js/features/gallery-overlay.js" defer></script> <!-- NOUVEAU: Inclure le script de l'overlay -->
-    <?php include "includes/components/visionner.php"; ?>
+    <script src="js/features/gallery-overlay.js" defer></script>
+    <?php include 'includes/components/visionner.php'; ?>
 </body>
 </html>

@@ -2,6 +2,21 @@
    1. VUE PRINCIPALE DES PORTRAITS (ÉCRAN DE SÉLECTION)
    ========================================================================== */
 
+:root {
+  --portraits-detail-padding-x: 10vw;
+  --portraits-detail-max-width: 1300px;
+  --portraits-text-max: 72ch;
+
+  --portraits-gallery-min: 160px;
+  --portraits-gallery-max: 220px;
+  --portraits-gallery-gap: 30px;
+
+  --portraits-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --portraits-card-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.4);
+
+  --portraits-focus-ring: #ffd54f;
+}
+
 .portraits-container {
   display: flex;
   flex-direction: row;
@@ -121,8 +136,8 @@
   align-items: center;
   justify-content: center;
   background: var(--main-bg-color);
-  color: white;
-  padding: 40px 10vw;
+  color: #fff;
+  padding: 40px var(--portraits-detail-padding-x);
   box-sizing: border-box;
 }
 
@@ -131,7 +146,7 @@
 }
 
 .detail-content {
-  max-width: 1300px;
+  max-width: var(--portraits-detail-max-width);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -161,7 +176,7 @@
 .detail-content p {
   font-size: var(--text-body);
   line-height: 1.9;
-  max-width: 72ch;
+  max-width: var(--portraits-text-max);
   margin: 0 auto 1.5em auto;
   /* text-align: justify et text-indent: 2em définis dans main.css via .preserve-lines */
 }
@@ -169,10 +184,13 @@
 
 .portrait-image-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 220px));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--portraits-gallery-min), var(--portraits-gallery-max))
+  );
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: var(--portraits-gallery-gap);
   margin: 3rem 0;
   width: 100%;
 }
@@ -180,7 +198,7 @@
 .portrait-image-gallery .archive-gallery-item {
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--portraits-card-shadow);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -188,7 +206,7 @@
 
 .portrait-image-gallery .archive-gallery-item:hover {
   transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--portraits-card-shadow-hover);
 }
 
 .portrait-image-gallery .archive-gallery-item img {
@@ -210,13 +228,12 @@
 }
 /* Accessibility helpers for overlays and focusable informational regions */
 .accessible-focusable:focus {
-  outline: 3px solid #ffd54f; /* high-contrast focus ring */
+  outline: 3px solid var(--portraits-focus-ring);
   outline-offset: 4px;
 }
 
 .portraits-sound-overlay__content[role="status"] {
-  /* ensure contrast and readable font for assistive tech */
-  color: #ffffff;
+  color: #fff;
   background: rgba(0, 0, 0, 0.6);
 }
 .portrait-break-video video {
@@ -420,7 +437,7 @@
   font-size: var(--text-body-md);
   color: rgba(255, 255, 255, 0.6);
   text-align: right;
-  max-width: 72ch;
+  max-width: var(--portraits-text-max);
   margin: 2rem auto 0 auto;
   letter-spacing: 0.03em;
   text-indent: 0 !important;

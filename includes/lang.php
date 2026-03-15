@@ -56,8 +56,38 @@ function getPDO()
 }
 
 
-// Fonction de traduction
-function getTranslation($key, $lang = 'fr')
+/**
+ * Encode le texte puis réactive un sous-ensemble très limité de balises inline.
+ * Balises autorisées: <strong>/<b>, <em>/<i>, <br>.
+ */
+function formatRichText(?string $text, bool $convertLineBreaks = false): string
+{
+    $safe = htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
+
+    $allowedInlineTags = [
+        '&lt;strong&gt;'  => '<strong>',
+        '&lt;/strong&gt;' => '</strong>',
+        '&lt;b&gt;'       => '<strong>',
+        '&lt;/b&gt;'      => '</strong>',
+        '&lt;em&gt;'      => '<em>',
+        '&lt;/em&gt;'     => '</em>',
+        '&lt;i&gt;'       => '<em>',
+        '&lt;/i&gt;'      => '</em>',
+        '&lt;br&gt;'      => '<br>',
+        '&lt;br/&gt;'     => '<br>',
+        '&lt;br /&gt;'    => '<br>',
+    ];
+    $safe = str_ireplace(array_keys($allowedInlineTags), array_values($allowedInlineTags), $safe);
+
+    if ($convertLineBreaks) {
+        $safe = nl2br($safe);
+    }
+
+    return $safe;
+}
+
+
+function getTranslationsMap(): array
 {
     static $translations = null;
     if ($translations === null) {
@@ -69,19 +99,71 @@ function getTranslation($key, $lang = 'fr')
         }
     }
 
-    // Vérifier si la traduction existe dans la langue demandée
+    return $translations;
+}
+
+
+function getRawTranslation(string $key, string $lang = 'fr'): ?string
+{
+    $translations = getTranslationsMap();
+
     if (isset($translations[$key][$lang]) && $translations[$key][$lang] !== '') {
-        return htmlspecialchars($translations[$key][$lang], ENT_QUOTES, 'UTF-8');
+        return (string)$translations[$key][$lang];
     }
-    // Fallback sur le français
+
     if (isset($translations[$key]['fr']) && $translations[$key]['fr'] !== '') {
-        return htmlspecialchars($translations[$key]['fr'], ENT_QUOTES, 'UTF-8');
+        return (string)$translations[$key]['fr'];
     }
-    // Fallback sur l'anglais
+
     if (isset($translations[$key]['en']) && $translations[$key]['en'] !== '') {
-        return htmlspecialchars($translations[$key]['en'], ENT_QUOTES, 'UTF-8');
+        return (string)$translations[$key]['en'];
     }
-    // Sinon, retourner un message d'erreur clair et SÉCURISÉ
-    return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars($key, ENT_QUOTES, 'UTF-8');
+
+    return null;
+}
+
+
+// Fonction de traduction
+function getTranslation($key, $lang = 'fr')
+{
+    $raw = getRawTranslation((string)$key, (string)$lang);
+    if ($raw !== null) {
+        return htmlspecialchars($raw, ENT_QUOTES, 'UTF-8');
+    }
+
+    return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars((string)$key, ENT_QUOTES, 'UTF-8');
+}
+
+
+/**
+ * Variante "texte enrichi" pour les contenus narratifs.
+ * Autorise uniquement gras/italique/retour à la ligne.
+ */
+function getTranslationRich($key, $lang = 'fr', bool $convertLineBreaks = false)
+{
+    $raw = getRawTranslation((string)$key, (string)$lang);
+    if ($raw !== null) {
+        return formatRichText($raw, $convertLineBreaks);
+    }
+
+    return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars((string)$key, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Retourne les métadonnées d'une image d'archives par son ID.
+ * Les données sont chargées en une seule requête et mises en cache.
+ */
+function getArchive(int $id): ?array
+{
+    static $allArchives = null;
+    if ($allArchives === null) {
+        $pdo  = getPDO();
+        $stmt = $pdo->query("SELECT id, archives_titre, archives_src, archives_date, archives_auteur FROM archives");
+        $allArchives = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $allArchives[(int)$row['id']] = $row;
+        }
+    }
+    return $allArchives[$id] ?? null;
 }
 ?>

@@ -2,6 +2,26 @@
    PAGE ARCHIVES - TRACES DU PASSÉ
    ========================================================================== */
 
+:root {
+  --archives-content-max: 900px;
+  --archives-section-max: 75ch;
+  --archives-text-max: 72ch;
+  --archives-padding-inline: 2rem;
+
+  --archives-color-text: #fff;
+  --archives-color-title: #bbbbbb;
+  --archives-color-subtitle: #e0ded8;
+  --archives-color-overlay: #e0e0e0;
+  --archives-color-muted: rgba(255, 255, 255, 0.55);
+  --archives-color-muted-strong: rgba(255, 255, 255, 0.72);
+
+  --archives-border-soft: rgba(255, 255, 255, 0.25);
+  --archives-border-hover: rgba(255, 255, 255, 0.2);
+
+  --archives-overlay-max-width: 1100px;
+  --archives-overlay-info-width: 220px;
+}
+
 /* --- GENERAL LAYOUT & SCROLL --- */
 .archives-scroll {
   height: 100vh;
@@ -25,9 +45,9 @@
 
 /* --- NARRATIVE & INTRO --- */
 .archives-narrative {
-  max-width: 900px;
+  max-width: var(--archives-content-max);
   margin: 0 auto;
-  padding: 2rem 2rem;
+  padding: 2rem var(--archives-padding-inline);
   position: relative;
   z-index: 2;
   min-height: 100vh;
@@ -40,10 +60,10 @@
 .archives-intro {
   /* Container centered within parent; width grows symmetrically */
   width: 100%;
-  max-width: 900px;
+  max-width: var(--archives-content-max);
   box-sizing: border-box;
   margin: 0;
-  color: #fff;
+  color: var(--archives-color-text);
   text-align: center;
 }
 .archives-intro p {
@@ -59,16 +79,11 @@
    STRUCTURE DU CONTENU DES ARCHIVES
    ========================================================================== */
 
-/* --- GRANDES PARTIES (P1, P2, etc.) --- */
-.archives-part {
-  /* margin: 4rem 0; */
-}
-
 .archives-part-title {
   font-size: 2.8rem;
   margin: 3rem auto 2.5rem auto;
-  max-width: 75ch;
-  color: #bbbbbb;
+  max-width: var(--archives-section-max);
+  color: var(--archives-color-title);
   text-align: center;
   font-weight: 600;
   font-style: italic;
@@ -76,41 +91,50 @@
 
 /* --- INTRO DE PARTIE --- */
 .archives-part-intro {
-  max-width: 75ch;
+  max-width: var(--archives-section-max);
   margin: 0 auto 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--archives-padding-inline);
 }
 
 /* --- CHAPITRES (SOUS-PARTIES A, B, C) --- */
 .archives-chapter {
-  max-width: 75ch;
+  width: 100%;
+  max-width: var(--archives-section-max);
   margin: 0 auto 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--archives-padding-inline);
   min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+.archives-chapter.has-images,
+.archives-part-intro.has-images {
+  max-width: var(--archives-content-max);
+}
 .archives-content p {
   font-size: var(--text-body);
-  color: #fff;
+  color: var(--archives-color-text);
   line-height: 1.9;
-  max-width: 72ch;
+  max-width: var(--archives-text-max);
   margin: 0 auto 1em auto;
   /* text-align: justify et text-indent: 2em définis dans main.css via .preserve-lines */
 }
 .archives-chapter h3 {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
-  color: #e0ded8;
+  color: var(--archives-color-subtitle);
   padding-left: 1rem;
+  max-width: var(
+    --archives-text-max
+  ); /* reste aligné avec le texte même dans les chapitres élargis */
 }
 
 /* --- CONCLUSION --- */
 .archives-conclusion {
-  max-width: 75ch;
+  max-width: var(--archives-section-max);
   margin: 4rem auto 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--archives-padding-inline);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,7 +143,7 @@
 .archives-conclusion h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: #e0ded8;
+  color: var(--archives-color-subtitle);
   padding-left: 1rem;
 }
 
@@ -166,7 +190,7 @@ html.overlay-open body {
   user-select: none;
 }
 .archive-overlay-close:hover {
-  color: #fff;
+  color: var(--archives-color-text);
 }
 
 /* Zone centrale : flèche | photo | info | flèche */
@@ -178,7 +202,7 @@ html.overlay-open body {
   justify-content: center;
   gap: 1.5rem;
   width: 90vw;
-  max-width: 1100px;
+  max-width: var(--archives-overlay-max-width);
   height: 80vh;
 }
 
@@ -201,11 +225,11 @@ html.overlay-open body {
 
 /* Informations (titre, date, auteur) */
 .archive-overlay-info {
-  flex: 0 0 220px;
+  flex: 0 0 var(--archives-overlay-info-width);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #e0e0e0;
+  color: var(--archives-color-overlay);
 }
 
 .archive-overlay-title {
@@ -213,14 +237,14 @@ html.overlay-open body {
   font-size: 1.3rem;
   font-weight: 400;
   margin: 0;
-  color: #fff;
+  color: var(--archives-color-text);
   line-height: 1.3;
 }
 
 .archive-overlay-date,
 .archive-overlay-auteur {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--archives-color-muted);
   margin: 0;
 }
 
@@ -257,7 +281,7 @@ html.overlay-open body {
   max-width: 65ch;
   margin: 2.5rem auto;
   padding: 1.5rem 2rem 1.5rem 2.5rem;
-  border-left: 3px solid rgba(255, 255, 255, 0.25);
+  border-left: 3px solid var(--archives-border-soft);
   font-style: italic;
 }
 
@@ -284,4 +308,185 @@ html.overlay-open body {
 /* Citation de transition entre deux parties */
 .archives-transition-quote {
   margin: 0rem auto;
+}
+
+/* ==========================================================================
+   BLOCS IMAGE-TEXTE DANS LES ARCHIVES
+   ========================================================================== */
+
+.archive-media-block {
+  width: 100%;
+  margin: 2.5rem 0;
+  box-sizing: border-box;
+}
+
+/* ---- SIDE : texte + image(s) côte à côte ---- */
+
+.amb-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.amb-side .amb-text,
+.amb-side .amb-images {
+  min-width: 0;
+}
+
+.amb-side .amb-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.amb-side .amb-text p {
+  margin: 0 !important;
+}
+
+.amb-side.amb-img-right .amb-text {
+  order: 1;
+}
+
+.amb-side.amb-img-right .amb-images {
+  order: 2;
+}
+
+.amb-side.amb-img-left .amb-images {
+  order: 1;
+}
+
+.amb-side.amb-img-left .amb-text {
+  order: 2;
+}
+
+.amb-text p {
+  font-size: var(--text-body) !important;
+  color: var(--archives-color-text) !important;
+  line-height: 1.9 !important;
+  max-width: none !important;
+  margin: 0 0 1em 0 !important;
+  text-align: left !important;
+  text-indent: 0 !important;
+}
+
+/* ---- STRIP : rangée d'images + texte, empilés ---- */
+
+.amb-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.amb-strip .amb-images {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.amb-strip .amb-images figure {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.amb-strip .amb-images figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.amb-strip .amb-text p {
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* ---- NEWSPAPER : N colonnes (image + texte) ---- */
+
+.amb-newspaper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.amb-newspaper-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.amb-newspaper-col > p {
+  font-size: 0.82rem !important;
+  line-height: 1.65 !important;
+  text-align: left !important;
+  text-indent: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  color: var(--archives-color-muted-strong) !important;
+}
+
+/* ---- FIGURES & IMAGES (commun à tous les layouts) ---- */
+
+.amb-images figure,
+.amb-newspaper-col figure {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: outline 0.2s;
+}
+
+.amb-images figure img,
+.amb-newspaper-col figure img {
+  width: 100%;
+  display: block;
+  transition:
+    filter 0.25s,
+    transform 0.3s;
+}
+
+.amb-images figure:hover img,
+.amb-newspaper-col figure:hover img {
+  filter: brightness(1.08);
+  transform: scale(1.02);
+}
+
+/* Légende */
+.amb-images figcaption,
+.amb-newspaper-col figcaption {
+  display: none;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+}
+
+.amb-fig-title {
+  font-style: italic;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amb-fig-date {
+  flex: 0 0 auto;
+  opacity: 0.75;
+}
+
+/* Newspaper : image en aspect ratio 4/3 */
+.amb-newspaper-col figure img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Side : plusieurs images empilées verticalement */
+.amb-side .amb-images {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
