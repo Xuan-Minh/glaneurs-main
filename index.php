@@ -79,13 +79,14 @@ if (!$isMobile) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo getTranslation("index_titre", 'fr') ?></title>
-    
-    <?php if ($isMobile): ?>
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
+    <meta name="author" content="Sakina DOUIOU & Xuan-Minh TRAN">
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/index.php?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/font.css" />
     <link rel="stylesheet" type="text/css" href="css/typography.css" />
+    
+    <?php if ($isMobile): ?>
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
 
