@@ -78,7 +78,7 @@ if (!$isMobile) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php echo getTranslation("index_titre", 'fr') ?></title>
+    <title><?php echo getTranslation("index_titre", $lang) ?></title>
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
     <meta name="author" content="Sakina DOUIOU & Xuan-Minh TRAN">
     <meta name="keywords" content="documentary, South Korea, poesia, historical, social issues, Sakina DOUIOU, Xuan-Minh TRAN, Les glaneurs de carton">
@@ -88,7 +88,7 @@ if (!$isMobile) {
     <meta property="og:url" content="https://glaneursdecarton.mastercmw.com/" />
     <meta property="og:image" content="https://glaneursdecarton.mastercmw.com/img/posters/chariot_poster.png" />
     <meta property="og:description" content="<?php echo getTranslation('meta_description', $lang); ?>" />
-    <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/index.php?lang=<?php echo $lang; ?>" />
+    <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/font.css" />
     <link rel="stylesheet" type="text/css" href="css/typography.css" />
@@ -109,6 +109,20 @@ if (!$isMobile) {
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
     <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/?lang=en" />
     <link rel="alternate" hreflang="ko" href="https://glaneursdecarton.mastercmw.com/?lang=ko" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Les glaneurs de carton",
+      "url": "https://glaneursdecarton.mastercmw.com/",
+      "description": "<?php echo addslashes(getTranslation('meta_description', 'fr')); ?>",
+      "inLanguage": ["fr", "en", "ko"],
+      "author": {
+        "@type": "Person",
+        "name": "Sakina DOUIOU & Xuan-Minh TRAN"
+      }
+    }
+    </script>
 </head>
 <body>
 
