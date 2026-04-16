@@ -5,7 +5,7 @@
   <!-- Page d'accueil -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/?lang=fr</loc>
-    <lastmod>2025-06-22</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
@@ -17,7 +17,7 @@
   <!-- Portraits -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr</loc>
-    <lastmod>2025-06-22</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr" />
@@ -29,7 +29,7 @@
   <!-- Derrière le documentaire -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr</loc>
-    <lastmod>2025-06-22</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr" />
@@ -41,7 +41,7 @@
   <!-- Traces du passé -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=fr</loc>
-    <lastmod>2025-06-22</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/tracesdupasse.php?lang=fr" />
@@ -54,7 +54,7 @@
   <!-- Mentions Légales -->
   <url>
     <loc>https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr</loc>
-    <lastmod>2025-06-22</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr" />
