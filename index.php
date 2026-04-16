@@ -115,7 +115,7 @@ if (!$isMobile) {
       "@type": "WebSite",
       "name": "Les glaneurs de carton",
       "url": "https://glaneursdecarton.mastercmw.com/",
-      "description": "<?php echo addslashes(getTranslation('meta_description', 'fr')); ?>",
+      "description": "<?php echo addslashes(getTranslation('meta_description', $lang)); ?>",
       "inLanguage": ["fr", "en", "ko"],
       "author": {
         "@type": "Person",
