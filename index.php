@@ -78,7 +78,7 @@ if (!$isMobile) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php echo getTranslation("index_titre", $lang) ?></title>
+    <title><?php echo getTranslation("index_titre", 'fr') ?></title>
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
     <meta name="author" content="Sakina DOUIOU & Xuan-Minh TRAN">
     <meta name="keywords" content="documentary, South Korea, poesia, historical, social issues, Sakina DOUIOU, Xuan-Minh TRAN, Les glaneurs de carton">
