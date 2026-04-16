@@ -171,13 +171,47 @@ function renderPortraitContent(int $portraitId, string $lang): void
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo getTranslation("portraits_titre", $lang) ?> - Les glaneurs de carton<</title>
+    <title><?php echo getTranslation("portraits_titre", $lang) ?> - Les glaneurs de carton</title>
     <meta name="description" content="<?php echo getTranslation('meta_description_portraits', $lang); ?>">
+    <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=<?php echo $lang; ?>" />
+    <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=fr" />
+    <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=en" />
+    <link rel="alternate" hreflang="ko" href="https://glaneursdecarton.mastercmw.com/portraits.php?lang=ko" />
     <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
-    <title><?php echo getTranslation('portraits_titre', $lang) ?></title>
     <script src="js/features/portraits-map.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "<?php echo addslashes(getTranslation('portraits_titre', $lang)); ?> - Les glaneurs de carton",
+      "url": "https://glaneursdecarton.mastercmw.com/portraits.php?lang=<?php echo $lang; ?>",
+      "description": "<?php echo addslashes(getTranslation('meta_description_portraits', $lang)); ?>",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Les glaneurs de carton",
+        "url": "https://glaneursdecarton.mastercmw.com/"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Les glaneurs de carton",
+            "item": "https://glaneursdecarton.mastercmw.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "<?php echo addslashes(getTranslation('portraits_titre', $lang)); ?>",
+            "item": "https://glaneursdecarton.mastercmw.com/portraits.php?lang=<?php echo $lang; ?>"
+          }
+        ]
+      }
+    }
+    </script>
 </head>
 
 <body>

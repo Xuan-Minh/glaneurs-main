@@ -6,8 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo getTranslation("equipe_titre", $lang) ?> - Les glaneurs de carton</title>
+    <title><?php echo getTranslation("derriereledocumentaire_titre", $lang) ?> - Les glaneurs de carton</title>
     <meta name="description" content="<?php echo getTranslation('meta_description_equipe', $lang); ?>">
+    <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=<?php echo $lang; ?>" />
+    <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=fr" />
+    <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=en" />
+    <link rel="alternate" hreflang="ko" href="https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=ko" />
     <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/derriereledocumentaire.css">
    <?php $pdo = getPDO();
@@ -39,8 +43,37 @@
     }
     unset($member);
     ?>
-
-    <title><?php echo getTranslation('derriereledocumentaire_titre', $lang); ?></title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "<?php echo addslashes(getTranslation('derriereledocumentaire_titre', $lang)); ?> - Les glaneurs de carton",
+      "url": "https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=<?php echo $lang; ?>",
+      "description": "<?php echo addslashes(getTranslation('meta_description_equipe', $lang)); ?>",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Les glaneurs de carton",
+        "url": "https://glaneursdecarton.mastercmw.com/"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Les glaneurs de carton",
+            "item": "https://glaneursdecarton.mastercmw.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "<?php echo addslashes(getTranslation('derriereledocumentaire_titre', $lang)); ?>",
+            "item": "https://glaneursdecarton.mastercmw.com/derriere-le-documentaire.php?lang=<?php echo $lang; ?>"
+          }
+        ]
+      }
+    }
+    </script>
 </head>
 
 <body>
