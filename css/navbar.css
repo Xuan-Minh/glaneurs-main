@@ -319,7 +319,7 @@ li.mentionslegales-right a {
 }
 .menu-homeBouton-subtitle {
   font-size: var(--text-menu-subtitle);
-  font-family: var(--font-kr);
+  font-family: var(--font-ko);
   color: rgba(255, 255, 255, 0.8);
   margin-top: 0.2em;
   font-weight: 100;

@@ -80,7 +80,7 @@ body {
 }
 
 .mobile-slide h3.index-soustitre {
-  font-family: var(--font-kr);
+  font-family: var(--font-ko);
   font-weight: 300;
   font-size: clamp(1.2rem, 3vw, 1.8rem); /* Plus petit que desktop */
   margin-top: 0;
