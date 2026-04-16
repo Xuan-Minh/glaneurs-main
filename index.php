@@ -81,6 +81,13 @@ if (!$isMobile) {
     <title><?php echo getTranslation("index_titre", 'fr') ?></title>
     <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
     <meta name="author" content="Sakina DOUIOU & Xuan-Minh TRAN">
+    <meta name="keywords" content="documentary, South Korea, poesia, historical, social issues">
+
+    <meta property="og:title" content="Les glaneurs de carton" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://glaneursdecarton.mastercmw.com/" />
+    <meta property="og:image" content="https://glaneursdecarton.mastercmw.com/img/posters/chariot_poster.png" />
+    <meta property="og:description" content="<?php echo getTranslation('meta_description', $lang); ?>" />
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/index.php?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/font.css" />
