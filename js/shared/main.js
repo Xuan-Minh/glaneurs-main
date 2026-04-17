@@ -165,7 +165,9 @@ function playBgmAudio() {
               // L'utilisateur a interagi : réactiver le son et tenter la lecture.
               isGloballyMuted = false;
               if (typeof window.updateUI === "function") {
-                try { window.updateUI(); } catch (e) {}
+                try {
+                  window.updateUI();
+                } catch (e) {}
               }
               playBgmAudio();
             });
@@ -193,7 +195,9 @@ function playBgmAudio() {
                   // L'utilisateur a interagi : réactiver le son et tenter la lecture.
                   isGloballyMuted = false;
                   if (typeof window.updateUI === "function") {
-                    try { window.updateUI(); } catch (e) {}
+                    try {
+                      window.updateUI();
+                    } catch (e) {}
                   }
                   playBgmAudio();
                 });
