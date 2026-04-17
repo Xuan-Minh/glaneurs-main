@@ -94,13 +94,20 @@ function playBgmAudio() {
   } catch (e) {}
 
   // Synchronise l'état global et l'UI quand l'autoplay est bloqué par le navigateur.
+  // On met à jour le visuel uniquement, sans persister dans localStorage : c'est une
+  // restriction du navigateur, pas un choix explicite de l'utilisateur.
   function handleAutoplayBlocked() {
     isGloballyMuted = true;
-    localStorage.setItem("isSiteMuted", "true");
     try {
-      if (typeof window.updateUI === "function") window.updateUI();
+      const iconOn = document.getElementById("icon-sound-on");
+      const iconOff = document.getElementById("icon-sound-off");
+      if (iconOn) iconOn.classList.add("icon-hidden");
+      if (iconOff) iconOff.classList.remove("icon-hidden");
+      if (typeof window.animateWaveAmplitude === "function") {
+        window.animateWaveAmplitude(0, 600).catch(() => {});
+      }
     } catch (e) {
-      console.error("updateUI() failed after autoplay block:", e);
+      console.error("handleAutoplayBlocked() visual update failed:", e);
     }
   }
 
@@ -155,7 +162,12 @@ function playBgmAudio() {
             // Remplacer tout listener .autoplay existant pour éviter l'accumulation
             $(document).off("click.autoplay keydown.autoplay");
             $(document).one("click.autoplay keydown.autoplay", function () {
-              if (!isGloballyMuted) playBgmAudio();
+              // L'utilisateur a interagi : réactiver le son et tenter la lecture.
+              isGloballyMuted = false;
+              if (typeof window.updateUI === "function") {
+                try { window.updateUI(); } catch (e) {}
+              }
+              playBgmAudio();
             });
           });
         // Vérifier après délai si autoplay bloqué (annulé par .then() si play() a réussi)
@@ -178,7 +190,12 @@ function playBgmAudio() {
                 // Remplacer tout listener .autoplay existant pour éviter l'accumulation
                 $(document).off("click.autoplay keydown.autoplay");
                 $(document).one("click.autoplay keydown.autoplay", function () {
-                  if (!isGloballyMuted) playBgmAudio();
+                  // L'utilisateur a interagi : réactiver le son et tenter la lecture.
+                  isGloballyMuted = false;
+                  if (typeof window.updateUI === "function") {
+                    try { window.updateUI(); } catch (e) {}
+                  }
+                  playBgmAudio();
                 });
               }
             }
