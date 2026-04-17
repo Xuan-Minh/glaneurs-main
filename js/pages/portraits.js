@@ -68,7 +68,7 @@ window.startPortraitsAudio = function () {
   }
   if (typeof window.setPortraitsMuteState === "function") {
     window.setPortraitsMuteState(
-      typeof isGloballyMuted !== "undefined" ? isGloballyMuted : true
+      window.isGloballyMuted !== undefined ? window.isGloballyMuted : true
     );
   }
   if (gains.length && audioCtx.state !== "running") {
