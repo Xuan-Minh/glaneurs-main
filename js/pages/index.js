@@ -34,8 +34,7 @@ $(document).ready(function () {
         try {
           if (
             typeof window.initSiteAudio === "function" &&
-            (typeof audioContextStarted === "undefined" ||
-              audioContextStarted === false)
+            localStorage.getItem("audioHasBeenInitialized") !== "true"
           ) {
             window.initSiteAudio();
             return;

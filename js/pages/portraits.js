@@ -49,7 +49,7 @@ function fadeTo(gainNode, to, duration = 1.2) {
 }
 
 window.startPortraitsAudio = function () {
-  if (typeof isGloballyMuted !== "undefined" && isGloballyMuted) return;
+  if (window.isGloballyMuted) return;
   if (!window.portraitsAudioStarted && sources.length) {
     const now = audioCtx.currentTime + 0.1;
     sources.forEach((src) => {
@@ -68,7 +68,7 @@ window.startPortraitsAudio = function () {
   }
   if (typeof window.setPortraitsMuteState === "function") {
     window.setPortraitsMuteState(
-      typeof isGloballyMuted !== "undefined" ? isGloballyMuted : true
+      window.isGloballyMuted !== undefined ? window.isGloballyMuted : true
     );
   }
   if (gains.length && audioCtx.state !== "running") {
@@ -204,13 +204,15 @@ window.addEventListener("visibilitychange", function () {
     if (gains && gains.length) gains.forEach((g) => fadeTo(g, 0, 2));
   }
   if (document.visibilityState === "visible") {
-    if (gains && gains.length && !keepFocus) {
+    // Ne reprend l'audio que si le son n'est pas globalement coupé
+    const muted = window.isGloballyMuted !== undefined ? window.isGloballyMuted : false;
+    if (gains && gains.length && !keepFocus && !muted) {
       fadeTo(gains[0], 1, 1.2);
       gains.forEach((g, i) => {
         if (i > 0) fadeTo(g, 0, 0.6);
       });
     }
-    if (gains && gains.length && keepFocus && currentIndex !== null) {
+    if (gains && gains.length && keepFocus && currentIndex !== null && !muted) {
       fadeTo(gains[0], 0, 1.2);
       gains.forEach((g, i) => fadeTo(g, i === currentIndex ? 1 : 0, 0.4));
     }

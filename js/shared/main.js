@@ -1,7 +1,13 @@
 // Map pour stocker les intervals de fade par élément audio (évite la concurrence)
 const fadeIntervals = new WeakMap();
-let isGloballyMuted = true;
-let audioContextStarted = false;
+let isGloballyMuted =
+  localStorage.getItem("audioHasBeenInitialized") === "true"
+    ? localStorage.getItem("isSiteMuted") === "true"
+    : true;
+let audioContextStarted =
+  localStorage.getItem("audioHasBeenInitialized") === "true";
+// Expose pour que les modules tiers (ex: portraits.js) puissent lire l'état courant
+window.isGloballyMuted = isGloballyMuted;
 window.shouldPlayPortraitsAudio = false;
 window.isLangSwitching = false;
 
@@ -568,27 +574,21 @@ function initGlobalAudioControls() {
   window.waveAmplitude = waveAmplitude;
   let _amplitudeAnim = null; // RAF id for amplitude animation
 
-  // --- NOUVELLE LOGIQUE DE PERSISTANCE ---
-  // Au chargement de la page, on vérifie si l'utilisateur a déjà activé le son par le passé.
-  if (localStorage.getItem("audioHasBeenInitialized") === "true") {
-    audioContextStarted = true;
-    // On récupère son dernier choix (activé ou coupé)
-    isGloballyMuted = localStorage.getItem("isSiteMuted") === "true";
-
-    // Si le son doit être activé, on tente de le lancer
-    if (!isGloballyMuted) {
-      setTimeout(() => {
-        if (typeof playArirangAudio === "function") {
-          playArirangAudio();
-        }
-        if (typeof window.startPortraitsAudio === "function") {
-          window.shouldPlayPortraitsAudio = true;
-          window.startPortraitsAudio();
-        }
-      }, 100);
-    }
+  // --- LOGIQUE DE PERSISTANCE ---
+  // isGloballyMuted et audioContextStarted sont déjà initialisés depuis localStorage
+  // au niveau module ; on se contente ici de lancer l'audio si nécessaire.
+  if (audioContextStarted && !isGloballyMuted) {
+    setTimeout(() => {
+      if (typeof playArirangAudio === "function") {
+        playArirangAudio();
+      }
+      if (typeof window.startPortraitsAudio === "function") {
+        window.shouldPlayPortraitsAudio = true;
+        window.startPortraitsAudio();
+      }
+    }, 100);
   }
-  // --- FIN DE LA NOUVELLE LOGIQUE ---
+  // --- FIN DE LA LOGIQUE DE PERSISTANCE ---
 
   function drawFlatLine() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -764,6 +764,8 @@ function initGlobalAudioControls() {
       localStorage.setItem("isSiteMuted", isGloballyMuted);
     }
   }
+  // Expose updateUI globalement pour que visibilitychange / pageshow puissent la rappeler
+  window.updateUI = updateUI;
 
   function hintWave(duration = 600) {
     // Si la waveform n'existe pas, rien
@@ -787,6 +789,7 @@ function initGlobalAudioControls() {
     if (audioContextStarted) return;
 
     isGloballyMuted = false;
+    window.isGloballyMuted = false;
     audioContextStarted = true;
 
     localStorage.setItem("audioHasBeenInitialized", "true");
@@ -822,6 +825,7 @@ function initGlobalAudioControls() {
     }
 
     isGloballyMuted = !isGloballyMuted; // On inverse l'état
+    window.isGloballyMuted = isGloballyMuted; // Synchronise l'état global
 
     // Utiliser le fade plutôt que le mute instantané pour audio-bgm
     if (isGloballyMuted) {
