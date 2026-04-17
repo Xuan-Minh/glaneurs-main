@@ -22,7 +22,7 @@ $(document).ready(function () {
   if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);
-    // Ne pas appeler playArirangAudio() directement.
+    // Ne pas appeler playBgmAudio() directement.
     // Attendre la première interaction de l'utilisateur.
     $(document).one("click.startAudio keydown.startAudio", function () {
       const audio = document.getElementById("audio-bgm");
@@ -41,7 +41,7 @@ $(document).ready(function () {
           }
         } catch (e) {}
 
-        playArirangAudio();
+        playBgmAudio();
       }
     });
   }
@@ -136,7 +136,7 @@ $("#enter-button").click(function (e) {
     // Empêcher toute relance de l'audio d'ambiance si un visionneur est affiché
     try {
       if ($ && $(".visionner:visible").length > 0) {
-        if (typeof stopArirangAudio === "function") stopArirangAudio();
+        if (typeof stopBgmAudio === "function") stopBgmAudio();
       }
     } catch (e) {}
   });
@@ -361,10 +361,10 @@ $(".close-visionner").click(function (event) {
     // Relancer l'ambiance uniquement après fermeture effective de la modale
     try {
       if (!($ && $(".visionner:visible").length > 0)) {
-        if (typeof window.resumeArirangAudio === "function") {
-          window.resumeArirangAudio(0.3, 600);
+        if (typeof window.resumeBgmAudio === "function") {
+          window.resumeBgmAudio(0.3, 600);
         } else {
-          playArirangAudio();
+          playBgmAudio();
         }
       }
     } catch (e) {}
@@ -402,7 +402,7 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
   event.stopPropagation();
 
   lastFocusedElement = $(this);
-  stopArirangAudio();
+  stopBgmAudio();
   try {
     // Flag interne si nécessaire plus tard
     window.__visionnerOpen = true;
@@ -484,10 +484,10 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
       // Redémarrer l'ambiance après disparition effective
       try {
         if (!($ && $(".visionner:visible").length > 0)) {
-          if (typeof window.resumeArirangAudio === "function") {
-            window.resumeArirangAudio(0.3, 600);
+          if (typeof window.resumeBgmAudio === "function") {
+            window.resumeBgmAudio(0.3, 600);
           } else {
-            playArirangAudio();
+            playBgmAudio();
           }
         }
       } catch (e) {}

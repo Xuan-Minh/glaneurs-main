@@ -9,8 +9,12 @@ let audioContextStarted =
 // Expose via getter/setter pour garantir la cohérence entre la variable locale et window,
 // même si un script tiers écrit directement sur window.isGloballyMuted.
 Object.defineProperty(window, "isGloballyMuted", {
-  get() { return isGloballyMuted; },
-  set(v) { isGloballyMuted = v; },
+  get() {
+    return isGloballyMuted;
+  },
+  set(v) {
+    isGloballyMuted = v;
+  },
   configurable: true,
   enumerable: false,
 });
@@ -83,7 +87,7 @@ function fadeAudio(audio, to, duration = 1000) {
   fadeIntervals.set(audio, id);
 }
 
-function playArirangAudio() {
+function playBgmAudio() {
   if (isGloballyMuted) return;
   try {
     if ($ && $(".visionner:visible").length > 0) return; // Ne jamais lancer si un visionneur est ouvert
@@ -104,10 +108,7 @@ function playArirangAudio() {
             $(document).off("click.autoplay keydown.autoplay");
           })
           .catch((error) => {
-            console.error(
-              "Arirang audio autoplay was prevented or failed:",
-              error,
-            );
+            console.error("BGM audio autoplay was prevented or failed:", error);
             if (audio && audio.error) {
               console.error("Audio error code:", audio.error.code);
             }
@@ -135,7 +136,7 @@ function playArirangAudio() {
             }
 
             $(document).one("click.autoplay keydown.autoplay", function () {
-              if (!isGloballyMuted) playArirangAudio();
+              if (!isGloballyMuted) playBgmAudio();
             });
           });
         // Vérifier après délai si autoplay bloqué (annulé par .then() si play() a réussi)
@@ -155,7 +156,7 @@ function playArirangAudio() {
                 } catch (e) {}
                 // Installer un handler one-shot pour relancer au prochain événement utilisateur
                 $(document).one("click.autoplay keydown.autoplay", function () {
-                  if (!isGloballyMuted) playArirangAudio();
+                  if (!isGloballyMuted) playBgmAudio();
                 });
               }
             }
@@ -170,7 +171,7 @@ function playArirangAudio() {
   }
 }
 
-function stopArirangAudio() {
+function stopBgmAudio() {
   const audio = document.getElementById("audio-bgm");
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
@@ -183,7 +184,7 @@ function stopArirangAudio() {
   }
 }
 
-window.resumeArirangAudio = function (targetVol = 0.3, duration = 600) {
+window.resumeBgmAudio = function (targetVol = 0.3, duration = 600) {
   try {
     if (isGloballyMuted) return;
     if ($ && $(".visionner:visible").length > 0) return; // Ne rien faire si une modale est visible
@@ -204,9 +205,9 @@ window.resumeArirangAudio = function (targetVol = 0.3, duration = 600) {
       } catch (e) {}
     })
     .catch(() => {
-      // Si la reprise directe échoue (autoplay), laisser playArirangAudio gérer le fallback
+      // Si la reprise directe échoue (autoplay), laisser playBgmAudio gérer le fallback
       try {
-        if (typeof playArirangAudio === "function") playArirangAudio();
+        if (typeof playBgmAudio === "function") playBgmAudio();
       } catch (e) {}
     });
 };
@@ -225,15 +226,15 @@ $(document).on("keydown", function (e) {
 $(document).ready(function () {
   // ----------------------------------------------- LOADING ---------------------------------- //
 
-  window.addEventListener("beforeunload", stopArirangAudio);
+  window.addEventListener("beforeunload", stopBgmAudio);
   // Symétrie : arrêter l'audio quand la page est cachée/chargée via bfcache
-  window.addEventListener("pagehide", stopArirangAudio);
+  window.addEventListener("pagehide", stopBgmAudio);
   window.addEventListener("visibilitychange", function () {
     // Ne fait rien si l'utilisateur n'a jamais activé le son
     if (!audioContextStarted) return;
 
     if (document.visibilityState === "hidden") {
-      stopArirangAudio();
+      stopBgmAudio();
     }
     // Quand la page redevient visible, relancer l'audio et l'animation de la wave
     if (document.visibilityState === "visible") {
@@ -241,7 +242,7 @@ $(document).ready(function () {
         // Ne relance pas l'audio d'ambiance si un visionneur est ouvert
         try {
           if (!($ && $(".visionner:visible").length > 0)) {
-            if (typeof playArirangAudio === "function") playArirangAudio();
+            if (typeof playBgmAudio === "function") playBgmAudio();
           }
         } catch (e) {}
       }
@@ -282,7 +283,7 @@ $(document).ready(function () {
 
     // Si on doit changer de page :
     // 1. Gérer l'audio (fade global + portraits)
-    if (typeof stopArirangAudio === "function") stopArirangAudio();
+    if (typeof stopBgmAudio === "function") stopBgmAudio();
 
     const portraitsFadePromise =
       typeof window.requestPortraitsFadeOut === "function"
@@ -334,8 +335,8 @@ $(document).ready(function () {
           await window.requestPortraitsFadeOut(500);
         } catch (e) {}
       }
-      if (typeof stopArirangAudio === "function") {
-        stopArirangAudio();
+      if (typeof stopBgmAudio === "function") {
+        stopBgmAudio();
       }
     })();
 
@@ -473,7 +474,7 @@ $(document).on("click", ".lang-option", function (e) {
   $("#menuVolet").removeClass("open");
 
   // Transition sonore : fade out audio et wave
-  if (typeof stopArirangAudio === "function") stopArirangAudio();
+  if (typeof stopBgmAudio === "function") stopBgmAudio();
   if (typeof window.animateWaveAmplitude === "function")
     window.animateWaveAmplitude(0, 600);
 
@@ -585,8 +586,8 @@ function initGlobalAudioControls() {
   // au niveau module ; on se contente ici de lancer l'audio si nécessaire.
   if (audioContextStarted && !isGloballyMuted) {
     setTimeout(() => {
-      if (typeof playArirangAudio === "function") {
-        playArirangAudio();
+      if (typeof playBgmAudio === "function") {
+        playBgmAudio();
       }
       if (typeof window.startPortraitsAudio === "function") {
         window.shouldPlayPortraitsAudio = true;
@@ -720,7 +721,7 @@ function initGlobalAudioControls() {
       if (media.tagName === "AUDIO") {
         // Ne pas forcer le muted immédiatement pour le player principal
         if (media.id === "audio-bgm") {
-          // Laisser le contrôle de ce player à playArirangAudio/stopArirangAudio (fade)
+          // Laisser le contrôle de ce player à playBgmAudio/stopBgmAudio (fade)
         } else if (media.closest(".loading-screen")) {
           media.muted = true;
         } else {
@@ -800,8 +801,8 @@ function initGlobalAudioControls() {
     localStorage.setItem("audioHasBeenInitialized", "true");
     localStorage.setItem("isSiteMuted", "false");
 
-    if (typeof playArirangAudio === "function") {
-      playArirangAudio();
+    if (typeof playBgmAudio === "function") {
+      playBgmAudio();
     }
     if (typeof window.startPortraitsAudio === "function") {
       window.startPortraitsAudio();
@@ -830,9 +831,9 @@ function initGlobalAudioControls() {
 
     // Utiliser le fade plutôt que le mute instantané pour audio-bgm
     if (isGloballyMuted) {
-      if (typeof stopArirangAudio === "function") stopArirangAudio();
+      if (typeof stopBgmAudio === "function") stopBgmAudio();
     } else {
-      if (typeof playArirangAudio === "function") playArirangAudio();
+      if (typeof playBgmAudio === "function") playBgmAudio();
       if (typeof window.startPortraitsAudio === "function")
         window.startPortraitsAudio();
     }
@@ -875,8 +876,8 @@ function showNotification(message, duration = 3000) {
   // Si l'audio principal est déjà en train de jouer, on évite d'afficher
   // une notification (empêche les faux-positifs d'autoplay).
   try {
-    const arirang = document.getElementById("audio-bgm");
-    if (arirang && !arirang.paused) {
+    const bgm = document.getElementById("audio-bgm");
+    if (bgm && !bgm.paused) {
       return; // audio déjà en cours => ne pas afficher la popup
     }
   } catch (e) {
