@@ -92,6 +92,18 @@ function playBgmAudio() {
   try {
     if ($ && $(".visionner:visible").length > 0) return; // Ne jamais lancer si un visionneur est ouvert
   } catch (e) {}
+
+  // Synchronise l'état global et l'UI quand l'autoplay est bloqué par le navigateur.
+  function handleAutoplayBlocked() {
+    isGloballyMuted = true;
+    localStorage.setItem("isSiteMuted", "true");
+    try {
+      if (typeof window.updateUI === "function") window.updateUI();
+    } catch (e) {
+      console.error("updateUI() failed after autoplay block:", e);
+    }
+  }
+
   const audio = document.getElementById("audio-bgm");
   if (audio) {
     if (audio.paused) {
@@ -124,6 +136,9 @@ function playBgmAudio() {
               // noop
             }
 
+            // Autoplay bloqué : synchroniser l'état et l'UI avec la réalité
+            handleAutoplayBlocked();
+
             // Indiquer à l'utilisateur qu'il doit interagir pour autoriser le son
             try {
               if (typeof showNotification === "function") {
@@ -151,6 +166,8 @@ function playBgmAudio() {
               // Seul a.paused est fiable : currentTime peut rester à 0 pendant le buffering
               const consideredBlocked = a.paused;
               if (consideredBlocked) {
+                // Autoplay bloqué : synchroniser l'état et l'UI avec la réalité
+                handleAutoplayBlocked();
                 try {
                   if (typeof showNotification === "function") {
                     if (a.paused) {
