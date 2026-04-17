@@ -25,7 +25,7 @@ $(document).ready(function () {
     // Ne pas appeler playArirangAudio() directement.
     // Attendre la première interaction de l'utilisateur.
     $(document).one("click.startAudio keydown.startAudio", function () {
-      const audio = document.getElementById("audio-arirang");
+      const audio = document.getElementById("audio-bgm");
       // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
       // et qu'il n'y a pas de modale vidéo active
       if (audio && audio.paused && $(".visionner:visible").length === 0) {

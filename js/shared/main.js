@@ -76,7 +76,7 @@ function playArirangAudio() {
   try {
     if ($ && $(".visionner:visible").length > 0) return; // Ne jamais lancer si un visionneur est ouvert
   } catch (e) {}
-  const audio = document.getElementById("audio-arirang");
+  const audio = document.getElementById("audio-bgm");
   if (audio) {
     if (audio.paused) {
       const playPromise = audio.play();
@@ -113,7 +113,7 @@ function playArirangAudio() {
             try {
               if (typeof showNotification === "function") {
                 // double-check: ne pas montrer si audio s'est mis à jouer
-                const mainAudio = document.getElementById("audio-arirang");
+                const mainAudio = document.getElementById("audio-bgm");
                 if (!(mainAudio && !mainAudio.paused)) {
                   showNotification(getI18nMessage("autoplayBlocked"));
                 }
@@ -129,7 +129,7 @@ function playArirangAudio() {
         // Vérifier après délai si autoplay bloqué (annulé par .then() si play() a réussi)
         fallbackTimeoutId = setTimeout(() => {
           try {
-            const a = document.getElementById("audio-arirang");
+            const a = document.getElementById("audio-bgm");
             if (a) {
               // Seul a.paused est fiable : currentTime peut rester à 0 pendant le buffering
               const consideredBlocked = a.paused;
@@ -159,7 +159,7 @@ function playArirangAudio() {
 }
 
 function stopArirangAudio() {
-  const audio = document.getElementById("audio-arirang");
+  const audio = document.getElementById("audio-bgm");
   if (!audio) return;
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
   try {
@@ -177,7 +177,7 @@ window.resumeArirangAudio = function (targetVol = 0.3, duration = 600) {
     if ($ && $(".visionner:visible").length > 0) return; // Ne rien faire si une modale est visible
   } catch (e) {}
 
-  const audio = document.getElementById("audio-arirang");
+  const audio = document.getElementById("audio-bgm");
   if (!audio) return;
 
   const safeVol = Math.max(0, Math.min(1, Number(targetVol) || 0.3));
@@ -713,7 +713,7 @@ function initGlobalAudioControls() {
     mediaElements.forEach((media) => {
       if (media.tagName === "AUDIO") {
         // Ne pas forcer le muted immédiatement pour le player principal
-        if (media.id === "audio-arirang") {
+        if (media.id === "audio-bgm") {
           // Laisser le contrôle de ce player à playArirangAudio/stopArirangAudio (fade)
         } else if (media.closest(".loading-screen")) {
           media.muted = true;
@@ -823,7 +823,7 @@ function initGlobalAudioControls() {
 
     isGloballyMuted = !isGloballyMuted; // On inverse l'état
 
-    // Utiliser le fade plutôt que le mute instantané pour audio-arirang
+    // Utiliser le fade plutôt que le mute instantané pour audio-bgm
     if (isGloballyMuted) {
       if (typeof stopArirangAudio === "function") stopArirangAudio();
     } else {
@@ -870,7 +870,7 @@ function showNotification(message, duration = 3000) {
   // Si l'audio principal est déjà en train de jouer, on évite d'afficher
   // une notification (empêche les faux-positifs d'autoplay).
   try {
-    const arirang = document.getElementById("audio-arirang");
+    const arirang = document.getElementById("audio-bgm");
     if (arirang && !arirang.paused) {
       return; // audio déjà en cours => ne pas afficher la popup
     }

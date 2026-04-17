@@ -77,7 +77,7 @@
 </head>
 
 <body>
-    <audio id="audio-arirang" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
+    <audio id="audio-bgm" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
     <?php include "includes/layout/header.php"; ?>
 
     <?php include 'includes/components/hero.php'; renderHero('video/web/ville.mp4', 'img/posters/ville_poster.png', getTranslation('derriereledocumentaire_titre', $lang), 'dld-hero', $lang); ?>
