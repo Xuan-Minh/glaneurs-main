@@ -6,8 +6,14 @@ let isGloballyMuted =
     : true;
 let audioContextStarted =
   localStorage.getItem("audioHasBeenInitialized") === "true";
-// Expose pour que les modules tiers (ex: portraits.js) puissent lire l'état courant
-window.isGloballyMuted = isGloballyMuted;
+// Expose via getter/setter pour garantir la cohérence entre la variable locale et window,
+// même si un script tiers écrit directement sur window.isGloballyMuted.
+Object.defineProperty(window, "isGloballyMuted", {
+  get() { return isGloballyMuted; },
+  set(v) { isGloballyMuted = v; },
+  configurable: true,
+  enumerable: false,
+});
 window.shouldPlayPortraitsAudio = false;
 window.isLangSwitching = false;
 
@@ -789,20 +795,16 @@ function initGlobalAudioControls() {
     if (audioContextStarted) return;
 
     isGloballyMuted = false;
-    window.isGloballyMuted = false;
     audioContextStarted = true;
 
     localStorage.setItem("audioHasBeenInitialized", "true");
     localStorage.setItem("isSiteMuted", "false");
 
-    // On ne lance le son que si isGloballyMuted est faux
-    if (!isGloballyMuted) {
-      if (typeof playArirangAudio === "function") {
-        playArirangAudio();
-      }
-      if (typeof window.startPortraitsAudio === "function") {
-        window.startPortraitsAudio();
-      }
+    if (typeof playArirangAudio === "function") {
+      playArirangAudio();
+    }
+    if (typeof window.startPortraitsAudio === "function") {
+      window.startPortraitsAudio();
     }
 
     updateAudioElements();
@@ -825,7 +827,6 @@ function initGlobalAudioControls() {
     }
 
     isGloballyMuted = !isGloballyMuted; // On inverse l'état
-    window.isGloballyMuted = isGloballyMuted; // Synchronise l'état global
 
     // Utiliser le fade plutôt que le mute instantané pour audio-bgm
     if (isGloballyMuted) {

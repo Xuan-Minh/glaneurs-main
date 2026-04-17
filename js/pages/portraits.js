@@ -1,5 +1,4 @@
 // --- GESTION DE L'AUDIO (Web Audio API) ---
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const files = [
   "audio/arirang_full.mp3", // Ambiance globale
   "audio/arirang_bass.mp3", // Portrait 1
@@ -8,40 +7,32 @@ const files = [
   "audio/arirang_oboe.mp3", // Portrait 4
 ];
 
+// AudioContext créé uniquement lors de la première interaction utilisateur
+// pour respecter la politique d'autoplay des navigateurs.
+let audioCtx = null;
 let buffers = [],
   sources = [],
   gains = [];
 let keepFocus = false;
 let currentIndex = null;
 let masterVolume = 0.6;
+let _rawBuffers = null;
+let _audioSetupDone = false;
 
-// Chargement de tous les fichiers audio
+window.portraitsAudioStarted = false;
+
+// Préchargement des fichiers audio en ArrayBuffer (sans AudioContext)
 Promise.all(
-  files.map((url) =>
-    fetch(url)
-      .then((r) => r.arrayBuffer())
-      .then((data) => audioCtx.decodeAudioData(data))
-  )
-).then((loadedBuffers) => {
-  buffers = loadedBuffers;
-  for (let i = 0; i < buffers.length; i++) {
-    const gain = audioCtx.createGain();
-    gain.gain.value = i === 0 ? 0.6 : 0;
-    const src = audioCtx.createBufferSource();
-    src.buffer = buffers[i];
-    src.loop = true;
-    src.connect(gain).connect(audioCtx.destination);
-    sources.push(src);
-    gains.push(gain);
-  }
-  window.portraitsAudioStarted = false;
+  files.map((url) => fetch(url).then((r) => r.arrayBuffer()))
+).then((data) => {
+  _rawBuffers = data;
   if (window.shouldPlayPortraitsAudio) {
     window.startPortraitsAudio();
   }
 });
 
 function fadeTo(gainNode, to, duration = 1.2) {
-  if (!gainNode) return;
+  if (!gainNode || !audioCtx) return;
   const now = audioCtx.currentTime;
   gainNode.gain.cancelScheduledValues(now);
   gainNode.gain.setValueAtTime(gainNode.gain.value, now);
@@ -50,21 +41,53 @@ function fadeTo(gainNode, to, duration = 1.2) {
 
 window.startPortraitsAudio = function () {
   if (window.isGloballyMuted) return;
-  if (!window.portraitsAudioStarted && sources.length) {
-    const now = audioCtx.currentTime + 0.1;
-    sources.forEach((src) => {
-      try {
-        src.start(now);
-      } catch (e) {}
-    });
-    if (gains.length) {
-      gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
-      gains[0].gain.linearRampToValueAtTime(
-        masterVolume,
-        audioCtx.currentTime + 1.2
-      );
+  // Crée l'AudioContext lors de la première interaction utilisateur
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (!_audioSetupDone) {
+    if (!_rawBuffers) {
+      // Préchargement pas encore terminé ; on démarre dès qu'il sera prêt
+      window.shouldPlayPortraitsAudio = true;
+      return;
     }
-    window.portraitsAudioStarted = true;
+    _audioSetupDone = true;
+    // Décodage des ArrayBuffers avec le nouvel AudioContext
+    Promise.all(
+      _rawBuffers.map((data) => audioCtx.decodeAudioData(data))
+    ).then((loadedBuffers) => {
+      buffers = loadedBuffers;
+      for (let i = 0; i < buffers.length; i++) {
+        const gain = audioCtx.createGain();
+        gain.gain.value = i === 0 ? 0.6 : 0;
+        const src = audioCtx.createBufferSource();
+        src.buffer = buffers[i];
+        src.loop = true;
+        src.connect(gain).connect(audioCtx.destination);
+        sources.push(src);
+        gains.push(gain);
+      }
+      const now = audioCtx.currentTime + 0.1;
+      sources.forEach((src) => {
+        try {
+          src.start(now);
+        } catch (e) {}
+      });
+      if (gains.length) {
+        gains[0].gain.setValueAtTime(0, audioCtx.currentTime);
+        gains[0].gain.linearRampToValueAtTime(
+          masterVolume,
+          audioCtx.currentTime + 1.2
+        );
+      }
+      window.portraitsAudioStarted = true;
+      if (typeof window.setPortraitsMuteState === "function") {
+        window.setPortraitsMuteState(
+          window.isGloballyMuted !== undefined ? window.isGloballyMuted : true
+        );
+      }
+    });
+    return;
   }
   if (typeof window.setPortraitsMuteState === "function") {
     window.setPortraitsMuteState(
