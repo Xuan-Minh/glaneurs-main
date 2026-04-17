@@ -108,6 +108,8 @@ function playBgmAudio() {
             $(document).off("click.autoplay keydown.autoplay");
           })
           .catch((error) => {
+            // Annuler le timeout de secours pour éviter une double notification
+            clearTimeout(fallbackTimeoutId);
             console.error("BGM audio autoplay was prevented or failed:", error);
             if (audio && audio.error) {
               console.error("Audio error code:", audio.error.code);
@@ -135,6 +137,8 @@ function playBgmAudio() {
               // noop
             }
 
+            // Remplacer tout listener .autoplay existant pour éviter l'accumulation
+            $(document).off("click.autoplay keydown.autoplay");
             $(document).one("click.autoplay keydown.autoplay", function () {
               if (!isGloballyMuted) playBgmAudio();
             });
@@ -154,7 +158,8 @@ function playBgmAudio() {
                     }
                   }
                 } catch (e) {}
-                // Installer un handler one-shot pour relancer au prochain événement utilisateur
+                // Remplacer tout listener .autoplay existant pour éviter l'accumulation
+                $(document).off("click.autoplay keydown.autoplay");
                 $(document).one("click.autoplay keydown.autoplay", function () {
                   if (!isGloballyMuted) playBgmAudio();
                 });
@@ -258,6 +263,39 @@ $(document).ready(function () {
         });
       } catch (e) {}
     }
+  });
+
+  // Alt+tab : visibilitychange ne se déclenche pas quand l'utilisateur bascule vers
+  // une autre application (la page reste « visible » dans son onglet). On utilise
+  // blur/focus pour couper et reprendre le son dans ce cas.
+  window.addEventListener("blur", function () {
+    if (!audioContextStarted) return;
+    stopBgmAudio();
+  });
+
+  window.addEventListener("focus", function () {
+    if (!audioContextStarted) return;
+    if (!isGloballyMuted && document.visibilityState === "visible") {
+      try {
+        if (
+          !($ && $(".visionner:visible").length > 0) &&
+          !document.querySelector(".loading-screen")
+        ) {
+          if (typeof playBgmAudio === "function") playBgmAudio();
+        }
+      } catch (e) {}
+    }
+    try {
+      requestAnimationFrame(() => {
+        if (typeof updateUI === "function") {
+          updateUI();
+        } else if (typeof window.animateWaveAmplitude === "function") {
+          window
+            .animateWaveAmplitude(isGloballyMuted ? 0 : 1, 600)
+            .catch(() => {});
+        }
+      });
+    } catch (e) {}
   });
 
   $(document).on("click", ".transition-link", async function (e) {
@@ -586,6 +624,9 @@ function initGlobalAudioControls() {
   // au niveau module ; on se contente ici de lancer l'audio si nécessaire.
   if (audioContextStarted && !isGloballyMuted) {
     setTimeout(() => {
+      // Ne pas démarrer si l'écran de chargement est encore affiché : l'audio
+      // sera lancé par initAudio() quand l'utilisateur cliquera sur « Entrer ».
+      if (document.querySelector(".loading-screen")) return;
       if (typeof playBgmAudio === "function") {
         playBgmAudio();
       }
@@ -793,7 +834,17 @@ function initGlobalAudioControls() {
   } catch (e) {}
 
   function initAudio() {
-    if (audioContextStarted) return;
+    if (audioContextStarted) {
+      // Visiteur de retour : le contexte est déjà initialisé mais l'audio n'a pas été
+      // lancé pendant le loading screen. On le démarre ici si nécessaire.
+      if (!isGloballyMuted) {
+        if (typeof playBgmAudio === "function") playBgmAudio();
+        if (typeof window.startPortraitsAudio === "function")
+          window.startPortraitsAudio();
+      }
+      updateUI();
+      return;
+    }
 
     isGloballyMuted = false;
     audioContextStarted = true;
