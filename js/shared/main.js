@@ -81,8 +81,12 @@ function playArirangAudio() {
     if (audio.paused) {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
+        // Identifiant du timeout de vérification retardée, annulé si play() réussit
+        let fallbackTimeoutId;
         playPromise
           .then((_) => {
+            // La lecture a démarré : annuler la vérification retardée pour éviter les faux-positifs
+            clearTimeout(fallbackTimeoutId);
             if (audio.muted) audio.muted = false;
             fadeAudio(audio, 0.6, 500);
             $(document).off("click.autoplay keydown.autoplay");
@@ -96,7 +100,7 @@ function playArirangAudio() {
               console.error("Audio error code:", audio.error.code);
             }
             try {
-              if (audio && !audio.paused && audio.currentTime > 0) {
+              if (audio && !audio.paused) {
                 // La lecture a bien commencé malgré le rejet : on enlève les handlers
                 $(document).off("click.autoplay keydown.autoplay");
                 return;
@@ -122,17 +126,17 @@ function playArirangAudio() {
               if (!isGloballyMuted) playArirangAudio();
             });
           });
-        // Vérifier après délai si autoplay bloqué
-        setTimeout(() => {
+        // Vérifier après délai si autoplay bloqué (annulé par .then() si play() a réussi)
+        fallbackTimeoutId = setTimeout(() => {
           try {
             const a = document.getElementById("audio-arirang");
             if (a) {
-              const consideredBlocked = a.paused || a.currentTime === 0;
+              // Seul a.paused est fiable : currentTime peut rester à 0 pendant le buffering
+              const consideredBlocked = a.paused;
               if (consideredBlocked) {
                 try {
                   if (typeof showNotification === "function") {
-                    // double-check: ne pas montrer si audio s'est mis à jouer juste avant
-                    if (!(a && !a.paused && a.currentTime > 0)) {
+                    if (a.paused) {
                       showNotification(getI18nMessage("autoplayBlocked"));
                     }
                   }
@@ -867,7 +871,7 @@ function showNotification(message, duration = 3000) {
   // une notification (empêche les faux-positifs d'autoplay).
   try {
     const arirang = document.getElementById("audio-arirang");
-    if (arirang && !arirang.paused && arirang.currentTime > 0) {
+    if (arirang && !arirang.paused) {
       return; // audio déjà en cours => ne pas afficher la popup
     }
   } catch (e) {
