@@ -936,8 +936,6 @@ function initGlobalAudioControls() {
     enterButton.addEventListener("click", initAudio);
   }
   // État initial au chargement (prend en compte le localStorage)
-  // Le CTA flottant a été retiré car sa fonction est redondante avec la notification.
-
   // Initial UI sync
   updateUI();
   updateAudioElements();
