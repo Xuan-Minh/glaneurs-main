@@ -484,4 +484,5 @@ html.overlay-open body {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-bottom: 1em;
 }
