@@ -30,12 +30,8 @@
 }
 
 #last-paragraph {
+  font-size: var(--text-small);
   margin-bottom: 5vh;
-}
-
-/* Classe pour les paragraphes stylés - styles communs définis dans main.css */
-.styled-paragraph {
-  margin-bottom: 1.5em;
 }
 
 /* ==========================================================================
