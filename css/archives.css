@@ -14,8 +14,6 @@
   --archives-color-overlay: #e0e0e0;
   --archives-color-muted: rgba(255, 255, 255, 0.55);
   --archives-color-muted-strong: rgba(255, 255, 255, 0.72);
-
-  --archives-border-soft: rgba(255, 255, 255, 0.25);
   --archives-border-hover: rgba(255, 255, 255, 0.2);
 
   --archives-overlay-max-width: 1100px;
@@ -281,7 +279,6 @@ html.overlay-open body {
   max-width: 65ch;
   margin: 2.5rem auto;
   padding: 1.5rem 2rem 1.5rem 2.5rem;
-  border-left: 3px solid var(--archives-border-soft);
   font-style: italic;
 }
 
@@ -303,6 +300,7 @@ html.overlay-open body {
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
+  text-align: right;
 }
 
 /* Citation de transition entre deux parties */
@@ -316,7 +314,6 @@ html.overlay-open body {
 
 .archive-media-block {
   width: 100%;
-  margin: 2.5rem 0;
   box-sizing: border-box;
 }
 
@@ -391,7 +388,6 @@ html.overlay-open body {
 
 .amb-strip .amb-images figure img {
   width: 100%;
-  aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
 }
@@ -480,7 +476,6 @@ html.overlay-open body {
 
 /* Newspaper : image en aspect ratio 4/3 */
 .amb-newspaper-col figure img {
-  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
