@@ -58,6 +58,14 @@ $archives_structure = [
             ],
             'C' => [
                 'textes' => 5,
+                "image_blocks" => [
+                    [
+                        'layout' => 'side',
+                        'img_position' => 'left',
+                        'after' => 2,
+                        'images' => [20],
+                    ],
+                ],
                 'blockquote' => ['key' => 'p1_C_quote', 'source' => 'p1_C_quote_source'],
                 'extra_textes' => 1,
             ],
