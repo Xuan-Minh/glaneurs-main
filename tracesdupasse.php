@@ -120,7 +120,6 @@ function renderImageBlocks(array $blocks, int $afterIdx, string $lang, ?string $
                 $src    = htmlspecialchars($arch['archives_src'], ENT_QUOTES, 'UTF-8');
                 $titre  = htmlspecialchars($arch['archives_titre'], ENT_QUOTES, 'UTF-8');
                 $date   = htmlspecialchars($arch['archives_date'], ENT_QUOTES, 'UTF-8');
-                $auteur = htmlspecialchars($arch['archives_auteur'], ENT_QUOTES, 'UTF-8');
             ?>
             <div class="amb-newspaper-col">
                 <figure class="archive-gallery-item"
