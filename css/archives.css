@@ -37,14 +37,14 @@
   font-size: 1.2em;
   font-weight: 400;
   opacity: 1;
-  margin: 0;
   position: relative; /* nécessaire pour les images flottantes */
+  display: flex;
+  justify-content: center;
 }
 
 /* --- NARRATIVE & INTRO --- */
 .archives-narrative {
   max-width: var(--archives-content-max);
-  margin: 0 auto;
   padding: 2rem var(--archives-padding-inline);
   position: relative;
   z-index: 2;
