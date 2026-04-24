@@ -131,6 +131,9 @@ window.requestPortraitsFadeOut = function (duration = 500) {
 $(document).ready(function () {
   const container = $(".portraits-container");
 
+  // Etat initial: aucun portrait survole, donc pas de flou global.
+  container.addClass("no-hover");
+
   // 1. Fondu d'apparition synchronisé des vidéos
   if (container.length) {
     const videos = container.find(".portrait-video");
@@ -194,6 +197,7 @@ $(document).ready(function () {
   // 4. Clic sur le bouton "Retour"
   $(document).on("click", ".back-to-portraits", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    container.addClass("no-hover");
     // Audio
     if (!gains.length) return;
     keepFocus = false;
@@ -209,7 +213,7 @@ $(document).ready(function () {
 window.addEventListener("scroll", function () {
   if (window.scrollY === 0) {
     $(".portrait-section, .portrait-detail").removeClass("active");
-    $(".portraits-container").removeClass("has-active");
+    $(".portraits-container").removeClass("has-active").addClass("no-hover");
     // Si on est revenu en haut manuellement, on réinitialise le son
     if (keepFocus) {
       keepFocus = false;
