@@ -18,6 +18,9 @@ let currentIndex = null;
 let masterVolume = 0.6;
 let _rawBuffers = null;
 let _audioSetupDone = false;
+let idleTimeout = null;
+let suppressHoverUntilMove = false;
+let lastPointerPos = null;
 
 window.portraitsAudioStarted = false;
 
@@ -136,6 +139,33 @@ $(document).ready(function () {
   // Etat initial: aucun portrait survole, donc pas de flou global.
   container.addClass("no-hover");
 
+  const setIdleTimer = () => {
+    clearTimeout(idleTimeout);
+    idleTimeout = setTimeout(function () {
+      $(".portrait-section, .portrait-detail").removeClass("active");
+      container.removeClass("has-active");
+      container.addClass("no-hover");
+      suppressHoverUntilMove = true;
+    }, 2000);
+  };
+
+  document.addEventListener("mousemove", function (e) {
+    const moved =
+      !lastPointerPos ||
+      e.clientX !== lastPointerPos.x ||
+      e.clientY !== lastPointerPos.y;
+
+    lastPointerPos = { x: e.clientX, y: e.clientY };
+
+    if (moved) {
+      suppressHoverUntilMove = false;
+      container.removeClass("no-hover");
+    }
+
+    setIdleTimer();
+  });
+
+  setIdleTimer();
   // 1. Fondu d'apparition synchronisé des vidéos
   if (container.length) {
     const videos = container.find(".portrait-video");
@@ -155,6 +185,11 @@ $(document).ready(function () {
 
   // 2. Gestion du hover sur les portraits (visuel et audio)
   container.on("mouseenter", ".portrait-section", function () {
+    if (suppressHoverUntilMove) {
+      container.addClass("no-hover");
+      return;
+    }
+
     container.removeClass("no-hover");
     if (keepFocus || !gains.length) return;
     const idx = $(this).index() + 1;

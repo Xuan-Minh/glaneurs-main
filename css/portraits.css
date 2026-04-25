@@ -69,7 +69,6 @@
   min-height: 100vh;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
@@ -77,7 +76,7 @@
 }
 
 .section1-video {
-  transform: translate(-45%, -50%);
+  transform: translate(-40%, -45%);
 }
 .section2-video {
   transform: translate(-40%, -50%);
@@ -90,7 +89,7 @@
 }
 
 .portrait-section.active,
-.portrait-section:hover {
+.portraits-container:not(.no-hover) .portrait-section:hover {
   flex: 2.5;
   filter: none;
 }
@@ -119,7 +118,7 @@
 }
 
 .portrait-section.active .portrait-name,
-.portrait-section:hover .portrait-name {
+.portraits-container:not(.no-hover) .portrait-section:hover .portrait-name {
   opacity: 1;
 }
 
