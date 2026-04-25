@@ -74,16 +74,22 @@
 }
 
 .section1-video {
-  transform: translate(-40%, -45%);
+  transform: translate(-40%, -50%);
 }
 .section2-video {
   transform: translate(-40%, -50%);
+  width: 120vw;
+  height: 120vh;
 }
 .section3-video {
   transform: translate(-70%, -45%);
+  width: 120vw;
+  height: 120vh;
 }
 .section4-video {
   transform: translate(-45%, -55%);
+  width: 110vw;
+  height: 110vh;
 }
 
 .portrait-section.active,
