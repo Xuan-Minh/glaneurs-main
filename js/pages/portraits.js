@@ -146,6 +146,15 @@ $(document).ready(function () {
       container.removeClass("has-active");
       container.addClass("no-hover");
       suppressHoverUntilMove = true;
+      // Audio: retour à l'ambiance globale si un portrait était en focus
+      if (gains.length && (keepFocus || currentIndex !== null)) {
+        keepFocus = false;
+        currentIndex = null;
+        fadeTo(gains[0], 1, 1.2);
+        gains.forEach((g, i) => {
+          if (i > 0) fadeTo(g, 0, 0.6);
+        });
+      }
     }, 2000);
   };
 
