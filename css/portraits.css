@@ -65,10 +65,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 100vw;
-  min-height: 100vh;
-  width: auto;
-  height: auto;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
