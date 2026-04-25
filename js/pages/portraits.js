@@ -167,8 +167,28 @@ $(document).ready(function () {
     lastPointerPos = { x: e.clientX, y: e.clientY };
 
     if (moved) {
+      const wasSuppress = suppressHoverUntilMove;
       suppressHoverUntilMove = false;
       container.removeClass("no-hover");
+
+      // Si le timer idle a déactivé les portraits pendant que la souris
+      // était déjà sur un portrait, mouseenter ne se redéclenche pas.
+      // On le simule manuellement au premier mouvement.
+      if (wasSuppress && !keepFocus && gains.length) {
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const section = el && el.closest(".portrait-section");
+        if (section) {
+          const idx = $(section).index() + 1;
+          if (currentIndex !== idx) {
+            fadeTo(gains[0], 0, 0.8);
+            gains.forEach((g, i) => {
+              if (i === idx) fadeTo(g, 1, 0.8);
+              else if (i > 0) fadeTo(g, 0, 0.8);
+            });
+            currentIndex = idx;
+          }
+        }
+      }
     }
 
     setIdleTimer();
