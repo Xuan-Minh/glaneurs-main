@@ -141,6 +141,7 @@ $(document).ready(function () {
 
   const setIdleTimer = () => {
     clearTimeout(idleTimeout);
+    if (keepFocus) return; // Désactive le timer si un portrait est en focus
     idleTimeout = setTimeout(function () {
       $(".portrait-section, .portrait-detail").removeClass("active");
       container.removeClass("has-active");
@@ -155,7 +156,7 @@ $(document).ready(function () {
           if (i > 0) fadeTo(g, 0, 0.6);
         });
       }
-    }, 2000);
+    }, 2500);
   };
 
   document.addEventListener("mousemove", function (e) {
@@ -255,6 +256,7 @@ $(document).ready(function () {
     // Audio
     if (!gains.length) return;
     keepFocus = true;
+    clearTimeout(idleTimeout); // Stoppe le idleTimer quand on est en focus
     const idx = $(this).index() + 1;
     fadeTo(gains[0], 0, 1.2);
     gains.forEach((g, i) => fadeTo(g, i === idx ? 1 : 0, 0.4));
@@ -272,6 +274,7 @@ $(document).ready(function () {
     gains.forEach((g, i) => {
       if (i > 0) fadeTo(g, 0, 0.6);
     });
+    setIdleTimer(); // Relance le idleTimer au retour
   });
 });
 
@@ -289,6 +292,7 @@ window.addEventListener("scroll", function () {
         if (i > 0) fadeTo(g, 0, 0.6);
       });
     }
+    setIdleTimer(); // Relance le idleTimer si retour en haut
   }
 });
 
