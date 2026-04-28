@@ -3,6 +3,7 @@
 <?php
 session_start();
 
+
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
 $allowedLangs = ['fr', 'en', 'ko'];
 if (isset($_GET['lang']) && in_array($_GET['lang'], $allowedLangs, true)) {
@@ -11,7 +12,10 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], $allowedLangs, true)) {
 } elseif (isset($_SESSION['lang']) && in_array($_SESSION['lang'], $allowedLangs, true)) {
     $lang = $_SESSION['lang'];
 } else {
-    $lang = 'fr'; // fallback par défaut
+    $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    if (!in_array($lang, $allowedLangs, true)) {
+        $lang = 'fr';
+    }
     $_SESSION['lang'] = $lang;
 }
 // $lang est maintenant toujours 'fr', 'en' ou 'ko'.
