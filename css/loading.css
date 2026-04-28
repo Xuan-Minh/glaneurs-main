@@ -122,7 +122,6 @@ html[lang="fr"] .def-texte,
 html[lang="en"] .def-texte {
   text-indent: 5vw;
   font-family: var(--font-serif);
-  font-style: italic;
 }
 
 .loading-item#loading-item3 .loading-text {
