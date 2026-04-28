@@ -110,6 +110,9 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   margin-bottom: 0;
 }
+html[lang="ko"] .loading-soustitre {
+  font-family: var(--font-ko) !important;
+}
 
 .def-texte {
   text-indent: 5vw;
