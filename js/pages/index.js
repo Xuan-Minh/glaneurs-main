@@ -14,16 +14,13 @@ $(document).ready(function () {
     ); // L'événement ne se déclenche qu'une fois
   }
 
-  const definitionContainer = $("#definition-text");
-  if (definitionContainer.length) {
-    const definitionText = definitionContainer.data("definition");
-    definitionContainer.text(definitionText);
-  }
+  $(".definition-text").each(function () {
+    const definitionText = $(this).data("definition");
+    $(this).text(definitionText);
+  });
   if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
     $(".container").removeClass("hidden").fadeIn(1000);
-    // Ne pas appeler playBgmAudio() directement.
-    // Attendre la première interaction de l'utilisateur.
     $(document).one("click.startAudio keydown.startAudio", function () {
       const audio = document.getElementById("audio-bgm");
       // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
