@@ -34,6 +34,10 @@ header.hide-header {
   user-select: none;
 }
 
+html[lang="ko"] .language-selector {
+  font-family: var(--font-sans) !important;
+}
+
 .lang-option {
   cursor: pointer;
   position: relative;
