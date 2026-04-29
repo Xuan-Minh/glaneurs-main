@@ -42,7 +42,7 @@ $slides = array(
         "srcvideobg" => "video/web/lee.mp4",
         "poster" => "img/posters/lee_poster.png",
         "srcaudio" => "audio/chap3.mp3",
-        "srcdocupart" => "https://vimeo.com/1118628914#t=18m40s", // Remplacez XXXXXXXXX par l'ID Vimeo
+        "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
         "urlsuite" => "",
         "quote_author" => "LEE Sangman",
