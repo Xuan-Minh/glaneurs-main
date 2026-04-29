@@ -95,7 +95,9 @@
   font-size: var(--text-loading-content);
   margin-bottom: 2vw;
 }
-
+.definition-text {
+  margin-bottom: 0.5vw !important;
+}
 .loading-titre {
   font-size: var(--text-loading-title);
   font-weight: 400;
