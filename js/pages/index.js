@@ -220,25 +220,6 @@ function hideInfoPanel($slide) {
   $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
   $slide.find("video").removeClass("flou");
 }
-// NOUVELLE FONCTION : Réinitialisation forcée d'un slide
-/**
- * Réinitialise l'état d'un slide à sa position par défaut, sans animation.
- * C'est la solution pour corriger les états incohérents lors d'un scroll rapide.
- * @param {jQuery} $slide L'élément jQuery du slide à réinitialiser.
- */
-function resetSlideState($slide) {
-  if (!$slide || !$slide.length) return;
-  const $h2 = $slide.find("h2");
-  clearTimeout(authorFadeInTimer);
-  // On retire toutes les classes d'animation et d'état
-  $h2.removeClass("move author-visible animate-transform");
-
-  // On cache l'info et on remet les boutons dans leur état initial
-  $slide.find(".info").hide();
-  fadeVisionnerTriggerH3($slide, false);
-  $slide.find(".sliderButton .point1").addClass("full").removeClass("empty");
-  $slide.find(".sliderButton .point2").addClass("empty").removeClass("full");
-}
 // --------------------------------- EVENT HANDLERS --------------------------------- //
 
 // Clic sur le point 2 (pour afficher les infos)
@@ -274,6 +255,107 @@ function fadeVisionnerTriggerH3($slide, fadeOut = true) {
   } else {
     $trigger.removeClass("fade-out").addClass("fade-in");
   }
+}
+
+/**
+ * Parse un timecode "#t=1m2s", "#t=62s" ou "62" en secondes.
+ * @param {string|number} tc
+ * @returns {number|null}
+ */
+function parseTimecode(tc) {
+  if (!tc) return null;
+  let s = String(tc).trim();
+  if (s.startsWith("#t=")) s = s.slice(3);
+  if (/^\d+$/.test(s)) return parseInt(s, 10);
+  const m = s.match(/(?:(\d+)m)?(?:(\d+)s)?/i);
+  if (!m) return null;
+  const mins = m[1] ? parseInt(m[1], 10) : 0;
+  const secs = m[2] ? parseInt(m[2], 10) : 0;
+  return mins * 60 + secs;
+}
+
+/**
+ * Relance l'ambiance sonore si aucun visionneur n'est visible.
+ */
+function resumeBgmIfNoVisionner() {
+  try {
+    if (!($(".visionner:visible").length > 0)) {
+      if (typeof window.resumeBgmAudio === "function") {
+        window.resumeBgmAudio(0.3, 600);
+      } else {
+        playBgmAudio();
+      }
+    }
+  } catch (e) {}
+}
+
+/**
+ * Restaure l'état du panneau d'info d'un slide après la fermeture du visionneur.
+ * Gère le titre de l'auteur, le flou vidéo, le défilement et les boutons de navigation.
+ * @param {jQuery} $slide L'élément jQuery du slide.
+ */
+function applyInfoPanelState($slide) {
+  const $h2 = $slide.find("h2");
+  const isFirst = $slide.hasClass("slide1");
+
+  $("body").css("overflow", "auto");
+  $slide.find(".info").fadeIn(2000);
+
+  if (!isFirst) {
+    if (!$h2.hasClass("move")) {
+      triggerH2TransformAnimation($h2);
+    }
+    $h2.addClass("move");
+    clearTimeout(authorFadeInTimer);
+    authorFadeInTimer = setTimeout(() => {
+      $h2.addClass("author-visible");
+    }, 1500);
+    $slide.find("video").addClass("flou");
+    fadeVisionnerTriggerH3($slide, true);
+  } else {
+    $h2.removeClass("move author-visible animate-transform");
+    $slide.find("video").removeClass("flou");
+    fadeVisionnerTriggerH3($slide, false);
+  }
+  $slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
+  $slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+}
+
+/**
+ * Retourne l'index de la slide la plus proche du centre du viewport.
+ * @param {NodeList|Array} slides
+ * @returns {number}
+ */
+function getClosestSlideIndex(slides) {
+  const viewportMiddle = window.innerHeight / 2;
+  let currentIndex = 0;
+  let minDist = Infinity;
+  Array.from(slides).forEach((slide, i) => {
+    const rect = slide.getBoundingClientRect();
+    const slideMiddle = rect.top + rect.height / 2;
+    const dist = Math.abs(slideMiddle - viewportMiddle);
+    if (dist < minDist) {
+      minDist = dist;
+      currentIndex = i;
+    }
+  });
+  return currentIndex;
+}
+
+/**
+ * Retourne la première slide dont le haut est en dessous du viewport.
+ * @param {NodeList|Array} slides
+ * @returns {Element|null}
+ */
+function getNextSlide(slides) {
+  let next = null;
+  Array.from(slides).some((slide) => {
+    if (slide.getBoundingClientRect().top > 10) {
+      next = slide;
+      return true;
+    }
+  });
+  return next;
 }
 
 // --------------------------------- Reset Slide --------------------------------- //
@@ -342,55 +424,19 @@ function removeFocusTrap(container) {
 
 $(".close-visionner").click(function (event) {
   event.stopPropagation();
-  const slide = $(this).closest(".slides");
-  const info = slide.find(".info");
-  const visionner = slide.find(".visionner");
+  const $slide = $(this).closest(".slides");
+  const visionner = $slide.find(".visionner");
   removeFocusTrap(visionner);
   visionner.find("iframe").remove();
 
-  // Correction ici : un seul fadeOut avec le callback
   visionner.fadeOut(400, function () {
-    // On cache le lien car on affiche l'info
-    fadeVisionnerTriggerH3(slide, true); // CHANGEMENT ICI : de false à true
     try {
       window.__visionnerOpen = false;
     } catch (e) {}
-    // Relancer l'ambiance uniquement après fermeture effective de la modale
-    try {
-      if (!($ && $(".visionner:visible").length > 0)) {
-        if (typeof window.resumeBgmAudio === "function") {
-          window.resumeBgmAudio(0.3, 600);
-        } else {
-          playBgmAudio();
-        }
-      }
-    } catch (e) {}
+    resumeBgmIfNoVisionner();
   });
 
-  $("body").css("overflow", "auto");
-  info.fadeIn(2000);
-
-  const $h2 = slide.find("h2");
-  const isFirst = slide.hasClass("slide1");
-  if (!isFirst) {
-    if (!$h2.hasClass("move")) {
-      triggerH2TransformAnimation($h2);
-    }
-    $h2.addClass("move");
-
-    // C'est la bonne méthode : on utilise un timer fiable.
-    authorFadeInTimer = setTimeout(() => {
-      $h2.addClass("author-visible");
-    }, 1500); // 1.5s, comme la transition CSS
-
-    slide.find("video").addClass("flou");
-  } else {
-    // S'assurer qu'aucune classe indésirable ne reste
-    $h2.removeClass("move author-visible animate-transform");
-    slide.find("video").removeClass("flou");
-  }
-  slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-  slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
+  applyInfoPanelState($slide);
 });
 
 let vimeoPlayer = null;
@@ -437,18 +483,6 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
 
   // Crée un nouveau player Vimeo et attache l'event 'ended'
   vimeoPlayer = new Vimeo.Player(iframe[0]);
-  // Helper: parse "#t=1m2s" or "#t=62s" or "62" to seconds
-  function parseTimecode(tc) {
-    if (!tc) return null;
-    let s = String(tc).trim();
-    if (s.startsWith("#t=")) s = s.slice(3);
-    if (/^\d+$/.test(s)) return parseInt(s, 10);
-    const m = s.match(/(?:(\d+)m)?(?:(\d+)s)?/i);
-    if (!m) return null;
-    const mins = m[1] ? parseInt(m[1], 10) : 0;
-    const secs = m[2] ? parseInt(m[2], 10) : 0;
-    return mins * 60 + secs;
-  }
   const startAt = parseTimecode(rawTimecode);
 
   const hasTimecode = startAt != null && !isNaN(startAt) && startAt > 0;
@@ -462,32 +496,11 @@ $(".visionner-trigger, .visionner-trigger-h3").click(function (event) {
     .then(() => vimeoPlayer.play().catch(() => {}));
   vimeoPlayer.on("ended", function () {
     visionner.fadeOut(400, function () {
-      $("body").css("overflow", "auto");
-      const info = slide.find(".info");
-      info.fadeIn(2000);
-      // Pour la première slide, ne pas appliquer le zoom ni le flou pour garder la cohérence visuelle
-      if (!isFirstSlide) {
-        slide.find("h2").addClass("move");
-        fadeVisionnerTriggerH3(slide, true);
-        slide.find("video").addClass("flou");
-      } else {
-        // S'assurer que la première slide ne garde pas de classes d'animation indésirables
-        slide.find("h2").removeClass("move author-visible animate-transform");
-        fadeVisionnerTriggerH3(slide, false);
-        slide.find("video").removeClass("flou");
-      }
-      slide.find(".sliderButton .point2").addClass("full").removeClass("empty");
-      slide.find(".sliderButton .point1").addClass("empty").removeClass("full");
-      // Redémarrer l'ambiance après disparition effective
       try {
-        if (!($ && $(".visionner:visible").length > 0)) {
-          if (typeof window.resumeBgmAudio === "function") {
-            window.resumeBgmAudio(0.3, 600);
-          } else {
-            playBgmAudio();
-          }
-        }
+        window.__visionnerOpen = false;
       } catch (e) {}
+      applyInfoPanelState(slide);
+      resumeBgmIfNoVisionner();
     });
   });
 
@@ -571,19 +584,7 @@ $(document).on("keydown", function (e) {
   if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
 
   const $slides = $(".slides");
-  let currentIndex = 0;
-  let minDist = Infinity;
-  const viewportMiddle = window.innerHeight / 2;
-
-  $slides.each(function (i, slide) {
-    const rect = slide.getBoundingClientRect();
-    const slideMiddle = rect.top + rect.height / 2;
-    const dist = Math.abs(slideMiddle - viewportMiddle);
-    if (dist < minDist) {
-      minDist = dist;
-      currentIndex = i;
-    }
-  });
+  const currentIndex = getClosestSlideIndex($slides.toArray());
 
   if (e.key === "ArrowDown" && currentIndex < $slides.length - 1) {
     $slides.eq(currentIndex + 1)[0].scrollIntoView({ behavior: "smooth" });
@@ -635,30 +636,11 @@ function initIndexWheelAndScrollArrow() {
 
           if (delta > 0) {
             // vers le bas : prochaine slide
-            const $slides = $(slides);
-            let nextSlide = null;
-            $slides.each(function (i, slide) {
-              const rect = slide.getBoundingClientRect();
-              if (rect.top > 10) {
-                nextSlide = slide;
-                return false;
-              }
-            });
+            const nextSlide = getNextSlide(slides);
             if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
           } else {
             // vers le haut : slide précédente
-            const viewportMiddle = window.innerHeight / 2;
-            let currentIndex = 0;
-            let minDist = Infinity;
-            slides.forEach((slide, i) => {
-              const rect = slide.getBoundingClientRect();
-              const slideMiddle = rect.top + rect.height / 2;
-              const dist = Math.abs(slideMiddle - viewportMiddle);
-              if (dist < minDist) {
-                minDist = dist;
-                currentIndex = i;
-              }
-            });
+            const currentIndex = getClosestSlideIndex(slides);
             if (currentIndex > 0)
               slides[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
           }
@@ -705,14 +687,7 @@ $(document).on(
     }
 
     const $slides = $(".slides");
-    let nextSlide = null;
-    $slides.each(function (i, slide) {
-      const rect = slide.getBoundingClientRect();
-      if (rect.top > 10) {
-        nextSlide = slide;
-        return false;
-      }
-    });
+    const nextSlide = getNextSlide($slides.toArray());
     if (nextSlide) nextSlide.scrollIntoView({ behavior: "smooth" });
   },
 );
