@@ -171,7 +171,7 @@ function showInfoPanel($slide) {
     // C'est la bonne méthode : on utilise un timer fiable.
     authorFadeInTimer = setTimeout(() => {
       $h2.addClass("author-visible");
-    }, 1500); // 1.5s, comme la transition CSS
+    }, TRANSFORM_ANIMATION_DURATION);
   } else {
     // Première slide : on saute move/author-visible/flou pour garder la cohérence visuelle.
   }
@@ -235,14 +235,15 @@ $(".point1").on("click", function () {
  * Ajoute temporairement la classe pour animer la transformation.
  * @param {jQuery} $element L'élément jQuery h2.
  */
+let isH2Animating = false;
 function triggerH2TransformAnimation($element) {
   if (!$element || !$element.length) return;
   $element.addClass("animate-transform");
-  // NOUVEAU : On écoute la fin de la transition pour libérer le verrou
+  // On écoute la fin de la transition pour libérer le verrou
   $element.one("transitionend", function (e) {
     if (e.originalEvent.propertyName === "transform") {
       $element.removeClass("animate-transform");
-      isAnimating = false; // On libère le verrou ici
+      isH2Animating = false; // On libère le verrou ici
     }
   });
 }
@@ -309,7 +310,7 @@ function applyInfoPanelState($slide) {
     clearTimeout(authorFadeInTimer);
     authorFadeInTimer = setTimeout(() => {
       $h2.addClass("author-visible");
-    }, 1500);
+    }, TRANSFORM_ANIMATION_DURATION);
     $slide.find("video").addClass("flou");
     fadeVisionnerTriggerH3($slide, true);
   } else {
@@ -363,14 +364,24 @@ function getNextSlide(slides) {
 function resetSlideState($slide) {
   if (!$slide || !$slide.length) return;
 
-  // --- DÉBUT DE LA CORRECTION ---
-  // On remplace l'ancien contenu par une logique plus complète et correcte.
   const $h2 = $slide.find("h2");
 
   clearTimeout(authorFadeInTimer);
 
   // On retire toutes les classes d'état et d'animation
   $h2.removeClass("move author-visible animate-transform");
+
+  // Si un visionneur est ouvert sur cette slide, on le ferme proprement
+  const $visionner = $slide.find(".visionner");
+  if ($visionner.is(":visible")) {
+    removeFocusTrap($visionner);
+    $visionner.find("iframe").remove();
+    $visionner.hide();
+    try {
+      window.__visionnerOpen = false;
+    } catch (e) {}
+    resumeBgmIfNoVisionner();
+  }
 
   // On cache l'info et on remet les boutons dans leur état initial
   $slide.find(".info").hide();
@@ -380,7 +391,6 @@ function resetSlideState($slide) {
 
   // La ligne la plus importante : on retire le flou !
   $slide.find("video").removeClass("flou");
-  // --- FIN DE LA CORRECTION ---
 }
 
 // --------------------------------- Player video --------------------------------- //
@@ -433,10 +443,9 @@ $(".close-visionner").click(function (event) {
     try {
       window.__visionnerOpen = false;
     } catch (e) {}
+    applyInfoPanelState($slide);
     resumeBgmIfNoVisionner();
   });
-
-  applyInfoPanelState($slide);
 });
 
 let vimeoPlayer = null;
