@@ -220,7 +220,7 @@ function stopBgmAudio() {
   fadeAudio(audio, 0, 800); // Fade out en 0.8s
   try {
     if (typeof window.animateWaveAmplitude === "function") {
-      window.animateWaveAmplitude(0, 300).catch(() => {});
+      window.animateWaveAmplitude(0, 600).catch(() => {});
     }
   } catch (e) {
     // noop

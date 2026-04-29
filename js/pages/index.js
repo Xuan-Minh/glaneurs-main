@@ -285,6 +285,9 @@ function resumeBgmIfNoVisionner() {
         window.resumeBgmAudio(0.3, 600);
       } else {
         playBgmAudio();
+        if (typeof window.animateWaveAmplitude === "function") {
+          window.animateWaveAmplitude(0, 600).catch(() => {});
+        }
       }
     }
   } catch (e) {}

@@ -369,47 +369,6 @@
   transform: scaleX(1);
 }
 
-.volume-control {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #fff;
-  z-index: 100;
-}
-
-#volumeRange {
-  vertical-align: middle;
-}
-
-.sound-wave-container {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  z-index: 10;
-  width: 120px;
-  height: 40px;
-  pointer-events: none;
-}
-
-.sound-wave-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.sound-wave-cloud {
-  fill: #fff;
-  opacity: 0.18;
-  filter: url(#blur);
-  transition: 0.1s;
-}
-
-.sound-wave-line {
-  stroke: #fff;
-  stroke-width: 3;
-  transition: 0.1s;
-}
-
 #map-parcours {
   width: 100%;
   height: 400px;
