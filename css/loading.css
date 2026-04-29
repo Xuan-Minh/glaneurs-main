@@ -118,10 +118,10 @@ html[lang="fr"] .def,
 html[lang="en"] .def {
   font-family: var(--font-serif);
 }
-html[lang="fr"] .def-texte,
-html[lang="en"] .def-texte {
+html[lang="fr"] .definition-text,
+html[lang="en"] .definition-text {
   text-indent: 5vw;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .loading-item#loading-item3 .loading-text {
