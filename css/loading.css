@@ -95,7 +95,8 @@
   font-size: var(--text-loading-content);
   margin-bottom: 2vw;
 }
-.definition-text {
+.loading-item#loading-item1 .definition-text {
+  font-size: var(--text-loading-definition);
   margin-bottom: 0.5vw !important;
 }
 .loading-titre {

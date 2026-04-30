@@ -50,6 +50,11 @@
   --text-team-name: clamp(1.1rem, 2vw, 1.5rem); /* Nom équipe */
   /* ========== LOADING ========== */
   --text-loading-item: clamp(1.5em, 2vw, 2em); /* Item loading général */
+  --text-loading-definition: clamp(
+    0.85em,
+    1.5vw,
+    1.5em
+  ); /* Définition loading item1 */
   --text-loading-content: clamp(1em, 1.5vw, 1.5em); /* Contenu loading item1 */
   --text-loading-title: clamp(2rem, 3vw, 3em); /* Titre loading */
   --text-loading-text: clamp(1em, 1.2vw, 1.2em); /* Texte loading item3 */
