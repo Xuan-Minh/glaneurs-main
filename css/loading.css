@@ -99,6 +99,38 @@
   font-size: var(--text-loading-definition);
   margin-bottom: 0.5vw !important;
 }
+html[lang="fr"] .def,
+html[lang="en"] .def {
+  font-family: var(--font-serif);
+}
+html[lang="fr"] .definition-text,
+html[lang="en"] .definition-text {
+  text-indent: 5vw;
+  font-family: var(--font-sans);
+}
+.def-container {
+  display: flex;
+  gap: 1vw;
+  margin-bottom: 2vw;
+}
+
+.def {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  min-width: 0;
+  line-height: 1;
+}
+.mot {
+  font-weight: 900;
+}
+.mot-phonetique {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+}
+.mot-type {
+  color: rgba(255, 255, 255, 0.5);
+}
 .loading-titre {
   font-size: var(--text-loading-title);
   font-weight: 400;
@@ -115,16 +147,6 @@
 }
 html[lang="ko"] .loading-soustitre {
   font-family: var(--font-ko) !important;
-}
-
-html[lang="fr"] .def,
-html[lang="en"] .def {
-  font-family: var(--font-serif);
-}
-html[lang="fr"] .definition-text,
-html[lang="en"] .definition-text {
-  text-indent: 5vw;
-  font-family: var(--font-sans);
 }
 
 .loading-item#loading-item3 .loading-text {

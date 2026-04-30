@@ -7,9 +7,13 @@
     </video>
     <div class="loading-items">
         <div class="loading-item" id="loading-item1">
-            <div class="loading-content def"><?php echo getTranslation("loading_def_titre", $lang) ?></div>
+            <div class="loading-content def-container">
+            <div class="loading-content def mot"><?php echo getTranslation("loading_def_titre", $lang) ?></div>
+            <div class="loading-content def mot-phonetique"><?php echo getTranslation("loading_def_phonetique", $lang) ?></div>
+            <div class="loading-content def mot-type"><?php echo getTranslation("loading_def_type", $lang) ?></div> 
+            </div>   
             <div class="loading-content definition-text" data-definition="<?php echo getTranslation("loading_def_texte", $lang) ?>"></div>
-            <div class="loading-content definition-text" data-definition="<?php echo getTranslation("loading_def_texte2", $lang) ?>"></div>
+            <div class="loading-content definition-text" data-definition="<?php echo getTranslation("loading_def_texte2", $lang) ?>"></div> 
         </div>
         <div class="loading-item" id="loading-item2">
             <div class="loading-content loading-titre"><?php echo getTranslation("index_titre", "fr") ?></div>
