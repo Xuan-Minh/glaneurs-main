@@ -101,8 +101,8 @@
         }
 
         // Détection de la page courante
-        $current_page = basename($_SERVER['PHP_SELF']);
-        $isHome = ($current_page === 'index.php');
+        $current = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+        $isHome = ($current === 'glaneurs-main' || $current === '' || $current === 'index.php');
         ?>
     </div>
     <div class="menu-links">
