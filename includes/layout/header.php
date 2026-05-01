@@ -70,7 +70,6 @@
 
 <div class="menu-volet" id="menuVolet">
     <div class="menu-volet-content">
-        
         <?php
         $videoSources = [
             [
@@ -100,19 +99,23 @@
             echo '<h4>' . $video["title"] . '</h4>';
             echo '</div>';
         }
+
+        // Détection de la page courante
+        $current_page = basename($_SERVER['PHP_SELF']);
+        $isHome = ($current_page === 'index.php');
         ?>
     </div>
     <div class="menu-links">
         <ul>
-            <li><a href="./" class="transition-link" id="homeBouton-style">
+            <li><a href="./" class="transition-link<?php echo $isHome ? ' active' : ''; ?>" id="homeBouton-style">
                 <span><?php echo getTranslation('index_titre', "fr") ?></span>
                 <span class="menu-homeBouton-subtitle"><?php echo getTranslation('index_titre', "ko") ?></span>
             </a></li>
-            <li><a href="portraits" class="transition-link" title="<?php echo getTranslation('portraits_titre', $lang) ?>"><?php echo getTranslation('portraits_titre', $lang) ?></a></li>
-            <li><a href="tracesdupasse" class="transition-link" title="<?php echo getTranslation('archives_titre', $lang) ?>"><?php echo getTranslation('archives_titre', $lang) ?></a></li>
-            <li><a href="derriere-le-documentaire" class="transition-link" title="<?php echo getTranslation('derriereledocumentaire_titre', $lang) ?>"><?php echo getTranslation('derriereledocumentaire_titre', $lang) ?></a></li>
+            <li><a href="portraits" class="transition-link<?php echo ($current === 'portraits' || $current === 'portraits.php') ? ' active' : ''; ?>" title="<?php echo getTranslation('portraits_titre', $lang) ?>"><?php echo getTranslation('portraits_titre', $lang) ?></a></li>
+            <li><a href="tracesdupasse" class="transition-link<?php echo ($current === 'tracesdupasse' || $current === 'tracesdupasse.php') ? ' active' : ''; ?>" title="<?php echo getTranslation('archives_titre', $lang) ?>"><?php echo getTranslation('archives_titre', $lang) ?></a></li>
+            <li><a href="derriere-le-documentaire" class="transition-link<?php echo ($current === 'derriere-le-documentaire' || $current === 'derriere-le-documentaire.php') ? ' active' : ''; ?>" title="<?php echo getTranslation('derriereledocumentaire_titre', $lang) ?>"><?php echo getTranslation('derriereledocumentaire_titre', $lang) ?></a></li>
            
-            <li class="mentionslegales-right"><a href="mentionslegales" class="transition-link" title="<?php echo getTranslation('mentionslegales_titre', $lang) ?>"><?php echo getTranslation('mentionslegales_titre', $lang) ?></a></li>
+            <li class="mentionslegales-right"><a href="mentionslegales" class="transition-link<?php echo ($current === 'mentionslegales' || $current === 'mentionslegales.php') ? ' active' : ''; ?>" title="<?php echo getTranslation('mentionslegales_titre', $lang) ?>"><?php echo getTranslation('mentionslegales_titre', $lang) ?></a></li>
         </ul>
     </div>
 </div>
