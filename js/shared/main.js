@@ -344,13 +344,13 @@ $(document).ready(function () {
     if (!href || href === "#" || href.startsWith("javascript")) return;
 
     // Normalise les URLs pour vérifier si on est déjà sur la page
-    const currentPath = window.location.pathname.replace(/\/$/, "");
-    const targetPath = new URL(href, window.location.origin).pathname.replace(
-      /\/$/,
-      "",
-    );
+    const currentPath = window.location.pathname.split('/').pop().replace('.php', '') || 'index';
+    const targetPath = new URL(href, window.location.origin).pathname.split('/').pop().replace('.php', '') || 'index';
 
-    if (currentPath === targetPath) {
+    // Cas spécial pour le lien racine "./" qui doit correspondre à "index"
+    const isTargetHome = $(this).attr('href') === './';
+
+    if (currentPath === targetPath || (isTargetHome && currentPath === 'index')) {
       // Si on est déjà sur la page, on ferme juste le menu s'il est ouvert
       $("#menuVolet").removeClass("open");
       $("#menuBurger").removeClass("open");
