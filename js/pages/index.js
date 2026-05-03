@@ -20,7 +20,7 @@ $(document).ready(function () {
   });
   if ($(".loading-screen").length === 0) {
     // Si pas de loading-screen, rendre le conteneur visible
-    $(".container").removeClass("hidden").fadeIn(1000);
+    $(".container").removeClass("hidden");
     $(document).one("click.startAudio keydown.startAudio", function () {
       const audio = document.getElementById("audio-bgm");
       // Vérifier si l'audio est en pause (ce qui inclut le cas où il n'a jamais joué)
@@ -119,7 +119,7 @@ $("#enter-button").click(function (e) {
   // 2) Quand il est opaque, basculer du loading à la homeBouton
   setTimeout(function () {
     $(".loading-screen").remove(); // retire le loading (plus de flash)
-    $(".container").removeClass("hidden").show();
+    $(".container").removeClass("hidden");
 
     // 3) Puis faire disparaître le rideau noir (1 -> 0)
     requestAnimationFrame(() => {
