@@ -1,3 +1,11 @@
+/* Masquer le conteneur principal pendant le loading-screen sans le retirer
+   du flux de mise en page : évite le CLS de 1 causé par l'apparition soudaine
+   d'un bloc pleine page quand display:none bascule vers block. */
+.container.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 :root {
   --main-bg-color: #050d1e;
   --main-text-color: #ffffff;

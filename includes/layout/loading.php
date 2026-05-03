@@ -103,7 +103,6 @@
                 setTimeout(function() {
                     loadingScreen.remove();
                     container.classList.remove('hidden');
-                    container.style.display = 'block';
                     
                     if (overlay) {
                         overlay.classList.add('hide');

@@ -92,6 +92,10 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
     # Sécurité : supprimer le header qui révèle la stack serveur
     Header always unset X-Powered-By
 
+    # HTTP/3 (QUIC) : annoncer au navigateur qu'il peut mettre à niveau
+    # Nécessite que Nginx écoute sur UDP/443 (activé via Plesk "Prise en charge HTTP/3")
+    Header always set Alt-Svc 'h3=":443"; ma=86400'
+
     # HSTS : forcer HTTPS pendant 1 an, sous-domaines inclus, éligible preload
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
