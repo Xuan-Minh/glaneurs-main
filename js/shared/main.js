@@ -46,6 +46,20 @@ function getLocalizedMessage(key) {
   );
 }
 
+function updateSoundUIToMuted() {
+  try {
+    const iconOn = document.getElementById("icon-sound-on");
+    const iconOff = document.getElementById("icon-sound-off");
+    if (iconOn) iconOn.classList.add("icon-hidden");
+    if (iconOff) iconOff.classList.remove("icon-hidden");
+    if (typeof window.animateWaveAmplitude === "function") {
+      window.animateWaveAmplitude(0, 600).catch(() => {});
+    }
+  } catch (e) {
+    console.error("updateSoundUIToMuted() visual update failed:", e);
+  }
+}
+
 function getI18nMessage(key) {
   try {
     if (window && window.I18N && typeof window.I18N[key] === "string")
@@ -98,17 +112,7 @@ function playBgmAudio() {
   // restriction du navigateur, pas un choix explicite de l'utilisateur.
   function handleAutoplayBlocked() {
     isGloballyMuted = true;
-    try {
-      const iconOn = document.getElementById("icon-sound-on");
-      const iconOff = document.getElementById("icon-sound-off");
-      if (iconOn) iconOn.classList.add("icon-hidden");
-      if (iconOff) iconOff.classList.remove("icon-hidden");
-      if (typeof window.animateWaveAmplitude === "function") {
-        window.animateWaveAmplitude(0, 600).catch(() => {});
-      }
-    } catch (e) {
-      console.error("handleAutoplayBlocked() visual update failed:", e);
-    }
+    updateSoundUIToMuted();
   }
 
   const audio = document.getElementById("audio-bgm");
@@ -441,6 +445,13 @@ $(document).ready(function () {
   setTimeout(function () {
     $("#transition-overlay").addClass("hide");
   }, 50);
+
+  // Si pas de loading screen, tenter de jouer l'audio.
+  if (document.querySelector(".loading-screen") === null) {
+    if (typeof playBgmAudio === "function") {
+      playBgmAudio();
+    }
+  }
 
   // Ancien DOMContentLoaded: sécurité pour éviter un overlay bloqué lors de certains enchaînements.
   setTimeout(function () {
