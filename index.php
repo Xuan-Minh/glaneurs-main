@@ -105,12 +105,74 @@ if (!$isMobile) {
         <!-- Preload NotoSansKR : découverte au 1er niveau (casse la chaîne HTML→font.css→police) -->
         <link rel="preload" href="font/NotoSansKR/NotoSansKR-Light.woff2" as="font" type="font/woff2" crossorigin>
 
+        <!-- @font-face inlinés : élimine une requête réseau render-blocking -->
+        <style>
+        @font-face {
+          font-family: "Figtree";
+          src: url("/font/Figtree/Figtree-VariableFont_wght.woff2") format("woff2"),
+               url("/font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
+          font-display: swap;
+        }
+        @font-face {
+          font-family: "Libre Baskerville";
+          src: url("/font/Libre_Baskerville/LibreBaskerville-Regular.woff2") format("woff2"),
+               url("/font/Libre_Baskerville/LibreBaskerville-Regular.ttf") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: "Libre Baskerville";
+          src: url("/font/Libre_Baskerville/LibreBaskerville-Italic.woff2") format("woff2"),
+               url("/font/Libre_Baskerville/LibreBaskerville-Italic.ttf") format("truetype");
+          font-weight: normal;
+          font-style: italic;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: "Libre Baskerville";
+          src: url("/font/Libre_Baskerville/LibreBaskerville-Bold.woff2") format("woff2"),
+               url("/font/Libre_Baskerville/LibreBaskerville-Bold.ttf") format("truetype");
+          font-weight: bold;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: "Noto Sans KR";
+          src: url("/font/NotoSansKR/NotoSansKR-Light.woff2") format("woff2"),
+               url("/font/NotoSansKR/NotoSansKR-Light.ttf") format("truetype");
+          font-weight: 300;
+          font-style: normal;
+          font-display: optional;
+        }
+        @font-face {
+          font-family: "Noto Sans KR";
+          src: url("/font/NotoSansKR/NotoSansKR-Medium.woff2") format("woff2"),
+               url("/font/NotoSansKR/NotoSansKR-Medium.ttf") format("truetype");
+          font-weight: 500;
+          font-style: normal;
+          font-display: optional;
+        }
+        @font-face {
+          font-family: "Noto Sans KR";
+          src: url("/font/NotoSansKR/NotoSansKR-Bold.woff2") format("woff2"),
+               url("/font/NotoSansKR/NotoSansKR-Bold.ttf") format("truetype");
+          font-weight: 700;
+          font-style: normal;
+          font-display: optional;
+        }
+        </style>
         <!-- CSS critiques chargés de manière synchrone pour le premier rendu -->
-        <link rel="stylesheet" type="text/css" href="css/font.css" />
-        <link rel="stylesheet" type="text/css" href="css/typography.css" />
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
+        <?php if ($showLoading): ?>
+        <!-- index.css chargé en async : le .container est masqué jusqu'au clic "Entrer" -->
+        <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="css/index.css"></noscript>
+        <?php else: ?>
+        <!-- Visiteur de retour : pas de loading-screen, index.css nécessaire immédiatement -->
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <?php endif; ?>
 
         <!-- CSS non-critiques : chargement asynchrone pour ne pas bloquer le rendu initial -->
         <link rel="preload" href="css/navbar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

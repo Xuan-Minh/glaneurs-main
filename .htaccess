@@ -19,8 +19,6 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
     # H2Push : précharge les ressources critiques dès la réponse HTML
     # (actif seulement quand HTTP/2 est effectivement activé côté serveur)
     <FilesMatch "^(index|portraits|tracesdupasse|derriere-le-documentaire|mentionslegales|souvenirs)\.php$">
-        H2PushResource add /css/font.css
-        H2PushResource add /css/typography.css
         H2PushResource add /css/main.css
     </FilesMatch>
 </IfModule>

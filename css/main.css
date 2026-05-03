@@ -1,3 +1,126 @@
+/* ==========================================================================
+   TYPOGRAPHIE : variables CSS, familles de polices, styles de base
+   (contenu fusionné depuis l'ancien typography.css)
+   ========================================================================== */
+:root {
+  /* Font stacks (doivent matcher les font-family existants) */
+  --font-sans: "Figtree", sans-serif;
+  --font-serif: "Libre Baskerville", serif;
+  --font-ko: "Noto Sans KR", sans-serif;
+
+  /* Aliases (pour le jour où on remplace dans les CSS) */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-serif);
+
+  /* Weights (indicatifs, si on veut uniformiser ensuite) */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ========== TITRES ========== */
+  --text-h1: clamp(2rem, 3vw, 3rem); /* Titre principal (hero, slides) */
+  --text-h2: clamp(1.8rem, 3vw, 2.5rem); /* Titre section */
+  --text-h3: clamp(1rem, 1.5vw, 1.5rem); /* Sous-titre - rapport 2:1 avec H1 */
+  /* ========== CORPS DE TEXTE ========== */
+  --text-body: clamp(0.9rem, 1.6vw, 1.1rem); /* Paragraphe standard */
+  --text-body-md: clamp(1rem, 1.8vw, 1.1rem); /* Paragraphe moyen */
+  --text-body-lg: clamp(1rem, 1.8vw, 1.3rem); /* Paragraphe large */
+  --text-small: clamp(
+    0.85rem,
+    1.5vw,
+    1.05rem
+  ); /* Texte petit (rôles, légendes) */
+  --text-caption: clamp(0.8rem, 1.8vw, 1rem); /* Caption/métadonnées */
+
+  /* ========== UI COMPOSANTS ========== */
+  --text-nav: clamp(16px, 1.2vw, 22px); /* Navigation header */
+  --text-menu-link: clamp(1.2rem, 1.2vw, 1.6rem); /* Liens menu volet */
+  --text-menu-home: clamp(1.2rem, 2vw, 2rem); /* Titre menu home */
+  --text-menu-subtitle: clamp(0.9rem, 1.5vw, 1.5rem); /* Sous-titre menu */
+  --text-button: clamp(1.2em, 1.9vw, 1.4em); /* Boutons/CTA */
+
+  /* ========== SPÉCIFIQUE PAGES ========== */
+  --text-portrait-name: clamp(1.8rem, 4vw, 3rem); /* Nom portrait */
+  --text-portrait-role: clamp(1rem, 2vw, 1.2rem); /* Rôle portrait */
+  --text-slide-title: clamp(1.5rem, 2vw, 2.9rem); /* Titre slide index */
+  --text-slide-title-md: clamp(
+    1.3rem,
+    3vw,
+    1.8rem
+  ); /* Titre slide index (<=1250px) */
+  --text-slide-subtitle: clamp(1.5rem, 2vw, 2.5em); /* Sous-titre slide */
+  --text-archive-title: clamp(1.5rem, 2.5vw, 2rem); /* Titre archive */
+  --text-team-name: clamp(1.1rem, 2vw, 1.5rem); /* Nom équipe */
+  /* ========== LOADING ========== */
+  --text-loading-item: clamp(1.5em, 2vw, 2em); /* Item loading général */
+  --text-loading-definition: clamp(
+    0.85em,
+    1.5vw,
+    1.5em
+  ); /* Définition loading item1 */
+  --text-loading-content: clamp(1em, 1.5vw, 1.5em); /* Contenu loading item1 */
+  --text-loading-title: clamp(2rem, 3vw, 3em); /* Titre loading */
+  --text-loading-text: clamp(1em, 1.2vw, 1.2em); /* Texte loading item3 */
+  --text-loading-button: clamp(1em, 2vw, 1.5em); /* Bouton loading container */
+  --text-loading-enter: clamp(0.8em, 1vw, 2em); /* Bouton "Entrer" */
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  color: #fff;
+}
+h4 {
+  font-size: var(--text-caption);
+}
+
+.ko-lang body {
+  font-family: var(--font-ko);
+}
+.ko-lang h2 {
+  font-family: var(--font-ko);
+}
+button {
+  font-family: var(--font-body);
+}
+p {
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-ko {
+  font-family: var(--font-ko);
+}
+
 /* Masquer le conteneur principal pendant le loading-screen sans le retirer
    du flux de mise en page : évite le CLS de 1 causé par l'apparition soudaine
    d'un bloc pleine page quand display:none bascule vers block. */
