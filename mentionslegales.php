@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo getTranslation("mentionslegales_titre", $lang) ?> - Les glaneurs de carton</title>
+  <meta name="description" content="<?php echo getTranslation('meta_description', $lang); ?>">
   <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=<?php echo $lang; ?>" />
   <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=fr" />
   <link rel="alternate" hreflang="en" href="https://glaneursdecarton.mastercmw.com/mentionslegales.php?lang=en" />

@@ -36,19 +36,23 @@
   src: url("../font/Noto sans KR/NotoSansKR-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
-  font-display: swap; /* Ajoutez cette ligne */
+  /* optional : si la police n'est pas prête dès le premier rendu, le navigateur
+     conserve la police système plutôt que de provoquer un FOUT tardif.
+     NotoSansKR-Light pèse ~6,2 Mo (confirmé par audit Lighthouse) ;
+     la charger dans le chemin critique est trop coûteux. */
+  font-display: optional;
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
-  font-display: swap; /* Ajoutez cette ligne */
+  font-display: optional;
 }
 @font-face {
   font-family: "Noto Sans KR";
   src: url("../font/Noto sans KR/NotoSansKR-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-  font-display: swap; /* Ajoutez cette ligne */
+  font-display: optional;
 }

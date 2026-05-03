@@ -90,31 +90,33 @@ if (!$isMobile) {
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
 
-    <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="font/Noto sans KR/NotoSansKR-Regular.ttf" as="font" type="font/ttf" crossorigin>
-
-    <link rel="stylesheet" type="text/css" href="css/font.css" />
-    <link rel="stylesheet" type="text/css" href="css/typography.css" />
-    
     <?php if ($isMobile): ?>
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
         <?php if ($showLoading): ?>
             <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4" fetchpriority="high">
-            <link rel="preload" href="img/posters/eaulow_poster.webp" as="image">
+            <link rel="preload" href="img/posters/eaulow_poster.webp" as="image" fetchpriority="high">
         <?php else: ?>
             <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
-            <link rel="preload" href="img/posters/chariot_poster.webp" as="image">
+            <link rel="preload" href="img/posters/chariot_poster.webp" as="image" fetchpriority="high">
         <?php endif; ?>
 
+        <!-- Preload des polices critiques (Latin uniquement — NotoSansKR-Regular en lazy) -->
         <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
         <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>
-        <link rel="preload" href="font/Noto sans KR/NotoSansKR-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
+        <!-- CSS critiques chargés de manière synchrone pour le premier rendu -->
+        <link rel="stylesheet" type="text/css" href="css/font.css" />
+        <link rel="stylesheet" type="text/css" href="css/typography.css" />
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <?php include "includes/layout/css.php"; ?>
+
+        <!-- CSS non-critiques : chargement asynchrone pour ne pas bloquer le rendu initial -->
+        <link rel="preload" href="css/navbar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="css/navbar.css"></noscript>
+        <link rel="preload" href="css/visionner.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="css/visionner.css"></noscript>
     <?php endif; ?>
 
     <link rel="alternate" hreflang="fr" href="https://glaneursdecarton.mastercmw.com/?lang=fr" />
