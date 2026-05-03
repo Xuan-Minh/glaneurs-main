@@ -1,4 +1,3 @@
-
 <?php
 header("Vary: User-Agent");
 include 'wip-config.php';
@@ -90,6 +89,11 @@ if (!$isMobile) {
     <meta property="og:description" content="<?php echo getTranslation('meta_description', $lang); ?>" />
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
+
+    <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="font/Noto sans KR/NotoSansKR-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
     <link rel="stylesheet" type="text/css" href="css/font.css" />
     <link rel="stylesheet" type="text/css" href="css/typography.css" />
     
@@ -97,9 +101,10 @@ if (!$isMobile) {
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
 
+    <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
+    <link rel="preload" href="img/posters/chariot_poster.png" as="image">
     <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
     <link rel="preload" href="img/posters/eaulow_poster.png" as="image" type="image/png">
-    <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4">
 
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
