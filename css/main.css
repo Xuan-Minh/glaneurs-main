@@ -19,7 +19,7 @@
   --weight-bold: 700;
 
   /* ========== TITRES ========== */
-  --text-h1: clamp(2rem, 3vw, 3rem); /* Titre principal (hero, slides) */
+  --text-h1: clamp(2rem, 3vw, 3em); /* Titre principal (hero, slides) */
   --text-h2: clamp(1.8rem, 3vw, 2.5rem); /* Titre section */
   --text-h3: clamp(1rem, 1.5vw, 1.5rem); /* Sous-titre - rapport 2:1 avec H1 */
   /* ========== CORPS DE TEXTE ========== */
