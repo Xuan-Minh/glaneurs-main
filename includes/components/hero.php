@@ -2,7 +2,7 @@
 /**
  * Composant réutilisable pour les sections hero
  * @param string $videoSrc Source de la vidéo (ex. 'video/web/archives.mp4')
- * @param string $posterSrc Source du poster (ex. 'img/posters/archives_poster.png')
+ * @param string $posterSrc Source du poster (ex. 'img/posters/archives_poster.webp')
  * @param string $title Titre à afficher
  * @param string $className Classe CSS spécifique (ex. 'archive-hero')
  * @param string $lang Langue pour les traductions si nécessaire

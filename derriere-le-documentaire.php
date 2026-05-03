@@ -80,7 +80,7 @@
     <audio id="audio-bgm" src="audio/ambiancedld.mp3" loop preload="auto"></audio>
     <?php include "includes/layout/header.php"; ?>
 
-    <?php include 'includes/components/hero.php'; renderHero('video/web/ville.mp4', 'img/posters/ville_poster.png', getTranslation('derriereledocumentaire_titre', $lang), 'dld-hero', $lang); ?>
+    <?php include 'includes/components/hero.php'; renderHero('video/web/ville.mp4', 'img/posters/ville_poster.webp', getTranslation('derriereledocumentaire_titre', $lang), 'dld-hero', $lang); ?>
     <div class="page-intro dld-presentation content-anim">
 
         <h2><?php echo getTranslation('derriereledocumentaire_approche', $lang); ?></h2>

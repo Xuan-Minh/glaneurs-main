@@ -74,19 +74,19 @@
         $videoSources = [
             [
                 "src" => "video/web/recyclerie.mp4",
-                "poster" => "img/posters/recyclerie_poster.png",
+                "poster" => "img/posters/recyclerie_poster.webp",
                 "title" => getTranslation("menu_voletchap1", $lang),
                 "slide" => 1
             ],
             [
                 "src" => "video/web/bache.mp4",
-                "poster" => "img/posters/bache_poster.png",
+                "poster" => "img/posters/bache_poster.webp",
                 "title" => getTranslation("menu_voletchap2", $lang),
                 "slide" => 2
             ],
             [
                 "src" => "video/web/lee.mp4",
-                "poster" => "img/posters/lee_poster.png",
+                "poster" => "img/posters/lee_poster.webp",
                 "title" => getTranslation("menu_voletchap3", $lang),
                 "slide" => 3
             ]

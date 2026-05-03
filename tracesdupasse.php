@@ -285,7 +285,7 @@ function renderParagraphFlow(
         <?php include "includes/layout/header.php"; ?>
         <audio id="audio-bgm" src="audio/slide3.mp3" loop preload="auto"></audio>
         <div class="archives-scroll">
-            <?php include 'includes/components/hero.php'; renderHero('video/web/archives.mp4', 'img/posters/archives_poster.png', getTranslation("archives_titre", $lang), 'archive-hero', $lang); ?>
+            <?php include 'includes/components/hero.php'; renderHero('video/web/archives.mp4', 'img/posters/archives_poster.webp', getTranslation("archives_titre", $lang), 'archive-hero', $lang); ?>
             
             <section class="archives-content">
                 <div class="archives-narrative">

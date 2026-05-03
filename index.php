@@ -6,7 +6,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_titre", $lang), // Utilise la fonction de traduction
         "srcvideobg" => "video/web/chariot.mp4",
-        "poster" => "img/posters/chariot_poster.png", 
+        "poster" => "img/posters/chariot_poster.webp", 
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1118628914", 
         "info" => "",
@@ -15,7 +15,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre1", $lang),
         "srcvideobg" => "video/web/recyclerie.mp4",
-        "poster" => "img/posters/recyclerie_poster.png", 
+        "poster" => "img/posters/recyclerie_poster.webp", 
         "srcaudio" => "audio/chap1.mp3",
         "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap1info", $lang),
@@ -26,7 +26,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre2", $lang),
         "srcvideobg" => "video/web/bache.mp4",
-        "poster" => "img/posters/bache_poster.png",
+        "poster" => "img/posters/bache_poster.webp",
         "srcaudio" => "audio/chap2.mp3",
         "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap2info", $lang),
@@ -39,7 +39,7 @@ $slides = array(
     array(
         "chapitre" => getTranslation("index_chapitre3", $lang),
         "srcvideobg" => "video/web/lee.mp4",
-        "poster" => "img/posters/lee_poster.png",
+        "poster" => "img/posters/lee_poster.webp",
         "srcaudio" => "audio/chap3.mp3",
         "srcdocupart" => "https://vimeo.com/1118628914", // Remplacez XXXXXXXXX par l'ID Vimeo
         "info" => getTranslation("index_chap3info", $lang),
@@ -85,7 +85,7 @@ if (!$isMobile) {
     <meta property="og:title" content="Les glaneurs de carton" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://glaneursdecarton.mastercmw.com/" />
-    <meta property="og:image" content="https://glaneursdecarton.mastercmw.com/img/posters/chariot_poster.png" />
+    <meta property="og:image" content="https://glaneursdecarton.mastercmw.com/img/posters/chariot_poster.webp" />
     <meta property="og:description" content="<?php echo getTranslation('meta_description', $lang); ?>" />
     <link rel="canonical" href="https://glaneursdecarton.mastercmw.com/?lang=<?php echo $lang; ?>" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
@@ -102,10 +102,10 @@ if (!$isMobile) {
     <?php else: ?>
         <?php if ($showLoading): ?>
             <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4" fetchpriority="high">
-            <link rel="preload" href="img/posters/eaulow_poster.png" as="image">
+            <link rel="preload" href="img/posters/eaulow_poster.webp" as="image">
         <?php else: ?>
             <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
-            <link rel="preload" href="img/posters/chariot_poster.png" as="image">
+            <link rel="preload" href="img/posters/chariot_poster.webp" as="image">
         <?php endif; ?>
 
         <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>

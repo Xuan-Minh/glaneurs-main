@@ -1,6 +1,6 @@
 <div class="loading-screen">
     <!-- NOUVEAU : Un conteneur dédié pour le poster -->
-    <div class="loading-poster" style="background-image: url('img/posters/eaulow_poster.png');"></div>
+    <div class="loading-poster" style="background-image: url('img/posters/eaulow_poster.webp');"></div>
     <video id="loading-bg-video" preload="auto" autoplay muted loop playsinline webkit-playsinline>
         <source src="video/web/eaulow.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
