@@ -100,8 +100,6 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
         Header set Expires "0"
     </FilesMatch>
 
-    # Toujours envoyer Vary: Accept-Encoding pour les ressources compressées
-    <FilesMatch "\.(css|js|ttf|woff|woff2|html|php)$">
-        Header append Vary Accept-Encoding
-    </FilesMatch>
+    # Note : Vary: Accept-Encoding est déjà envoyé par Nginx (gzip_vary on)
+    # — ne pas le dupliquer ici pour éviter le double header Vary
 </IfModule>
