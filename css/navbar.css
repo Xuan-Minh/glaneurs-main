@@ -322,8 +322,7 @@ li.mentionslegales-right a {
   border-radius: 2px;
   z-index: -1;
 }
-#homeBouton-style:hover span::after,
-#homeBouton-style.active span::after {
+#homeBouton-style:hover span::after {
   width: 100%;
 }
 .menu-homeBouton-subtitle {
