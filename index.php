@@ -99,9 +99,11 @@ if (!$isMobile) {
             <link rel="preload" href="img/posters/chariot_poster.webp" as="image" fetchpriority="high">
         <?php endif; ?>
 
-        <!-- Preload des polices critiques (Latin uniquement — NotoSansKR-Regular en lazy) -->
-        <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-        <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <!-- Preload des polices critiques (WOFF2) -->
+        <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <!-- Preload NotoSansKR : découverte au 1er niveau (casse la chaîne HTML→font.css→police) -->
+        <link rel="preload" href="font/NotoSansKR/NotoSansKR-Light.woff2" as="font" type="font/woff2" crossorigin>
 
         <!-- CSS critiques chargés de manière synchrone pour le premier rendu -->
         <link rel="stylesheet" type="text/css" href="css/font.css" />

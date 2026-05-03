@@ -6,10 +6,23 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^/]+)$ $1.php [L,QSA]
 
 # -----------------------------------------------------------------------
-# HTTP/2 — activer sur les serveurs Apache qui supportent mod_http2
+# HTTP/2 — IMPORTANT : la directive Protocols ne peut s'activer que depuis
+# httpd.conf ou la config VirtualHost (pas depuis .htaccess).
+# Pour activer HTTP/2 :
+#   1. Apache : charger mod_http2, puis ajouter dans le VirtualHost :
+#        Protocols h2 http/1.1
+#   2. Nginx (reverse proxy) : ajouter dans le bloc server :
+#        listen 443 ssl http2;
 # -----------------------------------------------------------------------
 <IfModule mod_http2.c>
-    Protocols h2 h2c http/1.1
+    # Protocols h2 h2c http/1.1  # Déplacer dans httpd.conf/VirtualHost pour activer
+    # H2Push : précharge les ressources critiques dès la réponse HTML
+    # (actif seulement quand HTTP/2 est effectivement activé côté serveur)
+    <FilesMatch "^(index|portraits|tracesdupasse|derriere-le-documentaire|mentionslegales|souvenirs)\.php$">
+        H2PushResource add /css/font.css
+        H2PushResource add /css/typography.css
+        H2PushResource add /css/main.css
+    </FilesMatch>
 </IfModule>
 
 # -----------------------------------------------------------------------
