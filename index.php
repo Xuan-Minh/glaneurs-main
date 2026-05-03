@@ -105,12 +105,18 @@ if (!$isMobile) {
         <!-- Preload NotoSansKR : découverte au 1er niveau (casse la chaîne HTML→font.css→police) -->
         <link rel="preload" href="font/NotoSansKR/NotoSansKR-Light.woff2" as="font" type="font/woff2" crossorigin>
 
+        <?php include __DIR__ . "/includes/layout/font-face.php"; ?>
         <!-- CSS critiques chargés de manière synchrone pour le premier rendu -->
-        <link rel="stylesheet" type="text/css" href="css/font.css" />
-        <link rel="stylesheet" type="text/css" href="css/typography.css" />
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
+        <?php if ($showLoading): ?>
+        <!-- index.css chargé en async : le .container est masqué jusqu'au clic "Entrer" -->
+        <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="css/index.css"></noscript>
+        <?php else: ?>
+        <!-- Visiteur de retour : pas de loading-screen, index.css nécessaire immédiatement -->
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <?php endif; ?>
 
         <!-- CSS non-critiques : chargement asynchrone pour ne pas bloquer le rendu initial -->
         <link rel="preload" href="css/navbar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -179,7 +185,7 @@ if (!$isMobile) {
     <?php if ($showLoading): ?>
     <?php include 'includes/layout/loading.php'; ?>
     <?php endif; ?>
-    <audio id="audio-bgm" src="audio/homepage.mp3" loop preload="auto"></audio>
+    <audio id="audio-bgm" src="audio/homepage.mp3" loop preload="none"></audio>
     <?php include 'includes/layout/header.php'; ?>
     <div class="container <?php echo $showLoading ? 'hidden' : ''; ?>">
         <?php

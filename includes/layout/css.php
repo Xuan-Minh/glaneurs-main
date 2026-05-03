@@ -1,7 +1,7 @@
 
+<?php include __DIR__ . "/font-face.php"; ?>
+
 <!-- CSS critiques : synchrones pour bloquer le rendu le moins possible -->
-<link rel="stylesheet" href="css/font.css" type="text/css" />
-<link rel="stylesheet" href="css/typography.css" type="text/css" />
 <link rel="stylesheet" href="css/main.css">
 
 <!-- CSS non-critiques : chargement asynchrone -->

@@ -19,8 +19,6 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
     # H2Push : précharge les ressources critiques dès la réponse HTML
     # (actif seulement quand HTTP/2 est effectivement activé côté serveur)
     <FilesMatch "^(index|portraits|tracesdupasse|derriere-le-documentaire|mentionslegales|souvenirs)\.php$">
-        H2PushResource add /css/font.css
-        H2PushResource add /css/typography.css
         H2PushResource add /css/main.css
     </FilesMatch>
 </IfModule>
@@ -91,6 +89,10 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
 <IfModule mod_headers.c>
     # Sécurité : supprimer le header qui révèle la stack serveur
     Header always unset X-Powered-By
+
+    # HTTP/3 (QUIC) : annoncer au navigateur qu'il peut mettre à niveau
+    # Nécessite que Nginx écoute sur UDP/443 (activé via Plesk "Prise en charge HTTP/3")
+    Header always set Alt-Svc 'h3=":443"; ma=86400'
 
     # HSTS : forcer HTTPS pendant 1 an, sous-domaines inclus, éligible preload
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
