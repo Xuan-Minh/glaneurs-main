@@ -100,6 +100,6 @@ RewriteRule ^([^/]+)$ $1.php [L,QSA]
         Header set Expires "0"
     </FilesMatch>
 
-# Note : Vary: Accept-Encoding est déjà envoyé par Nginx (gzip_vary on)
+    # Note : Vary: Accept-Encoding est déjà envoyé par Nginx (gzip_vary on)
     # — ne pas le dupliquer ici pour éviter le double header Vary
 </IfModule>

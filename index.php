@@ -94,10 +94,8 @@ if (!$isMobile) {
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
         <?php if ($showLoading): ?>
-            <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4" fetchpriority="high">
             <link rel="preload" href="img/posters/eaulow_poster.webp" as="image" fetchpriority="high">
         <?php else: ?>
-            <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
             <link rel="preload" href="img/posters/chariot_poster.webp" as="image" fetchpriority="high">
         <?php endif; ?>
 
