@@ -112,6 +112,7 @@ html[lang="en"] .definition-text {
   display: flex;
   gap: 1vw;
   margin-bottom: 2vw;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 html[lang="ko"] .def-container {
