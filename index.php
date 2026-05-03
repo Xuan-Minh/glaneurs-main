@@ -100,11 +100,17 @@ if (!$isMobile) {
     <?php if ($isMobile): ?>
         <link rel="stylesheet" type="text/css" href="css/mobile-index.css" />
     <?php else: ?>
+        <?php if ($showLoading): ?>
+            <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4" fetchpriority="high">
+            <link rel="preload" href="img/posters/eaulow_poster.png" as="image">
+        <?php else: ?>
+            <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
+            <link rel="preload" href="img/posters/chariot_poster.png" as="image">
+        <?php endif; ?>
 
-    <link rel="preload" href="video/web/chariot.mp4" as="video" type="video/mp4" fetchpriority="high">
-    <link rel="preload" href="img/posters/chariot_poster.png" as="image">
-    <link rel="preload" href="video/web/eaulow.mp4" as="video" type="video/mp4">
-    <link rel="preload" href="img/posters/eaulow_poster.png" as="image" type="image/png">
+        <link rel="preload" href="font/Figtree/Figtree-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="font/Libre_Baskerville/LibreBaskerville-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="font/Noto sans KR/NotoSansKR-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
         <link rel="stylesheet" type="text/css" href="css/loading.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
