@@ -1,7 +1,7 @@
 
 
 <?php
-session_start();
+session_start(['cache_limiter' => '']);
 
 
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
