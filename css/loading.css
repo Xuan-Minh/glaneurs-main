@@ -114,6 +114,10 @@ html[lang="en"] .definition-text {
   margin-bottom: 2vw;
 }
 
+html[lang="ko"] .def-container {
+  font-family: var(--font-serif) !important;
+}
+
 .def {
   margin: 0 !important;
   padding: 0 !important;
