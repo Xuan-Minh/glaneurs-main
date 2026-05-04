@@ -4,7 +4,7 @@
   font-family: "Figtree";
   src: url("font/Figtree/Figtree-VariableFont_wght.woff2") format("woff2"),
        url("font/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Libre Baskerville";
@@ -12,7 +12,7 @@
        url("font/Libre_Baskerville/LibreBaskerville-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Libre Baskerville";
@@ -20,7 +20,7 @@
        url("font/Libre_Baskerville/LibreBaskerville-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Libre Baskerville";
@@ -28,7 +28,7 @@
        url("font/Libre_Baskerville/LibreBaskerville-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Sans KR";
@@ -36,7 +36,7 @@
        url("font/NotoSansKR/NotoSansKR-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Sans KR";
@@ -44,7 +44,7 @@
        url("font/NotoSansKR/NotoSansKR-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Sans KR";
@@ -52,6 +52,6 @@
        url("font/NotoSansKR/NotoSansKR-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 </style>
