@@ -111,5 +111,17 @@
             }
         })();
     </script>
-    <?php endif; ?>
+        <?php endif; ?>
+        <script>
+        // Masquer le poster dès que la vidéo est prête
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.getElementById('loading-bg-video');
+            var poster = document.querySelector('.loading-poster');
+            if (video && poster) {
+                video.addEventListener('canplaythrough', function () {
+                    poster.style.display = 'none';
+                }, { once: true });
+            }
+        });
+        </script>
 </div>
