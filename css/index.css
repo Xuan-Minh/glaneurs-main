@@ -42,7 +42,6 @@ body {
 h1,
 h2,
 button.visionner-trigger-h3 {
-  font-size: var(--text-h1);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   position: absolute;
   color: white;
