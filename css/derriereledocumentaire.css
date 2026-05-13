@@ -7,14 +7,25 @@
    ========================================================================== */
 
 .dld-presentation {
-  max-width: 1000px;
-  padding: 5vw;
+  max-width: 1200px;
 }
-
+.page-intro {
+  width: 90vw;
+  max-width: 1100px;
+  margin: 10vh auto 10vh auto;
+  color: #fff;
+}
 .dld-presentation h2 {
   padding: 0 0 0.9vw 0;
+  padding-bottom: 2vmax;
 }
-
+.dld-presentation h3 {
+  font-size: var(--text-body-md);
+  font-weight: normal;
+  line-height: 1.9;
+  text-align: justify;
+  text-indent: 1.5rem;
+}
 .dld-remerciements {
   width: 90vw;
   max-width: 1100px;
@@ -26,7 +37,8 @@
 .dld-remerciements p {
   font-size: var(--text-body-md);
   line-height: 1.9;
-  /* text-align: justify défini dans main.css */
+  text-align: justify;
+  text-indent: 1.5rem;
 }
 
 #last-paragraph {

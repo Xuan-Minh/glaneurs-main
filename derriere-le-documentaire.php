@@ -83,10 +83,13 @@
     <?php include 'includes/components/hero.php'; renderHero('video/web/ville.mp4', 'img/posters/ville_poster.webp', getTranslation('derriereledocumentaire_titre', $lang), 'dld-hero', $lang); ?>
     <div class="page-intro dld-presentation content-anim">
 
-        <h2><?php echo getTranslation('derriereledocumentaire_approche', $lang); ?></h2>
-        <p>
+        <h2 ><?php echo getTranslation('derriereledocumentaire_approche', $lang); ?></h2>
+        <h3 class="dld-presentation">
             <?php echo getTranslation('derriereledocumentaire_intro', $lang); ?>
-        </p>
+        </h3>
+        <h3 class="dld-presentation">
+            <?php echo getTranslation('derriereledocumentaire_intro2', $lang); ?>
+        </h3>
     </div>
     <div class="team-grid content-anim">
         <?php foreach ($members as $i => $membre): ?>
