@@ -180,7 +180,7 @@ function renderPortraitContent(int $portraitId, string $lang): void
     <?php include "includes/layout/css.php"; ?>
     <link rel="stylesheet" href="css/portraits.css">
     <link rel="stylesheet" href="css/archives.css">
-    <script src="js/features/portraits-map.js"></script>
+    <script src="js/features/portraits-map.js" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

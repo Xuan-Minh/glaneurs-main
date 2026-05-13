@@ -169,7 +169,7 @@
         </p>
     </section>
     <?php include "includes/layout/jsinclude.php"; ?>
-    <script src="js/pages/derriereledocumentaire.js"></script>
+    <script src="js/pages/derriereledocumentaire.js" defer></script>
 </body>
 
 </html>
