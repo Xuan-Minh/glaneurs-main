@@ -291,7 +291,7 @@ button.visionner-trigger-h3:hover::after {
   .slides h2.move {
     font-size: var(--text-slide-title-md);
     width: 45%;
-    transform: translate(calc(-50% - (50vw - 20vw)), -110%) scale(0.7);
+    transform: translate(calc(-50% - (50vw - 25vw)), -10%) scale(0.7);
   }
 
   .info {
