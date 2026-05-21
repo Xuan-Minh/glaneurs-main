@@ -165,9 +165,6 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
     for ($i = 1; $i <= 20; $i++) {
         $raw = getRawTranslation((string)$baseKey . '_p' . $i, (string)$lang);
         if ($raw === null) {
-            if ($i === 1) {
-                break;
-            }
             break;
         }
         $paragraphs[] = '<p>' . formatRichText($raw, false) . '</p>';
