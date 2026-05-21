@@ -3,6 +3,24 @@
 <?php
 session_start(['cache_limiter' => '']);
 
+if (!defined('MAX_TRANSLATION_PARAGRAPHS')) {
+    define('MAX_TRANSLATION_PARAGRAPHS', 20);
+}
+
+const ALLOWED_INLINE_TAGS_MAP = [
+    '&lt;strong&gt;'  => '<strong>',
+    '&lt;/strong&gt;' => '</strong>',
+    '&lt;b&gt;'       => '<strong>',
+    '&lt;/b&gt;'      => '</strong>',
+    '&lt;em&gt;'      => '<em>',
+    '&lt;/em&gt;'     => '</em>',
+    '&lt;i&gt;'       => '<em>',
+    '&lt;/i&gt;'      => '</em>',
+    '&lt;br&gt;'      => '<br>',
+    '&lt;br/&gt;'     => '<br>',
+    '&lt;br /&gt;'    => '<br>',
+];
+
 
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
 $allowedLangs = ['fr', 'en', 'ko'];
@@ -68,20 +86,7 @@ function formatRichText(?string $text, bool $convertLineBreaks = false): string
 {
     $safe = htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
 
-    $allowedInlineTags = [
-        '&lt;strong&gt;'  => '<strong>',
-        '&lt;/strong&gt;' => '</strong>',
-        '&lt;b&gt;'       => '<strong>',
-        '&lt;/b&gt;'      => '</strong>',
-        '&lt;em&gt;'      => '<em>',
-        '&lt;/em&gt;'     => '</em>',
-        '&lt;i&gt;'       => '<em>',
-        '&lt;/i&gt;'      => '</em>',
-        '&lt;br&gt;'      => '<br>',
-        '&lt;br/&gt;'     => '<br>',
-        '&lt;br /&gt;'    => '<br>',
-    ];
-    $safe = str_ireplace(array_keys($allowedInlineTags), array_values($allowedInlineTags), $safe);
+    $safe = str_ireplace(array_keys(ALLOWED_INLINE_TAGS_MAP), array_values(ALLOWED_INLINE_TAGS_MAP), $safe);
 
     if ($convertLineBreaks) {
         $safe = nl2br($safe);
@@ -151,6 +156,31 @@ function getTranslationRich($key, $lang = 'fr', bool $convertLineBreaks = false)
     }
 
     return 'TRADUCTION_MANQUANTE: ' . htmlspecialchars((string)$key, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Retourne un contenu narratif possiblement découpé en paragraphes:
+ * - essaie key_p1, key_p2, ... tant que les clés existent
+ * - sinon, fallback sur key simple
+ */
+function getTranslationParagraphs($baseKey, $lang = 'fr')
+{
+    $paragraphs = [];
+
+    for ($i = 1; $i <= MAX_TRANSLATION_PARAGRAPHS; $i++) {
+        $raw = getRawTranslation("{$baseKey}_p{$i}", $lang);
+        if ($raw === null) {
+            break;
+        }
+        $safeParagraph = formatRichText($raw, false);
+        $paragraphs[] = '<p>' . $safeParagraph . '</p>';
+    }
+
+    if (!empty($paragraphs)) {
+        return implode('', $paragraphs);
+    }
+
+    return getTranslationRich($baseKey, $lang, false);
 }
 
 /**
