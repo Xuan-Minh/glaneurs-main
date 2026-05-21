@@ -204,17 +204,34 @@ button.visionner-trigger-h3:hover::after {
   background: rgba(4, 14, 30, 0.6);
   text-align: justify;
   border-radius: 10px;
-  padding: 2vw 2.5vw 80px 2.5vw; /* padding-bottom inclus ici */
-  width: 40%;
-  max-width: 500px;
+  padding: clamp(1rem, 2vw, 2rem);
+  width: min(40vw, 520px);
+  max-width: calc(100vw - 2.5rem);
   position: absolute;
-  left: 55vw;
-  top: 20%;
+  left: clamp(50vw, 55vw, 58vw);
+  top: clamp(15%, 20%, 24%);
   color: white;
   line-height: 1.9;
   display: none;
-  min-height: 30vh;
-  text-indent: 40px;
+  min-height: min(30vh, 420px);
+  max-height: min(65vh, 700px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.info-content > p:first-child {
+  margin-top: 0;
+}
+
+.info-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.info-actions {
+  margin-top: clamp(1rem, 2vh, 1.5rem);
+  display: flex;
+  justify-content: flex-end;
 }
 
 @keyframes nudge-right {
@@ -230,9 +247,8 @@ button.visionner-trigger-h3:hover::after {
 .info-button {
   display: inline-flex;
   align-items: center;
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
+  gap: 0.4rem;
+  position: relative;
   padding: 12px 24px;
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
@@ -273,7 +289,7 @@ button.visionner-trigger-h3:hover::after {
   display: inline-block;
   width: 22px;
   height: 22px;
-  margin-left: 8px;
+  margin-left: 0;
   background-image: url("../img/arrowright.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -295,10 +311,20 @@ button.visionner-trigger-h3:hover::after {
   }
 
   .info {
-    left: 52vw;
-    right: 20px;
-    width: auto;
-    max-width: 90%;
+    left: 50vw;
+    top: 22%;
+    width: min(44vw, 520px);
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+@media (max-width: 980px) {
+  .info {
+    left: 50%;
+    top: 56%;
+    transform: translateX(-50%);
+    width: min(88vw, 620px);
+    max-height: 38vh;
   }
 }
 

@@ -42,10 +42,12 @@ foreach ($slides as $slide) {
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
-        echo '<div class="info preserve-lines">'; ;
-        echo $slide["info"];
+        echo '<div class="info preserve-lines">';
+        echo '<div class="info-content">' . $slide["info"] . '</div>';
         if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
-            echo '<a href="' . $slide["info_button_link"] . '" class="info-button transition-link"><span>' . $slide["info_button_text"] . '</span></a>';
+            echo '<div class="info-actions">';
+            echo '<a href="' . htmlspecialchars($slide["info_button_link"], ENT_QUOTES, 'UTF-8') . '" class="info-button transition-link"><span>' . htmlspecialchars($slide["info_button_text"], ENT_QUOTES, 'UTF-8') . '</span></a>';
+            echo '</div>';
         }
         echo '</div>';
     }
