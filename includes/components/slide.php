@@ -42,10 +42,20 @@ foreach ($slides as $slide) {
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
-        echo '<div class="info preserve-lines">'; ;
-        echo $slide["info"];
+        echo '<div class="info preserve-lines" tabindex="0">';
+        echo '<div class="info-content">' . $slide["info"] . '</div>';
         if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
-            echo '<a href="' . $slide["info_button_link"] . '" class="info-button transition-link"><span>' . $slide["info_button_text"] . '</span></a>';
+            $rawLink = trim((string)$slide["info_button_link"]);
+            $parsedLink = parse_url($rawLink);
+            $isHttpsLink = isset($parsedLink["scheme"]) && strtolower((string)$parsedLink["scheme"]) === "https";
+            $isPermittedRelativeLink = !isset($parsedLink["scheme"])
+                && preg_match('/^(?!\\/)(?!.*\\/\\/)[a-zA-Z0-9_-]+(?:\\/[a-zA-Z0-9_-]+)*$/', $rawLink) === 1;
+
+            if ($isHttpsLink || $isPermittedRelativeLink) {
+                echo '<div class="info-actions">';
+                echo '<a href="' . htmlspecialchars($rawLink, ENT_QUOTES, 'UTF-8') . '" class="info-button transition-link"><span>' . htmlspecialchars($slide["info_button_text"], ENT_QUOTES, 'UTF-8') . '</span></a>';
+                echo '</div>';
+            }
         }
         echo '</div>';
     }
