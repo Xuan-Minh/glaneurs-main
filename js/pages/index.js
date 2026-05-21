@@ -30,7 +30,9 @@ $(document).ready(function () {
         }
       })),
     initIndexAutoCloseNonActiveSlides(),
-    initIndexWheelAndScrollArrow());
+    initIndexWheelAndScrollArrow(),
+    updateAllTriggerPointPositions(),
+    initIndexInfoAnchorSync());
 });
 const loadingItems = $(".loading-item");
 let currentItem = 0;
@@ -87,6 +89,51 @@ function showNextItem() {
   }));
 const TRANSFORM_ANIMATION_DURATION = 1500;
 let authorFadeInTimer = null;
+function updateSlideTriggerPointPosition(e) {
+  const t = e && e.length ? e : $(e);
+  if (!t || !t.length) return;
+  const n = t.get(0),
+    i = t.find(".info").get(0),
+    o = t.find(".sliderButton").get(0);
+  if (!n || !i || !o) return;
+  const s = window.getComputedStyle(i).display;
+  let r = !1;
+  const a = i.style.display,
+    l = i.style.visibility,
+    d = i.style.pointerEvents;
+  "none" === s &&
+    ((i.style.display = "block"),
+    (i.style.visibility = "hidden"),
+    (i.style.pointerEvents = "none"),
+    (r = !0));
+  const c = n.getBoundingClientRect(),
+    u = i.getBoundingClientRect();
+  let f = u.top - c.top + u.height / 2;
+  Number.isFinite(f) && u.height > 0 && ((f = Math.max(0, Math.min(c.height, f))), (o.style.top = `${f}px`)),
+    r &&
+      ((i.style.display = a),
+      (i.style.visibility = l),
+      (i.style.pointerEvents = d));
+}
+function updateAllTriggerPointPositions() {
+  $(".slides").each(function () {
+    updateSlideTriggerPointPosition($(this));
+  });
+}
+function initIndexInfoAnchorSync() {
+  let e = null;
+  const t = () => {
+    (null !== e && window.clearTimeout(e),
+      (e = window.setTimeout(() => {
+        updateAllTriggerPointPositions();
+      }, 80)));
+  };
+  window.addEventListener("resize", t, { passive: !0 }),
+    window.addEventListener("orientationchange", t),
+    window.addEventListener("load", function () {
+      updateAllTriggerPointPositions();
+    });
+}
 function showInfoPanel(e) {
   if (!e || !e.length) return;
   const t = e.hasClass("slide1"),
@@ -103,7 +150,9 @@ function showInfoPanel(e) {
       (authorFadeInTimer = setTimeout(() => {
         n.addClass("author-visible");
       }, 1500))),
-    i.fadeIn(500),
+    i.fadeIn(500, function () {
+      updateSlideTriggerPointPosition(e);
+    }),
     e.find(".sliderButton .point2").addClass("full").removeClass("empty"),
     e.find(".sliderButton .point1").addClass("empty").removeClass("full"),
     t || e.find("video").addClass("flou"));
@@ -190,7 +239,8 @@ function applyInfoPanelState(e) {
         e.find("video").addClass("flou"),
         fadeVisionnerTriggerH3(e, !0)),
     e.find(".sliderButton .point2").addClass("full").removeClass("empty"),
-    e.find(".sliderButton .point1").addClass("empty").removeClass("full"));
+    e.find(".sliderButton .point1").addClass("empty").removeClass("full"),
+    updateSlideTriggerPointPosition(e));
 }
 function getClosestSlideIndex(e) {
   const t = window.innerHeight / 2;
@@ -232,7 +282,8 @@ function resetSlideState(e) {
     fadeVisionnerTriggerH3(e, !1),
     e.find(".sliderButton .point1").addClass("full").removeClass("empty"),
     e.find(".sliderButton .point2").addClass("empty").removeClass("full"),
-    e.find("video").removeClass("flou"));
+    e.find("video").removeClass("flou"),
+    updateSlideTriggerPointPosition(e));
 }
 function focusTrap(e) {
   const t = e
