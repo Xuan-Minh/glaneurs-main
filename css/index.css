@@ -132,6 +132,8 @@ button.visionner-trigger-h3:hover::after {
   --info-align-center-x: 30vw;
   --info-panel-top: 20%;
   --trigger-points-top: 80%;
+  --info-bottom-gap: 6%;
+  --info-scrollbar-thumb-color: rgba(255, 255, 255, 0.55);
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -222,10 +224,14 @@ button.visionner-trigger-h3:hover::after {
   line-height: 1.9;
   display: none;
   min-height: min(24vh, 320px);
-  max-height: min(58vh, calc(var(--trigger-points-top) - var(--info-panel-top) - 6%));
+  /* Garde une marge visuelle entre le bas de .info et les points de déclenchement */
+  max-height: min(
+    58vh,
+    calc(var(--trigger-points-top) - var(--info-panel-top) - var(--info-bottom-gap))
+  );
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
+  scrollbar-color: var(--info-scrollbar-thumb-color) transparent;
   box-sizing: border-box;
   z-index: 10;
 }
@@ -235,7 +241,7 @@ button.visionner-trigger-h3:hover::after {
 }
 
 .info::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: var(--info-scrollbar-thumb-color);
   border-radius: 999px;
 }
 
