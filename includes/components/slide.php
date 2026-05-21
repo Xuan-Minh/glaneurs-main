@@ -42,7 +42,7 @@ foreach ($slides as $slide) {
         echo '<div class="point1 full"></div>';
         echo '<div class="point2 empty"></div>';
         echo '</div>';
-        echo '<div class="info preserve-lines">';
+        echo '<div class="info preserve-lines" tabindex="0">';
         echo '<div class="info-content">' . $slide["info"] . '</div>';
         if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
             echo '<div class="info-actions">';
