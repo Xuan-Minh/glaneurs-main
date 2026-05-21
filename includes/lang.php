@@ -169,12 +169,11 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
     $paragraphs = [];
 
     for ($i = 1; $i <= MAX_TRANSLATION_PARAGRAPHS; $i++) {
-        $raw = getRawTranslation("{$baseKey}_p{$i}", (string)$lang);
+        $raw = getRawTranslation("{$baseKey}_p{$i}", $lang);
         if ($raw === null) {
             break;
         }
         $safeParagraph = formatRichText($raw, false);
-        $safeParagraph = strip_tags($safeParagraph, ALLOWED_INLINE_TAGS_STR);
         $paragraphs[] = '<p>' . $safeParagraph . '</p>';
     }
 
