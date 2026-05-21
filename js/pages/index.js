@@ -89,31 +89,41 @@ function showNextItem() {
   }));
 const TRANSFORM_ANIMATION_DURATION = 1500;
 let authorFadeInTimer = null;
-function updateSlideTriggerPointPosition(e) {
-  const t = e && e.length ? e : $(e);
-  if (!t || !t.length) return;
-  const n = t.get(0),
-    i = t.find(".info").get(0),
-    o = t.find(".sliderButton").get(0);
-  if (!n || !i || !o) return;
-  const s = window.getComputedStyle(i).display;
-  let r = !1;
-  const a = i.style.display,
-    l = i.style.visibility,
-    d = i.style.pointerEvents;
-  "none" === s &&
-    ((i.style.display = "block"),
-    (i.style.visibility = "hidden"),
-    (i.style.pointerEvents = "none"),
-    (r = !0));
-  const c = n.getBoundingClientRect(),
-    u = i.getBoundingClientRect();
-  let f = u.top - c.top + u.height / 2;
-  Number.isFinite(f) && u.height > 0 && ((f = Math.max(0, Math.min(c.height, f))), (o.style.top = `${f}px`)),
-    r &&
-      ((i.style.display = a),
-      (i.style.visibility = l),
-      (i.style.pointerEvents = d));
+function updateSlideTriggerPointPosition(slide) {
+  const slideJquery = slide && slide.length ? slide : $(slide);
+  if (!slideJquery || !slideJquery.length) return;
+  const slideElement = slideJquery.get(0),
+    infoPanel = slideJquery.find(".info").get(0),
+    sliderButton = slideJquery.find(".sliderButton").get(0);
+  if (!slideElement || !infoPanel || !sliderButton) return;
+
+  const computedDisplay = window.getComputedStyle(infoPanel).display;
+  let wasInfoTemporarilyShown = !1;
+  const originalDisplay = infoPanel.style.display,
+    originalVisibility = infoPanel.style.visibility,
+    originalPointerEvents = infoPanel.style.pointerEvents;
+
+  if ("none" === computedDisplay) {
+    infoPanel.style.display = "block";
+    infoPanel.style.visibility = "hidden";
+    infoPanel.style.pointerEvents = "none";
+    wasInfoTemporarilyShown = !0;
+  }
+
+  const slideRect = slideElement.getBoundingClientRect(),
+    infoRect = infoPanel.getBoundingClientRect();
+  let centerY = infoRect.top - slideRect.top + infoRect.height / 2;
+
+  if (Number.isFinite(centerY) && infoRect.height > 0) {
+    centerY = Math.max(0, Math.min(slideRect.height, centerY));
+    sliderButton.style.top = `${centerY}px`;
+  }
+
+  if (wasInfoTemporarilyShown) {
+    infoPanel.style.display = originalDisplay;
+    infoPanel.style.visibility = originalVisibility;
+    infoPanel.style.pointerEvents = originalPointerEvents;
+  }
 }
 function updateAllTriggerPointPositions() {
   $(".slides").each(function () {
@@ -121,15 +131,15 @@ function updateAllTriggerPointPositions() {
   });
 }
 function initIndexInfoAnchorSync() {
-  let e = null;
-  const t = () => {
-    (null !== e && window.clearTimeout(e),
-      (e = window.setTimeout(() => {
-        updateAllTriggerPointPositions();
-      }, 80)));
+  let debounceTimer = null;
+  const debouncedUpdate = () => {
+    if (null !== debounceTimer) window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      updateAllTriggerPointPositions();
+    }, 80);
   };
-  window.addEventListener("resize", t, { passive: !0 }),
-    window.addEventListener("orientationchange", t),
+  window.addEventListener("resize", debouncedUpdate, { passive: !0 }),
+    window.addEventListener("orientationchange", debouncedUpdate),
     window.addEventListener("load", function () {
       updateAllTriggerPointPositions();
     });
