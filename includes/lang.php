@@ -20,7 +20,6 @@ const ALLOWED_INLINE_TAGS_MAP = [
     '&lt;br/&gt;'     => '<br>',
     '&lt;br /&gt;'    => '<br>',
 ];
-const ALLOWED_INLINE_TAGS_STR = '<strong><em><br>';
 
 
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
