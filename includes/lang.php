@@ -180,6 +180,22 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
         return implode('', $paragraphs);
     }
 
+    // Si on n'a pas de clés _p1/_p2..., tenter de découper le contenu
+    // du champ unique en paragraphes séparés par une ligne vide.
+    $raw = getRawTranslation($baseKey, $lang);
+    if ($raw !== null) {
+        $parts = preg_split('/\R{2,}/u', $raw); // sépare sur lignes vides (Windows/Unix)
+        $out = [];
+        foreach ($parts as $part) {
+            $part = trim($part);
+            if ($part === '') continue;
+            $out[] = '<p>' . formatRichText($part, false) . '</p>';
+        }
+        if (!empty($out)) {
+            return implode('', $out);
+        }
+    }
+
     return getTranslationRich($baseKey, $lang, false);
 }
 
