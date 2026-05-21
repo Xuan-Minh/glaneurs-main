@@ -7,6 +7,21 @@ if (!defined('MAX_TRANSLATION_PARAGRAPHS')) {
     define('MAX_TRANSLATION_PARAGRAPHS', 20);
 }
 
+const ALLOWED_INLINE_TAGS_MAP = [
+    '&lt;strong&gt;'  => '<strong>',
+    '&lt;/strong&gt;' => '</strong>',
+    '&lt;b&gt;'       => '<strong>',
+    '&lt;/b&gt;'      => '</strong>',
+    '&lt;em&gt;'      => '<em>',
+    '&lt;/em&gt;'     => '</em>',
+    '&lt;i&gt;'       => '<em>',
+    '&lt;/i&gt;'      => '</em>',
+    '&lt;br&gt;'      => '<br>',
+    '&lt;br/&gt;'     => '<br>',
+    '&lt;br /&gt;'    => '<br>',
+];
+const ALLOWED_INLINE_TAGS_STR = '<strong><em><br>';
+
 
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
 $allowedLangs = ['fr', 'en', 'ko'];
@@ -72,20 +87,7 @@ function formatRichText(?string $text, bool $convertLineBreaks = false): string
 {
     $safe = htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
 
-    $allowedInlineTags = [
-        '&lt;strong&gt;'  => '<strong>',
-        '&lt;/strong&gt;' => '</strong>',
-        '&lt;b&gt;'       => '<strong>',
-        '&lt;/b&gt;'      => '</strong>',
-        '&lt;em&gt;'      => '<em>',
-        '&lt;/em&gt;'     => '</em>',
-        '&lt;i&gt;'       => '<em>',
-        '&lt;/i&gt;'      => '</em>',
-        '&lt;br&gt;'      => '<br>',
-        '&lt;br/&gt;'     => '<br>',
-        '&lt;br /&gt;'    => '<br>',
-    ];
-    $safe = str_ireplace(array_keys($allowedInlineTags), array_values($allowedInlineTags), $safe);
+    $safe = str_ireplace(array_keys(ALLOWED_INLINE_TAGS_MAP), array_values(ALLOWED_INLINE_TAGS_MAP), $safe);
 
     if ($convertLineBreaks) {
         $safe = nl2br($safe);
@@ -172,7 +174,7 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
             break;
         }
         $safeParagraph = formatRichText($raw, false);
-        $safeParagraph = strip_tags($safeParagraph, '<strong><em><br>');
+        $safeParagraph = strip_tags($safeParagraph, ALLOWED_INLINE_TAGS_STR);
         $paragraphs[] = '<p>' . $safeParagraph . '</p>';
     }
 
