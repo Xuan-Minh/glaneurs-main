@@ -45,9 +45,16 @@ foreach ($slides as $slide) {
         echo '<div class="info preserve-lines" tabindex="0">';
         echo '<div class="info-content">' . $slide["info"] . '</div>';
         if (isset($slide["info_button_text"]) && isset($slide["info_button_link"])) {
-            echo '<div class="info-actions">';
-            echo '<a href="' . htmlspecialchars($slide["info_button_link"], ENT_QUOTES, 'UTF-8') . '" class="info-button transition-link"><span>' . htmlspecialchars($slide["info_button_text"], ENT_QUOTES, 'UTF-8') . '</span></a>';
-            echo '</div>';
+            $rawLink = trim((string)$slide["info_button_link"]);
+            $parsedLink = parse_url($rawLink);
+            $isHttpLink = isset($parsedLink["scheme"]) && in_array(strtolower((string)$parsedLink["scheme"]), ["http", "https"], true);
+            $isRelativeLink = !isset($parsedLink["scheme"]) && $rawLink !== "" && !preg_match('/^\s*(?:javascript|data):/i', $rawLink);
+
+            if ($isHttpLink || $isRelativeLink) {
+                echo '<div class="info-actions">';
+                echo '<a href="' . htmlspecialchars($rawLink, ENT_QUOTES, 'UTF-8') . '" class="info-button transition-link"><span>' . htmlspecialchars($slide["info_button_text"], ENT_QUOTES, 'UTF-8') . '</span></a>';
+                echo '</div>';
+            }
         }
         echo '</div>';
     }
