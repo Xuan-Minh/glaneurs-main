@@ -103,7 +103,7 @@ function updateSlideTriggerPointPosition(slide) {
     originalVisibility = infoPanel.style.visibility,
     originalPointerEvents = infoPanel.style.pointerEvents;
 
-  if ("none" === computedDisplay) {
+  if (computedDisplay === "none") {
     infoPanel.style.display = "block";
     infoPanel.style.visibility = "hidden";
     infoPanel.style.pointerEvents = "none";
@@ -133,7 +133,7 @@ function updateAllTriggerPointPositions() {
 function initIndexInfoAnchorSync() {
   let debounceTimer = null;
   const debouncedUpdate = () => {
-    if (null !== debounceTimer) window.clearTimeout(debounceTimer);
+    if (debounceTimer !== null) window.clearTimeout(debounceTimer);
     debounceTimer = window.setTimeout(() => {
       updateAllTriggerPointPositions();
     }, 80);
