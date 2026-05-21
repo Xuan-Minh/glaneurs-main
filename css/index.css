@@ -224,7 +224,7 @@ button.visionner-trigger-h3:hover::after {
   line-height: 1.9;
   display: none;
   min-height: min(24vh, 320px);
-  /* Garde une marge visuelle entre le bas de .info et les points de déclenchement */
+  /* 58vh borne la hauteur sur écrans très hauts ; le calc() garde la marge avec les points */
   max-height: min(
     58vh,
     calc(var(--trigger-points-top) - var(--info-panel-top) - var(--info-bottom-gap))
