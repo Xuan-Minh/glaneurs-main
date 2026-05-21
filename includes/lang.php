@@ -3,6 +3,10 @@
 <?php
 session_start(['cache_limiter' => '']);
 
+if (!defined('MAX_TRANSLATION_PARAGRAPHS')) {
+    define('MAX_TRANSLATION_PARAGRAPHS', 20);
+}
+
 
 // --- GESTION SÉCURISÉE DE LA LANGUE ---
 $allowedLangs = ['fr', 'en', 'ko'];
@@ -162,7 +166,7 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
 {
     $paragraphs = [];
 
-    for ($i = 1; $i <= 20; $i++) {
+    for ($i = 1; $i <= MAX_TRANSLATION_PARAGRAPHS; $i++) {
         $raw = getRawTranslation((string)$baseKey . '_p' . $i, (string)$lang);
         if ($raw === null) {
             break;
@@ -170,7 +174,7 @@ function getTranslationParagraphs($baseKey, $lang = 'fr')
         $paragraphs[] = '<p>' . formatRichText($raw, false) . '</p>';
     }
 
-    if ($paragraphs !== []) {
+    if (!empty($paragraphs)) {
         return implode('', $paragraphs);
     }
 
