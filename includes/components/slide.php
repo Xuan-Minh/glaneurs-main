@@ -48,7 +48,7 @@ foreach ($slides as $slide) {
             $rawLink = trim((string)$slide["info_button_link"]);
             $parsedLink = parse_url($rawLink);
             $isHttpLink = isset($parsedLink["scheme"]) && in_array(strtolower((string)$parsedLink["scheme"]), ["http", "https"], true);
-            $isRelativeLink = !isset($parsedLink["scheme"]) && $rawLink !== "" && !preg_match('/^\s*(?:javascript|data):/i', $rawLink);
+            $isRelativeLink = !isset($parsedLink["scheme"]) && $rawLink !== "" && !preg_match('/^(?:javascript|data):/i', $rawLink);
 
             if ($isHttpLink || $isRelativeLink) {
                 echo '<div class="info-actions">';
