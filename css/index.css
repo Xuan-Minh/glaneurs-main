@@ -204,7 +204,7 @@ button.visionner-trigger-h3:hover::after {
   background: rgba(4, 14, 30, 0.6);
   text-align: justify;
   border-radius: 10px;
-  padding: 2vw 2.5vw 80px 2.5vw; /* padding-bottom inclus ici */
+  padding: 2vw;
   width: 40%;
   max-width: 500px;
   position: absolute;
@@ -214,7 +214,20 @@ button.visionner-trigger-h3:hover::after {
   line-height: 1.9;
   display: none;
   min-height: 30vh;
-  text-indent: 40px;
+}
+
+.info-content > p:first-child {
+  margin-top: 0;
+}
+
+.info-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.info-actions {
+  margin-top: clamp(1rem, 2vh, 1.5rem);
+  display: flex;
+  justify-content: flex-end;
 }
 
 @keyframes nudge-right {
@@ -230,9 +243,7 @@ button.visionner-trigger-h3:hover::after {
 .info-button {
   display: inline-flex;
   align-items: center;
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
+  position: relative;
   padding: 12px 24px;
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
