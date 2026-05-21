@@ -90,11 +90,11 @@ function showNextItem() {
 const TRANSFORM_ANIMATION_DURATION = 1500;
 let authorFadeInTimer = null;
 function updateSlideTriggerPointPosition(slide) {
-  const slideJquery = slide && slide.length ? slide : $(slide);
-  if (!slideJquery || !slideJquery.length) return;
-  const slideElement = slideJquery.get(0),
-    infoPanel = slideJquery.find(".info").get(0),
-    sliderButton = slideJquery.find(".sliderButton").get(0);
+  const $slide = slide && slide.length ? slide : $(slide);
+  if (!$slide || !$slide.length) return;
+  const slideElement = $slide.get(0),
+    infoPanel = $slide.find(".info").get(0),
+    sliderButton = $slide.find(".sliderButton").get(0);
   if (!slideElement || !infoPanel || !sliderButton) return;
 
   const computedDisplay = window.getComputedStyle(infoPanel).display;
@@ -133,16 +133,16 @@ function updateAllTriggerPointPositions() {
 function initIndexInfoAnchorSync() {
   let debounceTimer = null;
   const debouncedUpdate = () => {
-    if (debounceTimer !== null) window.clearTimeout(debounceTimer);
+    window.clearTimeout(debounceTimer);
     debounceTimer = window.setTimeout(() => {
       updateAllTriggerPointPositions();
     }, 80);
   };
   window.addEventListener("resize", debouncedUpdate, { passive: true }),
-    window.addEventListener("orientationchange", debouncedUpdate),
-    window.addEventListener("load", function () {
-      updateAllTriggerPointPositions();
-    });
+    window.addEventListener("orientationchange", debouncedUpdate, {
+      passive: true,
+    }),
+    window.addEventListener("load", debouncedUpdate, { passive: true });
 }
 function showInfoPanel(e) {
   if (!e || !e.length) return;
