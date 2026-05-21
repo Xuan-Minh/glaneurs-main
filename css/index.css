@@ -208,7 +208,7 @@ button.visionner-trigger-h3:hover::after {
   width: min(40vw, 520px);
   max-width: calc(100vw - 2.5rem);
   position: absolute;
-  left: clamp(50vw, 55vw, 58vw);
+  left: clamp(50vw, calc(50vw + 5vw), 58vw);
   top: clamp(15%, 20%, 24%);
   color: white;
   line-height: 1.9;
@@ -216,8 +216,19 @@ button.visionner-trigger-h3:hover::after {
   min-height: min(30vh, 420px);
   max-height: min(65vh, 700px);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
   box-sizing: border-box;
   z-index: 10;
+}
+
+.info::-webkit-scrollbar {
+  width: 8px;
+}
+
+.info::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
 }
 
 .info-content > p:first-child {
