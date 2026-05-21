@@ -154,6 +154,33 @@ function getTranslationRich($key, $lang = 'fr', bool $convertLineBreaks = false)
 }
 
 /**
+ * Retourne un contenu narratif possiblement découpé en paragraphes:
+ * - essaie key_p1, key_p2, ... tant que les clés existent
+ * - sinon, fallback sur key simple
+ */
+function getTranslationParagraphs($baseKey, $lang = 'fr')
+{
+    $paragraphs = [];
+
+    for ($i = 1; $i <= 20; $i++) {
+        $raw = getRawTranslation((string)$baseKey . '_p' . $i, (string)$lang);
+        if ($raw === null) {
+            if ($i === 1) {
+                break;
+            }
+            break;
+        }
+        $paragraphs[] = '<p>' . formatRichText($raw, false) . '</p>';
+    }
+
+    if ($paragraphs !== []) {
+        return implode('', $paragraphs);
+    }
+
+    return getTranslationRich($baseKey, $lang, false);
+}
+
+/**
  * Retourne les métadonnées d'une image d'archives par son ID.
  * Les données sont chargées en une seule requête et mises en cache.
  */
