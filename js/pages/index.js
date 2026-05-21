@@ -98,7 +98,7 @@ function updateSlideTriggerPointPosition(slide) {
   if (!slideElement || !infoPanel || !sliderButton) return;
 
   const computedDisplay = window.getComputedStyle(infoPanel).display;
-  let wasInfoTemporarilyShown = !1;
+  let wasInfoTemporarilyShown = false;
   const originalDisplay = infoPanel.style.display,
     originalVisibility = infoPanel.style.visibility,
     originalPointerEvents = infoPanel.style.pointerEvents;
@@ -107,7 +107,7 @@ function updateSlideTriggerPointPosition(slide) {
     infoPanel.style.display = "block";
     infoPanel.style.visibility = "hidden";
     infoPanel.style.pointerEvents = "none";
-    wasInfoTemporarilyShown = !0;
+    wasInfoTemporarilyShown = true;
   }
 
   const slideRect = slideElement.getBoundingClientRect(),
@@ -138,7 +138,7 @@ function initIndexInfoAnchorSync() {
       updateAllTriggerPointPositions();
     }, 80);
   };
-  window.addEventListener("resize", debouncedUpdate, { passive: !0 }),
+  window.addEventListener("resize", debouncedUpdate, { passive: true }),
     window.addEventListener("orientationchange", debouncedUpdate),
     window.addEventListener("load", function () {
       updateAllTriggerPointPositions();

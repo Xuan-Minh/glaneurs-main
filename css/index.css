@@ -377,7 +377,7 @@ button.visionner-trigger-h3:hover::after {
   min-width: 70px;
   height: auto;
   position: absolute;
-  top: var(--trigger-points-top);
+  top: var(--trigger-points-top, 80%);
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
