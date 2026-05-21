@@ -48,9 +48,10 @@ foreach ($slides as $slide) {
             $rawLink = trim((string)$slide["info_button_link"]);
             $parsedLink = parse_url($rawLink);
             $isHttpLink = isset($parsedLink["scheme"]) && in_array(strtolower((string)$parsedLink["scheme"]), ["http", "https"], true);
-            $isRelativeLink = !isset($parsedLink["scheme"]) && $rawLink !== "" && !preg_match('/^(?:javascript|data):/i', $rawLink);
+            $isPermittedRelativeLink = !isset($parsedLink["scheme"])
+                && preg_match("/^(?!\\/\\/)(?!.*[\\x00-\\x1F\\x7F])[\\/?#A-Za-z0-9._~!$&'()*+,;=@%-]+$/", $rawLink) === 1;
 
-            if ($isHttpLink || $isRelativeLink) {
+            if ($isHttpLink || $isPermittedRelativeLink) {
                 echo '<div class="info-actions">';
                 echo '<a href="' . htmlspecialchars($rawLink, ENT_QUOTES, 'UTF-8') . '" class="info-button transition-link"><span>' . htmlspecialchars($slide["info_button_text"], ENT_QUOTES, 'UTF-8') . '</span></a>';
                 echo '</div>';
