@@ -90,7 +90,7 @@ function showNextItem() {
 const TRANSFORM_ANIMATION_DURATION = 1500;
 let authorFadeInTimer = null;
 function updateSlideTriggerPointPosition(slide) {
-  const $slide = slide && slide.length ? slide : $(slide);
+  const $slide = slide && slide.jquery ? slide : $(slide);
   if (!$slide || !$slide.length) return;
   const slideElement = $slide.get(0),
     infoPanel = $slide.find(".info").get(0),
@@ -116,7 +116,7 @@ function updateSlideTriggerPointPosition(slide) {
 
   if (Number.isFinite(centerY) && infoRect.height > 0) {
     centerY = Math.max(0, Math.min(slideRect.height, centerY));
-    sliderButton.style.top = `${centerY}px`;
+    slideElement.style.setProperty("--trigger-points-top", `${centerY}px`);
   }
 
   if (wasInfoTemporarilyShown) {
