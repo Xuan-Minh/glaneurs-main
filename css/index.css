@@ -129,6 +129,9 @@ button.visionner-trigger-h3:hover::after {
 }
 /* ---------------------- MAIN PAGE ------------------------------------ */
 .slides {
+  --info-align-center-x: 30vw;
+  --info-panel-top: 20%;
+  --trigger-points-top: 80%;
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -190,7 +193,11 @@ button.visionner-trigger-h3:hover::after {
   ); /* La taille change instantanément, ce qui est moins choquant qu'une animation saccadée */
   text-align: left;
   white-space: normal;
-  transform: translate(calc(-50% - (50vw - 30vw)), 0%) scale(0.8);
+  transform: translate(
+      calc(-50% - (50vw - var(--info-align-center-x))),
+      0%
+    )
+    scale(0.8);
 }
 
 .sliderButton {
@@ -208,13 +215,14 @@ button.visionner-trigger-h3:hover::after {
   width: min(40vw, 520px);
   max-width: calc(100vw - 2.5rem);
   position: absolute;
-  left: clamp(50vw, calc(50vw + 5vw), 58vw);
-  top: clamp(15%, 20%, 24%);
+  left: var(--info-align-center-x);
+  top: var(--info-panel-top);
+  transform: translateX(-50%);
   color: white;
   line-height: 1.9;
   display: none;
-  min-height: min(30vh, 420px);
-  max-height: min(65vh, 700px);
+  min-height: min(24vh, 320px);
+  max-height: min(58vh, calc(var(--trigger-points-top) - var(--info-panel-top) - 6%));
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
@@ -314,15 +322,22 @@ button.visionner-trigger-h3:hover::after {
 }
 
 @media (max-width: 1250px) {
+  .slides {
+    --info-align-center-x: 25vw;
+    --info-panel-top: 22%;
+  }
+
   .slides h2.move {
     font-size: var(--text-slide-title-md);
     width: 45%;
-    transform: translate(calc(-50% - (50vw - 25vw)), -10%) scale(0.7);
+    transform: translate(
+        calc(-50% - (50vw - var(--info-align-center-x))),
+        -10%
+      )
+      scale(0.7);
   }
 
   .info {
-    left: 50vw;
-    top: 22%;
     width: min(44vw, 520px);
     max-width: calc(100vw - 2rem);
   }
